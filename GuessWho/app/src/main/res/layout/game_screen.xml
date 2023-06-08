@@ -14,14 +14,15 @@
         android:layout_height="match_parent"
         tools:context=".GameScreenActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <AutoCompleteTextView
+            android:id="@+id/EnterTextAutoCompleted"
+            android:layout_width="242dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="52dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
