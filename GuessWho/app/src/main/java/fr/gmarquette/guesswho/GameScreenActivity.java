@@ -18,6 +18,7 @@ import java.util.List;
 import fr.gmarquette.guesswho.databinding.GameScreenBinding;
 import fr.gmarquette.guesswho.datas.Characters;
 import fr.gmarquette.guesswho.datas.DataBase;
+import fr.gmarquette.guesswho.datas.SearchCharacters;
 import fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn;
 import fr.gmarquette.guesswho.gui.GameScreenViewModel;
 
@@ -25,7 +26,7 @@ public class GameScreenActivity extends AppCompatActivity {
 
     private GameScreenBinding binding;
     private GameScreenViewModel gameScreenViewModel;
-    private Characters characters;
+    private SearchCharacters searchCharacters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class GameScreenActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
         DataBase.getInstance(this).CreateDatabase();
+        searchCharacters = new SearchCharacters(this);
 
 
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.EnterTextAutoCompleted);
