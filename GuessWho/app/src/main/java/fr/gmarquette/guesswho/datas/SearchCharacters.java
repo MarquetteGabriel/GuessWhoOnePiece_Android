@@ -5,32 +5,32 @@ import android.content.Context;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class SearchCharacters extends Thread
 {
-    private ExecutorService executorService;
-    private Context context;
-    private List<String> list;
+    private final ExecutorService executorService;
+    private final Context context;
 
     public SearchCharacters(Context context)
     {
         this.context = context;
-        this.executorService = Executors.newSingleThreadExecutor();
+        this.executorService = Executors.newFixedThreadPool(15);
     }
 
-    public void addElements(List<Characters> charactersList)
+    public void addElementsAsync(List<Characters> charactersList)
     {
-
+        executorService.execute(() -> DataBaseSingleton.getInstance().getDataBase(context).dao().addElements(charactersList));
     }
 
-    public List<String> getNames()
+    public Future<List<String>> getNamesAsync()
     {
-        Runnable runnable = () -> {
-            this.list = DataBase.getInstance(context).dao().getNames();
-        };
-        executorService.execute(runnable);
-        return this.list;
+        return executorService.submit(() -> DataBaseSingleton.getInstance().getDataBase(context).dao().getNames());
+    }
 
+    public Future<Characters> getCharacterAsync(String name)
+    {
+        return executorService.submit(() -> DataBaseSingleton.getInstance().getDataBase(context).dao().getCharacterFromName(name));
     }
 
 }

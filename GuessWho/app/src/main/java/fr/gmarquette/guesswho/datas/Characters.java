@@ -8,32 +8,15 @@ import androidx.room.PrimaryKey;
 public class Characters
 {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    public int id;
-
-    @ColumnInfo(name = "name")
-    public String name;
-
-    @ColumnInfo(name = "devilFruit")
-    public boolean devilFruit;
-
-    @ColumnInfo(name = "bounty")
-    public String bounty;
-
-    @ColumnInfo(name = "firstAppearance")
-    public int firstAppearance;
-
-    @ColumnInfo(name = "type")
-    public String type;
-
-    @ColumnInfo(name = "alive")
-    public boolean alive;
-
-    @ColumnInfo(name = "age")
-    public int age;
-
-    @ColumnInfo(name = "crew")
-    public String crew;
+    @ColumnInfo(name = "id") private int id;
+    @ColumnInfo(name = "name") private String name;
+    @ColumnInfo(name = "devilFruit") private boolean devilFruit;
+    @ColumnInfo(name = "bounty") private String bounty;
+    @ColumnInfo(name = "firstAppearance") private int firstAppearance;
+    @ColumnInfo(name = "type") private String type;
+    @ColumnInfo(name = "alive") private boolean alive;
+    @ColumnInfo(name = "age") private int age;
+    @ColumnInfo(name = "crew") private String crew;
 
     public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, String type, boolean alive, int age, String crew) {
         this.name = name;
@@ -62,7 +45,7 @@ public class Characters
         this.name = name;
     }
 
-    public boolean isDevilFruit() {
+    public boolean hasDevilFruit() {
         return devilFruit;
     }
 

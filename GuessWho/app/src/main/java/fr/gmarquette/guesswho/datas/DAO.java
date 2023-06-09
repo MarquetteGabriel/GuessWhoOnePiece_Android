@@ -15,4 +15,7 @@ public interface DAO{
 
     @Query("SELECT name FROM Characters")
     List<String> getNames();
+
+    @Query("SELECT * FROM Characters WHERE name LIKE:name")
+    Characters getCharacterFromName(String name);
 }

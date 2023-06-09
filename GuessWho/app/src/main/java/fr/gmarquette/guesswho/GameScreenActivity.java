@@ -9,16 +9,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.databinding.GameScreenBinding;
 import fr.gmarquette.guesswho.datas.Characters;
 import fr.gmarquette.guesswho.datas.DataBase;
+import fr.gmarquette.guesswho.datas.DataBaseSingleton;
 import fr.gmarquette.guesswho.datas.SearchCharacters;
+import fr.gmarquette.guesswho.game.GameManager;
 import fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn;
 import fr.gmarquette.guesswho.gui.GameScreenViewModel;
 
@@ -27,6 +27,8 @@ public class GameScreenActivity extends AppCompatActivity {
     private GameScreenBinding binding;
     private GameScreenViewModel gameScreenViewModel;
     private SearchCharacters searchCharacters;
+    List<String> suggestions;
+    Characters test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +41,18 @@ public class GameScreenActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        DataBase.getInstance(this).CreateDatabase();
+        DataBaseSingleton.getInstance().getDataBase(this).CreateDatabase();
         searchCharacters = new SearchCharacters(this);
+        this.getSuggestions();
 
-
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.EnterTextAutoCompleted);
-
-        new AsyncTask<Void, Void, List<String>>() {
-            @Override
-            protected List<String> doInBackground(Void... voids) {
-                return DataBase.getInstance(getApplicationContext()).dao().getNames();
-            }
-
-            @Override
-            protected void onPostExecute(List<String> names) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, DataBase.getNames());
-                autoCompleteTextView.setAdapter(adapter);
-            }
-        }.execute();
-
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, suggestions);
+        autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setOnItemClickListener((adapterView, view, position, id) -> {
             String selectedValue = autoCompleteTextView.getAdapter().getItem(position).toString();
             autoCompleteTextView.setText(selectedValue);
@@ -71,6 +66,46 @@ public class GameScreenActivity extends AppCompatActivity {
         FirstAnswerFirstColumn fragments = (FirstAnswerFirstColumn) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView2);
         assert fragments != null;
         fragments.updateText(value);
+        Characters character;
+        try {
+            character = (Characters) searchCharacters.getCharacterAsync(value).get();
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Met a jour le fragment 1
+        //this.updateText(GameManager.hasEatenDevilFruit(character, test));
+        this.updateText(GameManager.whatBounty(character, test), findViewById(R.id.textView));
+        //this.updateText(GameManager.getAppearanceDiff(character, test));
+        GameManager.getType(character, test);
+        GameManager.getAge(character, test);
+        GameManager.getAge(character, test);
+        GameManager.getCrew(character, test);
+
+        if(GameManager.isSameName(character, test))
+        {
+
+        }
+
+    }
+
+    void getSuggestions()
+    {
+        try {
+            suggestions = searchCharacters.getNamesAsync().get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void updateText(String newText, TextView textView)
+    {
+        if(textView != null)
+        {
+            textView.setText(newText);
+        }
     }
 
 }

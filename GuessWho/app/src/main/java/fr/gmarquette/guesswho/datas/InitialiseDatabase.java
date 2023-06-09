@@ -114,7 +114,9 @@ class InitialiseDatabase
 
     private void Navy()
     {
+        Characters kizaru = new Characters("Borsalino / Kizaru", true, "0", 397, "Navy", true, 55, "Navy's Crew");
 
+        listCharacters.add(kizaru);
     }
 
     private void Revolutionary()
