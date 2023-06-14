@@ -1,4 +1,12 @@
-package fr.gmarquette.guesswho;
+/*
+ *
+ * @brief Copyright (c) 2023 Gabriel Marquette
+ *
+ * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ *
+ */
+
+package fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -14,21 +22,22 @@ import androidx.databinding.DataBindingUtil;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import fr.gmarquette.guesswho.R;
 import fr.gmarquette.guesswho.databinding.GameScreenBinding;
-import fr.gmarquette.guesswho.database.Characters;
-import fr.gmarquette.guesswho.datas.DataBaseSingleton;
-import fr.gmarquette.guesswho.datas.SearchCharacters;
-import fr.gmarquette.guesswho.game.GameInit;
-import fr.gmarquette.guesswho.game.GameManager;
-import fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn;
-import fr.gmarquette.guesswho.gui.GameScreenViewModel;
+import fr.gmarquette.guesswho.GameData.Database.Characters;
+import fr.gmarquette.guesswho.GameData.Database.DataBaseSingleton;
+import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
+import fr.gmarquette.guesswho.GameSystem.GameInit;
+import fr.gmarquette.guesswho.GameSystem.GameManager;
+import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn;
+import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.GameScreenViewModel;
 
 public class GameScreenActivity extends AppCompatActivity {
 
     public static int NUMBER_GUESSED = 0;
     private GameScreenViewModel gameScreenViewModel;
     private GameInit gameInit;
-    private SearchCharacters searchCharacters;
+    private CallDAOAsync callDAOAsync;
     List<String> suggestions;
     Characters characterToFind;
 
@@ -46,7 +55,7 @@ public class GameScreenActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
         DataBaseSingleton.getInstance().getDataBase(this).CreateDatabase();
-        searchCharacters = new SearchCharacters(this);
+        callDAOAsync = new CallDAOAsync(this);
         this.getSuggestions();
         gameInit = new GameInit(this);
         characterToFind = gameInit.getCharacterToFound();
@@ -73,7 +82,7 @@ public class GameScreenActivity extends AppCompatActivity {
         fragments.updateText(value);
         Characters character;
         try {
-            character = searchCharacters.getCharacterAsync(value).get();
+            character = callDAOAsync.getCharacterAsync(value).get();
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -107,7 +116,7 @@ public class GameScreenActivity extends AppCompatActivity {
             @Override
             protected List<String> doInBackground(Void... voids) {
                 try {
-                    return searchCharacters.getNamesAsync().get();
+                    return callDAOAsync.getNamesAsync().get();
                 } catch (ExecutionException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }

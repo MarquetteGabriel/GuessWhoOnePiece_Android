@@ -1,8 +1,16 @@
-package fr.gmarquette.guesswho.game.searchModel;
+/*
+ *
+ * @brief Copyright (c) 2023 Gabriel Marquette
+ *
+ * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ *
+ */
+
+package fr.gmarquette.guesswho.GameSystem.BountyManager;
 
 import static java.lang.Integer.parseInt;
 
-import fr.gmarquette.guesswho.database.Characters;
+import fr.gmarquette.guesswho.GameData.Database.Characters;
 
 public class BountyFactory {
     private static final String NoBounty = "Unknown";

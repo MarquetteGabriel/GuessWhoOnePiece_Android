@@ -1,4 +1,12 @@
-package fr.gmarquette.guesswho.datas;
+/*
+ *
+ * @brief Copyright (c) 2023 Gabriel Marquette
+ *
+ * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ *
+ */
+
+package fr.gmarquette.guesswho.GameData.Database;
 
 import android.content.Context;
 

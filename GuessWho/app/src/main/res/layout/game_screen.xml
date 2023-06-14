@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewmodel"
-            type="fr.gmarquette.guesswho.gui.GameScreenViewModel" />
+            type="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.GameScreenViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".GameScreenActivity">
+        tools:context=".InterfaceManagement.GameSelectionScreen.GameScreenActivity">
 
         <AutoCompleteTextView
             android:id="@+id/EnterTextAutoCompleted"
@@ -27,7 +27,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView2"
-            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
             android:layout_width="87dp"
             android:layout_height="603dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView3"
-            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
             android:layout_width="71dp"
             android:layout_height="604dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView6"
-            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
             android:layout_width="71dp"
             android:layout_height="604dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +66,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView5"
-            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
             android:layout_width="71dp"
             android:layout_height="604dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +78,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView4"
-            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
             android:layout_width="71dp"
             android:layout_height="604dp"
             app:layout_constraintBottom_toBottomOf="parent"

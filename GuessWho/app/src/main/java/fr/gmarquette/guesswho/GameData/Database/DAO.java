@@ -1,4 +1,12 @@
-package fr.gmarquette.guesswho.datas;
+/*
+ *
+ * @brief Copyright (c) 2023 Gabriel Marquette
+ *
+ * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ *
+ */
+
+package fr.gmarquette.guesswho.GameData.Database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -6,8 +14,6 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
-
-import fr.gmarquette.guesswho.database.Characters;
 
 @Dao
 public interface DAO{

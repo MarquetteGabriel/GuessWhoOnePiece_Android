@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewmodel"
-            type="fr.gmarquette.guesswho.gui.GameScreenViewModel" />
+            type="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.GameScreenViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".gui.FirstAnswerFirstColumn">
+        tools:context=".InterfaceManagement.GameScreen.FirstAnswerFirstColumn">
 
         <View
             android:id="@+id/view2"

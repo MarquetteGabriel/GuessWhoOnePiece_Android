@@ -1,4 +1,12 @@
-package fr.gmarquette.guesswho.gui;
+/*
+ *
+ * @brief Copyright (c) 2023 Gabriel Marquette
+ *
+ * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ *
+ */
+
+package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

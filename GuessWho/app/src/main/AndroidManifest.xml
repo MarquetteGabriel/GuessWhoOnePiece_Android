@@ -12,7 +12,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".GameScreenActivity"
+            android:name=".InterfaceManagement.GameSelectionScreen.GameScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

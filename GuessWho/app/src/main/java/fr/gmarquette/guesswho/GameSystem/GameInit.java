@@ -1,4 +1,12 @@
-package fr.gmarquette.guesswho.game;
+/*
+ *
+ * @brief Copyright (c) 2023 Gabriel Marquette
+ *
+ * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ *
+ */
+
+package fr.gmarquette.guesswho.GameSystem;
 
 import android.content.Context;
 
@@ -7,23 +15,23 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-import fr.gmarquette.guesswho.database.Characters;
-import fr.gmarquette.guesswho.datas.SearchCharacters;
+import fr.gmarquette.guesswho.GameData.Database.Characters;
+import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 
 public class GameInit extends Thread
 {
-    SearchCharacters searchCharacters;
+    CallDAOAsync callDAOAsync;
     Context context;
 
     public GameInit(Context context) {
         this.context = context;
-        searchCharacters = new SearchCharacters(context);
+        callDAOAsync = new CallDAOAsync(context);
     }
 
     public int RandomId() {
         List<Integer> list;
         try {
-            list = searchCharacters.getIdAsync().get();
+            list = callDAOAsync.getIdAsync().get();
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -38,7 +46,7 @@ public class GameInit extends Thread
     {
         int id = this.RandomId();
         try {
-            return searchCharacters.getCharacterFromIdAsync(id).get();
+            return callDAOAsync.getCharacterFromIdAsync(id).get();
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }

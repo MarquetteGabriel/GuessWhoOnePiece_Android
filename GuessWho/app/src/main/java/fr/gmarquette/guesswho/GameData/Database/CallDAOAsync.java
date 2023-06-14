@@ -1,4 +1,12 @@
-package fr.gmarquette.guesswho.datas;
+/*
+ *
+ * @brief Copyright (c) 2023 Gabriel Marquette
+ *
+ * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ *
+ */
+
+package fr.gmarquette.guesswho.GameData.Database;
 
 import android.content.Context;
 
@@ -7,17 +15,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import fr.gmarquette.guesswho.database.Characters;
-
-public class SearchCharacters extends Thread
+public class CallDAOAsync extends Thread
 {
     private final ExecutorService executorService;
     private final Context context;
 
-    public SearchCharacters(Context context)
+    private static final Integer NUMBER_THREAD = 15;
+
+    public CallDAOAsync(Context context)
     {
         this.context = context;
-        this.executorService = Executors.newFixedThreadPool(15);
+        this.executorService = Executors.newFixedThreadPool(NUMBER_THREAD);
     }
 
     public Future<List<String>> getNamesAsync()
