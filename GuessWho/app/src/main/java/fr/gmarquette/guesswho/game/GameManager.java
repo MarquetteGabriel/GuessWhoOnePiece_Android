@@ -1,68 +1,47 @@
 package fr.gmarquette.guesswho.game;
 
-import static java.lang.Integer.parseInt;
-
-import fr.gmarquette.guesswho.datas.Characters;
+import fr.gmarquette.guesswho.game.searchModel.BountyFactory;
+import fr.gmarquette.guesswho.database.Characters;
 
 public class GameManager
 {
-    public static boolean isAlive(Characters characters, Characters characterSearched)
+
+
+    private static final String BothAlive = "Les 2 sont en vies";
+    private static final String BothDead = "Les 2 sont morts";
+    private static final String WrongAlive = "Faux, il n'est pas en vie";
+    private static final String WrongDead = "Faux, il n'est pas mort";
+
+    private static final String BothFruit= "Les 2 sont ont mange des fruits";
+    private static final String BothNoFruit = "Les 2 n'ont pas mangé de fruit";
+    private static final String WrongFruit = "Faux, il n'est pas n'a pas mangé d efruit";
+    private static final String WrongNoFruit = "Faux, il a mangé un fruit";
+
+    private static final String GoodCrew = "Ils sont dans le meme équipage";
+
+    private static final String WrongCrew = "Ils ne sont pas dnas le mm équipage";
+
+    public static String isAlive(Characters characters, Characters characterSearched)
     {
-        return (characters.isAlive() == characterSearched.isAlive());
+        return characters.isAlive() && characterSearched.isAlive() ? BothAlive :
+            !characters.isAlive() && !characterSearched.isAlive() ? BothDead :
+                characters.isAlive() && !characterSearched.isAlive() ? WrongAlive : WrongDead;
     }
 
-    public static boolean hasEatenDevilFruit(Characters characters, Characters characterSearched)
+    public static String hasEatenDevilFruit(Characters characters, Characters characterSearched)
     {
-        return (characters.hasDevilFruit() == characterSearched.hasDevilFruit());
+        return characters.hasDevilFruit() && characterSearched.hasDevilFruit() ? BothFruit :
+                !characters.hasDevilFruit() && !characterSearched.hasDevilFruit() ? BothNoFruit :
+                        characters.hasDevilFruit() && !characterSearched.hasDevilFruit() ? WrongFruit : WrongNoFruit;
     }
-    
-    public static String whatBounty(Characters characters, Characters characterSearched)
-    {
-        String messageReturned;
-        if(characters.getBounty().equals("Unkwon"))
-        {
-            if(characterSearched.getBounty().equals("Unknown"))
-            {
-                messageReturned = "Les 2 sont inconnus";
-            }
-            else
-            {
-                messageReturned = "La prime est connue";
-            }
-        }
-        else if (characters.getBounty().equals("0"))
-        {
-            if(characterSearched.getBounty().equals("0"))
-            {
-                messageReturned = "ils sont pas recherches";
-            }
-            else
-            {
-                messageReturned = "Le personnage est recherché";
-            }
-        }
-        else if (parseInt(characters.getBounty().substring(0, characters.getBounty().length() - 3)) ==
-                parseInt(characterSearched.getBounty().substring(0, characterSearched.getBounty().length() - 3)))
-        {
-            messageReturned = "Même prime";
-        }
-        else
-        {
-            int diff = parseInt(characters.getBounty().substring(0, characters.getBounty().length() - 3)) -
-                    parseInt(characterSearched.getBounty().substring(0, characterSearched.getBounty().length() - 3));
-            if(diff > 0)
-            {
-                // prime plus basse pour le perso chercher
-                messageReturned = getBountyFork(diff);
-            }
-            else
-            {
-                messageReturned = getBountyFork(-diff);
-            }
 
-        }
-        return messageReturned;
+    public static String lookingForBounty(Characters characters, Characters characterSearched)
+    {
+        return BountyFactory.whatBounty(characters, characterSearched);
     }
+
+
+
 
     public static boolean isSameName(Characters characters, Characters characterSearched)
     {
@@ -72,7 +51,11 @@ public class GameManager
     public static String getAppearanceDiff(Characters characters, Characters characterSearched)
     {
         int diff = characters.getFirstAppearance() - characterSearched.getFirstAppearance();
-        if(diff <= 50)
+        if(diff == 0)
+        {
+            return "Bon chapitre";
+        }
+        else if(diff <= 50)
         {
             return "-50 chapitres d'écart";
         } else if (diff <= 200) {
@@ -88,25 +71,25 @@ public class GameManager
 
     public static String getType(Characters characters, Characters characterSearched)
     {
-        if(characters.getType().equals("Navy") && characterSearched.equals("Navy"))
+        if(characters.getType().equals("Navy") && characterSearched.getType().equals("Navy"))
         {
             return "C'est bien un " + characters.getType();
         }
-        else if (characters.getType().equals("Pirate") && characterSearched.equals("Pirate"))
+        else if (characters.getType().equals("Pirate") && characterSearched.getType().equals("Pirate"))
         {
             return "C'est bien un " + characters.getType();
         }
-        else if(characters.getType().equals("Revolutionary") && characterSearched.equals("Revolutionary"))
+        else if(characters.getType().equals("Revolutionary") && characterSearched.getType().equals("Revolutionary"))
         {
             return "C'est bien un " + characters.getType();
         }
-        else if (characters.getType().equals("Citizen") && characterSearched.equals("Citizen"))
+        else if (characters.getType().equals("Citizen") && characterSearched.getType().equals("Citizen"))
         {
             return "C'est bien un " + characters.getType();
         }
         else
         {
-            return "Il n'est pas de " + characters.getType();
+            return "Il n'est pas un " + characters.getType();
         }
     }
 
@@ -127,26 +110,10 @@ public class GameManager
         }
     }
 
-    public static boolean getCrew(Characters characters, Characters characterSearched)
+    public static String getCrew(Characters characters, Characters characterSearched)
     {
-        return characters.getCrew().equals(characterSearched.getCrew());
+        return characters.getCrew().equals(characterSearched.getCrew()) ? GoodCrew : WrongCrew;
     }
 
-
-    private static String getBountyFork(int diff)
-    {
-        if(diff <= 50)
-        {
-            return "-50M d'écart";
-        } else if (diff <= 200) {
-            return "Entre 50 et 200M d'écart";
-        } else if(diff <= 500)
-        {
-            return "Entre 200 et 500M d'écart";
-        }
-        else {
-            return "Plus de 500 d'écart";
-        }
-    }
 
 }

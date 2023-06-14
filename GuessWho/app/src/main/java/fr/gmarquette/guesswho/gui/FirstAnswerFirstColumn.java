@@ -44,7 +44,7 @@ public class FirstAnswerFirstColumn extends Fragment {
     }
 
     public void updateText(String newText) {
-        TextView textView = view.findViewById(R.id.test);
+        TextView textView = view.findViewById(R.id.alive7);
         if (textView != null) {
             textView.setText(newText);
         }

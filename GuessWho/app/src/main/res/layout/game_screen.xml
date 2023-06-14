@@ -25,28 +25,68 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="218dp"
-            android:layout_height="182dp"
-            android:layout_marginBottom="188dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView2"
             android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
-            android:layout_width="114dp"
-            android:layout_height="85dp"
+            android:layout_width="87dp"
+            android:layout_height="603dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.097"
+            app:layout_constraintHorizontal_bias="0.024"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.272"
+            app:layout_constraintVertical_bias="0.953"
+            tools:layout="@layout/fragment_first_answer_first_column" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView3"
+            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:layout_width="71dp"
+            android:layout_height="604dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.982"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.952"
+            tools:layout="@layout/fragment_first_answer_first_column" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView6"
+            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:layout_width="71dp"
+            android:layout_height="604dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.729"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.952"
+            tools:layout="@layout/fragment_first_answer_first_column" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView5"
+            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:layout_width="71dp"
+            android:layout_height="604dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.952"
+            tools:layout="@layout/fragment_first_answer_first_column" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView4"
+            android:name="fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn"
+            android:layout_width="71dp"
+            android:layout_height="604dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.279"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.952"
             tools:layout="@layout/fragment_first_answer_first_column" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

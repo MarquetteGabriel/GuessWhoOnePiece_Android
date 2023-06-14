@@ -1,13 +1,13 @@
-package fr.gmarquette.guesswho.datas;
+package fr.gmarquette.guesswho.database;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class InitialiseDatabase
+public class InitialiseDatabase
 {
     private final List<Characters> listCharacters = new ArrayList<>();
 
-    List<Characters> getDatabaseValues()
+    public List<Characters> getDatabaseValues()
     {
         this.MugiwaraCrew();
         this.ShanksCrew();
@@ -130,7 +130,7 @@ class InitialiseDatabase
     Other
      */
 
-    void ClearList()
+    public void ClearList()
     {
         this.listCharacters.clear();
     }

@@ -1,4 +1,4 @@
-package fr.gmarquette.guesswho.datas;
+package fr.gmarquette.guesswho.database;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -9,14 +9,14 @@ public class Characters
 {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") private int id;
-    @ColumnInfo(name = "name") private String name;
-    @ColumnInfo(name = "devilFruit") private boolean devilFruit;
-    @ColumnInfo(name = "bounty") private String bounty;
-    @ColumnInfo(name = "firstAppearance") private int firstAppearance;
-    @ColumnInfo(name = "type") private String type;
-    @ColumnInfo(name = "alive") private boolean alive;
-    @ColumnInfo(name = "age") private int age;
-    @ColumnInfo(name = "crew") private String crew;
+    @ColumnInfo(name = "name") private final String name;
+    @ColumnInfo(name = "devilFruit") private final boolean devilFruit;
+    @ColumnInfo(name = "bounty") private final String bounty;
+    @ColumnInfo(name = "firstAppearance") private final int firstAppearance;
+    @ColumnInfo(name = "type") private final String type;
+    @ColumnInfo(name = "alive") private final boolean alive;
+    @ColumnInfo(name = "age") private final int age;
+    @ColumnInfo(name = "crew") private final String crew;
 
     public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, String type, boolean alive, int age, String crew) {
         this.name = name;
@@ -32,72 +32,31 @@ public class Characters
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public boolean hasDevilFruit() {
         return devilFruit;
     }
-
-    public void setDevilFruit(boolean devilFruit) {
-        this.devilFruit = devilFruit;
-    }
-
     public String getBounty() {
         return bounty;
     }
-
-    public void setBounty(String bounty) {
-        this.bounty = bounty;
-    }
-
     public int getFirstAppearance() {
         return firstAppearance;
     }
-
-    public void setFirstAppearance(int firstAppearance) {
-        this.firstAppearance = firstAppearance;
-    }
-
     public String getType() {
         return type;
     }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public boolean isAlive() {
         return alive;
     }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
     public int getAge() {
         return age;
     }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getCrew() {
         return crew;
-    }
-
-    public void setCrew(String crew) {
-        this.crew = crew;
     }
 }

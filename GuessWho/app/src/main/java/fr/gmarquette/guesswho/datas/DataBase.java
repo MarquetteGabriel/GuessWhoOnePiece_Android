@@ -1,19 +1,15 @@
 package fr.gmarquette.guesswho.datas;
 
-import android.content.Context;
-
-import androidx.annotation.NonNull;
 import androidx.room.Database;
-import androidx.room.DatabaseConfiguration;
-import androidx.room.InvalidationTracker;
-import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import fr.gmarquette.guesswho.database.Characters;
+import fr.gmarquette.guesswho.database.InitialiseDatabase;
 
 @Database(entities = {Characters.class}, version = 1)
 public abstract class DataBase extends RoomDatabase {

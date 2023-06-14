@@ -1,5 +1,6 @@
 package fr.gmarquette.guesswho;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -14,26 +15,29 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.databinding.GameScreenBinding;
-import fr.gmarquette.guesswho.datas.Characters;
-import fr.gmarquette.guesswho.datas.DataBase;
+import fr.gmarquette.guesswho.database.Characters;
 import fr.gmarquette.guesswho.datas.DataBaseSingleton;
 import fr.gmarquette.guesswho.datas.SearchCharacters;
+import fr.gmarquette.guesswho.game.GameInit;
 import fr.gmarquette.guesswho.game.GameManager;
 import fr.gmarquette.guesswho.gui.FirstAnswerFirstColumn;
 import fr.gmarquette.guesswho.gui.GameScreenViewModel;
 
 public class GameScreenActivity extends AppCompatActivity {
 
-    private GameScreenBinding binding;
+    public static int NUMBER_GUESSED = 0;
     private GameScreenViewModel gameScreenViewModel;
+    private GameInit gameInit;
     private SearchCharacters searchCharacters;
     List<String> suggestions;
-    Characters test;
+    Characters characterToFind;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.game_screen);
+        GameScreenBinding binding = DataBindingUtil.setContentView(this, R.layout.game_screen);
         binding.setViewmodel(this.gameScreenViewModel);
         binding.setLifecycleOwner(this);
 
@@ -44,20 +48,21 @@ public class GameScreenActivity extends AppCompatActivity {
         DataBaseSingleton.getInstance().getDataBase(this).CreateDatabase();
         searchCharacters = new SearchCharacters(this);
         this.getSuggestions();
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        gameInit = new GameInit(this);
+        characterToFind = gameInit.getCharacterToFound();
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.EnterTextAutoCompleted);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, suggestions);
-        autoCompleteTextView.setAdapter(adapter);
+
+
+        getSuggestions();
+
+
         autoCompleteTextView.setOnItemClickListener((adapterView, view, position, id) -> {
             String selectedValue = autoCompleteTextView.getAdapter().getItem(position).toString();
             autoCompleteTextView.setText(selectedValue);
             updateFragments(selectedValue);
         });
+
+        NUMBER_GUESSED = 0;
 
     }
 
@@ -68,36 +73,25 @@ public class GameScreenActivity extends AppCompatActivity {
         fragments.updateText(value);
         Characters character;
         try {
-            character = (Characters) searchCharacters.getCharacterAsync(value).get();
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+            character = searchCharacters.getCharacterAsync(value).get();
+        } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
         // Met a jour le fragment 1
-        //this.updateText(GameManager.hasEatenDevilFruit(character, test));
-        this.updateText(GameManager.whatBounty(character, test), findViewById(R.id.textView));
-        //this.updateText(GameManager.getAppearanceDiff(character, test));
-        GameManager.getType(character, test);
-        GameManager.getAge(character, test);
-        GameManager.getAge(character, test);
-        GameManager.getCrew(character, test);
+        this.updateText(GameManager.hasEatenDevilFruit(character, characterToFind), findViewById(R.id.alive1));
+        this.updateText(GameManager.lookingForBounty(character, characterToFind), findViewById(R.id.alive2));
+        this.updateText(GameManager.getAppearanceDiff(character, characterToFind), findViewById(R.id.alive3));
+        this.updateText(GameManager.getType(character, characterToFind), findViewById(R.id.alive4));
+        this.updateText(GameManager.getAge(character, characterToFind), findViewById(R.id.alive5));
+        this.updateText(GameManager.isAlive(character, characterToFind), findViewById(R.id.alive6));
+        this.updateText(GameManager.getCrew(character, characterToFind), findViewById(R.id.alive7));
 
-        if(GameManager.isSameName(character, test))
+        if(GameManager.isSameName(character, characterToFind))
         {
-
+            // TODO : Show POPUP WIN/LOOSE
         }
 
-    }
-
-    void getSuggestions()
-    {
-        try {
-            suggestions = searchCharacters.getNamesAsync().get();
-        } catch (ExecutionException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     void updateText(String newText, TextView textView)
@@ -106,6 +100,28 @@ public class GameScreenActivity extends AppCompatActivity {
         {
             textView.setText(newText);
         }
+    }
+
+    void getSuggestions() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, List<String>> task = new AsyncTask<Void, Void, List<String>>() {
+            @Override
+            protected List<String> doInBackground(Void... voids) {
+                try {
+                    return searchCharacters.getNamesAsync().get();
+                } catch (ExecutionException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            @Override
+            protected void onPostExecute(List<String> result) {
+                suggestions = result;
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, suggestions);
+                AutoCompleteTextView autoCompleteTextView = findViewById(R.id.EnterTextAutoCompleted);
+                autoCompleteTextView.setAdapter(adapter);
+            }
+        };
+        task.execute();
     }
 
 }
