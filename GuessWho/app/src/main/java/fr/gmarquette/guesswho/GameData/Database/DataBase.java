@@ -2,39 +2,35 @@
  *
  * @brief Copyright (c) 2023 Gabriel Marquette
  *
- * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ * Copyright (c) 2023 Gabriel Marquette. All rights reserved.
  *
  */
 
 package fr.gmarquette.guesswho.GameData.Database;
 
+import android.content.Context;
+
 import androidx.room.Database;
+import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import fr.gmarquette.guesswho.GameData.Characters.InitialiseDatabase;
+import java.io.Serializable;
 
 @Database(entities = {Characters.class}, version = 1)
-public abstract class DataBase extends RoomDatabase {
+public abstract class DataBase extends RoomDatabase implements Serializable {
 
-    ExecutorService executor = Executors.newSingleThreadExecutor();
-    List<String> list = new ArrayList<>();
+    private static DataBase database;
+    private static final String DATABASE_NAME = "database";
 
-    public void CreateDatabase()
+    public synchronized static DataBase getInstance(Context context)
     {
-        InitialiseDatabase initialiseDatabase = new InitialiseDatabase();
-        Runnable runnable = () -> {
-            this.clearAllTables();
-            this.dao().addElements(initialiseDatabase.getDatabaseValues());
-            this.list = this.dao().getNames();
-        };
-        executor.execute(runnable);
-
-        initialiseDatabase.ClearList();
+        if(database == null)
+        {
+            database = Room.databaseBuilder(context.getApplicationContext(), DataBase.class, DATABASE_NAME)
+                    .fallbackToDestructiveMigration()
+                    .build();
+        }
+        return database;
     }
 
     public abstract DAO dao();

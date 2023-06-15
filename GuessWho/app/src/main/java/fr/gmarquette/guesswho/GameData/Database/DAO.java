@@ -2,7 +2,7 @@
  *
  * @brief Copyright (c) 2023 Gabriel Marquette
  *
- * Copyright (c) 2023 Gabriel Marquette. Tous droits réservés.
+ * Copyright (c) 2023 Gabriel Marquette. All rights reserved.
  *
  */
 

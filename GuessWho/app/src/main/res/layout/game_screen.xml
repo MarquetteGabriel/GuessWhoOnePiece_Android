@@ -1,93 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".InterfaceManagement.GameSelectionScreen.GameScreenActivity"
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content">
 
-    <data>
-        <variable
-            name="viewmodel"
-            type="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.GameScreenViewModel" />
-    </data>
+    <AutoCompleteTextView
+        android:id="@+id/EnterTextAutoCompleted"
+        android:layout_width="242dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginLeft="104dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".InterfaceManagement.GameSelectionScreen.GameScreenActivity">
-
-        <AutoCompleteTextView
-            android:id="@+id/EnterTextAutoCompleted"
-            android:layout_width="242dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="52dp"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView2"
-            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
-            android:layout_width="87dp"
-            android:layout_height="603dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.024"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.953"
-            tools:layout="@layout/fragment_first_answer_first_column" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView3"
-            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
-            android:layout_width="71dp"
-            android:layout_height="604dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.982"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.952"
-            tools:layout="@layout/fragment_first_answer_first_column" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView6"
-            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
-            android:layout_width="71dp"
-            android:layout_height="604dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.729"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.952"
-            tools:layout="@layout/fragment_first_answer_first_column" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView5"
-            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
-            android:layout_width="71dp"
-            android:layout_height="604dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.952"
-            tools:layout="@layout/fragment_first_answer_first_column" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView4"
-            android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.FirstAnswerFirstColumn"
-            android:layout_width="71dp"
-            android:layout_height="604dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.279"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.952"
-            tools:layout="@layout/fragment_first_answer_first_column" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
