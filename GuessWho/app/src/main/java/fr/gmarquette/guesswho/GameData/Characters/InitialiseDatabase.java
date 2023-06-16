@@ -15,10 +15,11 @@ import fr.gmarquette.guesswho.GameData.Database.Characters;
 
 public class InitialiseDatabase
 {
-    private final List<Characters> listCharacters = new ArrayList<>();
+    private static final List<Characters> listCharacters = new ArrayList<>();
 
-    public List<Characters> getDatabaseValues()
+    public static List<Characters> getDatabaseValues()
     {
+        ClearList();
         listCharacters.addAll(Pirates.getPirates());
         listCharacters.addAll(WorldGovernment.getWorldGovernment());
         listCharacters.addAll(Citizens.getCitizens());
@@ -27,9 +28,9 @@ public class InitialiseDatabase
         return listCharacters;
     }
 
-    public void ClearList()
+    public static void ClearList()
     {
-        this.listCharacters.clear();
+        listCharacters.clear();
     }
 
 }

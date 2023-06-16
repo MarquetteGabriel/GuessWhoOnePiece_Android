@@ -48,7 +48,13 @@ public class LoadingScreenActivity extends AppCompatActivity {
         try {
             if(callDAOAsync.getCountAsync().get() == 0)
             {
-                callDAOAsync.getAddElementsAsync(initialiseDatabase.getDatabaseValues());
+                callDAOAsync.deleteAllAsync();
+                callDAOAsync.getAddElementsAsync(InitialiseDatabase.getDatabaseValues());
+            }
+            else if(callDAOAsync.getCountAsync().get() < InitialiseDatabase.getDatabaseValues().size())
+            {
+                callDAOAsync.deleteAllAsync();
+                callDAOAsync.getAddElementsAsync(InitialiseDatabase.getDatabaseValues());
             }
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);

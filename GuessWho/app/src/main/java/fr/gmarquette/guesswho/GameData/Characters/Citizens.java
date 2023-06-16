@@ -19,7 +19,18 @@ public class Citizens
 
     static List<Characters> getCitizens()
     {
+        EastBlue();
 
         return listCharacters;
+    }
+
+    private static void EastBlue()
+    {
+        Characters stelly = new Characters("Stelly", false, "0", 586, "Citizen", true, 20, "Citizen", 1);
+        Characters makino = new Characters("Makino", false, "0", 1, "Citizen", true, 31, "Citizen", 0);
+
+        listCharacters.add(stelly);
+        listCharacters.add(makino);
+
     }
 }

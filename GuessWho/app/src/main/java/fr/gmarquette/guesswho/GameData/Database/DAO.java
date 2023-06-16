@@ -38,4 +38,7 @@ public interface DAO{
 
     @Query("SELECT id FROM Characters WHERE name LIKE:name")
     int getIdFromCharacterName(String name);
+
+    @Query("DELETE FROM Characters")
+    void deleteAll();
 }

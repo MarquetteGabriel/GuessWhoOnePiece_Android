@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import fr.gmarquette.guesswho.GameData.Characters.InitialiseDatabase;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
 import fr.gmarquette.guesswho.GameSystem.GameInit;
@@ -37,8 +36,6 @@ public class GameScreenActivity extends AppCompatActivity {
         Intent intent = getIntent();
         ArrayList<String> suggestions = intent.getStringArrayListExtra("Suggestions");
         DataBase.getInstance(this);
-
-        InitialiseDatabase initialiseDatabase = new InitialiseDatabase();
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -63,7 +60,6 @@ public class GameScreenActivity extends AppCompatActivity {
         });
 
         NUMBER_GUESSED = 0;
-        initialiseDatabase.ClearList();
     }
 
 }
