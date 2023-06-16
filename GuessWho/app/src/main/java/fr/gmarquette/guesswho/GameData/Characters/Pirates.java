@@ -60,7 +60,32 @@ class Pirates {
 
     private static void ShanksCrew()
     {
+        Characters shanks = new Characters("Shanks", false, "4048900000", 1, "Pirate", true, 39, "Shanks's Crew", 0);
+        Characters beckman = new Characters("Ben Beckmann", false, "Unknown", 1, "Pirate", true, 50, "Shanks's Crew", 0);
+        Characters roo = new Characters("Lucky Roo", false, "Unknown", 1, "Pirate", true, 35, "Shanks's Crew", 1);
+        Characters yasopp = new Characters("Yasopp", false, "Unknown", 1, "Pirate", true, 47, "Shanks's Crew", 1);
+        //Characters limejuice = new Characters("Limejuice", false, "Unknown", 41, "Pirate", true, ??, "Shanks's Crew", 1);
+        //Characters bonk = new Characters("Bonk Punch", false, "Unknown", 1, "Pirate", true, ??, "Shanks's Crew", 1);
+        //Characters monster = new Characters("Monster", false, "Unknown", 1, "Pirate", true, ??, "Shanks's Crew", 1);
+        //Characters snake = new Characters("Building Snake", false, "Unknown", 41, "Pirate", true, ??, "Shanks's Crew", 1);
+        //Characters hongo = new Characters("Hongo", false, "Unknown", 1, "Pirate", true, 90, "Shanks's Crew", 1);
+        //Characters howling = new Characters("Howling Dab", false, "Unknown", 580, "Pirate", true, ??, "Shanks's Crew", 1);
+        //Characters rockstar = new Characters("Rockstar", false, "94000000", 234, "Pirate", true, ??, "Shanks's Crew", 1);
+        Characters uta = new Characters("Uta", true, "Unknown", 1055, "Pirate", true, 21, "Shanks's Crew", 1);
 
+
+        listCharacters.add(shanks);
+        listCharacters.add(beckman);
+        listCharacters.add(roo);
+        listCharacters.add(yasopp);
+        //listCharacters.add(limejuice);
+        //listCharacters.add(bonk);
+        //listCharacters.add(monster);
+        //listCharacters.add(snake);
+        //listCharacters.add(hongo);
+        //listCharacters.add(howling);
+        //listCharacters.add(rockstar);
+        listCharacters.add(uta);
     }
 
     private static void TeachCrew()

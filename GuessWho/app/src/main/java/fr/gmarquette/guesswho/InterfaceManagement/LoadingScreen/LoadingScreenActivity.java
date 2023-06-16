@@ -26,7 +26,6 @@ public class LoadingScreenActivity extends AppCompatActivity {
 
     private static final int LOADING_TIME = 2000;
     private CallDAOAsync callDAOAsync;
-    private final InitialiseDatabase initialiseDatabase = new InitialiseDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
