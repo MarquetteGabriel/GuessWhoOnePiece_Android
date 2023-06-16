@@ -14,19 +14,19 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import fr.gmarquette.guesswho.GameData.Characters.InitialiseDatabase;
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
-import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameScreenActivity;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameSelectionScreenActivity;
 import fr.gmarquette.guesswho.R;
 
-public class SplashLoadingScreen extends AppCompatActivity {
+public class LoadingScreenActivity extends AppCompatActivity {
 
-    private static int LOADING_TIME = 5000;
+    private static final int LOADING_TIME = 2000;
     private CallDAOAsync callDAOAsync;
-    public static List<String> SUGGESTIONS;
+    private final InitialiseDatabase initialiseDatabase = new InitialiseDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +35,21 @@ public class SplashLoadingScreen extends AppCompatActivity {
 
         callDAOAsync = new CallDAOAsync(getApplicationContext());
         DataBase.getInstance(getApplicationContext());
-        getSuggestions();
+        possibleAddElements();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(getApplicationContext(), GameScreenActivity.class));
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(getApplicationContext(), GameSelectionScreenActivity.class);
+            startActivity(intent);
         }, LOADING_TIME);
     }
 
-    private void getSuggestions()
+    private void possibleAddElements()
     {
         try {
-            SUGGESTIONS = (callDAOAsync.getNamesAsync().get());
+            if(callDAOAsync.getCountAsync().get() == 0)
+            {
+                callDAOAsync.getAddElementsAsync(initialiseDatabase.getDatabaseValues());
+            }
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }

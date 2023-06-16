@@ -12,7 +12,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".InterfaceManagement.LoadingScreen.SplashLoadingScreen"
+            android:name=".InterfaceManagement.LoadingScreen.LoadingScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +21,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InterfaceManagement.GameSelectionScreen.GameScreenActivity"
+            android:name=".InterfaceManagement.GameScreen.GameScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".InterfaceManagement.GameSelectionScreen.GameSelectionScreenActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
     </application>
 
 </manifest>

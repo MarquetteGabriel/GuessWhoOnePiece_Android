@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".InterfaceManagement.GameSelectionScreen.GameScreenActivity"
-     android:layout_height="wrap_content"
-     android:layout_width="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <AutoCompleteTextView
-        android:id="@+id/EnterTextAutoCompleted"
-        android:layout_width="242dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginLeft="104dp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            tools:context=".InterfaceManagement.GameScreen.GameScreenActivity"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:foregroundGravity="center">
+
+            <AutoCompleteTextView
+                android:id="@+id/EnterTextAutoCompleted"
+                android:layout_width="242dp"
+                android:layout_height="48dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</layout>

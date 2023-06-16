@@ -10,46 +10,43 @@ package fr.gmarquette.guesswho.GameSystem;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
+import fr.gmarquette.guesswho.GameData.Database.Characters;
 
 public class GameInit extends Thread
 {
     CallDAOAsync callDAOAsync;
-    Context context;
 
     public GameInit(Context context) {
-        this.context = context;
         callDAOAsync = new CallDAOAsync(context);
     }
 
-    public int RandomId() {
-        List<Integer> list;
-        try {
-            list = callDAOAsync.getIdAsync().get();
-        } catch (ExecutionException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        while (list.isEmpty());
-        int minId = Collections.min(list);
-        int maxId = Collections.max(list);
+    private int RandomId(List<Integer> integerList) {
+        int minId = Collections.min(integerList);
+        int maxId = Collections.max(integerList);
         Random rand = new Random();
         return rand.nextInt(maxId - minId + 1) + minId;
     }
 
-    public Characters getCharacterToFound()
-    {
-        int id = this.RandomId();
-        try {
+    public Characters getCharacterToFound(List<String> characterNameList) throws InterruptedException {
+        List<Integer> integerList = new ArrayList<>();
+        try
+        {
+            for(String characterName : characterNameList)
+            {
+                integerList.add(callDAOAsync.getIdFromCharacterNameAsync(characterName).get());
+            }
+            int id = this.RandomId(integerList);
             return callDAOAsync.getCharacterFromIdAsync(id).get();
-        } catch (ExecutionException | InterruptedException e) {
+        } catch (ExecutionException e)
+        {
             throw new RuntimeException(e);
         }
-
     }
 }

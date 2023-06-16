@@ -11,7 +11,7 @@ package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GameScreenViewModel extends ViewModel
+public class GameScreenActivityViewModel extends ViewModel
 {
     MutableLiveData<String> life = new MutableLiveData<>();
 

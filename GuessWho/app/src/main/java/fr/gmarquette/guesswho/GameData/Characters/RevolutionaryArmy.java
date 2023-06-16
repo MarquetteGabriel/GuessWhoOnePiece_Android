@@ -27,7 +27,7 @@ public class RevolutionaryArmy {
 
     private static void Revolutionary()
     {
-        Characters sabo = new Characters("Sabo", true, "602000000", 583, "Revolutionary", true, 22, "Revolutionary's Crew");
+        Characters sabo = new Characters("Sabo", true, "602000000", 583, "Revolutionary", true, 22, "Revolutionary's Crew", 0);
 
         listCharacters.add(sabo);
     }

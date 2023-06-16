@@ -35,16 +35,16 @@ class Pirates {
 
     private static void MugiwaraCrew()
     {
-        Characters luffy = new Characters("Monkey D. Luffy", true, "3000000000", 1, "Pirate", true, 19, "Mugiwara's Crew");
-        Characters zoro = new Characters("Roronoa Zoro", false, "1111000000", 3, "Pirate", true, 21, "Mugiwara's Crew");
-        Characters nami = new Characters("Nami", false, "366000000", 8, "Pirate", true, 20, "Mugiwara's Crew");
-        Characters usopp = new Characters("Usopp", false, "500000000", 23, "Pirate", true, 19, "Mugiwara's Crew");
-        Characters sanji = new Characters("Vinsmoke Sanji", false, "1032000000", 43, "Pirate", true, 21, "Mugiwara's Crew");
-        Characters chopper = new Characters("Tony-Tony Chopper", true, "1000", 134, "Pirate", true, 17, "Mugiwara's Crew");
-        Characters robin = new Characters("Nico Robin", true, "930000000", 114, "Pirate", true, 30, "Mugiwara's Crew");
-        Characters franky = new Characters("Franky / Cutty Flam", false, "394000000", 329, "Pirate", true, 36, "Mugiwara's Crew");
-        Characters brook = new Characters("Brook", true, "383000000", 442, "Pirate", true, 90, "Mugiwara's Crew");
-        Characters jinbei = new Characters("Jinbei", false, "1100000000", 528, "Pirate", true, 46, "Mugiwara's Crew");
+        Characters luffy = new Characters("Monkey D. Luffy", true, "3000000000", 1, "Pirate", true, 19, "Mugiwara's Crew", 0);
+        Characters zoro = new Characters("Roronoa Zoro", false, "1111000000", 3, "Pirate", true, 21, "Mugiwara's Crew", 0);
+        Characters nami = new Characters("Nami", false, "366000000", 8, "Pirate", true, 20, "Mugiwara's Crew", 0);
+        Characters usopp = new Characters("Usopp", false, "500000000", 23, "Pirate", true, 19, "Mugiwara's Crew", 0);
+        Characters sanji = new Characters("Vinsmoke Sanji", false, "1032000000", 43, "Pirate", true, 21, "Mugiwara's Crew", 0);
+        Characters chopper = new Characters("Tony-Tony Chopper", true, "1000", 134, "Pirate", true, 17, "Mugiwara's Crew", 0);
+        Characters robin = new Characters("Nico Robin", true, "930000000", 114, "Pirate", true, 30, "Mugiwara's Crew", 0);
+        Characters franky = new Characters("Franky / Cutty Flam", false, "394000000", 329, "Pirate", true, 36, "Mugiwara's Crew", 0);
+        Characters brook = new Characters("Brook", true, "383000000", 442, "Pirate", true, 90, "Mugiwara's Crew", 0);
+        Characters jinbei = new Characters("Jinbei", false, "1100000000", 528, "Pirate", true, 46, "Mugiwara's Crew", 0);
 
         listCharacters.add(luffy);
         listCharacters.add(zoro);
@@ -75,14 +75,14 @@ class Pirates {
 
     private static void NewgateCrew()
     {
-        Characters ace = new Characters("Portgas D. Ace", true, "550000000", 154, "Pirate", false, 20, "Newgate's Crew");
+        Characters ace = new Characters("Portgas D. Ace", true, "550000000", 154, "Pirate", false, 20, "Newgate's Crew", 0);
 
         listCharacters.add(ace);
     }
 
     private static void BigMomCrew()
     {
-        Characters katakuri = new Characters("Charlotte Katakuri", true, "1057000000", 860, "Pirate", true, 48, "BigMom's Crew");
+        Characters katakuri = new Characters("Charlotte Katakuri", true, "1057000000", 860, "Pirate", true, 48, "BigMom's Crew", 0);
 
         listCharacters.add(katakuri);
     }
@@ -94,7 +94,7 @@ class Pirates {
 
     private static void EnerCrew()
     {
-        Characters ener = new Characters("Ener", true, "Unknown", 254, "Pirate", true, 39, "Ener's Crew");
+        Characters ener = new Characters("Ener", true, "Unknown", 254, "Pirate", true, 39, "Ener's Crew", 0);
 
         listCharacters.add(ener);
     }

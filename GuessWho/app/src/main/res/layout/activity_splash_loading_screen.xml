@@ -12,10 +12,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InterfaceManagement.LoadingScreen.SplashLoadingScreen">
+    tools:context=".InterfaceManagement.LoadingScreen.LoadingScreenActivity">
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/loadingCircle"
         style="?android:attr/progressBarStyle"
         android:layout_width="83dp"
         android:layout_height="91dp"

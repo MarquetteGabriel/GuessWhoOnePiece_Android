@@ -4,4 +4,9 @@
 
     <!-- Left Column -->
     <string name="guess1">Guess n°1</string>
+    <string name="guess_who">Guess Who ?</string>
+    <string name="play">Play</string>
+    <string name="hard">Hard</string>
+    <string name="logo_app">Logo</string>
+    <string name="easy">Easy</string>
 </resources>

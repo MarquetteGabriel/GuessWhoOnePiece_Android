@@ -26,7 +26,7 @@ class WorldGovernment
 
     private static void Navy()
     {
-        Characters kizaru = new Characters("Borsalino / Kizaru", true, "0", 397, "Navy", true, 55, "Navy's Crew");
+        Characters kizaru = new Characters("Borsalino / Kizaru", true, "0", 397, "Navy", true, 55, "Navy's Crew", 0);
 
         listCharacters.add(kizaru);
     }

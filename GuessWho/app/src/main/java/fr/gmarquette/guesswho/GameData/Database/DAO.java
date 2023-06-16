@@ -18,11 +18,8 @@ import java.util.List;
 @Dao
 public interface DAO{
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addElements(List<Characters> charactersList);
-
-    @Query("SELECT name FROM Characters")
-    List<String> getNames();
 
     @Query("SELECT id FROM Characters")
     List<Integer> getID();
@@ -32,4 +29,13 @@ public interface DAO{
 
     @Query("SELECT * FROM Characters WHERE id LIKE:id")
     Characters getCharacterFromId(int id);
+
+    @Query("SELECT name FROM Characters WHERE level LIKE:level")
+    List<String> getNamesByDifficulty(int level);
+
+    @Query("SELECT COUNT(*) FROM Characters")
+    int getCount();
+
+    @Query("SELECT id FROM Characters WHERE name LIKE:name")
+    int getIdFromCharacterName(String name);
 }
