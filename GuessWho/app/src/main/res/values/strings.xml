@@ -17,4 +17,5 @@
     <string name="guess_4">Guess 4</string>
     <string name="guess_5">Guess 5</string>
     <string name="guess_6">Guess 6</string>
+    <string name="make_your_guess">Make your guess</string>
 </resources>

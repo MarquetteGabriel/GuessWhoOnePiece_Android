@@ -14,7 +14,7 @@
             android:gravity="center"
             android:layout_marginStart="@dimen/startCharacterName"
             android:text="@string/guess_1"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="11sp"
             android:textStyle="bold" />
 
@@ -25,7 +25,7 @@
             android:gravity="center"
             android:layout_marginStart="@dimen/startCharacterName"
             android:text="@string/guess_2"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="11sp"
             android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
             android:gravity="center"
             android:layout_marginStart="@dimen/startCharacterName"
             android:text="@string/guess_3"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="11sp"
             android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
             android:gravity="center"
             android:layout_marginStart="@dimen/startCharacterName"
             android:text="@string/guess_4"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="11sp"
             android:textStyle="bold" />
 
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:layout_marginStart="@dimen/startCharacterName"
             android:text="@string/guess_5"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="11sp"
             android:textStyle="bold" />
 
@@ -69,7 +69,7 @@
             android:gravity="center"
             android:layout_marginStart="@dimen/startCharacterName"
             android:text="@string/guess_6"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="11sp"
             android:textStyle="bold" />
 
