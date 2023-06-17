@@ -19,7 +19,7 @@
                 android:id="@+id/imageview1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/Illustration2" />
+                android:src="@drawable/gray_circle" />
 
             <TextView
                 android:id="@+id/textviewAge1"
@@ -41,7 +41,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/Illustration2" />
+                android:src="@drawable/gray_circle" />
 
             <TextView
                 android:id="@+id/textviewAge2"
@@ -63,7 +63,7 @@
                 android:id="@+id/imageView3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/Illustration2" />
+                android:src="@drawable/gray_circle" />
 
             <TextView
                 android:id="@+id/textviewAge3"
@@ -85,7 +85,7 @@
                 android:id="@+id/imageView4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/Illustration2" />
+                android:src="@drawable/gray_circle" />
 
             <TextView
                 android:id="@+id/textviewAge4"
@@ -107,7 +107,7 @@
                 android:id="@+id/imageView5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/Illustration2" />
+                android:src="@drawable/gray_circle" />
 
             <TextView
                 android:id="@+id/textviewAge5"
@@ -129,7 +129,7 @@
                 android:id="@+id/imageView6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/Illustration2" />
+                android:src="@drawable/gray_circle" />
 
             <TextView
                 android:id="@+id/textviewAge6"
