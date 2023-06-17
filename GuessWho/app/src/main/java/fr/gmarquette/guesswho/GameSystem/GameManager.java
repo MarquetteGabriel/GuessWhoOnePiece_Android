@@ -8,26 +8,26 @@
 
 package fr.gmarquette.guesswho.GameSystem;
 
-import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyFactory;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
+import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyFactory;
 
 public class GameManager
 {
 
 
-    private static final String BothAlive = "Les 2 sont en vies";
-    private static final String BothDead = "Les 2 sont morts";
-    private static final String WrongAlive = "Faux, il n'est pas en vie";
-    private static final String WrongDead = "Faux, il n'est pas mort";
+    private static final String BothAlive = "Both are alive";
+    private static final String BothDead = "Both are dead";
+    private static final String WrongAlive = "He is not alive";
+    private static final String WrongDead = "He is not dead yet";
 
-    private static final String BothFruit= "Les 2 sont ont mange des fruits";
-    private static final String BothNoFruit = "Les 2 n'ont pas mangé de fruit";
-    private static final String WrongFruit = "Faux, il n'est pas n'a pas mangé d efruit";
-    private static final String WrongNoFruit = "Faux, il a mangé un fruit";
+    private static final String BothFruit= "Both have eaten devil fruit";
+    private static final String BothNoFruit = "Both have not eaten devil fruit";
+    private static final String WrongFruit = "He has not eaten devil fruit";
+    private static final String WrongNoFruit = "He has eaten devil fruit";
 
-    private static final String GoodCrew = "Ils sont dans le meme équipage";
+    private static final String GoodCrew = "Same Crew";
 
-    private static final String WrongCrew = "Ils ne sont pas dnas le mm équipage";
+    private static final String WrongCrew = "Wrong Crew";
 
     public static String isAlive(Characters characters, Characters characterSearched)
     {
@@ -61,19 +61,19 @@ public class GameManager
         int diff = characters.getFirstAppearance() - characterSearched.getFirstAppearance();
         if(diff == 0)
         {
-            return "Bon chapitre";
+            return "Same Chapter";
         }
         else if(diff <= 50)
         {
-            return "-50 chapitres d'écart";
+            return " Less than 50 Chapter gap";
         } else if (diff <= 200) {
-            return "Entre 50 et 200 chapitres d'écart";
+            return "Between 50 and 200 Chapter gap";
         } else if(diff <= 500)
         {
-            return "Entre 200 et 500 chapitres d'écart";
+            return "Between 200 and 500 Chapter gap";
         }
         else {
-            return "Plus de 500 chapitres d'écart";
+            return "More than 500 Chapter gap";
         }
     }
 
@@ -81,23 +81,23 @@ public class GameManager
     {
         if(characters.getType().equals("Navy") && characterSearched.getType().equals("Navy"))
         {
-            return "C'est bien un " + characters.getType();
+            return "He is a " + characters.getType();
         }
         else if (characters.getType().equals("Pirate") && characterSearched.getType().equals("Pirate"))
         {
-            return "C'est bien un " + characters.getType();
+            return "He is a " + characters.getType();
         }
         else if(characters.getType().equals("Revolutionary") && characterSearched.getType().equals("Revolutionary"))
         {
-            return "C'est bien un " + characters.getType();
+            return "He is a " + characters.getType();
         }
         else if (characters.getType().equals("Citizen") && characterSearched.getType().equals("Citizen"))
         {
-            return "C'est bien un " + characters.getType();
+            return "He is a " + characters.getType();
         }
         else
         {
-            return "Il n'est pas un " + characters.getType();
+            return "He is not a " + characters.getType();
         }
     }
 
@@ -106,15 +106,15 @@ public class GameManager
         int diff = Math.abs(characters.getAge() - characterSearched.getAge());
         if(diff <= 10)
         {
-            return "Moins de 10 ans d'écart";
+            return "Less than 10 years gap";
         }
         else if(diff <= 35)
         {
-            return "Entre 10 et 35 ans d'écart";
+            return "Between 10 and 35 years gap";
         }
         else
         {
-            return "Plus de 35 ans d'écart";
+            return "More than 35 years gap";
         }
     }
 

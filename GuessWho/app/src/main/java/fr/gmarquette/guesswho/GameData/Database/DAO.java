@@ -21,9 +21,6 @@ public interface DAO{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addElements(List<Characters> charactersList);
 
-    @Query("SELECT id FROM Characters")
-    List<Integer> getID();
-
     @Query("SELECT * FROM Characters WHERE name LIKE:name")
     Characters getCharacterFromName(String name);
 

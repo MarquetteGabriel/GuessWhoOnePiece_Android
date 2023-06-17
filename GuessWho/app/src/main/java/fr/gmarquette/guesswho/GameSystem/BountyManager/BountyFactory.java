@@ -22,7 +22,7 @@ public class BountyFactory {
         switch (bountyType)
         {
             case UNKNOWN:
-                return getBountyUknown(bountyTypeSearched);
+                return getBountyUnknown(bountyTypeSearched);
             case NO_RESEARCHED:
                 return getNoBounty(bountyTypeSearched);
             case BOUNTY_ON:
@@ -43,17 +43,17 @@ public class BountyFactory {
                 return BountyType.BOUNTY_ON;
         }
     }
-    private static String getBountyUknown(BountyType bountyType)
+    private static String getBountyUnknown(BountyType bountyType)
     {
 
         switch (bountyType)
         {
             case UNKNOWN:
-                return "Les 2 sont inconnus";
+                return "Both are unknown";
             case NO_RESEARCHED:
-                return "Le personnage n'est pas recherché";
+                return "The character is not wanted";
             case BOUNTY_ON:
-                return "Le personnage est recherché";
+                return "The character is wanted";
             default :
                 return null;
         }
@@ -64,9 +64,9 @@ public class BountyFactory {
         {
             case UNKNOWN:
             case BOUNTY_ON:
-                return "Le personnage n'est pas recherché";
+                return "The character is not wanted";
             case NO_RESEARCHED:
-                return "Le 2 ne sont pas recheché";
+                return "Both are not wanted";
             default :
                 return null;
         }
@@ -76,9 +76,9 @@ public class BountyFactory {
         switch (bountyType)
         {
             case UNKNOWN:
-                return "La prime est inconnue";
+                return "Bounty is Unknown";
             case NO_RESEARCHED:
-                return "Le personnage n'est pas recherché";
+                return "The character is not wanted";
             case BOUNTY_ON:
                 return getBountyFork(characters, characterSearched);
             default :
@@ -91,19 +91,19 @@ public class BountyFactory {
                 parseInt(characterSearched.getBounty().substring(0, characterSearched.getBounty().length() - 3)));
         if (diff == 0)
         {
-            return "Pareil";
+            return "Equal";
         }
         else if(diff <= 50)
         {
-            return "-50M d'écart";
+            return "Less than 50M gap";
         } else if (diff <= 200) {
-            return "Entre 50 et 200M d'écart";
+            return "Between 50 and 200M gap";
         } else if(diff <= 500)
         {
-            return "Entre 200 et 500M d'écart";
+            return "Between 200 and 500M gap";
         }
         else {
-            return "Plus de 500 d'écart";
+            return "More than 500M gap";
         }
     }
 }
