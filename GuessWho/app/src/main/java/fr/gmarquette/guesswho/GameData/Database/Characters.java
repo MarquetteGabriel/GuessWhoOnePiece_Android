@@ -12,6 +12,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import fr.gmarquette.guesswho.GameSystem.TypeType;
+
 @Entity
 public class Characters
 {
@@ -21,13 +23,13 @@ public class Characters
     @ColumnInfo(name = "devilFruit") private final boolean devilFruit;
     @ColumnInfo(name = "bounty") private final String bounty;
     @ColumnInfo(name = "firstAppearance") private final int firstAppearance;
-    @ColumnInfo(name = "type") private final String type;
+    @ColumnInfo(name = "type") private final TypeType type;
     @ColumnInfo(name = "alive") private final boolean alive;
     @ColumnInfo(name = "age") private final int age;
     @ColumnInfo(name = "crew") private final String crew;
     @ColumnInfo(name = "level") private final int level;
 
-    public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, String type, boolean alive, int age, String crew, int level) {
+    public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, TypeType type, boolean alive, int age, String crew, int level) {
         this.name = name;
         this.devilFruit = devilFruit;
         this.bounty = bounty;
@@ -57,7 +59,7 @@ public class Characters
     public int getFirstAppearance() {
         return firstAppearance;
     }
-    public String getType() {
+    public TypeType getType() {
         return type;
     }
     public boolean isAlive() {
