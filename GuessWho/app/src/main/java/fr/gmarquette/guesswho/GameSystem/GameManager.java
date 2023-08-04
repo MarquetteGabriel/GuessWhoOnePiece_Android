@@ -10,6 +10,7 @@ package fr.gmarquette.guesswho.GameSystem;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyFactory;
+import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
 
 public class GameManager
 {
@@ -23,7 +24,7 @@ public class GameManager
         return (characters.hasDevilFruit() && characterSearched.hasDevilFruit());
     }
 
-    public static boolean lookingForBounty(Characters characters, Characters characterSearched)
+    public static BountyType lookingForBounty(Characters characters, Characters characterSearched)
     {
         return BountyFactory.whatBounty(characters, characterSearched);
     }
@@ -75,8 +76,6 @@ public class GameManager
     public static boolean getCrew(Characters characters, Characters characterSearched)
     {
         return characters.getCrew().equals(characterSearched.getCrew());
-
-        // Si vrai, dire que c'est le mm crew, sinon dire que c'est pas le meme
     }
 
 

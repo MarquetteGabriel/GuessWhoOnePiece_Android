@@ -15,7 +15,7 @@ import fr.gmarquette.guesswho.GameData.Database.Characters;
 public class BountyFactory {
     private static final String NoBounty = "Unknown";
 
-    public static boolean whatBounty(Characters characters, Characters characterSearched)
+    public static BountyType whatBounty(Characters characters, Characters characterSearched)
     {
 
         BountyType bountyType = getTypeOfBounty(characters);
@@ -29,25 +29,29 @@ public class BountyFactory {
             if(diff < 0)
             {
                 // Arrow Up
-                return false;
+                return BountyType.LOWER;
             }
             else if( diff > 0)
             {
                 // Arrow down
-                return false;
+                return BountyType.UPPER;
             }
             else
             {
-                return true;
+                return BountyType.EQUAL;
             }
         }
-        else if(typeOfResearched)
+        else if(typeOfResearched && bountyType == BountyType.NO_RESEARCHED)
         {
-            return true;
+            return BountyType.CORRECT_NO_RESEARCHED;
+        }
+        else if(typeOfResearched && bountyType == BountyType.UNKNOWN)
+        {
+            return BountyType.CORRECT_UNKNOWN;
         }
         else
         {
-            return true;
+            return bountyType;
         }
     }
 

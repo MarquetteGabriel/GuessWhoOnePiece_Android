@@ -11,5 +11,10 @@ package fr.gmarquette.guesswho.GameSystem.BountyManager;
 public enum BountyType {
     UNKNOWN,
     NO_RESEARCHED,
-    BOUNTY_ON
+    BOUNTY_ON,
+    LOWER,
+    UPPER,
+    EQUAL,
+    CORRECT_UNKNOWN,
+    CORRECT_NO_RESEARCHED
 }
