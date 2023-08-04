@@ -12,6 +12,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import fr.gmarquette.guesswho.GameSystem.CrewType;
 import fr.gmarquette.guesswho.GameSystem.TypeType;
 
 @Entity
@@ -26,10 +27,10 @@ public class Characters
     @ColumnInfo(name = "type") private final TypeType type;
     @ColumnInfo(name = "alive") private final boolean alive;
     @ColumnInfo(name = "age") private final int age;
-    @ColumnInfo(name = "crew") private final String crew;
+    @ColumnInfo(name = "crew") private final CrewType crew;
     @ColumnInfo(name = "level") private final int level;
 
-    public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, TypeType type, boolean alive, int age, String crew, int level) {
+    public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, TypeType type, boolean alive, int age, CrewType crew, int level) {
         this.name = name;
         this.devilFruit = devilFruit;
         this.bounty = bounty;
@@ -68,7 +69,7 @@ public class Characters
     public int getAge() {
         return age;
     }
-    public String getCrew() {
+    public CrewType getCrew() {
         return crew;
     }
     public int getLevel() {
