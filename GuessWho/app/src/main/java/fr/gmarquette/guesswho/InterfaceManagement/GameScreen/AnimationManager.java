@@ -19,19 +19,6 @@ import fr.gmarquette.guesswho.R;
 
 public class AnimationManager
 {
-    private static final ImageView ARROW_UP = null;
-    private static final ImageView ARROW_DOWN = null;
-    private static final ImageView BLANK_ANSWER = null;
-    private static final ImageView CORRECT_ANSWER = null;
-
-    public static void setImages()
-    {
-        BLANK_ANSWER.setImageResource(R.drawable.gray_circle);
-        CORRECT_ANSWER.setImageResource(R.drawable.green_mark);
-        ARROW_DOWN.setImageResource(R.drawable.gray_circle);
-        ARROW_UP.setImageResource(R.drawable.gray_circle);
-    }
-
     public static void updateFruit(boolean eatenFruit, Characters characters, ImageView imageView)
     {
         if (characters.hasDevilFruit())
@@ -45,7 +32,7 @@ public class AnimationManager
 
         if(eatenFruit)
         {
-            imageView = CORRECT_ANSWER;
+            imageView = PicturesAlbum.getInstance().CORRECT_ANSWER;
         }
         else
         {
@@ -61,15 +48,15 @@ public class AnimationManager
             case EQUAL:
             case CORRECT_NO_RESEARCHED:
             case CORRECT_UNKNOWN:
-                imageView = CORRECT_ANSWER;
+                imageView = PicturesAlbum.getInstance().CORRECT_ANSWER;
                 textView.setText(bounty);
                 break;
             case UPPER: // Arrow Down
-                imageView = ARROW_DOWN;
+                imageView = PicturesAlbum.getInstance().ARROW_DOWN;
                 textView.setText(bounty);
                 break;
             case LOWER: // Arrow Up
-                imageView = ARROW_UP;
+                imageView = PicturesAlbum.getInstance().ARROW_UP;
                 textView.setText(bounty);
                 break;
             case UNKNOWN:
@@ -96,7 +83,7 @@ public class AnimationManager
                 textView.setText(age);
                 break;
             case EQUAL:
-                imageView = CORRECT_ANSWER;
+                imageView = PicturesAlbum.getInstance().CORRECT_ANSWER;
                 textView.setText(age);
                 break;
             default:
@@ -118,7 +105,7 @@ public class AnimationManager
                 textView.setText(chapter);
                 break;
             case SAME_CHAPTER:
-                imageView = CORRECT_ANSWER;
+                imageView = PicturesAlbum.getInstance().CORRECT_ANSWER;
                 textView.setText(chapter);
                 break;
             default:
@@ -148,7 +135,7 @@ public class AnimationManager
 
         if (getType)
         {
-            imageView = CORRECT_ANSWER;
+            imageView = PicturesAlbum.getInstance().CORRECT_ANSWER;
         }
         else
         {
@@ -169,7 +156,7 @@ public class AnimationManager
 
         if(alived)
         {
-            imageView = CORRECT_ANSWER;
+            imageView = PicturesAlbum.getInstance().CORRECT_ANSWER;
 
         }
         else
@@ -182,7 +169,7 @@ public class AnimationManager
     {
         if(belongingCrew)
         {
-            imageView = CORRECT_ANSWER;
+            imageView = PicturesAlbum.getInstance().CORRECT_ANSWER;
         }
         else
         {
@@ -197,28 +184,37 @@ public class AnimationManager
         switch (characters.getCrew())
         {
             case CITIZEN:
+                imageView = PicturesAlbum.getInstance().CITIZEN;
                 break;
             case NAVY:
+                imageView = PicturesAlbum.getInstance().NAVY;
                 break;
             case ENER_CREW:
+                imageView = PicturesAlbum.getInstance().CREW_ENER;
                 break;
             case KAIDO_CREW:
+                imageView = PicturesAlbum.getInstance().CREW_KAIDO;
                 break;
             case TEACH_CREW:
+                imageView = PicturesAlbum.getInstance().CREW_TEACH;
                 break;
             case BIGMOM_CREW:
+                imageView = PicturesAlbum.getInstance().CREW_BIGMOM;
                 break;
             case CROSS_GUILD:
+                imageView = PicturesAlbum.getInstance().CROSS_GUILD;
                 break;
             case SHANKS_CREW:
+                imageView = PicturesAlbum.getInstance().CREW_SHANKS;
                 break;
             case NEWGATE_CREW:
-                imageView.setImageResource(R.drawable.crew_newgate);
+                imageView = PicturesAlbum.getInstance().CREW_NEWGATE;
                 break;
             case MUGIWARA_CREW:
-                imageView.setImageResource(R.drawable.crew_mugiwara);
+                imageView = PicturesAlbum.getInstance().CREW_MUGIWARA;
                 break;
             case REVOLUTIONARY_ARMY:
+                imageView = PicturesAlbum.getInstance().REVOLUTIONARY_ARMY;
                 break;
             default:
                 break;

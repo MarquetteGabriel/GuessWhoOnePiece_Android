@@ -50,6 +50,7 @@ public class GameScreenActivity extends AppCompatActivity {
     TextView textViewCrew0, textViewCrew1, textViewCrew2, textViewCrew3, textViewCrew4, textViewCrew5;
 
     private ArrayList<String> suggestions;
+    private PicturesAlbum picturesAlbum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,8 @@ public class GameScreenActivity extends AppCompatActivity {
             autoCompleteTextView.setText("");
         });
 
-        AnimationManager.setImages();
+        picturesAlbum = PicturesAlbum.getInstance();
+        picturesAlbum.setImages();
 
         NUMBER_GUESSED = 0;
     }
@@ -110,75 +112,75 @@ public class GameScreenActivity extends AppCompatActivity {
         }
 
         setCircleOfAnswer();
-        boolean stringFruit = GameManager.hasEatenDevilFruit(character, characterToFind);
-        BountyType stringBounty = GameManager.lookingForBounty(character, characterToFind);
-        ChapterType stringChapter = GameManager.getAppearanceDiff(character, characterToFind);
-        boolean stringType = GameManager.getType(character, characterToFind);
-        boolean stringAlive = GameManager.isAlive(character, characterToFind);
-        AgeType stringAge = GameManager.getAge(character, characterToFind);
-        boolean stringCrew = GameManager.getCrew(character, characterToFind);
+        boolean hasFruit = GameManager.hasEatenDevilFruit(character, characterToFind);
+        BountyType bounty = GameManager.lookingForBounty(character, characterToFind);
+        ChapterType chapter = GameManager.getAppearanceDiff(character, characterToFind);
+        boolean type = GameManager.getType(character, characterToFind);
+        boolean alive = GameManager.isAlive(character, characterToFind);
+        AgeType age = GameManager.getAge(character, characterToFind);
+        boolean crew = GameManager.getCrew(character, characterToFind);
 
         switch (NUMBER_GUESSED)
         {
             case 1:
                 textViewCharacterName0.setText(selectedValue);
-                AnimationManager.updateFruit(stringFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(stringBounty, character, findViewById(R.id.imageview1), textViewBounty0);
-                AnimationManager.updateChapter(stringChapter, character, findViewById(R.id.imageview1), textViewChapter0);
-                AnimationManager.updateType(stringType, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(stringAlive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(stringAge, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(stringCrew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty0);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter0);
+                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
                 break;
             case 2:
                 textViewCharacterName1.setText(selectedValue);
-                AnimationManager.updateFruit(stringFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(stringBounty, character, findViewById(R.id.imageview1), textViewBounty1);
-                AnimationManager.updateChapter(stringChapter, character, findViewById(R.id.imageview1), textViewChapter1);
-                AnimationManager.updateType(stringType, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(stringAlive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(stringAge, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(stringCrew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty1);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter1);
+                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
                 break;
             case 3:
                 textViewCharacterName2.setText(selectedValue);
-                AnimationManager.updateFruit(stringFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(stringBounty, character, findViewById(R.id.imageview1), textViewBounty2);
-                AnimationManager.updateChapter(stringChapter, character, findViewById(R.id.imageview1), textViewChapter2);
-                AnimationManager.updateType(stringType, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(stringAlive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(stringAge, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(stringCrew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty2);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter2);
+                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
                 break;
             case 4:
                 textViewCharacterName3.setText(selectedValue);
-                AnimationManager.updateFruit(stringFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(stringBounty, character, findViewById(R.id.imageview1), textViewBounty3);
-                AnimationManager.updateChapter(stringChapter, character, findViewById(R.id.imageview1), textViewChapter3);
-                AnimationManager.updateType(stringType, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(stringAlive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(stringAge, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(stringCrew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty3);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter3);
+                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
                 break;
             case 5:
                 textViewCharacterName4.setText(selectedValue);
-                AnimationManager.updateFruit(stringFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(stringBounty, character, findViewById(R.id.imageview1), textViewBounty4);
-                AnimationManager.updateChapter(stringChapter, character, findViewById(R.id.imageview1), textViewChapter4);
-                AnimationManager.updateType(stringType, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(stringAlive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(stringAge, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(stringCrew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty4);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter4);
+                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
                 break;
             case 6:
                 textViewCharacterName5.setText(selectedValue);
-                AnimationManager.updateFruit(stringFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(stringBounty, character, findViewById(R.id.imageview1), textViewBounty5);
-                AnimationManager.updateChapter(stringChapter, character, findViewById(R.id.imageview1), textViewChapter5);
-                AnimationManager.updateType(stringType, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(stringAlive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(stringAge, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(stringCrew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty5);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter5);
+                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
                 break;
         }
 
