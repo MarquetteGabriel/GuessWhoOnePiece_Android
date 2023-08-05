@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,13 +17,13 @@
             android:layout_marginStart="7dp">
 
             <ImageView
-                android:id="@+id/imageview1"
+                android:id="@+id/age_wr_circle_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewAge1"
+                android:id="@+id/age_text_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -38,13 +39,13 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/age_wr_circle_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewAge2"
+                android:id="@+id/age_text_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -60,13 +61,13 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/age_wr_circle_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewAge3"
+                android:id="@+id/age_text_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -82,13 +83,13 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/age_wr_circle_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewAge4"
+                android:id="@+id/age_text_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -104,13 +105,13 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/age_wr_circle_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewAge5"
+                android:id="@+id/age_text_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -126,13 +127,13 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/age_wr_circle_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewAge6"
+                android:id="@+id/age_text_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"

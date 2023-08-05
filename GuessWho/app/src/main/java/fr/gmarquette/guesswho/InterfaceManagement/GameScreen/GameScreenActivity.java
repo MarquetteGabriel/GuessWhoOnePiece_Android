@@ -124,63 +124,63 @@ public class GameScreenActivity extends AppCompatActivity {
         {
             case 1:
                 textViewCharacterName0.setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty0);
-                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter0);
-                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.age_wr_circle_1), textViewBounty0);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.age_wr_circle_1), textViewChapter0);
+                AnimationManager.updateType(type, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.age_wr_circle_1), findViewById(R.id.age_text_1));
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.age_wr_circle_1));
                 break;
             case 2:
                 textViewCharacterName1.setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty1);
-                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter1);
-                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.age_wr_circle_1), textViewBounty1);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.age_wr_circle_1), textViewChapter1);
+                AnimationManager.updateType(type, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.age_wr_circle_2), findViewById(R.id.age_text_2));
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.age_wr_circle_1));
                 break;
             case 3:
                 textViewCharacterName2.setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty2);
-                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter2);
-                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.age_wr_circle_1), textViewBounty2);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.age_wr_circle_1), textViewChapter2);
+                AnimationManager.updateType(type, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.age_wr_circle_3), findViewById(R.id.age_text_3));
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.age_wr_circle_1));
                 break;
             case 4:
                 textViewCharacterName3.setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty3);
-                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter3);
-                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.age_wr_circle_1), textViewBounty3);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.age_wr_circle_1), textViewChapter3);
+                AnimationManager.updateType(type, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.age_wr_circle_4), findViewById(R.id.age_text_4));
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.age_wr_circle_1));
                 break;
             case 5:
                 textViewCharacterName4.setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty4);
-                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter4);
-                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.age_wr_circle_1), textViewBounty4);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.age_wr_circle_1), textViewChapter4);
+                AnimationManager.updateType(type, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.age_wr_circle_5), findViewById(R.id.age_text_5));
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.age_wr_circle_1));
                 break;
             case 6:
                 textViewCharacterName5.setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.imageview1));
-                AnimationManager.updateBounty(bounty, character, findViewById(R.id.imageview1), textViewBounty5);
-                AnimationManager.updateChapter(chapter, character, findViewById(R.id.imageview1), textViewChapter5);
-                AnimationManager.updateType(type, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAlive(alive, character, findViewById(R.id.imageview1));
-                AnimationManager.updateAge(age, character, findViewById(R.id.imageview1), textViewAge0);
-                AnimationManager.updateCrew(crew, character, findViewById(R.id.imageview1));
+                AnimationManager.updateFruit(hasFruit, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateBounty(bounty, character, findViewById(R.id.age_wr_circle_1), textViewBounty5);
+                AnimationManager.updateChapter(chapter, character, findViewById(R.id.age_wr_circle_1), textViewChapter5);
+                AnimationManager.updateType(type, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAlive(alive, character, findViewById(R.id.age_wr_circle_1));
+                AnimationManager.updateAge(age, character, findViewById(R.id.age_wr_circle_6), findViewById(R.id.age_text_6));
+                AnimationManager.updateCrew(crew, character, findViewById(R.id.age_wr_circle_1));
                 break;
         }
 
@@ -345,12 +345,12 @@ public class GameScreenActivity extends AppCompatActivity {
         textViewAlive4 = findViewById(R.id.textviewAlive5);
         textViewAlive5 = findViewById(R.id.textviewAlive6);
 
-        textViewAge0 = findViewById(R.id.textviewAge1);
-        textViewAge1 = findViewById(R.id.textviewAge2);
-        textViewAge2 = findViewById(R.id.textviewAge3);
-        textViewAge3 = findViewById(R.id.textviewAge4);
-        textViewAge4 = findViewById(R.id.textviewAge5);
-        textViewAge5 = findViewById(R.id.textviewAge6);
+        textViewAge0 = findViewById(R.id.age_text_1);
+        textViewAge1 = findViewById(R.id.age_text_2);
+        textViewAge2 = findViewById(R.id.age_text_3);
+        textViewAge3 = findViewById(R.id.age_text_4);
+        textViewAge4 = findViewById(R.id.age_text_5);
+        textViewAge5 = findViewById(R.id.age_text_6);
 
         textViewCrew0 = findViewById(R.id.textviewCrew1);
         textViewCrew1 = findViewById(R.id.textviewCrew2);

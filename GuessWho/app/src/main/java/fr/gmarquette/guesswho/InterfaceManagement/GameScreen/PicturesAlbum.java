@@ -15,7 +15,7 @@ import fr.gmarquette.guesswho.R;
 public class PicturesAlbum
 {
     public ImageView ARROW_UP, ARROW_DOWN;
-    public ImageView BLANK_ANSWER, CORRECT_ANSWER;
+    public ImageView BLANK_ANSWER, CORRECT_ANSWER, EMPTY_ANSWER;
     public ImageView CREW_KAIDO, CREW_MUGIWARA, CREW_NEWGATE, CREW_SHANKS, CREW_TEACH, CROSS_GUILD,
             CREW_BIGMOM, CREW_ENER, NAVY, REVOLUTIONARY_ARMY, CITIZEN;
     private PicturesAlbum()
@@ -33,11 +33,12 @@ public class PicturesAlbum
 
     public void setImages()
     {
-        this.BLANK_ANSWER.setImageResource(R.drawable.gray_circle);
-        this.CORRECT_ANSWER.setImageResource(R.drawable.green_mark);
+        BLANK_ANSWER.setImageResource(R.drawable.gray_circle);
+        CORRECT_ANSWER.setImageResource(R.drawable.green_mark);
+        EMPTY_ANSWER.setImageResource(R.drawable.empty_circle);
 
-        this.ARROW_DOWN.setImageResource(R.drawable.gray_circle);
-        this.ARROW_UP.setImageResource(R.drawable.gray_circle);
+        ARROW_DOWN.setImageResource(R.drawable.gray_circle);
+        ARROW_UP.setImageResource(R.drawable.gray_circle);
 
         setImagesOfCrew();
     }
@@ -50,5 +51,10 @@ public class PicturesAlbum
         CREW_SHANKS.setImageResource(R.drawable.crew_shanks);
         CREW_TEACH.setImageResource(R.drawable.crew_teach);
         CROSS_GUILD.setImageResource(R.drawable.crew_cross_guild);
+        CREW_BIGMOM.setImageResource(R.drawable.crew_bigmom);
+        CREW_ENER.setImageResource(R.drawable.crew_ener);
+        NAVY.setImageResource(R.drawable.crew_navy);
+        REVOLUTIONARY_ARMY.setImageResource(R.drawable.crew_revolutionary_army);
+        CITIZEN.setImageResource(R.drawable.crew_citizen);
     }
 }
