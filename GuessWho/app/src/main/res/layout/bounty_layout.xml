@@ -116,8 +116,10 @@
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
+                android:src="@drawable/gray_circle"
                 android:textColor="@android:color/white"
-                android:src="@drawable/gray_circle" />
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
