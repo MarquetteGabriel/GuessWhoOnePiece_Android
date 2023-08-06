@@ -90,19 +90,69 @@ class Pirates {
 
     private static void TeachCrew()
     {
+        Characters teach = new Characters("Marshall D. Teach", true, "3.996 Md", 223, "Pirate", true, 40, "Teach's Crew", 0);
+        Characters burgess = new Characters("Jesus Burgess", true, "200 Mi", 222, "Pirate", true, 29, "Teach's Crew", 0);
+        Characters shiliew = new Characters("Shiliew", true, "Unknown", 538, "Pirate", true, 44, "Teach's Crew", 0);
+        Characters auger = new Characters("Van Auger", true, "640 Mi", 222, "Pirate", true, 27, "Teach's Crew", 0);
+        Characters pizarro = new Characters("Avalo Pizarro", true, "Unknown", 575, "Pirate", true, 42, "Teach's Crew", 0);
+        Characters laffitte = new Characters("Laffitte", true, "422 Mi", 234, "Pirate", true, 41, "Teach's Crew", 0);
+        Characters devon = new Characters("Catarina Devon", true, "Unknown", 575, "Pirate", true, 36, "Teach's Crew", 0);
+        Characters wolf = new Characters("Sanjuan Wolf", true, "Unknown", 575, "Pirate", true, 99, "Teach's Crew", 0);
+        Characters vasco = new Characters("Vasco Shot", true, "Unknown", 575, "Pirate", true, 38, "Teach's Crew", 0);
+        Characters doq = new Characters("Doc Q", true, "720 Mi", 223, "Pirate", true, 28, "Teach's Crew", 0);
+        Characters kuzan = new Characters("Kuzan / Aokiji", true, "Unknown", 303, "Pirate", true, 49, "Teach's Crew", 0);
+        //Characters pinkBeard = new Characters("Barbe Rose", true, "52000000", 904, "Pirate", true, ??, "Teach's Crew", 1);
 
+        listCharacters.add(teach);
+        listCharacters.add(burgess);
+        listCharacters.add(shiliew);
+        listCharacters.add(auger);
+        listCharacters.add(pizarro);
+        listCharacters.add(laffitte);
+        listCharacters.add(devon);
+        listCharacters.add(wolf);
+        listCharacters.add(vasco);
+        listCharacters.add(doq);
+        listCharacters.add(kuzan);
     }
 
     private static void CrossGuild()
     {
+        Characters baggy = new Characters("Baggy", true, "3.189 Md", 9, "Pirate", true, 39, "Cross Guild", 0);
+        Characters mihawk = new Characters("Dracule Mihawk", false, " 3.590 Md", 49, "Pirate", true, 43, "Cross Guild", 0);
+        Characters crocodile = new Characters("Crocodile", true, "1.965 Md", 126, "Pirate", true, 46, "Cross Guild", 0);
+        Characters das = new Characters("Das Bones / Mr 1", true, "750 Mi", 160, "Pirate", true, 31, "Cross Guild", 0);
+        Characters alvida = new Characters("Alvida", true, "5 Mi", 2, "Pirate", true, 27, "Cross Guild", 0);
+        Characters galdino = new Characters("Galdino / Mr 3", true, "24 Mi", 117, "Pirate", true, 37, "Cross Guild", 1);
+        Characters morge = new Characters("Morge", false, "Unknown", 9, "Pirate", true, 29, "Cross Guild", 1);
+        Characters cabadji = new Characters("Cabadji", false, "Unknown", 9, "Pirate", true, 34, "Cross Guild", 1);
 
+        listCharacters.add(baggy);
+        listCharacters.add(mihawk);
+        listCharacters.add(crocodile);
+        listCharacters.add(das);
+        listCharacters.add(alvida);
+        listCharacters.add(galdino);
+        listCharacters.add(morge);
+        listCharacters.add(cabadji);
     }
 
     private static void NewgateCrew()
     {
+        Characters newgate = new Characters("Edward Newgate", true, "5.500 Md", 234, "Pirate", false, 72, "Newgate's Crew", 0);
         Characters ace = new Characters("Portgas D. Ace", true, "550 Mi", 154, "Pirate", false, 20, "Newgate's Crew", 0);
+        Characters joz = new Characters("Joz", true, "Unknown", 234, "Pirate", true, 42, "Newgate's Crew", 0);
+        //Characters thatch = new Characters("Thatch", false, "Unknown", 440, "Pirate", false, ??, "Newgate's Crew", 1);
+        Characters vista = new Characters("Vista", false, "Unknown", 552, "Pirate", true, 47, "Newgate's Crew", 0);
+        Characters squardo = new Characters("Sqaurdo", false, "210 Mi", 551, "Pirate", true, 52, "Newgate's Crew", 1);
+        Characters ozjr = new Characters("Little Oz Junior", false, "550 Mi", 554, "Pirate", true, 72, "Newgate's Crew", 1);
 
+        listCharacters.add(newgate);
         listCharacters.add(ace);
+        listCharacters.add(joz);
+        listCharacters.add(vista);
+        listCharacters.add(squardo);
+        listCharacters.add(ozjr);
     }
 
     private static void BigMomCrew()
