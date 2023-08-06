@@ -26,7 +26,26 @@ class Pirates {
         NewgateCrew();
         BigMomCrew();
         KaidoCrew();
-
+        ArmadaMugiwaraCrew();
+        ChatNoirCrew();
+        KriegCrew();
+        FoxyCrew();
+        MoriaCrew();
+        LawCrew();
+        KiddCrew();
+        BegeCrew();
+        BonneyCrew();
+        UrougeCrew();
+        KujaCrew();
+        ShikiCrew();
+        CaribouCrew();
+        SunPiratesCrew();
+        WeevilCrew();
+        RogerCrew();
+        RumbarCrew();
+        DoffyCrew();
+        FishermanCrew();
+        BluejamCrew();
         EnerCrew();
 
 
@@ -157,12 +176,164 @@ class Pirates {
 
     private static void BigMomCrew()
     {
+        Characters bigmom = new Characters("Charlotte Linlin / BigMom", true, "4.388 Md", 651, "Pirate", true, 68, "BigMom's Crew", 0);
         Characters katakuri = new Characters("Charlotte Katakuri", true, "1.057 Md", 860, "Pirate", true, 48, "BigMom's Crew", 0);
+        Characters smoothie = new Characters("Charlotte Smoothie", true, "932 Mi", 846, "Pirate", true, 35, "BigMom's Crew", 0);
+        Characters cracker = new Characters("Charlotte Cracker", true, "860 Mi", 835, "Pirate", true, 45, "BigMom's Crew", 0);
+        Characters perospero = new Characters("Charlotte Perospero", true, "700 Mi", 834, "Pirate", true, 50, "BigMom's Crew", 0);
+        Characters daifuku = new Characters("Charlotte Daifuku", true, "300 Mi", 861, "Pirate", true, 48, "BigMom's Crew", 0);
+        Characters oven = new Characters("Charlotte Oven", true, "300 Mi", 861, "Pirate", true, 48, "BigMom's Crew", 1);
+        Characters amande = new Characters("Charlotte Amande", false, "Unknown", 827, "Pirate", true, 47, "BigMom's Crew", 1);
+        Characters opera = new Characters("Charlotte Opéra", true, "Unknown", 829, "Pirate", true, 46, "BigMom's Crew", 1);
+        Characters brulee = new Characters("Charlotte Brulée", true, "Unknown", 831, "Pirate", true, 43, "BigMom's Crew", 0);
+        Characters montdor = new Characters("Charlotte Mont d'or", true, "120 Mi", 829, "Pirate", true, 38, "BigMom's Crew", 1);
+        Characters galette = new Characters("Charlotte Galette", true, "Unknown", 829, "Pirate", true, 31, "BigMom's Crew", 1);
+        Characters snack = new Characters("Charlotte Snack", true, "600 Mi", 894, "Pirate", true, 30, "BigMom's Crew", 1);
+        Characters pudding = new Characters("Charlotte Pudding", true, "Unknown", 651, "Pirate", true, 16, "BigMom's Crew", 0);
+        Characters flampe = new Characters("Charlotte Flampe", false, "Unknown", 891, "Pirate", true, 15, "BigMom's Crew", 1);
 
+        listCharacters.add(bigmom);
         listCharacters.add(katakuri);
+        listCharacters.add(smoothie);
+        listCharacters.add(cracker);
+        listCharacters.add(perospero);
+        listCharacters.add(daifuku);
+        listCharacters.add(oven);
+        listCharacters.add(amande);
+        listCharacters.add(opera);
+        listCharacters.add(brulee);
+        listCharacters.add(montdor);
+        listCharacters.add(galette);
+        listCharacters.add(snack);
+        listCharacters.add(pudding);
+        listCharacters.add(flampe);
+
     }
 
     private static void KaidoCrew()
+    {
+        Characters kaido = new Characters("Kaido", true, "4.611 Md", 795, "Pirate", true, 59, "Kaido's Crew", 0);
+        Characters king = new Characters("King / Alber", true, "1.390 Md", 925, "Pirate", true, 47, "Kaido's Crew", 0);
+        Characters queen = new Characters("Queen", true, "1.320 Md", 925, "Pirate", true, 56, "Kaido's Crew", 0);
+        Characters jack = new Characters("Jack", true, "1 Md", 801, "Pirate", true, 28, "Kaido's Crew", 0);
+        Characters pageone = new Characters("Page One", true, "290 Mi", 929, "Pirate", true, 20, "Kaido's Crew", 1);
+        Characters ulti = new Characters("Ulti", true, "400 Mi", 977, "Pirate", true, 22, "Kaido's Crew", 1);
+        Characters whoswho = new Characters("Who's who", true, "546 Mi", 977, "Pirate", true, 38, "Kaido's Crew", 1);
+        Characters blackmaria = new Characters("Black Maria", true, "480 Mi", 977, "Pirate", true, 29, "Kaido's Crew", 1);
+        Characters sasaki = new Characters("Sasaki", true, "472 Mi", 977, "Pirate", true, 34, "Kaido's Crew", 1);
+        Characters hawkins = new Characters("Basil Hawkins", true, "320 Md", 498, "Pirate", true, 31, "Kaido's Crew", 0);
+        Characters apoo = new Characters("Scratchmen Apoo", true, "350 Mi", 498, "Pirate", true, 31, "Kaido's Crew", 0);
+
+        listCharacters.add(kaido);
+        listCharacters.add(king);
+        listCharacters.add(queen);
+        listCharacters.add(jack);
+        listCharacters.add(pageone);
+        listCharacters.add(ulti);
+        listCharacters.add(whoswho);
+        listCharacters.add(blackmaria);
+        listCharacters.add(sasaki);
+        listCharacters.add(hawkins);
+        listCharacters.add(apoo);
+
+    }
+
+    private static void ArmadaMugiwaraCrew()
+    {
+
+    }
+
+    private static void ChatNoirCrew()
+    {
+
+    }
+
+    private static void KriegCrew()
+    {
+
+    }
+
+    private static void FoxyCrew()
+    {
+
+    }
+
+    private static void MoriaCrew()
+    {
+
+    }
+
+    private static void LawCrew()
+    {
+
+    }
+
+    private static void KiddCrew()
+    {
+
+    }
+
+    private static void BegeCrew()
+    {
+
+    }
+
+    private static void BonneyCrew()
+    {
+
+    }
+
+    private static void UrougeCrew()
+    {
+
+    }
+
+    private static void KujaCrew()
+    {
+
+    }
+
+    private static void ShikiCrew()
+    {
+
+    }
+
+    private static void CaribouCrew()
+    {
+
+    }
+
+    private static void SunPiratesCrew()
+    {
+
+    }
+
+    private static void WeevilCrew()
+    {
+
+    }
+
+    private static void RogerCrew()
+    {
+
+    }
+
+    private static void RumbarCrew()
+    {
+
+    }
+
+    private static void DoffyCrew()
+    {
+
+    }
+
+    private static void FishermanCrew()
+    {
+
+    }
+
+    private static void BluejamCrew()
     {
 
     }
