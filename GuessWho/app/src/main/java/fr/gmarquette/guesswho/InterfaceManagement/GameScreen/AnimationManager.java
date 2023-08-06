@@ -201,7 +201,7 @@ public class AnimationManager
             case "Kaido's Crew":
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_KAIDO);
                 break;
-            case "TEACH_CREW":
+            case "Teach's Crew":
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_TEACH);
                 break;
             case "BigMom's Crew":
