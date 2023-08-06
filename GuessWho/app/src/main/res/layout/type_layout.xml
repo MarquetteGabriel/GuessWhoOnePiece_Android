@@ -16,19 +16,16 @@
             android:layout_marginStart="7dp">
 
             <ImageView
-                android:id="@+id/age_wr_circle_1"
+                android:id="@+id/type_wr_circle_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
-            <TextView
-                android:id="@+id/textviewType1"
+            <ImageView
+                android:id="@+id/type_answer_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:src="@drawable/gray_circle" />
 
         </RelativeLayout>
 
@@ -38,19 +35,16 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_2"
+                android:id="@+id/type_wr_circle_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
-            <TextView
-                android:id="@+id/textviewType2"
+            <ImageView
+                android:id="@+id/type_answer_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:src="@drawable/gray_circle" />
 
         </RelativeLayout>
 
@@ -60,19 +54,16 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_3"
+                android:id="@+id/type_wr_circle_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
-            <TextView
-                android:id="@+id/textviewType3"
+            <ImageView
+                android:id="@+id/type_answer_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:src="@drawable/gray_circle" />
 
         </RelativeLayout>
 
@@ -82,19 +73,16 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_4"
+                android:id="@+id/type_wr_circle_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
-            <TextView
-                android:id="@+id/textviewType4"
+            <ImageView
+                android:id="@+id/type_answer_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:src="@drawable/gray_circle" />
 
         </RelativeLayout>
 
@@ -104,19 +92,16 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_5"
+                android:id="@+id/type_wr_circle_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
-            <TextView
-                android:id="@+id/textviewType5"
+            <ImageView
+                android:id="@+id/type_answer_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:src="@drawable/gray_circle" />
 
         </RelativeLayout>
 
@@ -126,19 +111,16 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_6"
+                android:id="@+id/type_wr_circle_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
-            <TextView
-                android:id="@+id/textviewType6"
+            <ImageView
+                android:id="@+id/type_answer_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:src="@drawable/gray_circle" />
 
         </RelativeLayout>
 

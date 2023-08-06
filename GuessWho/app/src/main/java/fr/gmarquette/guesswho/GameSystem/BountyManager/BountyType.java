@@ -15,6 +15,7 @@ public enum BountyType {
     LOWER,
     UPPER,
     EQUAL,
+    NOT_EQUAL,
     CORRECT_UNKNOWN,
     CORRECT_NO_RESEARCHED
 }

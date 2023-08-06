@@ -33,6 +33,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_loading_screen);
 
         callDAOAsync = new CallDAOAsync(getApplicationContext());
+        callDAOAsync.deleteAllAsync();
         DataBase.getInstance(getApplicationContext());
         possibleAddElements();
 

@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
-import fr.gmarquette.guesswho.GameSystem.CrewType;
-import fr.gmarquette.guesswho.GameSystem.TypeType;
 
 class WorldGovernment
 {
@@ -28,7 +26,7 @@ class WorldGovernment
 
     private static void Navy()
     {
-        Characters kizaru = new Characters("Borsalino / Kizaru", true, "0", 397, TypeType.NAVY, true, 55, CrewType.NAVY, 0);
+        Characters kizaru = new Characters("Borsalino / Kizaru", true, "0", 397, "Navy", true, 55, "Navy's Crew", 0);
 
         listCharacters.add(kizaru);
     }

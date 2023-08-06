@@ -16,13 +16,19 @@
             android:layout_marginStart="7dp">
 
             <ImageView
-                android:id="@+id/age_wr_circle_1"
+                android:id="@+id/chapter_wr_circle_1"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle" />
+
+            <ImageView
+                android:id="@+id/chapter_answer_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewChapter1"
+                android:id="@+id/chapter_text_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -38,13 +44,19 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_2"
+                android:id="@+id/chapter_wr_circle_2"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle" />
+
+            <ImageView
+                android:id="@+id/chapter_answer_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewChapter2"
+                android:id="@+id/chapter_text_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -60,13 +72,19 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_3"
+                android:id="@+id/chapter_wr_circle_3"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle" />
+
+            <ImageView
+                android:id="@+id/chapter_answer_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewChapter3"
+                android:id="@+id/chapter_text_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -82,13 +100,19 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_4"
+                android:id="@+id/chapter_wr_circle_4"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle" />
+
+            <ImageView
+                android:id="@+id/chapter_answer_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewChapter4"
+                android:id="@+id/chapter_text_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -104,13 +128,19 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_5"
+                android:id="@+id/chapter_wr_circle_5"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle" />
+
+            <ImageView
+                android:id="@+id/chapter_answer_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewChapter5"
+                android:id="@+id/chapter_text_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"
@@ -126,13 +156,19 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/age_wr_circle_6"
+                android:id="@+id/chapter_wr_circle_6"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle" />
+
+            <ImageView
+                android:id="@+id/chapter_answer_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:src="@drawable/gray_circle" />
 
             <TextView
-                android:id="@+id/textviewChapter6"
+                android:id="@+id/chapter_text_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
                 android:gravity="center"

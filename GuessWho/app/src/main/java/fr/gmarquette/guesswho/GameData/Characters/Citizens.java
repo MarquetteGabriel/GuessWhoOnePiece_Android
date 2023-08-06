@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
-import fr.gmarquette.guesswho.GameSystem.CrewType;
-import fr.gmarquette.guesswho.GameSystem.TypeType;
 
 public class Citizens
 {
@@ -28,8 +26,8 @@ public class Citizens
 
     private static void EastBlue()
     {
-        Characters stelly = new Characters("Stelly", false, "0", 586, TypeType.CITIZEN, true, 20, CrewType.CITIZEN, 1);
-        Characters makino = new Characters("Makino", false, "0", 1, TypeType.CITIZEN, true, 31, CrewType.CITIZEN, 0);
+        Characters stelly = new Characters("Stelly", false, "0", 586, "Citizen", true, 20, "Citizen", 1);
+        Characters makino = new Characters("Makino", false, "0", 1, "Citizen", true, 31, "Citizen", 0);
 
         listCharacters.add(stelly);
         listCharacters.add(makino);

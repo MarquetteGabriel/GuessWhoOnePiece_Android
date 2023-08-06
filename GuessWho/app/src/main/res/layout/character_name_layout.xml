@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textViewCharacter0"
+            android:id="@+id/guess_1"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -19,7 +19,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewCharacter1"
+            android:id="@+id/guess_2"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -30,7 +30,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewCharacter2"
+            android:id="@+id/guess_3"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -41,7 +41,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewCharacter3"
+            android:id="@+id/guess_4"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -52,7 +52,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewCharacter4"
+            android:id="@+id/guess_5"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -63,7 +63,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewCharacter5"
+            android:id="@+id/guess_6"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"

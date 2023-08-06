@@ -21,7 +21,7 @@ public class GameManager
 
     public static boolean hasEatenDevilFruit(Characters characters, Characters characterSearched)
     {
-        return (characters.hasDevilFruit() && characterSearched.hasDevilFruit());
+        return (characters.hasDevilFruit() == characterSearched.hasDevilFruit());
     }
 
     public static BountyType lookingForBounty(Characters characters, Characters characterSearched)
@@ -53,7 +53,7 @@ public class GameManager
 
     public static boolean getType(Characters characters, Characters characterSearched)
     {
-        return (characters.getType() == characterSearched.getType());
+        return (characters.getType().equals(characterSearched.getType()));
     }
 
     public static AgeType getAge(Characters characters, Characters characterSearched)

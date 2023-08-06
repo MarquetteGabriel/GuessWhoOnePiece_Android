@@ -8,8 +8,6 @@
 
 package fr.gmarquette.guesswho.GameSystem.BountyManager;
 
-import static java.lang.Integer.parseInt;
-
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 
 public class BountyFactory {
@@ -24,8 +22,20 @@ public class BountyFactory {
 
         if(typeOfResearched && getTypeOfBounty(characters) == BountyType.BOUNTY_ON)
         {
-            int diff = (parseInt(characters.getBounty().substring(0, characters.getBounty().length() - 3)) -
-                    parseInt(characterSearched.getBounty().substring(0, characterSearched.getBounty().length() - 3)));
+            float bounty = Float.parseFloat(characters.getBounty().replaceAll("[^\\d.]", ""));
+            float bountySearched = Float.parseFloat(characterSearched.getBounty().replaceAll("[^\\d.]", ""));
+
+            if(characters.getBounty().contains("Md") && characterSearched.getBounty().contains("Mi"))
+            {
+                bounty *= 1000;
+            }
+            else if (characters.getBounty().contains("Mi") && characterSearched.getBounty().contains("Md"))
+            {
+                bountySearched *= 1000;
+            }
+
+            float diff = bounty - bountySearched;
+
             if(diff < 0)
             {
                 // Arrow Up
@@ -44,6 +54,10 @@ public class BountyFactory {
         else if(typeOfResearched && bountyType == BountyType.NO_RESEARCHED)
         {
             return BountyType.CORRECT_NO_RESEARCHED;
+        }
+        else if (!typeOfResearched && bountyType == BountyType.BOUNTY_ON)
+        {
+            return BountyType.NOT_EQUAL;
         }
         else if(typeOfResearched && bountyType == BountyType.UNKNOWN)
         {

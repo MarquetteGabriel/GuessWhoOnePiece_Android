@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,7 +21,16 @@
                 android:id="@+id/age_wr_circle_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/age_answer_1"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/empty_circle"
+                app:srcCompat="@drawable/empty_circle"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/age_text_1"
@@ -42,7 +52,16 @@
                 android:id="@+id/age_wr_circle_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/age_answer_2"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle"
+                app:srcCompat="@drawable/empty_circle"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/age_text_2"
@@ -64,7 +83,16 @@
                 android:id="@+id/age_wr_circle_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/age_answer_3"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle"
+                app:srcCompat="@drawable/empty_circle"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/age_text_3"
@@ -86,7 +114,16 @@
                 android:id="@+id/age_wr_circle_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/age_answer_4"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle"
+                app:srcCompat="@drawable/empty_circle"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/age_text_4"
@@ -108,7 +145,16 @@
                 android:id="@+id/age_wr_circle_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/age_answer_5"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle"
+                app:srcCompat="@drawable/empty_circle"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/age_text_5"
@@ -130,7 +176,16 @@
                 android:id="@+id/age_wr_circle_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/age_answer_6"
+                android:layout_width="@dimen/size_item"
+                android:layout_height="@dimen/size_item"
+                android:src="@drawable/gray_circle"
+                app:srcCompat="@drawable/empty_circle"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/age_text_6"
