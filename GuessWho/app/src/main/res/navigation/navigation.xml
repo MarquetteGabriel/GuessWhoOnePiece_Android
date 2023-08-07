@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ @brief Copyright (c) 2023 Gabriel Marquette
+  ~
+  ~ Copyright (c) 2023 Gabriel Marquette. All rights reserved.
+  ~
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loadingScreenFragment">
+
+
+    <fragment
+        android:id="@+id/loadingScreenFragment"
+        android:name="fr.gmarquette.guesswho.InterfaceManagement.LoadingScreen.LoadingScreenFragment"
+        android:label="fragment_loading_screen"
+        tools:layout="@layout/fragment_loading_screen" >
+        <action
+            android:id="@+id/action_loadingScreenFragment_to_gameSelectionScreenFragment"
+            app:destination="@id/gameSelectionScreenFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" >
+            <argument
+                android:name="suggestions"
+                app:argType="stringArrayList"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/gameSelectionScreenFragment"
+        android:name="fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameSelectionScreenFragment"
+        android:label="fragment_game_selection_screen"
+        tools:layout="@layout/fragment_game_selection_screen" >
+        <action
+            android:id="@+id/action_gameSelectionScreenFragment_to_gameScreenFragment"
+            app:destination="@id/gameScreenFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameScreenFragment"
+        android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.GameScreenFragment"
+        android:label="fragment_game_screen"
+        tools:layout="@layout/fragment_game_screen" >
+        <action
+            android:id="@+id/action_gameScreenFragment_to_gameSelectionScreenFragment"
+            app:destination="@id/gameSelectionScreenFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+</navigation>

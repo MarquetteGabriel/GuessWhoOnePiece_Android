@@ -9,49 +9,49 @@
 package fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
-import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.GameScreenActivity;
 import fr.gmarquette.guesswho.R;
 
-public class GameSelectionScreenActivity extends AppCompatActivity {
+public class GameSelectionScreenFragment extends Fragment {
 
     private CallDAOAsync callDAOAsync;
     private static final List<String> SUGGESTIONS = new ArrayList<>();
     private final ArrayList<String> arrayList = new ArrayList<>();
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        View viewFragment = inflater.inflate(R.layout.fragment_game_selection_screen, container, false);
 
-        setContentView(R.layout.activity_game_selection_screen);
-        callDAOAsync = new CallDAOAsync(this);
+        callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
 
         SUGGESTIONS.clear();
         arrayList.clear();
 
 
-        Button button = findViewById(R.id.playButton);
-        RadioButton easyRadioButton = findViewById(R.id.easyRadioButton);
-        RadioButton hardRadioButton = findViewById(R.id.hardRadioButton);
+        Button button = viewFragment.findViewById(R.id.playButton);
+        RadioButton easyRadioButton = viewFragment.findViewById(R.id.easyRadioButton);
+        RadioButton hardRadioButton = viewFragment.findViewById(R.id.hardRadioButton);
 
         button.setOnClickListener(view -> {
 
@@ -67,11 +67,13 @@ public class GameSelectionScreenActivity extends AppCompatActivity {
 
             arrayList.clear();
             arrayList.addAll(SUGGESTIONS);
-            Intent intent = new Intent(getApplicationContext(), GameScreenActivity.class);
-            intent.putStringArrayListExtra("Suggestions", arrayList);
-            startActivity(intent);
-            finish();
+            Bundle args = new Bundle();
+            args.putStringArrayList("Suggestions", arrayList);
+            Navigation.findNavController(viewFragment).navigate(R.id.gameScreenFragment, args);
+            requireActivity().finish();
         });
+
+        return viewFragment;
     }
 
     private void getSuggestions(int level)
@@ -84,22 +86,20 @@ public class GameSelectionScreenActivity extends AppCompatActivity {
     }
 
     @SuppressLint("NonConstantResourceId")
-    public void onClickSwitchRadioButtons(View view) {
+    public void onClickSwitchRadioButtons(View view)
+    {
         boolean checked = ((RadioButton) view).isChecked();
 
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.easyRadioButton:
-                if(checked)
-                {
-                    RadioButton hardRadioButton = findViewById(R.id.hardRadioButton);
+                if (checked) {
+                    RadioButton hardRadioButton = view.findViewById(R.id.hardRadioButton);
                     hardRadioButton.setChecked(false);
                 }
                 break;
             case R.id.hardRadioButton:
-                if(checked)
-                {
-                    RadioButton easyRadioButton = findViewById(R.id.easyRadioButton);
+                if (checked) {
+                    RadioButton easyRadioButton = view.findViewById(R.id.easyRadioButton);
                     easyRadioButton.setChecked(false);
                 }
                 break;
