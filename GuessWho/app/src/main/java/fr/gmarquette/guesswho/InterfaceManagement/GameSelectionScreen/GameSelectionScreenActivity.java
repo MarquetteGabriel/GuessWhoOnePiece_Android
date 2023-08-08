@@ -10,12 +10,14 @@ package fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,6 +37,9 @@ public class GameSelectionScreenActivity extends AppCompatActivity {
     private final ArrayList<String> arrayList = new ArrayList<>();
 
 
+    private VideoView videoView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,21 @@ public class GameSelectionScreenActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_game_selection_screen);
+
+        videoView = (VideoView) findViewById(R.id.video_gear5);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.presentation_gear5);
+        videoView.setVideoURI(uri);
+
+        videoView.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            mp.start();
+        });
+
+        videoView.setOnCompletionListener(mp -> {
+            mp.seekTo(0);
+            mp.start();
+        });
+
         callDAOAsync = new CallDAOAsync(this);
 
         SUGGESTIONS.clear();
@@ -104,5 +124,18 @@ public class GameSelectionScreenActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        videoView.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        videoView.suspend();
     }
 }
