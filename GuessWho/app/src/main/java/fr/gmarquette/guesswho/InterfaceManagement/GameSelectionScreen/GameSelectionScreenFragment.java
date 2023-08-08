@@ -30,7 +30,7 @@ public class GameSelectionScreenFragment extends Fragment {
 
     private CallDAOAsync callDAOAsync;
     private static final List<String> SUGGESTIONS = new ArrayList<>();
-    private final ArrayList<String> arrayList = new ArrayList<>();
+    public static final ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,9 +67,9 @@ public class GameSelectionScreenFragment extends Fragment {
 
             arrayList.clear();
             arrayList.addAll(SUGGESTIONS);
-            Bundle args = new Bundle();
-            args.putStringArrayList("Suggestions", arrayList);
-            Navigation.findNavController(viewFragment).navigate(R.id.gameScreenFragment, args);
+            //Bundle args = new Bundle();
+            //args.putStringArrayList("Suggestions", arrayList);
+            Navigation.findNavController(viewFragment).navigate(R.id.gameScreenFragment);
             requireActivity().finish();
         });
 

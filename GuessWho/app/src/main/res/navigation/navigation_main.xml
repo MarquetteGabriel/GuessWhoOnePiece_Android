@@ -22,11 +22,7 @@
             android:id="@+id/action_loadingScreenFragment_to_gameSelectionScreenFragment"
             app:destination="@id/gameSelectionScreenFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" >
-            <argument
-                android:name="suggestions"
-                app:argType="stringArrayList"/>
-        </action>
+            app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/gameSelectionScreenFragment"
@@ -37,7 +33,7 @@
             android:id="@+id/action_gameSelectionScreenFragment_to_gameScreenFragment"
             app:destination="@id/gameScreenFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/gameScreenFragment"

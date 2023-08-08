@@ -34,6 +34,7 @@ import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
 import fr.gmarquette.guesswho.GameSystem.ChapterType;
 import fr.gmarquette.guesswho.GameSystem.GameInit;
 import fr.gmarquette.guesswho.GameSystem.GameManager;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameSelectionScreenFragment;
 import fr.gmarquette.guesswho.R;
 
 public class GameScreenFragment extends Fragment {
@@ -61,11 +62,7 @@ public class GameScreenFragment extends Fragment {
 
         viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
 
-        Bundle arguments = getArguments();
-        if (arguments != null && arguments.containsKey("suggestions"))
-        {
-            suggestions = arguments.getStringArrayList("suggestions");
-        }
+        suggestions = GameSelectionScreenFragment.arrayList;
 
         DataBase.getInstance(requireContext().getApplicationContext());
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());

@@ -26,10 +26,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navigation);
-        assert navHostFragment != null;
         navController = navHostFragment.getNavController();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView5, new LoadingScreenFragment())
-                .commit();
+            .add(R.id.fragmentContainerView5, new LoadingScreenFragment())
+            .commit();
+
+
     }
 }
