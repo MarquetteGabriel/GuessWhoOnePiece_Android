@@ -8,46 +8,48 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.LoadingScreen;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.GameData.Characters.InitialiseDatabase;
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
-import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameSelectionScreenActivity;
 import fr.gmarquette.guesswho.R;
 
-public class LoadingScreenActivity extends AppCompatActivity {
+public class LoadingScreenFragment extends Fragment {
+
 
     private static final int LOADING_TIME = 2000;
     private CallDAOAsync callDAOAsync;
 
+    public LoadingScreenFragment() {
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        setContentView(R.layout.activity_splash_loading_screen);
-
-        callDAOAsync = new CallDAOAsync(getApplicationContext());
+        View view = inflater.inflate(R.layout.fragment_loading_screen, container, false);
+        callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
         callDAOAsync.deleteAllAsync();
-        DataBase.getInstance(getApplicationContext());
+        DataBase.getInstance(requireContext().getApplicationContext());
         possibleAddElements();
 
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(getApplicationContext(), GameSelectionScreenActivity.class);
-            startActivity(intent);
-        }, LOADING_TIME);
+        new Handler().postDelayed(() -> Navigation.findNavController(view).navigate(R.id.gameSelectionScreenFragment), LOADING_TIME);
+
+        return view;
     }
 
     private void possibleAddElements()

@@ -27,7 +27,8 @@ public class GameInit extends Thread
         callDAOAsync = new CallDAOAsync(context);
     }
 
-    private int RandomId(List<Integer> integerList) {
+    private int RandomId(List<Integer> integerList)
+    {
         int minId = Collections.min(integerList);
         int maxId = Collections.max(integerList);
         Random rand = new Random();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InterfaceManagement.GameSelectionScreen.GameSelectionScreenActivity"
+    tools:context=".InterfaceManagement.GameSelectionScreen.GameSelectionScreenFragment"
     android:background="@drawable/selectmode">
 
     <VideoView
@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="@string/guess_who"
+        android:textColor="#263238"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,16 +69,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/easy"
-            tools:ignore="TouchTargetSizeCheck"
-            android:onClick="onClickSwitchRadioButtons"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
             android:id="@+id/hardRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hard"
-            tools:ignore="TouchTargetSizeCheck"
-            android:onClick="onClickSwitchRadioButtons"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 

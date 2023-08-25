@@ -11,8 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GuessWho"
         tools:targetApi="31">
+
         <activity
-            android:name=".InterfaceManagement.LoadingScreen.LoadingScreenActivity"
+            android:name=".InterfaceManagement.LoadingScreen.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,16 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".InterfaceManagement.GameScreen.GameScreenActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".InterfaceManagement.GameSelectionScreen.GameSelectionScreenActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-
     </application>
 
 </manifest>
