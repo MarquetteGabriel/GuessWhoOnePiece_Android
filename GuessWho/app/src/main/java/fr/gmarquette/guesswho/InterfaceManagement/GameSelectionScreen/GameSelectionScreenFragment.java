@@ -9,12 +9,14 @@
 package fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -32,6 +34,7 @@ public class GameSelectionScreenFragment extends Fragment{
     private CallDAOAsync callDAOAsync;
     private static final List<String> SUGGESTIONS = new ArrayList<>();
     public static final ArrayList<String> arrayList = new ArrayList<>();
+    private VideoView videoView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,20 @@ public class GameSelectionScreenFragment extends Fragment{
         View viewFragment = inflater.inflate(R.layout.fragment_game_selection_screen, container, false);
 
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
+
+        videoView = (VideoView) viewFragment.findViewById(R.id.video_gear5);
+        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.presentation_gear5);
+        videoView.setVideoURI(uri);
+
+        videoView.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            mp.start();
+        });
+
+        videoView.setOnCompletionListener(mp -> {
+            mp.seekTo(0);
+            mp.start();
+        });
 
         SUGGESTIONS.clear();
         arrayList.clear();
