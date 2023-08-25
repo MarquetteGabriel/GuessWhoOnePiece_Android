@@ -25,12 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navigation);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         navController = navHostFragment.getNavController();
-        getSupportFragmentManager().beginTransaction()
-            .add(R.id.fragmentContainerView5, new LoadingScreenFragment())
-            .commit();
-
-
     }
 }

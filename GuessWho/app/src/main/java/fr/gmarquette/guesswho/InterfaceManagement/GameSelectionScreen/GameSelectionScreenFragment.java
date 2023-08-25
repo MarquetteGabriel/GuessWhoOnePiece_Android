@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.concurrent.ExecutionException;
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.R;
 
-public class GameSelectionScreenFragment extends Fragment {
+public class GameSelectionScreenFragment extends Fragment{
 
     private CallDAOAsync callDAOAsync;
     private static final List<String> SUGGESTIONS = new ArrayList<>();
@@ -53,6 +54,16 @@ public class GameSelectionScreenFragment extends Fragment {
         RadioButton easyRadioButton = viewFragment.findViewById(R.id.easyRadioButton);
         RadioButton hardRadioButton = viewFragment.findViewById(R.id.hardRadioButton);
 
+        easyRadioButton.setOnClickListener(view -> {
+            easyRadioButton.setChecked(true);
+            hardRadioButton.setChecked(false);
+        });
+
+        hardRadioButton.setOnClickListener(view -> {
+            easyRadioButton.setChecked(false);
+            hardRadioButton.setChecked(true);
+        });
+
         button.setOnClickListener(view -> {
 
             if (easyRadioButton.isChecked())
@@ -67,10 +78,8 @@ public class GameSelectionScreenFragment extends Fragment {
 
             arrayList.clear();
             arrayList.addAll(SUGGESTIONS);
-            //Bundle args = new Bundle();
-            //args.putStringArrayList("Suggestions", arrayList);
-            Navigation.findNavController(viewFragment).navigate(R.id.gameScreenFragment);
-            requireActivity().finish();
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
+            navController.navigate(R.id.gameScreenFragment);
         });
 
         return viewFragment;
@@ -84,8 +93,8 @@ public class GameSelectionScreenFragment extends Fragment {
             throw new RuntimeException(e);
         }
     }
+/*
 
-    @SuppressLint("NonConstantResourceId")
     public void onClickSwitchRadioButtons(View view)
     {
         boolean checked = ((RadioButton) view).isChecked();
@@ -104,5 +113,5 @@ public class GameSelectionScreenFragment extends Fragment {
                 }
                 break;
         }
-    }
+    }*/
 }

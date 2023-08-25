@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
@@ -73,7 +74,6 @@ public class GameScreenFragment extends Fragment {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, suggestions);
         AutoCompleteTextView autoCompleteTextView = viewFragment.findViewById(R.id.EnterTextAutoCompleted);
@@ -349,7 +349,7 @@ public class GameScreenFragment extends Fragment {
 
     private void displayWinDialog()
     {
-        final Dialog dialog = new Dialog(requireContext().getApplicationContext());
+        final Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.win_popup);
@@ -367,7 +367,8 @@ public class GameScreenFragment extends Fragment {
 
         noButton.setOnClickListener(view -> {
             dialog.dismiss();
-            Navigation.findNavController(viewFragment).navigate(R.id.gameSelectionScreenFragment);
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
+            navController.navigate(R.id.gameSelectionScreenFragment);
         });
 
         dialog.show();
@@ -375,7 +376,7 @@ public class GameScreenFragment extends Fragment {
 
     private void displayLooseDialog()
     {
-        final Dialog dialog = new Dialog(requireContext().getApplicationContext());
+        final Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.win_popup);
@@ -393,7 +394,8 @@ public class GameScreenFragment extends Fragment {
 
         noButton.setOnClickListener(view -> {
             dialog.dismiss();
-            Navigation.findNavController(viewFragment).navigate(R.id.gameSelectionScreenFragment);
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
+            navController.navigate(R.id.gameSelectionScreenFragment);
         });
 
         dialog.show();

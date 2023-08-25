@@ -18,4 +18,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/navigation_main"
         tools:layout="@layout/fragment_loading_screen" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

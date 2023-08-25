@@ -20,9 +20,7 @@
         tools:layout="@layout/fragment_loading_screen" >
         <action
             android:id="@+id/action_loadingScreenFragment_to_gameSelectionScreenFragment"
-            app:destination="@id/gameSelectionScreenFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"/>
+            app:destination="@id/gameSelectionScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameSelectionScreenFragment"
@@ -31,9 +29,7 @@
         tools:layout="@layout/fragment_game_selection_screen" >
         <action
             android:id="@+id/action_gameSelectionScreenFragment_to_gameScreenFragment"
-            app:destination="@id/gameScreenFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"/>
+            app:destination="@id/gameScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameScreenFragment"
@@ -42,8 +38,6 @@
         tools:layout="@layout/fragment_game_screen" >
         <action
             android:id="@+id/action_gameScreenFragment_to_gameSelectionScreenFragment"
-            app:destination="@id/gameSelectionScreenFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:destination="@id/gameSelectionScreenFragment" />
     </fragment>
 </navigation>
