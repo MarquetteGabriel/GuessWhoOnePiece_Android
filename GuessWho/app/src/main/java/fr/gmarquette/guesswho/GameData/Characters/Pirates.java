@@ -217,7 +217,6 @@ class Pirates {
         listCharacters.add(pudding);
         listCharacters.add(flampe);
         listCharacters.add(laura);
-
     }
 
     private static void KaidoCrew()
