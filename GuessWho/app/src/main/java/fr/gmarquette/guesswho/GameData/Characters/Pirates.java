@@ -37,7 +37,6 @@ class Pirates {
         BonneyCrew();
         UrougeCrew();
         KujaCrew();
-        ShikiCrew();
         CaribouCrew();
         SunPiratesCrew();
         WeevilCrew();
@@ -47,7 +46,12 @@ class Pirates {
         FishermanCrew();
         BluejamCrew();
         EnerCrew();
-
+        MonkeyCrew();
+        ArlongCrew();
+        FalseMugiwaraCrew();
+        CaesarCrew();
+        BaroqueWorks();
+        Solos();
 
         return listCharacters;
     }
@@ -165,13 +169,17 @@ class Pirates {
         Characters vista = new Characters("Vista", false, "Unknown", 552, "Pirate", true, 47, "Newgate's Crew", 0);
         Characters squardo = new Characters("Sqaurdo", false, "210 Mi", 551, "Pirate", true, 52, "Newgate's Crew", 1);
         Characters ozjr = new Characters("Little Oz Junior", false, "550 Mi", 554, "Pirate", true, 72, "Newgate's Crew", 1);
+        Characters marco = new Characters("Marco", true, "1.374 Md", 234, "Pirate", true, 45, "Newgate's Crew", 0);
+        Characters izo = new Characters("Izo", false, "510 Mi", 553, "Pirate", false, 45, "Newgate's Crew", 0);
 
         listCharacters.add(newgate);
+        listCharacters.add(marco);
         listCharacters.add(ace);
         listCharacters.add(joz);
         listCharacters.add(vista);
         listCharacters.add(squardo);
         listCharacters.add(ozjr);
+        listCharacters.add(izo);
     }
 
     private static void BigMomCrew()
@@ -191,6 +199,7 @@ class Pirates {
         Characters snack = new Characters("Charlotte Snack", true, "600 Mi", 894, "Pirate", true, 30, "BigMom's Crew", 1);
         Characters pudding = new Characters("Charlotte Pudding", true, "Unknown", 651, "Pirate", true, 16, "BigMom's Crew", 0);
         Characters flampe = new Characters("Charlotte Flampe", false, "Unknown", 891, "Pirate", true, 15, "BigMom's Crew", 1);
+        Characters laura = new Characters("Charlotte Laura", false, "24 Mi", 476, "Pirate", true, 26, "Laura's Crew", 1);
 
         listCharacters.add(bigmom);
         listCharacters.add(katakuri);
@@ -207,6 +216,7 @@ class Pirates {
         listCharacters.add(snack);
         listCharacters.add(pudding);
         listCharacters.add(flampe);
+        listCharacters.add(laura);
 
     }
 
@@ -240,108 +250,389 @@ class Pirates {
 
     private static void ArmadaMugiwaraCrew()
     {
+        Characters cavendish = new Characters("Cavendish", false, "330 Mi", 704, "Pirate", true, 26, "Mugiwara's Armada Crew", 0);
+        Characters suleiman = new Characters("Suleiman", false, "67 Mi", 704, "Pirate", true, 40, "Mugiwara's Armada Crew", 1);
+        Characters bartolomeo = new Characters("Bartolomeo", true, "200 Mi", 705, "Pirate", true, 24, "Mugiwara's Armada Crew", 0);
+        //Characters gambia = new Characters("Gambia", false, "67 Mi", 705, "Pirate", true, , "Mugiwara's Armada Crew", 1);
+        Characters sai = new Characters("Sai", false, "210 Mi", 704, "Pirate", true, 28, "Mugiwara's Armada Crew", 0);
+        //Characters boo = new Characters("Boo", false, "Unkwown", 704, "Pirate", true, , "Mugiwara's Armada Crew", 1);
+        Characters baby = new Characters("Baby 5", true, "Unkwown", 682, "Pirate", true, 24, "Mugiwara's Armada Crew", 1);
+        Characters ideo = new Characters("Ideo", false, "Unkwown", 706, "Pirate", true, 22, "Mugiwara's Armada Crew", 0);
+        Characters bluegilly = new Characters("Blue Gilly", false, "Unkwown", 706, "Pirate", true, 24, "Mugiwara's Armada Crew", 1);
+        //Characters abdullah = new Characters("Abdullah", false, "Unkwown", 704, "Pirate", true, , "Mugiwara's Armada Crew", 1);
+        //Characters jeet = new Characters("Jeet", false, "Unkwown", 704, "Pirate", true, , "Mugiwara's Armada Crew", 1);
+        Characters leo = new Characters("Léo", true, "Unkwown", 710, "Pirate", true, 25, "Mugiwara's Armada Crew", 0);
+        //Characters kabu = new Characters("Kabu", true, "Unkwown", 710, "Pirate", true, , "Mugiwara's Armada Crew", 1);
+        //Characters beeanne = new Characters("Bee Anne", true, "Unkwown", 717, "Pirate", true, , "Mugiwara's Armada Crew", 1);
+        Characters hajrudin = new Characters("Hajrudin", false, "Unkwown", 706, "Pirate", true, 81, "Mugiwara's Armada Crew", 0);
+        //Characters stansen = new Characters("Stansen", false, "Unkwown", 500, "Pirate", true, , "Mugiwara's Armada Crew", 1);
+        Characters road = new Characters("Road", false, "Unkwown", 898, "Pirate", true, 63, "Mugiwara's Armada Crew", 1);
+        Characters goldberg = new Characters("Goldberg", false, "Unkwown", 899, "Pirate", true, 63, "Mugiwara's Armada Crew", 1);
+        Characters gerd = new Characters("Gerd", false, "Unkwown", 866, "Pirate", true, 75, "Mugiwara's Armada Crew", 1);
+        Characters orlumbus = new Characters("Orlumbus", false, "148 Mi", 704, "Pirate", true, 42, "Mugiwara's Armada Crew", 0);
 
+        listCharacters.add(cavendish);
+        listCharacters.add(suleiman);
+        listCharacters.add(bartolomeo);
+        //listCharacters.add(gambia);
+        listCharacters.add(sai);
+        //listCharacters.add(boo);
+        listCharacters.add(baby);
+        listCharacters.add(ideo);
+        listCharacters.add(bluegilly);
+        //listCharacters.add(abdullah);
+        //listCharacters.add(jeet);
+        listCharacters.add(leo);
+        //listCharacters.add(kabu);
+        //listCharacters.add(beeanne);
+        listCharacters.add(hajrudin);
+        //listCharacters.add(stansen);
+        listCharacters.add(road);
+        listCharacters.add(goldberg);
+        listCharacters.add(gerd);
+        listCharacters.add(orlumbus);
     }
 
     private static void ChatNoirCrew()
     {
+        Characters kuro = new Characters("Kuro", false, "16 Mi", 23, "Pirate", true, 35, "Black Cat's Crew", 0);
+        Characters sham = new Characters("Sham", false, "7 Mi", 31, "Pirate", true, 23, "Black Cat's Crew", 1);
+        Characters buchi = new Characters("Buchi", false, "7 Mi", 31, "Pirate", true, 23, "Black Cat's Crew", 1);
 
+        listCharacters.add(kuro);
+        listCharacters.add(sham);
+        listCharacters.add(buchi);
     }
 
     private static void KriegCrew()
     {
+        Characters krieg = new Characters("Don Krieg", false, "17 Mi", 45, "Pirate", true, 44, "Don Krieg's Crew", 0);
+        Characters gyn = new Characters("Gyn", false, "12 Mi", 44, "Pirate", true, 27, "Don Krieg's Crew", 0);
+        Characters pearl = new Characters("Pearl", false, "Unkwown", 54, "Pirate", true, 25, "Don Krieg's Crew", 1);
 
+        listCharacters.add(krieg);
+        listCharacters.add(gyn);
+        listCharacters.add(pearl);
+    }
+
+    private static void MonkeyCrew()
+    {
+        Characters cricket = new Characters("Montblanc Cricket", false, "25 Mi", 227, "Pirate", true, 43, "Monkey's Forces Crew", 0);
+        Characters masira = new Characters("Masira", false, "23 Mi", 219, "Pirate", true, 25, "Monkey's Forces Crew", 0);
+        Characters shojo = new Characters("Shojo", false, "36 Mi", 226, "Pirate", true, 27, "Monkey's Forces Crew", 0);
+
+        listCharacters.add(cricket);
+        listCharacters.add(masira);
+        listCharacters.add(shojo);
     }
 
     private static void FoxyCrew()
     {
+        Characters foxy = new Characters("Foxy", true, "24 Mi", 305, "Pirate", true, 38, "Foxy's Crew", 0);
+        //Characters porche = new Characters("Porché", false, "Unkwown", 305, "Pirate", true, , "Foxy's Crew", 1);
+        //Characters hamburg = new Characters("Hamburg", false, "Unkwown", 305, "Pirate", true, , "Foxy's Crew", 1);
 
+        listCharacters.add(foxy);
+        //listCharacters.add(porche);
+        //listCharacters.add(hamburg);
     }
 
     private static void MoriaCrew()
     {
+        Characters moria = new Characters("Gecko Moria", true, "320 Mi", 449, "Pirate", true, 50, "Moria's Crew", 0);
+        Characters hogback = new Characters("Hogback", false, "Unkwown", 446, "Pirate", true, 47, "Moria's Crew", 0);
+        Characters absalom = new Characters("Absalom", true, "Unkwown", 444, "Pirate", false, 36, "Moria's Crew", 0);
+        Characters perona = new Characters("Perona", true, "Unkwown", 443, "Pirate", true, 25, "Moria's Crew", 0);
 
+        listCharacters.add(moria);
+        listCharacters.add(hogback);
+        listCharacters.add(absalom);
+        listCharacters.add(perona);
     }
 
     private static void LawCrew()
     {
+        Characters law = new Characters("Trafalgar D. Water Law", true, "3 Md", 498, "Pirate", true, 26, "Heart's Crew", 0);
+        Characters bepo = new Characters("Bepo", false, "500", 498, "Pirate", true, 22, "Heart's Crew", 0);
+        //Characters jeanbart = new Characters("Jean Bart", false, "Unkwown", 497, "Pirate", true, , "Heart's Crew", 1);
+        Characters shachi = new Characters("Shachi", false, "Unkwown", 498, "Pirate", true, 27, "Heart's Crew", 1);
+        Characters pingouin = new Characters("Pingouin", false, "Unkwown", 498, "Pirate", true, 28, "Heart's Crew", 1);
 
+        listCharacters.add(law);
+        listCharacters.add(bepo);
+        listCharacters.add(shachi);
+        listCharacters.add(pingouin);
     }
 
     private static void KiddCrew()
     {
+        Characters kidd = new Characters("Eustass Kidd", true, "3 Md", 498, "Pirate", true, 23, "Kidd's Crew", 0);
+        Characters killer = new Characters("Killer", false, "200 Mi", 498, "Pirate", true, 27, "Kidd's Crew", 0);
 
+        listCharacters.add(kidd);
+        listCharacters.add(killer);
     }
 
     private static void BegeCrew()
     {
+        Characters bege = new Characters("Capone Bege", true, "350 Mi", 498, "Pirate", true, 42, "Bege's Crew", 0);
+        Characters vito = new Characters("Vito", false, "95 Mi", 812, "Pirate", true, 36, "Bege's Crew", 1);
+        Characters gotti = new Characters("Gotti", false, "90 Mi", 825, "Pirate", true, 33, "Bege's Crew", 1);
+        Characters chiffon = new Characters("Charlotte Chiffon", false, "Unkwown", 825, "Pirate", true, 26, "Bege's Crew", 1);
+        Characters pets = new Characters("Charlotte Pets", false, "Unkwown", 834, "Pirate", true, 1, "Bege's Crew", 1);
 
+
+        listCharacters.add(bege);
+        listCharacters.add(vito);
+        listCharacters.add(gotti);
+        listCharacters.add(chiffon);
+        listCharacters.add(pets);
     }
 
     private static void BonneyCrew()
     {
-
+        Characters bonney = new Characters("Jewelry Bonney", true, "320 Mi", 498, "Pirate", true, 24, "Bonney's Crew", 0);
+        listCharacters.add(bonney);
     }
 
     private static void UrougeCrew()
     {
-
+        Characters urouge = new Characters("Urouge", true, "108 Mi", 498, "Pirate", true, 47, "Urouge's Crew", 0);
+        listCharacters.add(urouge);
     }
 
     private static void KujaCrew()
     {
+        Characters hancock = new Characters("Boa Hancock", true, "1.659 Md", 516, "Pirate", true, 31, "Kuja's Crew", 0);
+        Characters sandersonia = new Characters("Boa Sandersonia", true, "40 Mi", 516, "Pirate", true, 30, "Kuja's Crew", 0);
+        Characters marigold = new Characters("Boa Marigold", true, "40 Mi", 516, "Pirate", true, 28, "Kuja's Crew", 0);
+        Characters margaret = new Characters("Margaret", false, "Unkwown", 514, "Pirate", true, 18, "Kuja's Crew", 1);
 
-    }
-
-    private static void ShikiCrew()
-    {
-
+        listCharacters.add(hancock);
+        listCharacters.add(sandersonia);
+        listCharacters.add(marigold);
+        listCharacters.add(margaret);
     }
 
     private static void CaribouCrew()
     {
+        Characters caribou = new Characters("Caribou", true, "210 Mi", 600, "Pirate", true, 32, "Caribou's Crew", 0);
+        Characters coribou = new Characters("Coribou", false, "190 Mi", 600, "Pirate", true, 29, "Caribou's Crew", 1);
 
+        listCharacters.add(caribou);
+        listCharacters.add(coribou);
     }
 
     private static void SunPiratesCrew()
     {
-
+        Characters fishertiger = new Characters("Fisher Tiger", false, "230 Mi", 521, "Pirate", false, 48, "Sun Pirates' Crew", 0);
+        Characters aladdin = new Characters("Aladdin", false, "Unkwown", 620, "Pirate", true, 46, "Sun Pirates' Crew", 0);
+        Characters praline = new Characters("Charlotte Praliné", false, "Unkwown", 830, "Pirate", true, 29, "Sun Pirates' Crew", 1);
+        Characters wadatsumi = new Characters("Wadatsumi", false, "Unkwown", 606, "Pirate", true, 25, "Sun Pirates' Crew", 1);
+        listCharacters.add(fishertiger);
+        listCharacters.add(aladdin);
+        listCharacters.add(praline);
+        listCharacters.add(wadatsumi);
     }
 
     private static void WeevilCrew()
     {
-
+        Characters weeble = new Characters("Edward Weeble", false, "480 Mi", 802, "Pirate", true, 35, "Weeble's Crew", 0);
+        Characters stussy = new Characters("Buckingham Stussy", false, "Unkwown", 802, "Pirate", true, 76, "Weeble's Crew", 1);
+        listCharacters.add(weeble);
+        listCharacters.add(stussy);
     }
 
     private static void RogerCrew()
     {
+        Characters roger = new Characters("Gol D. Roger", false, "5.5648 Md", 1, "Pirate", false, 53, "Roger's Crew", 0);
+        //Characters gaban = new Characters("Scopper Gaban", false, "Unkwown", 19, "Pirate", true, , "Roger's Crew", 0);
+        Characters rayleigh = new Characters("Silvers Rayleigh", false, "Unknown", 19, "Pirate", true, 78, "Roger's Crew", 0);
+        Characters oden = new Characters("Oden Kozuki", false, "0", 920, "Pirate", false, 39, "Roger's Crew", 0);
 
+        listCharacters.add(roger);
+        //listCharacters.add(gaban);
+        listCharacters.add(rayleigh);
+        listCharacters.add(oden);
+    }
+
+    private static void ArlongCrew()
+    {
+        Characters arlong = new Characters("Arlong", false, "20 Mi", 69, "Pirate", true, 41, "Arlong's Crew", 0);
+        Characters kuroobi = new Characters("Kuroobi", false, "9 Mi", 69, "Pirate", true, 38, "Arlong's Crew", 0);
+        Characters smack = new Characters("Smack", false, "5.5 Mi", 69, "Pirate", true, 35, "Arlong's Crew", 0);
+
+        listCharacters.add(arlong);
+        listCharacters.add(kuroobi);
+        listCharacters.add(smack);
     }
 
     private static void RumbarCrew()
     {
-
+        //Characters yorki = new Characters("Yorki", false, "Unkwown", 103, "Pirate", false, , "Rumbar's Crew", 1);
+        //listCharacters.add(yorki);
     }
 
     private static void DoffyCrew()
     {
+        Characters doflamingo = new Characters("Don Quijote Doflamingo", true, "340 Mi", 233, "Pirate", true, 41, "Doflamingo's Crew", 0);
+        Characters trebol = new Characters("Trébol", true, "99 Mi", 700, "Pirate", true, 49, "Doflamingo's Crew", 0);
+        Characters diamante = new Characters("Diamante", true, "99 Mi", 700, "Pirate", true, 45, "Doflamingo's Crew", 0);
+        Characters pica = new Characters("Pica", true, "99 Mi", 700, "Pirate", true, 40, "Doflamingo's Crew", 0);
+        Characters vergo = new Characters("Vergo", false, "Unkwown", 671, "Pirate", false, 41, "Doflamingo's Crew", 0);
+        Characters sugar = new Characters("Sugar", true, "Unkwown", 682, "Pirate", true, 22, "Doflamingo's Crew", 0);
+        Characters jora = new Characters("Jora", true, "Unkwown", 682, "Pirate", true, 61, "Doflamingo's Crew", 0);
+        Characters laog = new Characters("Lao G", false, "61 Mi", 682, "Pirate", true, 70, "Doflamingo's Crew", 0);
+        Characters senorpink = new Characters("Señor Pink", true, "58 Mi", 702, "Pirate", true, 46, "Doflamingo's Crew", 0);
+        Characters machvise = new Characters("Machvise", true, "11 Mi", 682, "Pirate", true, 52, "Doflamingo's Crew", 0);
+        Characters dellinger = new Characters("Dellinger", false, "15 Mi", 702, "Pirate", true, 16, "Doflamingo's Crew", 0);
+        Characters gladius = new Characters("Gladius", true, "31 Mi", 682, "Pirate", true, 33, "Doflamingo's Crew", 0);
+        Characters buffalo = new Characters("Buffalo", true, "Unkwown", 692, "Pirate", true, 33, "Doflamingo's Crew", 0);
+        Characters monet = new Characters("Monet", true, "Unkwown", 657, "Pirate", false, 30, "Doflamingo's Crew", 0);
+        Characters bellamy = new Characters("Bellamy", true, "195 Mi", 222, "Pirate", true, 27, "Doflamingo's Crew", 0);
+        Characters sarquiss = new Characters("Sarquiss", false, "38 Mi", 222, "Pirate", false, 27, "Doflamingo's Crew", 1);
 
+        listCharacters.add(doflamingo);
+        listCharacters.add(trebol);
+        listCharacters.add(diamante);
+        listCharacters.add(pica);
+        listCharacters.add(vergo);
+        listCharacters.add(sugar);
+        listCharacters.add(jora);
+        listCharacters.add(laog);
+        listCharacters.add(senorpink);
+        listCharacters.add(machvise);
+        listCharacters.add(dellinger);
+        listCharacters.add(gladius);
+        listCharacters.add(buffalo);
+        listCharacters.add(monet);
+        listCharacters.add(bellamy);
+        listCharacters.add(sarquiss);
     }
 
     private static void FishermanCrew()
     {
+        Characters hody = new Characters("Hody Jones", false, "Unkwown", 608, "Pirate", true, 30, "Fishmen's Crew", 0);
+        Characters dosun = new Characters("Dosun", false, "Unkwown", 611, "Pirate", true, 30, "Fishmen's Crew", 0);
+        Characters zeo = new Characters("Zeo", false, "Unkwown", 611, "Pirate", true, 30, "Fishmen's Crew", 0);
+        Characters daruma = new Characters("Daruma", false, "Unkwown", 611, "Pirate", true, 30, "Fishmen's Crew", 0);
+        Characters ikaros = new Characters("Ikaros Much", false, "Unkwown", 611, "Pirate", true, 30, "Fishmen's Crew", 0);
+        Characters hyozo = new Characters("Hyozo", false, "Unkwown", 607, "Pirate", true, 30, "Fishmen's Crew", 0);
+        Characters decken = new Characters("Vander Decken IX", true, "Unkwown", 606, "Pirate", true, 35, "Fishmen's Crew", 0);
 
+        listCharacters.add(hody);
+        listCharacters.add(dosun);
+        listCharacters.add(zeo);
+        listCharacters.add(daruma);
+        listCharacters.add(ikaros);
+        listCharacters.add(hyozo);
+        listCharacters.add(decken);
     }
 
     private static void BluejamCrew()
     {
-
+        Characters bluejam = new Characters("Bluejam", false, "14.3 Mi", 584, "Pirate", false, 42, "Bluejam's Crew", 0);
+        Characters porchemy = new Characters("Porchemy", false, "3.4 Mi", 583, "Pirate", false, 25, "Bluejam's Crew", 1);
+        listCharacters.add(bluejam);
+        listCharacters.add(porchemy);
     }
 
     private static void EnerCrew()
     {
         Characters ener = new Characters("Ener", true, "Unknown", 254, "Pirate", true, 39, "Ener's Crew", 0);
+        Characters om = new Characters("Om", false, "0", 241, "Pirate", true, 29, "Ener's Crew", 0);
+        Characters satori = new Characters("Satori", false, "0", 241, "Pirate", true, 27, "Ener's Crew", 0);
+        Characters shura = new Characters("Shura", false, "0", 241, "Pirate", true, 33, "Ener's Crew", 0);
+        Characters yama = new Characters("Yama", false, "0", 254, "Pirate", true, 45, "Ener's Crew", 1);
+        Characters hotori = new Characters("Hotori", false, "0", 261, "Pirate", true, 27, "Ener's Crew", 1);
+        Characters kotori = new Characters("Kotori", false, "0", 261, "Pirate", true, 27, "Ener's Crew", 1);
+        Characters gedatsu = new Characters("Gedatsu", false, "Unknown", 31, "Pirate", true, 31, "Ener's Crew", 0);
 
         listCharacters.add(ener);
+        listCharacters.add(om);
+        listCharacters.add(satori);
+        listCharacters.add(shura);
+        listCharacters.add(yama);
+        listCharacters.add(hotori);
+        listCharacters.add(kotori);
+        listCharacters.add(gedatsu);
+    }
+
+    private static void FalseMugiwaraCrew()
+    {
+        Characters demaro = new Characters("Demaro Black", false, "26 Mi", 598, "Pirate", true, 36, "False Mugiwara's Crew", 0);
+        Characters manjaro = new Characters("Manjaro", false, "Unkwown", 598, "Pirate", true, 25, "False Mugiwara's Crew", 1);
+        Characters chocolat = new Characters("Chocolat", false, "Unkwown", 598, "Pirate", true, 26, "False Mugiwara's Crew", 1);
+        Characters mounblutain = new Characters("Mounblutain", false, "Unkwown", 598, "Pirate", true, 30, "False Mugiwara's Crew", 1);
+        Characters drip = new Characters("Drip", false, "Unkwown", 598, "Pirate", true, 24, "False Mugiwara's Crew", 1);
+        Characters nora = new Characters("Nora Gitsune", false, "Unkwown", 598, "Pirate", true, 13, "False Mugiwara's Crew", 1);
+        Characters cocoa = new Characters("Cocoa", false, "Unkwown", 598, "Pirate", true, 27, "False Mugiwara's Crew", 1);
+        Characters turco = new Characters("Turco", false, "Unkwown", 598, "Pirate", true, 45, "False Mugiwara's Crew", 1);
+        listCharacters.add(demaro);
+        listCharacters.add(manjaro);
+        listCharacters.add(chocolat);
+        listCharacters.add(mounblutain);
+        listCharacters.add(drip);
+        listCharacters.add(nora);
+        listCharacters.add(cocoa);
+        listCharacters.add(turco);
+    }
+
+    private static void CaesarCrew()
+    {
+        Characters barbebrune = new Characters("Barbe Brune", false, "80.6 Mi", 581, "Pirate", true, 45, "Caesar's Crew", 1);
+        Characters caesar = new Characters("Caesar Clown", true, "300 Mi", 658, "Pirate", true, 55, "Caesar's Crew", 0);
+        Characters rock = new Characters("Rock", false, "20 Mi", 665, "Pirate", true, 25, "Caesar's Crew", 1);
+        Characters scotch = new Characters("Scotch", false, "20 Mi", 665, "Pirate", true, 25, "Caesar's Crew", 1);
+        Characters smiley = new Characters("Smiley", true, "0", 668, "Citizen", false, 4, "Caesar's Crew", 1);
+
+        listCharacters.add(barbebrune);
+        listCharacters.add(caesar);
+        listCharacters.add(rock);
+        listCharacters.add(scotch);
+        listCharacters.add(smiley);
+    }
+
+    private static void BaroqueWorks()
+    {
+        Characters zala = new Characters("Zala / Miss Doublefinger", true, "35 Mi", 155, "Pirate", true, 28, "Baroque Works", 0);
+        Characters bonclay = new Characters("Bentham / Mr. 2 Bon Clay", true, "32 Mi", 129, "Pirate", true, 32, "Baroque Works", 0);
+        Characters marianne = new Characters("Marianne / Miss Goldenweek", false, "29 Mi", 117, "Pirate", true, 18, "Baroque Works", 0);
+        Characters babe = new Characters("Babe / Mr. 4", false, "3.2 Mi", 103, "Pirate", true, 30, "Baroque Works", 0);
+        Characters drophy = new Characters("Drophy / Miss Merrychristmas", true, "14 Mi", 160, "Pirate", true, 51, "Baroque Works", 0);
+        Characters gemme = new Characters("Gemme / Mr. 5", true, "10 Mi", 110, "Pirate", true, 26, "Baroque Works", 0);
+        Characters mikita = new Characters("Mikita / Miss Valentine", true, "7.5 Mi", 110, "Pirate", true, 24, "Baroque Works", 0);
+
+        listCharacters.add(zala);
+        listCharacters.add(bonclay);
+        listCharacters.add(marianne);
+        listCharacters.add(babe);
+        listCharacters.add(drophy);
+        listCharacters.add(gemme);
+        listCharacters.add(mikita);
+    }
+
+    private static void Solos()
+    {
+        Characters dadan = new Characters("Curly Dadan", false, "0", 568, "Pirate", true, 55, "Dadan's Crew", 0);
+        Characters higuma = new Characters("Higuma", false, "0", 1, "Pirate", false, 46, "Moutain's Bandits", 0);
+        Characters zeff = new Characters("Zeff", false, "Unknown", 43, "Pirate", true, 67, "Zeff's Crew", 0);
+        Characters chinjao = new Characters("Chinjao", false, "542 Mi", 704, "Pirate", true, 78, "8 Treasures's Navy", 0);
+        Characters dorry = new Characters("Dorry", false, "100 Mi", 116, "Pirate", true, 160, "Giants' Crew", 0);
+        Characters broggy = new Characters("Broggy", false, "100 Mi", 115, "Pirate", true, 160, "Giants' Crew", 0);
+        Characters pedro = new Characters("Pedro", false, "382 Mi", 805, "Pirate", false, 32, "Nox's Crew", 0);
+        Characters kelly = new Characters("Kelly Funk", true, "57 Mi", 704, "Pirate", true, 36, "Assassin's Mogalo", 1);
+        Characters bobby = new Characters("Bobby Funk", false, "36 Mi", 704, "Pirate", true, 33, "Assassin's Mogalo", 1);
+
+        listCharacters.add(dadan);
+        listCharacters.add(higuma);
+        listCharacters.add(zeff);
+        listCharacters.add(chinjao);
+        listCharacters.add(dorry);
+        listCharacters.add(broggy);
+        listCharacters.add(pedro);
+        listCharacters.add(kelly);
+        listCharacters.add(bobby);
+
     }
 }

@@ -8,6 +8,8 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
+import android.graphics.drawable.RippleDrawable;
+
 import fr.gmarquette.guesswho.R;
 
 public class PicturesAlbum
@@ -18,7 +20,10 @@ public class PicturesAlbum
     public int DEVIL_FRUIT, NO_DEVIL_FRUIT;
     public int ALIVE, NOT_ALIVE;
     public int CREW_KAIDO, CREW_MUGIWARA, CREW_NEWGATE, CREW_SHANKS, CREW_TEACH, CROSS_GUILD,
-            CREW_BIGMOM, CREW_ENER, CREW_NAVY, CREW_REVOLUTIONARY_ARMY, CREW_CITIZEN;
+            CREW_BIGMOM, CREW_ENER, CREW_NAVY, CREW_REVOLUTIONARY_ARMY, CREW_CITIZEN, CREW_ARLONG,
+            CREW_BW, CREW_CARIBOU, CREW_CELESTIAL, CREW_DOFFY, CREW_GIANTS, CREW_ID, CREW_KIDD,
+            CREW_KRIEG, CREW_KUJA, CREW_LAW, CREW_MORIA, CREW_NEWFISH, CREW_ROGER, CREW_RUMBAR,
+            CREW_SUNPIRATES, CREW_WORLDGOV;
     private PicturesAlbum()
     {}
 
@@ -64,6 +69,24 @@ public class PicturesAlbum
         CREW_NAVY = R.drawable.crew_navy;
         CREW_REVOLUTIONARY_ARMY = R.drawable.crew_revolutionary_army;
         CREW_CITIZEN = R.drawable.crew_citizen;
+        CREW_ARLONG = R.drawable.crew_arlong;
+        CREW_BW = R.drawable.crew_baroqueworks;
+        CREW_CARIBOU = R.drawable.crew_caribou;
+        CREW_CELESTIAL = R.drawable.crew_celestial_dragons;
+        CREW_DOFFY = R.drawable.crew_doffy;
+        CREW_GIANTS = R.drawable.crew_giants;
+        CREW_ID = R.drawable.crew_impeldown;
+        CREW_KIDD = R.drawable.crew_kidd;
+        CREW_KRIEG = R.drawable.crew_krieg;
+        CREW_KUJA = R.drawable.crew_kuja;
+        CREW_LAW = R.drawable.crew_law;
+        CREW_MORIA = R.drawable.crew_moria;
+        CREW_NEWFISH = R.drawable.crew_newfish;
+        CREW_ROGER = R.drawable.crew_roger;
+        CREW_RUMBAR = R.drawable.crew_rumbar;
+        CREW_SUNPIRATES = R.drawable.crew_sunpirates;
+        CREW_WORLDGOV = R.drawable.crew_world_government;
+
     }
 
     private void setImagesOfTypes()

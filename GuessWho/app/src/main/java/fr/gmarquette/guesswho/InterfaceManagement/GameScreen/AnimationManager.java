@@ -217,11 +217,81 @@ public class AnimationManager
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_NEWGATE);
                 break;
             case "Mugiwara's Crew":
+            case "Mugiwara's Armada Crew":
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_MUGIWARA);
                 break;
             case "Revolutionary's Crew":
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_REVOLUTIONARY_ARMY);
                 break;
+            case "World Government":
+            case "Cipher Pol":
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_WORLDGOV);
+                break;
+            case "Arlong's Crew":
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_ARLONG);
+                break;
+            case "Baroque Works":
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_BW);
+                break;
+            case "Don Krieg's Crew":
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_KRIEG);
+                break;
+            case "Moria's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_MORIA);
+                break;
+            case "Heart's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_LAW);
+                break;
+            case "Kidd's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_KIDD);
+                break;
+            case "Kuja's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_KUJA);
+                break;
+            case "Caribou's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_CARIBOU);
+                break;
+            case "Sun Pirates' Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_SUNPIRATES);
+                break;
+            case "Roger's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_ROGER);
+                break;
+            case "Doflamingo's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_DOFFY);
+                break;
+            case "Rumbar's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_RUMBAR);
+                break;
+            case "Fishmen's Crew" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_NEWFISH);
+                break;
+            case "Giants' Crew":
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_GIANTS);
+                break;
+            case "Celestial Dragons" :
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_CELESTIAL);
+                break;
+            case "Impel Down":
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_ID);
+                break;
+            case "Monkey's Forces Crew":
+            case "Weeble's Crew" :
+            case "Black Cat's Crew" :
+            case "Foxy's Crew" :
+            case "Bege's Crew" :
+            case "Bonney's Crew" :
+            case "Urouge's Crew" :
+            case "Nox's Crew":
+            case "Assassin's Mogalo":
+            case "Vegapunk's Factory" :
+            case "Bluejam's Crew" :
+            case "False Mugiwara's Crew" :
+            case "Caesar's Crew" :
+            case "Dadan's Crew":
+            case "Moutain's Bandits":
+            case "Zeff's Crew":
+            case "8 Treasures's Navy":
             default:
                 break;
         }
