@@ -8,8 +8,6 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
-import android.graphics.drawable.RippleDrawable;
-
 import fr.gmarquette.guesswho.R;
 
 public class PicturesAlbum
@@ -23,7 +21,7 @@ public class PicturesAlbum
             CREW_BIGMOM, CREW_ENER, CREW_NAVY, CREW_REVOLUTIONARY_ARMY, CREW_CITIZEN, CREW_ARLONG,
             CREW_BW, CREW_CARIBOU, CREW_CELESTIAL, CREW_DOFFY, CREW_GIANTS, CREW_ID, CREW_KIDD,
             CREW_KRIEG, CREW_KUJA, CREW_LAW, CREW_MORIA, CREW_NEWFISH, CREW_ROGER, CREW_RUMBAR,
-            CREW_SUNPIRATES, CREW_WORLDGOV;
+            CREW_SUNPIRATES, CREW_WORLDGOV, CREW_DEFAULT;
     private PicturesAlbum()
     {}
 
@@ -86,6 +84,7 @@ public class PicturesAlbum
         CREW_RUMBAR = R.drawable.crew_rumbar;
         CREW_SUNPIRATES = R.drawable.crew_sunpirates;
         CREW_WORLDGOV = R.drawable.crew_world_government;
+        CREW_DEFAULT = R.drawable.crew_default;
 
     }
 

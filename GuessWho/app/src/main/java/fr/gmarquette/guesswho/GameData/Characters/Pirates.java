@@ -614,8 +614,8 @@ class Pirates {
 
     private static void Solos()
     {
-        Characters dadan = new Characters("Curly Dadan", false, "0", 568, "Pirate", true, 55, "Dadan's Crew", 0);
-        Characters higuma = new Characters("Higuma", false, "0", 1, "Pirate", false, 46, "Moutain's Bandits", 0);
+        Characters dadan = new Characters("Curly Dadan", false, "7.8 Mi", 568, "Pirate", true, 55, "Dadan's Crew", 0);
+        Characters higuma = new Characters("Higuma", false, "8 Mi", 1, "Pirate", false, 46, "Moutain's Bandits", 0);
         Characters zeff = new Characters("Zeff", false, "Unknown", 43, "Pirate", true, 67, "Zeff's Crew", 0);
         Characters chinjao = new Characters("Chinjao", false, "542 Mi", 704, "Pirate", true, 78, "8 Treasures's Navy", 0);
         Characters dorry = new Characters("Dorry", false, "100 Mi", 116, "Pirate", true, 160, "Giants' Crew", 0);

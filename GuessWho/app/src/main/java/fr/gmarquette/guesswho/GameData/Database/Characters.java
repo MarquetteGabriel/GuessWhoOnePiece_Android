@@ -12,9 +12,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import fr.gmarquette.guesswho.GameSystem.CrewType;
-import fr.gmarquette.guesswho.GameSystem.TypeType;
-
 @Entity
 public class Characters
 {

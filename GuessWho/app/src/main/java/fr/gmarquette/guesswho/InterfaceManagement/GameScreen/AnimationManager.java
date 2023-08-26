@@ -293,6 +293,7 @@ public class AnimationManager
             case "Zeff's Crew":
             case "8 Treasures's Navy":
             default:
+                imageView.setImageResource(PicturesAlbum.getInstance().CREW_DEFAULT);
                 break;
         }
     }
