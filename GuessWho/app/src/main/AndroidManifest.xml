@@ -15,7 +15,8 @@
         <activity
             android:name=".InterfaceManagement.LoadingScreen.MainActivity"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
