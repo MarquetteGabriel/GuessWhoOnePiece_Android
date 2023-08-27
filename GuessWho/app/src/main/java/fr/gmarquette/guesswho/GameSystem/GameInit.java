@@ -29,10 +29,16 @@ public class GameInit extends Thread
 
     private int RandomId(List<Integer> integerList)
     {
-        int minId = Collections.min(integerList);
-        int maxId = Collections.max(integerList);
-        Random rand = new Random();
-        return rand.nextInt(maxId - minId + 1) + minId;
+        try {
+            int minId = Collections.min(integerList);
+            int maxId = Collections.max(integerList);
+            Random rand = new Random();
+            return rand.nextInt(maxId - minId + 1) + minId;
+        }
+        catch (Exception e)
+        {
+            return 0;
+        }
     }
 
     public Characters getCharacterToFound(List<String> characterNameList) throws InterruptedException {

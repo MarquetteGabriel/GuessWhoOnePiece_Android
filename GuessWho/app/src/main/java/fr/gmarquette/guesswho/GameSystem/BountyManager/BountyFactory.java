@@ -15,70 +15,62 @@ public class BountyFactory {
 
     public static BountyType whatBounty(Characters characters, Characters characterSearched)
     {
+        String bountyCharacter = characters.getBounty();
+        String bountyCharacterSearched = characterSearched.getBounty();
 
-        BountyType bountyType = getTypeOfBounty(characters);
-        BountyType bountyTypeSearched = getTypeOfBounty(characterSearched);
-        boolean typeOfResearched = (bountyType == bountyTypeSearched);
-
-        if(typeOfResearched && getTypeOfBounty(characters) == BountyType.BOUNTY_ON)
+        if(bountyCharacterSearched.contains(NoBounty))
         {
-            float bounty = Float.parseFloat(characters.getBounty().replaceAll("[^\\d.]", ""));
-            float bountySearched = Float.parseFloat(characterSearched.getBounty().replaceAll("[^\\d.]", ""));
-
-            if(characters.getBounty().contains("Md") && characterSearched.getBounty().contains("Mi"))
-            {
-                bounty *= 1000;
-            }
-            else if (characters.getBounty().contains("Mi") && characterSearched.getBounty().contains("Md"))
-            {
-                bountySearched *= 1000;
-            }
-
-            float diff = bounty - bountySearched;
-
-            if(diff < 0)
-            {
-                // Arrow Up
-                return BountyType.LOWER;
-            }
-            else if( diff > 0)
-            {
-                // Arrow down
-                return BountyType.UPPER;
-            }
-            else
+            if(bountyCharacter.contains(NoBounty))
             {
                 return BountyType.EQUAL;
             }
-        }
-        else if(typeOfResearched && bountyType == BountyType.NO_RESEARCHED)
-        {
-            return BountyType.CORRECT_NO_RESEARCHED;
-        }
-        else if (!typeOfResearched && bountyType == BountyType.BOUNTY_ON)
-        {
-            return BountyType.NOT_EQUAL;
-        }
-        else if(typeOfResearched && bountyType == BountyType.UNKNOWN)
-        {
-            return BountyType.CORRECT_UNKNOWN;
+            else
+            {
+                return BountyType.WRONG_UNKNOWN;
+            }
         }
         else
         {
-            return bountyType;
-        }
-    }
+            if(bountyCharacter.contains(NoBounty))
+            {
+                return BountyType.WRONG_UNKNOWN;
+            }
+            else {
+                float bounty = Float.parseFloat(bountyCharacter.replaceAll("[^\\d.]", ""));
+                float bountySearched = Float.parseFloat(bountyCharacterSearched.replaceAll("[^\\d.]", ""));
 
-    private static BountyType getTypeOfBounty(Characters characters)
-    {
-        switch (characters.getBounty())
-        {
-            case NoBounty :
-                return BountyType.UNKNOWN;
-            case "0" :
-                return BountyType.NO_RESEARCHED;
-            default :
-                return BountyType.BOUNTY_ON;
+                if (bountyCharacter.contains("Md") && bountyCharacterSearched.contains("Mi")) {
+                    bounty *= 1000;
+                } else if (bountyCharacter.contains("Mi") && bountyCharacterSearched.contains("Md")) {
+                    bountySearched *= 1000;
+                }
+                else if(bountyCharacter.contains("Md") && (!bountyCharacterSearched.contains("Md") && !bountyCharacterSearched.contains("Mi")))
+                {
+                    bounty *= 1000000000;
+                }
+                else if(bountyCharacter.contains("Mi") && (!bountyCharacterSearched.contains("Md") && !bountyCharacterSearched.contains("Mi")))
+                {
+                    bounty *= 1000000;
+                }
+                else if(bountyCharacterSearched.contains("Md") && (!bountyCharacter.contains("Md") && !bountyCharacter.contains("Mi")))
+                {
+                    bountySearched *= 1000000000;
+                }
+                else if(bountyCharacterSearched.contains("Mi") && (!bountyCharacter.contains("Md") && !bountyCharacter.contains("Mi")))
+                {
+                    bountySearched *= 1000000;
+                }
+
+                float diff = bounty - bountySearched;
+
+                if (diff < 0) {
+                    return BountyType.UPPER;
+                } else if (diff > 0) {
+                    return BountyType.LOWER;
+                } else {
+                    return BountyType.EQUAL;
+                }
+            }
         }
     }
 }

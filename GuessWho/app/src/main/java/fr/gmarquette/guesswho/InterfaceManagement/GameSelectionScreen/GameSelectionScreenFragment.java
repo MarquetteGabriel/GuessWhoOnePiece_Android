@@ -8,7 +8,6 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen;
 
-import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
@@ -32,9 +30,8 @@ import fr.gmarquette.guesswho.R;
 public class GameSelectionScreenFragment extends Fragment{
 
     private CallDAOAsync callDAOAsync;
-    private static final List<String> SUGGESTIONS = new ArrayList<>();
-    public static final ArrayList<String> arrayList = new ArrayList<>();
-    private VideoView videoView;
+    //private static final List<String> SUGGESTIONS = new ArrayList<>();
+    public static ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +46,7 @@ public class GameSelectionScreenFragment extends Fragment{
 
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
 
-        videoView = (VideoView) viewFragment.findViewById(R.id.video_gear5);
+        VideoView videoView = viewFragment.findViewById(R.id.video_gear5);
         Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.presentation_gear5);
         videoView.setVideoURI(uri);
 
@@ -62,10 +59,6 @@ public class GameSelectionScreenFragment extends Fragment{
             mp.seekTo(0);
             mp.start();
         });
-
-        SUGGESTIONS.clear();
-        arrayList.clear();
-
 
         Button button = viewFragment.findViewById(R.id.playButton);
         RadioButton easyRadioButton = viewFragment.findViewById(R.id.easyRadioButton);
@@ -85,16 +78,18 @@ public class GameSelectionScreenFragment extends Fragment{
 
             if (easyRadioButton.isChecked())
             {
+                arrayList.clear();
                 getSuggestions(LevelDifficulty.EASY.ordinal());
             }
             else if (hardRadioButton.isChecked())
             {
+                arrayList.clear();
                 getSuggestions(LevelDifficulty.EASY.ordinal());
                 getSuggestions(LevelDifficulty.HARD.ordinal());
             }
 
-            arrayList.clear();
-            arrayList.addAll(SUGGESTIONS);
+            //arrayList.clear();
+            //arrayList.addAll(SUGGESTIONS);
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
             navController.navigate(R.id.gameScreenFragment);
         });
@@ -104,31 +99,28 @@ public class GameSelectionScreenFragment extends Fragment{
 
     private void getSuggestions(int level)
     {
+        ArrayList<String> tempList = getListLevels(level);
+
+        for(String character : tempList)
+        {
+            if(!arrayList.contains(character))
+            {
+                arrayList.add(character);
+            }
+        }
+    }
+
+    public static ArrayList<String> getListSuggestions()
+    {
+        return arrayList;
+    }
+
+    private ArrayList<String> getListLevels(int level)
+    {
         try {
-            SUGGESTIONS.addAll(callDAOAsync.getNamesByDifficultyAsync(level).get());
+            return new ArrayList<>(callDAOAsync.getNamesByDifficultyAsync(level).get());
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-/*
-
-    public void onClickSwitchRadioButtons(View view)
-    {
-        boolean checked = ((RadioButton) view).isChecked();
-
-        switch (view.getId()) {
-            case R.id.easyRadioButton:
-                if (checked) {
-                    RadioButton hardRadioButton = view.findViewById(R.id.hardRadioButton);
-                    hardRadioButton.setChecked(false);
-                }
-                break;
-            case R.id.hardRadioButton:
-                if (checked) {
-                    RadioButton easyRadioButton = view.findViewById(R.id.easyRadioButton);
-                    easyRadioButton.setChecked(false);
-                }
-                break;
-        }
-    }*/
 }

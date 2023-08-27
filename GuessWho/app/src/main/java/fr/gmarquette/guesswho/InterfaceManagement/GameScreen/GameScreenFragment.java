@@ -63,7 +63,7 @@ public class GameScreenFragment extends Fragment {
 
         viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
 
-        suggestions = GameSelectionScreenFragment.arrayList;
+        suggestions = GameSelectionScreenFragment.getListSuggestions();
 
         DataBase.getInstance(requireContext().getApplicationContext());
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
@@ -77,7 +77,6 @@ public class GameScreenFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, suggestions);
         AutoCompleteTextView autoCompleteTextView = viewFragment.findViewById(R.id.EnterTextAutoCompleted);
-
 
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setOnItemClickListener((adapterView, view, position, id) -> {

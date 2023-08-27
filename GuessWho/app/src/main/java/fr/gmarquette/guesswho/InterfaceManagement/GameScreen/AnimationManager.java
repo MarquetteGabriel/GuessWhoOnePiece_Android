@@ -45,24 +45,20 @@ public class AnimationManager
         switch (bountyType)
         {
             case EQUAL:
-            case CORRECT_NO_RESEARCHED:
-            case CORRECT_UNKNOWN:
                 imageViewBackground.setImageResource(PicturesAlbum.getInstance().CORRECT_ANSWER);
                 textView.setText(bounty);
                 break;
-            case UPPER: // Arrow Down
+            case LOWER:
                 imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
                 imageViewAnswer.setImageResource(PicturesAlbum.getInstance().ARROW_DOWN);
                 textView.setText(bounty);
                 break;
-            case LOWER: // Arrow Up
+            case UPPER:
                 imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
                 imageViewAnswer.setImageResource(PicturesAlbum.getInstance().ARROW_UP);
                 textView.setText(bounty);
                 break;
-            case UNKNOWN:
-            case NO_RESEARCHED:
-            case NOT_EQUAL:
+            case WRONG_UNKNOWN :
                 imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
                 textView.setText(bounty);
                 break;
@@ -289,9 +285,9 @@ public class AnimationManager
             case "False Mugiwara's Crew" :
             case "Caesar's Crew" :
             case "Dadan's Crew":
-            case "Moutain's Bandits":
+            case "Mountain's Bandits":
             case "Zeff's Crew":
-            case "8 Treasures's Navy":
+            case "8 Treasure's Navy":
             default:
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_DEFAULT);
                 break;
