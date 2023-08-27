@@ -88,4 +88,15 @@ public class SystemGameManagerTest
     }
 
 
+    @Test
+    public void testAlive()
+    {
+        Characters tester = new Characters("Tester", true, "0", 973, "Citizen", false, 76, "Citizen", 0);
+
+
+
+
+    }
+
+
 }

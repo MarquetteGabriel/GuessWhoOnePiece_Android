@@ -33,7 +33,7 @@ public class CallDAOAsync extends Thread {
         executorService.execute(() -> this.dataBase.dao().deleteAll());
     }
 
-    public Future<Characters> getCharacterAsync(String name) {
+    public Future<Characters> getCharacterFromNameAsync(String name) {
         return executorService.submit(() -> this.dataBase.dao().getCharacterFromName(name));
     }
 

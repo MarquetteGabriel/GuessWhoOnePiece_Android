@@ -10,7 +10,6 @@ package fr.gmarquette.guesswho.GameSystem;
 
 import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -41,19 +40,15 @@ public class GameInit extends Thread
         }
     }
 
-    public Characters getCharacterToFound(List<String> characterNameList) throws InterruptedException {
-        List<Integer> integerList = new ArrayList<>();
-        try
-        {
-            for(String characterName : characterNameList)
-            {
-                integerList.add(callDAOAsync.getIdFromCharacterNameAsync(characterName).get());
-            }
-            int id = this.RandomId(integerList);
-            return callDAOAsync.getCharacterFromIdAsync(id).get();
-        } catch (ExecutionException e)
-        {
+    public Characters getCharacterToFound(List<String> characterNameList) throws InterruptedException
+    {
+        Random rand = new Random();
+        int id2 = rand.nextInt(characterNameList.size() + 1);
+        try {
+            return callDAOAsync.getCharacterFromNameAsync(characterNameList.get(id2)).get();
+        } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
     }
+
 }

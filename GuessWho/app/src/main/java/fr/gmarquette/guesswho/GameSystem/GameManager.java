@@ -16,7 +16,7 @@ public class GameManager
 {
     public static boolean isAlive(Characters characters, Characters characterSearched)
     {
-        return (characters.isAlive() && characterSearched.isAlive());
+        return (characters.isAlive() == characterSearched.isAlive());
     }
 
     public static boolean hasEatenDevilFruit(Characters characters, Characters characterSearched)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,13 +20,15 @@
                 android:id="@+id/alive_wr_circle_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/alive_answer_1"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 
@@ -38,13 +41,15 @@
                 android:id="@+id/alive_wr_circle_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/alive_answer_2"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 
@@ -57,13 +62,15 @@
                 android:id="@+id/alive_wr_circle_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/alive_answer_3"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 
@@ -76,13 +83,15 @@
                 android:id="@+id/alive_wr_circle_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/alive_answer_4"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 
@@ -95,13 +104,15 @@
                 android:id="@+id/alive_wr_circle_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/alive_answer_5"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 
@@ -114,13 +125,15 @@
                 android:id="@+id/alive_wr_circle_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/alive_answer_6"
                 android:layout_width="@dimen/size_item"
                 android:layout_height="@dimen/size_item"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/gray_circle"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 
