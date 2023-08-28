@@ -8,6 +8,7 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen;
 
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,7 +31,6 @@ import fr.gmarquette.guesswho.R;
 public class GameSelectionScreenFragment extends Fragment{
 
     private CallDAOAsync callDAOAsync;
-    //private static final List<String> SUGGESTIONS = new ArrayList<>();
     public static ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
@@ -49,8 +49,10 @@ public class GameSelectionScreenFragment extends Fragment{
         VideoView videoView = viewFragment.findViewById(R.id.video_gear5);
         Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.presentation_gear5);
         videoView.setVideoURI(uri);
+        videoView.setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
 
         videoView.setOnPreparedListener(mp -> {
+            mp.setVolume(0,0);
             mp.setLooping(true);
             mp.start();
         });
@@ -88,8 +90,6 @@ public class GameSelectionScreenFragment extends Fragment{
                 getSuggestions(LevelDifficulty.HARD.ordinal());
             }
 
-            //arrayList.clear();
-            //arrayList.addAll(SUGGESTIONS);
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
             navController.navigate(R.id.gameScreenFragment);
         });
