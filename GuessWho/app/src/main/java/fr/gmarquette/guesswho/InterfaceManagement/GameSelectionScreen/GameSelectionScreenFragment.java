@@ -30,7 +30,6 @@ import fr.gmarquette.guesswho.R;
 public class GameSelectionScreenFragment extends Fragment{
 
     private CallDAOAsync callDAOAsync;
-    //private static final List<String> SUGGESTIONS = new ArrayList<>();
     public static ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
@@ -51,6 +50,7 @@ public class GameSelectionScreenFragment extends Fragment{
         videoView.setVideoURI(uri);
 
         videoView.setOnPreparedListener(mp -> {
+            mp.setVolume(0,0);
             mp.setLooping(true);
             mp.start();
         });
@@ -88,8 +88,6 @@ public class GameSelectionScreenFragment extends Fragment{
                 getSuggestions(LevelDifficulty.HARD.ordinal());
             }
 
-            //arrayList.clear();
-            //arrayList.addAll(SUGGESTIONS);
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
             navController.navigate(R.id.gameScreenFragment);
         });

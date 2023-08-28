@@ -10,7 +10,6 @@ package fr.gmarquette.guesswho.GameSystem;
 
 import android.content.Context;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -26,28 +25,14 @@ public class GameInit extends Thread
         callDAOAsync = new CallDAOAsync(context);
     }
 
-    private int RandomId(List<Integer> integerList)
-    {
-        try {
-            int minId = Collections.min(integerList);
-            int maxId = Collections.max(integerList);
-            Random rand = new Random();
-            return rand.nextInt(maxId - minId + 1) + minId;
-        }
-        catch (Exception e)
-        {
-            return 0;
-        }
-    }
-
     public Characters getCharacterToFound(List<String> characterNameList) throws InterruptedException
     {
         Random rand = new Random();
-        int id2 = rand.nextInt(characterNameList.size() + 1);
+        int id = rand.nextInt(characterNameList.size());
         try {
-            return callDAOAsync.getCharacterFromNameAsync(characterNameList.get(id2)).get();
+            return callDAOAsync.getCharacterFromNameAsync(characterNameList.get(id)).get();
         } catch (ExecutionException e) {
-            throw new RuntimeException(e);
+            return null;
         }
     }
 
