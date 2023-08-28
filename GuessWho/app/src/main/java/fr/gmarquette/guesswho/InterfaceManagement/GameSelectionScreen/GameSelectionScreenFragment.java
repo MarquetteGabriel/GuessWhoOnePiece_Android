@@ -8,6 +8,7 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen;
 
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class GameSelectionScreenFragment extends Fragment{
         VideoView videoView = viewFragment.findViewById(R.id.video_gear5);
         Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.presentation_gear5);
         videoView.setVideoURI(uri);
+        videoView.setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
 
         videoView.setOnPreparedListener(mp -> {
             mp.setVolume(0,0);
