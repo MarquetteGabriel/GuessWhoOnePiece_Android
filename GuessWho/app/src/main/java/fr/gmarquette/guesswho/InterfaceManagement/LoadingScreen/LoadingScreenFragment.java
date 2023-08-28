@@ -43,7 +43,7 @@ public class LoadingScreenFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_loading_screen, container, false);
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
-        callDAOAsync.deleteAllAsync();
+        //callDAOAsync.deleteAllAsync();
         DataBase.getInstance(requireContext().getApplicationContext());
         possibleAddElements();
 
