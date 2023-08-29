@@ -19,6 +19,9 @@ import java.util.List;
 public interface DAO{
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void addCharacter(Characters characters);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addElements(List<Characters> charactersList);
 
     @Query("SELECT * FROM Characters WHERE name LIKE:name")

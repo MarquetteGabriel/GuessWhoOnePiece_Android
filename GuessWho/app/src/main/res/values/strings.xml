@@ -1,6 +1,6 @@
 <resources>
     <!-- App name -->
-    <string name="app_name">GuessWho One Piece</string>
+    <string name="app_name">GuessWho One Piece Debug Version</string>
 
     <!-- Left Column -->
     <string name="guess1">Guess n°1</string>
