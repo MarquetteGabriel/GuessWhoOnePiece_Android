@@ -147,9 +147,9 @@ public class GenerateDatas
 
         for(String affiliation : affiliationCharacter)
         {
+            affiliation = affiliation.replaceAll("\\[.*?\\]\\s*$", "");
             if(!affiliation.contains("anciennement") && !affiliation.contains("temporairement"))
             {
-                affiliation = affiliation.replaceAll("\\[.*?\\]\\s*$", "");
                 return affiliation;
             }
         }
