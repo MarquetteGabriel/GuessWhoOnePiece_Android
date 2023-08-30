@@ -44,25 +44,40 @@ public class GenerateDatasTest {
             assertEquals(resultTwo.get(1), "No_Fruit");
             //assertEquals(resultTwo.get(2), "0");
             assertEquals(resultTwo.get(3), "25");
-            //assertEquals(resultTwo.get(4), "Marine");
+            assertEquals(resultTwo.get(4), "Navy");
             assertEquals(resultTwo.get(5), "Vivant");
             assertEquals(resultTwo.get(6), "29");
-            //assertEquals(resultTwo.get(7), "Marine");
+            assertEquals(resultTwo.get(7), "Navy");
         }
 
         String characterThree = "Rob Lucci";
         List<String> resultThree = generateDatas.extractValuesFromFandom(characterThree);
 
-        // Assert on Jango
+        // Assert on Lucci
         {
             assertEquals(resultThree.get(0), "Rob Lucci");
             assertEquals(resultThree.get(1), "Fruit");
             //assertEquals(resultThree.get(2), "0");
             assertEquals(resultThree.get(3), "323");
-            //assertEquals(resultThree.get(4), "Marine");
+            assertEquals(resultThree.get(4), "Navy");
             assertEquals(resultThree.get(5), "Vivant");
             assertEquals(resultThree.get(6), "30");
-            //assertEquals(resultThree.get(7), "Ciper Pol");
+            assertEquals(resultThree.get(7), "Ciper Pol");
+        }
+
+        String characterFour = "Monkey D. Dragon";
+        List<String> resultFour = generateDatas.extractValuesFromFandom(characterFour);
+
+        // Assert on Dragon
+        {
+            assertEquals(resultFour.get(0), "Monkey D. Dragon");
+            assertEquals(resultFour.get(1), "No_Fruit");
+            assertEquals(resultFour.get(2), "");
+            assertEquals(resultFour.get(3), "100");
+            assertEquals(resultFour.get(4), "Revolutionary");
+            assertEquals(resultFour.get(5), "Vivant");
+            assertEquals(resultFour.get(6), "55");
+            assertEquals(resultFour.get(7), "Revolutionary");
         }
     }
 

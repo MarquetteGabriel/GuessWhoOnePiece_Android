@@ -29,7 +29,7 @@ GenerateDatas generateDatas = new GenerateDatas();
 
         generateDatas.getDatasFromOutside(this);
         //GenerateDatas.getDatasFromOutisde(this);
-        GenerateDatas.getDatas_Thread.start();
+        //GenerateDatas.getDatas_Thread.start();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         assert navHostFragment != null;
