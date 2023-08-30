@@ -24,14 +24,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
+import fr.gmarquette.guesswho.GameData.Database.DataBase;
 
 public class GenerateDatas
 {
-    List<Characters> charactersList = new ArrayList<>();
-    String url_wikipedia_onepiece = "https://fr.wikipedia.org/wiki/Personnages_de_One_Piece";
-    String url_fandom = "https://onepiece.fandom.com/fr/wiki/";
-    String values;
-    Thread getDatas_Thread;
+    final String url_wikipedia_onepiece = "https://fr.wikipedia.org/wiki/Personnages_de_One_Piece";
+    final String url_fandom = "https://onepiece.fandom.com/fr/wiki/";
+    final String class_characterData = "pi-item pi-group pi-border-color";
+    final String class_titles = "mw-headline";
+    final String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
+
+    public static Thread getDatas_Thread;
     List<String> nameList;
 
     public void getDatasFromOutside(Context context)
@@ -40,76 +43,59 @@ public class GenerateDatas
             extractValuesFromWiki();
             for (String character : nameList)
             {
-                createCharacterFromInformation(extractValuesFromFandom(character), context);
+                List<String> listCharacterDatas = extractValuesFromFandom(character);
+                if(!listCharacterDatas.isEmpty())
+                {
+                    createCharacterFromInformation(listCharacterDatas, context);
+                }
             }
             });
-        getDatas_Thread.start();
     }
 
-    public void extractValuesFromWiki()
+    void extractValuesFromWiki()
     {
         try {
             Document doc = Jsoup.connect(url_wikipedia_onepiece).get();
             nameList = new ArrayList<>();
-            List<String> list = new ArrayList<>();
-            Elements bannedWords = doc.select("h3");
-            Elements bannedWords2 = doc.select("h2");
-            for (Element h3Element : bannedWords) {
-                String text_raw = h3Element.text();
-                String text = text_raw.replace("[modifier | modifier le code]", "").trim();
-                list.add(text);
-            }
+            List<String> bannedWordsList = new ArrayList<>();
 
-            for (Element h2Element : bannedWords2) {
+            Elements bannedWords = doc.select("h3, h2");
+            for (Element h2Element : bannedWords) {
                 String text_raw = h2Element.text();
                 String text = text_raw.replace("[modifier | modifier le code]", "").trim();
-                list.add(text);
+                bannedWordsList.add(text);
             }
 
-            Elements elements = doc.getElementsByClass("mw-headline");
+            Elements elements = doc.getElementsByClass(class_titles);
             for (Element headline : elements) {
-                values = headline.select("span").text();
-
-                boolean bannedWord = false;
-                for(String word : list)
-                {
-                    if (values.equals(word)) {
-                        bannedWord = true;
-                        break;
-                    }
-                }
-
-                if(!bannedWord)
-                {
+                String values = headline.select("span").text();
+                if (!bannedWordsList.equals(values)) {
                     nameList.add(values);
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
-    public List<String> extractValuesFromFandom(String character)
+    List<String> extractValuesFromFandom(String character)
     {
         List<String> characterDataList = new ArrayList<>();
         try {
             String url_character = character.replace(" ", "_").trim();
             String url = url_fandom + url_character;
-
             Document doc = Jsoup.connect(url).get();
-            values = doc.getElementsByClass("pi-item pi-group pi-border-color").text();
-
-            String fruitDemonPattern = "Fruit du Demon : ([^;]+)";
-            String occupationPattern = "Occupations : (.+) ; ";
+            String characterData = doc.getElementsByClass(class_characterData).text();
+            Element fruitElement = doc.getElementsByClass(class_fruit).first();
 
             characterDataList.add(character);
-            characterDataList.add(extractPattern(values, fruitDemonPattern));
-            characterDataList.add(extractPattern(values, "Prime : ([\\d,]+)").replace(",", "").trim());
-            characterDataList.add(extractPattern(values, "Première Apparition: Chapitre (\\d+)"));
-            characterDataList.add(extractPattern(values, occupationPattern));
-            characterDataList.add(extractPattern(values, "Statut : (Vivant|Décédé)"));
-            characterDataList.add(extractPatternAge(values, "(\\d+) ans"));
-            characterDataList.add(extractPattern(values, "Affiliations : ([^;]+)"));
+            characterDataList.add((!fruitElement.text().contains("Fruit du Démon")) ? "No_Fruit" : "Fruit");
+            characterDataList.add(extractPattern(characterData, "Prime : ([\\d.,]+)").replaceAll("[.,]", "").trim());
+            characterDataList.add(extractPattern(characterData, "Première Apparition: Chapitre (\\d+)"));
+            characterDataList.add(extractPattern(characterData, "Occupations : ([^;]+)")); //
+            characterDataList.add(extractPattern(characterData, "Statut : (Vivant|Décédé)"));
+            characterDataList.add(extractPatternAge(characterData, "(\\d+) ans"));
+            characterDataList.add(extractPattern(characterData, "Affiliations : ([^;]+)"));
             characterDataList.add("0");
         } catch (IOException e) {
             nameList.remove(character);
@@ -118,7 +104,7 @@ public class GenerateDatas
         return characterDataList;
     }
 
-    public static String extractPattern(String input, String pattern) {
+    private static String extractPattern(String input, String pattern) {
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher = regex.matcher(input);
         if (matcher.find()) {
@@ -127,7 +113,7 @@ public class GenerateDatas
         return "";
     }
 
-    public static String extractPatternAge(String input, String pattern)
+    private static String extractPatternAge(String input, String pattern)
     {
         Matcher matcher = Pattern.compile(pattern).matcher(input);
         int maxAge = 0;
@@ -135,16 +121,16 @@ public class GenerateDatas
         {
             maxAge = Math.max(maxAge, Integer.parseInt(Objects.requireNonNull(matcher.group(1))));
         }
-        return "" + maxAge;
+        return String.valueOf(maxAge);
     }
 
-    public void createCharacterFromInformation(List<String> characterData, Context context)
+    void createCharacterFromInformation(List<String> characterData, Context context)
     {
         Log.i("DATABASE_TEST_TYPE", characterData.get(0));
         Log.i("DATABASE_TEST_TYPE", characterData.get(4));
         Characters characters = new Characters(
                 characterData.get(0),
-                Boolean.getBoolean(characterData.get(1)),
+                stateFruit(characterData.get(1)),
                 characterData.get(2),
                 Integer.parseInt(characterData.get(3)),
                 characterData.get(4),
@@ -153,14 +139,17 @@ public class GenerateDatas
                 characterData.get(7),
                 Integer.parseInt(characterData.get(8)));
 
-        charactersList.add(characters);
-
-        //DataBase.getInstance(context).dao().addCharacter(characters);
+        DataBase.getInstance(context).dao().addCharacter(characters);
     }
 
     private boolean stateAlive(String state)
     {
         return(state.equals("Vivant"));
+    }
+
+    private boolean stateFruit(String fruit)
+    {
+        return (fruit.equals("Fruit"));
     }
 
     /*
@@ -174,6 +163,11 @@ public class GenerateDatas
         {
             return "Marine";
         }
+    }
+
+    private static String setOccupation(String text)
+    {
+        if(text.contains("Affiliations : L'Équipage du Chapeau de Paille"));
     }*/
 
 }
