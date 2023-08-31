@@ -42,12 +42,12 @@ public class GenerateDatasTest {
         {
             assertEquals(resultTwo.get(0), "Jango");
             assertEquals(resultTwo.get(1), "No_Fruit");
-            //assertEquals(resultTwo.get(2), "0");
+            assertEquals(resultTwo.get(2), "9000000");
             assertEquals(resultTwo.get(3), "25");
             assertEquals(resultTwo.get(4), "Navy");
             assertEquals(resultTwo.get(5), "Vivant");
             assertEquals(resultTwo.get(6), "29");
-            assertEquals(resultTwo.get(7), "Navy");
+            assertEquals(resultTwo.get(7), "Marine");
         }
 
         String characterThree = "Rob Lucci";
@@ -57,12 +57,12 @@ public class GenerateDatasTest {
         {
             assertEquals(resultThree.get(0), "Rob Lucci");
             assertEquals(resultThree.get(1), "Fruit");
-            //assertEquals(resultThree.get(2), "0");
+            assertEquals(resultThree.get(2), "");
             assertEquals(resultThree.get(3), "323");
             assertEquals(resultThree.get(4), "Navy");
             assertEquals(resultThree.get(5), "Vivant");
             assertEquals(resultThree.get(6), "30");
-            assertEquals(resultThree.get(7), "Ciper Pol");
+            assertEquals(resultThree.get(7), "CP-AIGIS0");
         }
 
         String characterFour = "Monkey D. Dragon";
@@ -77,7 +77,7 @@ public class GenerateDatasTest {
             assertEquals(resultFour.get(4), "Revolutionary");
             assertEquals(resultFour.get(5), "Vivant");
             assertEquals(resultFour.get(6), "55");
-            assertEquals(resultFour.get(7), "Revolutionary");
+            assertEquals(resultFour.get(7), "Armée de la Liberté");
         }
     }
 

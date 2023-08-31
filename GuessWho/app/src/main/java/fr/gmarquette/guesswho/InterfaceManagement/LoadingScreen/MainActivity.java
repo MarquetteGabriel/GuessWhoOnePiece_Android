@@ -28,8 +28,7 @@ GenerateDatas generateDatas = new GenerateDatas();
         setContentView(R.layout.activity_main);
 
         generateDatas.getDatasFromOutside(this);
-        //GenerateDatas.getDatasFromOutisde(this);
-        //GenerateDatas.getDatas_Thread.start();
+        generateDatas.getDatas_Thread.start();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         assert navHostFragment != null;

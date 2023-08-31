@@ -9,6 +9,7 @@
 package fr.gmarquette.guesswho.GameData.Characters;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,7 +36,12 @@ public class GenerateDatas
     final String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
     final String class_occupation = "pi-item pi-data pi-item-spacing pi-border-color";
 
-    public static Thread getDatas_Thread;
+    private static final List<String> pirateTypeList = Arrays.asList("Pirate", "Pirates", "Bandit", "Bandits");
+    private static final List<String> navyTypeList = Arrays.asList("Marine", "Cipher Pol", "Souverain", "Conseil des 5 doyens", "CP-AIGIS0");
+    private static final List<String> revoTypeList = Arrays.asList("Armée Révolutionnaire", "Révolutionnaires", "armée révolutionnaire");
+
+
+    public Thread getDatas_Thread;
     public static List<String> nameList;
 
     public void getDatasFromOutside(Context context)
@@ -44,14 +50,17 @@ public class GenerateDatas
             extractValuesFromWiki();
             for (String character : nameList)
             {
-                List<String> listCharacterDatas = extractValuesFromFandom(character);
-                if(!listCharacterDatas.isEmpty())
+                Log.i("WIKI_HELP", character);
+                if(character != null)
                 {
-                    createCharacterFromInformation(listCharacterDatas, context);
+                    List<String> listCharacterDatas = extractValuesFromFandom(character);
+                    if(!listCharacterDatas.isEmpty())
+                    {
+                        createCharacterFromInformation(listCharacterDatas, context);
+                    }
                 }
             }
             });
-        getDatas_Thread.start();
     }
 
     void extractValuesFromWiki()
@@ -67,7 +76,6 @@ public class GenerateDatas
                 String text = text_raw.replace("[modifier | modifier le code]", "").trim();
                 bannedWordsList.add(text);
             }
-
 
             Elements elements = doc.getElementsByClass(class_titles);
             for (Element headline : elements) {
@@ -86,8 +94,6 @@ public class GenerateDatas
                 {
                     nameList.add(values);
                 }
-                //if (!bannedWordsList.equals(values)) {
-                  //  nameList.add(values);}
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,13 +104,16 @@ public class GenerateDatas
     {
         List<String> characterDataList = new ArrayList<>();
         try {
+            Element occupation = null, affiliation = null;
             String url_character = character.replace(" ", "_").trim();
+            url_character = url_character.replace("'", "%27");
             String url = url_fandom + url_character;
+
             Document doc = Jsoup.connect(url).get();
             String characterData = doc.getElementsByClass(class_characterData).text();
             String fruitElement = doc.getElementsByClass(class_fruit).text();
             Elements occupationElements = doc.getElementsByClass(class_occupation);
-            Element occupation = null, affiliation = null;
+
             for (Element occupationElement : occupationElements) {
                 String dataSource = occupationElement.attr("data-source");
 
@@ -120,13 +129,13 @@ public class GenerateDatas
             characterDataList.add((!fruitElement.contains("Fruit du Démon")) ? "No_Fruit" : "Fruit");
             characterDataList.add(extractPattern(characterData, "Prime : ([\\d.,]+)").replaceAll("[.,]", "").trim());
             characterDataList.add(extractPattern(characterData, "Première Apparition: Chapitre (\\d+)"));
-            characterDataList.add(extractPatternType(Objects.requireNonNull(occupation)));
+            characterDataList.add(extractPatternType(occupation));
             characterDataList.add(extractPattern(characterData, "Statut : (Vivant|Décédé)"));
             characterDataList.add(extractPatternAge(characterData));
-            characterDataList.add(extractPatternCrew(Objects.requireNonNull(affiliation)));//characterData, "Affiliations : ([^;]+)")
+            characterDataList.add(extractPatternCrew(affiliation));//characterData, "Affiliations : ([^;]+)")
             characterDataList.add("0");
         } catch (IOException e) {
-            nameList.remove(character);
+            e.printStackTrace();
         }
 
         return characterDataList;
@@ -134,26 +143,35 @@ public class GenerateDatas
 
     private static String extractPatternCrew(Element text)
     {
-        List<String> affiliationCharacter = new ArrayList<>();
-        String[] affiliations = text.select(".pi-data-value").html().split("<br>");
-        for(String affiliation : affiliations)
+        try
         {
-            Document docSmallDatas = Jsoup.parse(affiliation);
-            String smallText = docSmallDatas.select("small").text();
-            affiliation = Jsoup.parse(affiliation).text().replaceAll("\\(.*?\\)", "").trim() + smallText;
-            affiliationCharacter.addAll(Arrays.asList(affiliation.split("[;,]")));
-        }
-        affiliationCharacter.removeIf(String::isEmpty);
-
-        for(String affiliation : affiliationCharacter)
-        {
-            affiliation = affiliation.replaceAll("\\[.*?\\]\\s*$", "");
-            if(!affiliation.contains("anciennement") && !affiliation.contains("temporairement"))
+            List<String> affiliationCharacter = new ArrayList<>();
+            String[] affiliations = text.select(".pi-data-value").html().split("<br>");
+            for(String affiliation : affiliations)
             {
-                return affiliation;
+                Document docSmallDatas = Jsoup.parse(affiliation);
+                String smallText = docSmallDatas.select("small").text();
+                affiliation = Jsoup.parse(affiliation).text().replaceAll("\\(.*?\\)", "").trim() + smallText;
+                affiliationCharacter.addAll(Arrays.asList(affiliation.split("[;,]")));
             }
+            affiliationCharacter.removeIf(String::isEmpty);
+
+            for(String affiliation : affiliationCharacter)
+            {
+                affiliation = affiliation.replaceAll("\\[.*?]\\s*$", "");
+                if(!affiliation.contains("anciennement") && !affiliation.contains("temporairement"))
+                {
+                    return affiliation;
+                }
+            }
+            return "Citizen";
         }
-        return "Citizen";
+        catch (Exception e)
+        {
+            // Pas de crew
+            e.printStackTrace();
+            return "";
+        }
     }
 
     private static String extractPattern(String input, String pattern) {
@@ -176,27 +194,31 @@ public class GenerateDatas
         return String.valueOf(maxAge);
     }
 
-    void createCharacterFromInformation(List<String> characterData, Context context)
+    private void createCharacterFromInformation(List<String> characterData, Context context)
     {
-        Characters characters = new Characters(
-                characterData.get(0),
-                stateFruit(characterData.get(1)),
-                fixBounty(characterData.get(2), characterData.get(4)),
-                Integer.parseInt(characterData.get(3)),
-                characterData.get(4),
-                stateAlive(characterData.get(5)),
-                Integer.parseInt(characterData.get(6)),
-                characterData.get(7),
-                Integer.parseInt(characterData.get(8)));
+        try
+        {
+            Characters characters = new Characters(
+                    characterData.get(0),
+                    stateFruit(characterData.get(1)),
+                    fixBounty(characterData.get(2), characterData.get(4)),
+                    Integer.parseInt(characterData.get(3)),
+                    characterData.get(4),
+                    stateAlive(characterData.get(5)),
+                    Integer.parseInt(characterData.get(6)),
+                    defineCrew(characterData.get(7)),
+                    Integer.parseInt(characterData.get(8)));
 
-        if(Integer.parseInt(characterData.get(3)) != 0)
-        {
-            DataBase.getInstance(context).dao().addCharacter(characters);
+            if(Integer.parseInt(characterData.get(3)) != 0)
+            {
+                DataBase.getInstance(context).dao().addCharacter(characters);
+            }
         }
-        else
+        catch (Exception e)
         {
-            nameList.remove(characterData.get(0));
+            // ParseInt sur null;
         }
+
     }
 
     private static String fixBounty(String bounty, String type)
@@ -217,51 +239,75 @@ public class GenerateDatas
 
     private static String extractPatternType(Element text)
     {
-        List<String> occupationCharacter = new ArrayList<>();
-        String[] occupations = text.select(".pi-data-value").html().split("<br>");
-        for(String occupation : occupations)
+        try
         {
-            Document docSmallDatas = Jsoup.parse(occupation);
-            String smallText = docSmallDatas.select("small").text();
-            occupation = Jsoup.parse(occupation).text().replaceAll("\\(.*?\\)", "").trim() + smallText;
-            occupationCharacter.addAll(Arrays.asList(occupation.split("[;,]")));
-        }
-        occupationCharacter.removeIf(String::isEmpty);
-
-        String type = "Citizen";
-        for(String occupation : occupationCharacter)
-        {
-            occupation = occupation.replaceAll("\\[.*?\\]\\s*$", "");
-            if(!occupation.contains("anciennement") && !occupation.contains("temporairement"))
+            List<String> occupationCharacter = new ArrayList<>();
+            String[] occupations = text.select(".pi-data-value").html().split("<br>");
+            for(String occupation : occupations)
             {
-                List<String> pirateTypeList = Arrays.asList("Pirate", "Pirates", "Bandit", "Bandits");
-                List<String> navyTypeList = Arrays.asList("Marine", "Cipher Pol", "Souverain", "Conseil des 5 doyens");
-                List<String> revoTypeList = Arrays.asList("Armée Révolutionnaire", "Révolutionnaires", "armée révolutionnaire");
+                Document docSmallDatas = Jsoup.parse(occupation);
+                String smallText = docSmallDatas.select("small").text();
+                occupation = Jsoup.parse(occupation).text().replaceAll("\\(.*?\\)", "").trim() + smallText;
+                occupationCharacter.addAll(Arrays.asList(occupation.split("[;,]")));
+            }
+            occupationCharacter.removeIf(String::isEmpty);
 
-                for (String pirateType : pirateTypeList)
+            String type = "Citizen";
+            for(String occupation : occupationCharacter)
+            {
+                occupation = occupation.replaceAll("\\[.*?]\\s*$", "");
+                if(!occupation.contains("anciennement") && !occupation.contains("temporairement"))
                 {
-                    if (occupation.contains(pirateType)) {
-                        type = "Pirate";
-                        break;
+                    for (String pirateType : pirateTypeList)
+                    {
+                        if (occupation.contains(pirateType)) {
+                            type = "Pirate";
+                            break;
+                        }
                     }
-                }
-                for (String navyType : navyTypeList)
-                {
-                    if (occupation.contains(navyType)) {
-                        type = "Navy";
-                        break;
+                    for (String navyType : navyTypeList)
+                    {
+                        if (occupation.contains(navyType)) {
+                            type = "Navy";
+                            break;
+                        }
                     }
-                }
-                for (String revoType : revoTypeList)
-                {
-                    if (occupation.contains(revoType)) {
-                        type = "Revolutionary";
-                        break;
+                    for (String revoType : revoTypeList)
+                    {
+                        if (occupation.contains(revoType)) {
+                            type = "Revolutionary";
+                            break;
+                        }
                     }
                 }
             }
+            return type;
         }
-        return type;
+        catch (Exception e)
+        {
+            // Pas d'affiliations
+            e.printStackTrace();
+            return "";
+        }
+
+    }
+
+    private String defineCrew(String rawCrew)
+    {
+        if(rawCrew.startsWith("CP"))
+        {
+            return "Cipher Pol";
+        }
+        else if (rawCrew.equals("Marine"))
+        {
+            return "Navy's Crew";
+        }
+        else if(rawCrew.contains("armée") || rawCrew.contains("Armée"))
+        {
+            return "Revolutionary's Crew";
+        }
+
+        return rawCrew;
     }
 
     private boolean stateAlive(String state)
