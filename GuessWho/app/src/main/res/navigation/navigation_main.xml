@@ -50,4 +50,9 @@
         android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
 </navigation>

@@ -25,13 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     NavController navController;
 
-    private Animation fromBottom;
-    private Animation toBottom;
-    private Animation openMenu;
-    private Animation closeMenu;
-    private FloatingActionButton fab_menu;
-    private FloatingActionButton fab_list;
-    private FloatingActionButton fab_settings;
+    private Animation fromBottom, toBottom, openMenu, closeMenu;
+    private FloatingActionButton fab_menu, fab_list, fab_settings, fab_help;
     private boolean clicked;
 
 
@@ -44,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         fab_menu = findViewById(R.id.menubtn);
         fab_list = findViewById(R.id.listbtn);
         fab_settings = findViewById(R.id.settingsbtn);
+        fab_help = findViewById(R.id.helpbtn);
 
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.from_botton_anim);
         toBottom = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
@@ -53,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         fab_menu.setOnClickListener(view -> onMenuButtonClicked());
         fab_list.setOnClickListener(view -> onListButtonClicked());
         fab_settings.setOnClickListener(view -> onSettingsClicked());
+        fab_help.setOnClickListener(view -> onHelpClicked());
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         assert navHostFragment != null;
@@ -70,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
         navController.navigate(R.id.listOfCharactersFragment);
     }
 
+    private void onHelpClicked()
+    {
+        onMenuButtonClicked();
+        navController.navigate(R.id.helpFragment);
+    }
+
     private void onMenuButtonClicked()
     {
         setVisibility(clicked);
@@ -85,12 +88,14 @@ public class MainActivity extends AppCompatActivity {
             fab_menu.setAnimation(openMenu);
             fab_list.startAnimation(fromBottom);
             fab_settings.startAnimation(fromBottom);
+            fab_help.setAnimation(fromBottom);
         }
         else
         {
             fab_menu.startAnimation(closeMenu);
             fab_list.startAnimation(toBottom);
             fab_settings.startAnimation(toBottom);
+            fab_help.setAnimation(toBottom);
         }
     }
 
@@ -100,11 +105,13 @@ public class MainActivity extends AppCompatActivity {
         {
             fab_list.setVisibility(View.VISIBLE);
             fab_settings.setVisibility(View.VISIBLE);
+            fab_help.setVisibility(View.VISIBLE);
         }
         else
         {
             fab_list.setVisibility(View.INVISIBLE);
             fab_settings.setVisibility(View.INVISIBLE);
+            fab_help.setVisibility(View.VISIBLE);
         }
     }
 
@@ -114,11 +121,13 @@ public class MainActivity extends AppCompatActivity {
         {
             fab_list.setClickable(false);
             fab_settings.setClickable(false);
+            fab_help.setClickable(false);
         }
         else
         {
             fab_list.setClickable(true);
             fab_settings.setClickable(true);
+            fab_help.setClickable(true);
         }
     }
 }

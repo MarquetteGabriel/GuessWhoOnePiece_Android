@@ -49,7 +49,7 @@ public class LoadingScreenFragment extends Fragment {
 
         new Handler().postDelayed(() -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
-            navController.navigate(R.id.gameScreenFragment);
+            navController.navigate(R.id.gameSelectionScreenFragment);
         }, LOADING_TIME);
 
         return view;
