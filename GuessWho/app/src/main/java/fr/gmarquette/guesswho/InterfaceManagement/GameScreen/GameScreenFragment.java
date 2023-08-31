@@ -8,15 +8,21 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -29,9 +35,6 @@ import java.util.concurrent.ExecutionException;
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
-import fr.gmarquette.guesswho.GameSystem.AgeType;
-import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
-import fr.gmarquette.guesswho.GameSystem.ChapterType;
 import fr.gmarquette.guesswho.GameSystem.GameInit;
 import fr.gmarquette.guesswho.GameSystem.GameManager;
 import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameSelectionScreenFragment;
@@ -46,6 +49,8 @@ public class GameScreenFragment extends Fragment {
 
     private ArrayList<String> suggestions;
     View viewFragment;
+    GridView gridView;
+    Animation fadeIn, fadeOut;
 
     public GameScreenFragment() {
         // Required empty public constructor
@@ -61,6 +66,22 @@ public class GameScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
+
+        fadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        fadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
+
+        String[] textAnswer = {"","","","","","","","","","", "","","","","","","","","","", "","","","",
+                "","","","","","", "","","","","","","","","","", "", ""};
+        int[] circleImages = {R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
+                R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
+                R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
+                R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
+                R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,  R.drawable.gray_circle};
+        int[] answerImages = {R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
+                R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
+                R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
+                R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
+                R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,  R.drawable.empty_circle};
 
         suggestions = GameSelectionScreenFragment.getListSuggestions();
 
@@ -80,6 +101,10 @@ public class GameScreenFragment extends Fragment {
         });
 
         PicturesAlbum.getInstance().setImages();
+
+        gridView = viewFragment.findViewById(R.id.grid_view);
+        GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer,circleImages, answerImages);
+        gridView.setAdapter(gridAdapter);
 
         restart();
         
@@ -109,103 +134,55 @@ public class GameScreenFragment extends Fragment {
             throw new RuntimeException(e);
         }
 
-        boolean hasFruit = GameManager.hasEatenDevilFruit(character, characterToFind);
-        BountyType bounty = GameManager.lookingForBounty(character, characterToFind);
-        ChapterType chapter = GameManager.getAppearanceDiff(character, characterToFind);
-        boolean type = GameManager.getType(character, characterToFind);
-        boolean alive = GameManager.isAlive(character, characterToFind);
-        AgeType age = GameManager.getAge(character, characterToFind);
-        boolean crew = GameManager.getCrew(character, characterToFind);
+        Answering answer = AnimationManager.updateFruit(GameManager.hasEatenDevilFruit(character, characterToFind), character);
+        int[] guessAnswer = {R.id.guess_1, R.id.guess_2, R.id.guess_3, R.id.guess_4, R.id.guess_5, R.id.guess_6};
+        getAnswerPrinted((NUMBER_GUESSED -1) * 7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        switch (NUMBER_GUESSED)
-        {
-            case 1:
-            {
-                ((TextView) viewFragment.findViewById(R.id.guess_1)).setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, viewFragment.findViewById(R.id.fruit_wr_circle_1), viewFragment.findViewById(R.id.fruit_answer_1));
-                AnimationManager.updateBounty(bounty, character, viewFragment.findViewById(R.id.bounty_wr_circle_1), viewFragment.findViewById(R.id.bounty_answer_1), viewFragment.findViewById(R.id.bounty_text_1));
-                AnimationManager.updateChapter(chapter, character, viewFragment.findViewById(R.id.chapter_wr_circle_1), viewFragment.findViewById(R.id.chapter_answer_1), viewFragment.findViewById(R.id.chapter_text_1));
-                AnimationManager.updateType(type, character, viewFragment.findViewById(R.id.type_wr_circle_1), viewFragment.findViewById(R.id.type_answer_1));
-                AnimationManager.updateAlive(alive, character, viewFragment.findViewById(R.id.alive_wr_circle_1), viewFragment.findViewById(R.id.alive_answer_1));
-                AnimationManager.updateAge(age, character, viewFragment.findViewById(R.id.age_wr_circle_1), viewFragment.findViewById(R.id.age_answer_1), viewFragment.findViewById(R.id.age_text_1));
-                AnimationManager.updateCrew(crew, character, viewFragment.findViewById(R.id.crew_wr_circle_1), viewFragment.findViewById(R.id.crew_answer_1));
-                break;
-            }
-            case 2:
-            {
-                ((TextView) viewFragment.findViewById(R.id.guess_2)).setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, viewFragment.findViewById(R.id.fruit_wr_circle_2), viewFragment.findViewById(R.id.fruit_answer_2));
-                AnimationManager.updateBounty(bounty, character, viewFragment.findViewById(R.id.bounty_wr_circle_2), viewFragment.findViewById(R.id.bounty_answer_2), viewFragment.findViewById(R.id.bounty_text_2));
-                AnimationManager.updateChapter(chapter, character, viewFragment.findViewById(R.id.chapter_wr_circle_2), viewFragment.findViewById(R.id.chapter_answer_2), viewFragment.findViewById(R.id.chapter_text_2));
-                AnimationManager.updateType(type, character, viewFragment.findViewById(R.id.type_wr_circle_2), viewFragment.findViewById(R.id.type_answer_2));
-                AnimationManager.updateAlive(alive, character, viewFragment.findViewById(R.id.alive_wr_circle_2), viewFragment.findViewById(R.id.alive_answer_2));
-                AnimationManager.updateAge(age, character, viewFragment.findViewById(R.id.age_wr_circle_2), viewFragment.findViewById(R.id.age_answer_2), viewFragment.findViewById(R.id.age_text_2));
-                AnimationManager.updateCrew(crew, character, viewFragment.findViewById(R.id.crew_wr_circle_2), viewFragment.findViewById(R.id.crew_answer_2));
-                break;
-            }
-            case 3:
-            {
-                ((TextView) viewFragment.findViewById(R.id.guess_3)).setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, viewFragment.findViewById(R.id.fruit_wr_circle_3), viewFragment.findViewById(R.id.fruit_answer_3));
-                AnimationManager.updateBounty(bounty, character, viewFragment.findViewById(R.id.bounty_wr_circle_3), viewFragment.findViewById(R.id.bounty_answer_3), viewFragment.findViewById(R.id.bounty_text_3));
-                AnimationManager.updateChapter(chapter, character, viewFragment.findViewById(R.id.chapter_wr_circle_3), viewFragment.findViewById(R.id.chapter_answer_3), viewFragment.findViewById(R.id.chapter_text_3));
-                AnimationManager.updateType(type, character, viewFragment.findViewById(R.id.type_wr_circle_3), viewFragment.findViewById(R.id.type_answer_3));
-                AnimationManager.updateAlive(alive, character, viewFragment.findViewById(R.id.alive_wr_circle_3), viewFragment.findViewById(R.id.alive_answer_3));
-                AnimationManager.updateAge(age, character, viewFragment.findViewById(R.id.age_wr_circle_3), viewFragment.findViewById(R.id.age_answer_3), viewFragment.findViewById(R.id.age_text_3));
-                AnimationManager.updateCrew(crew, character, viewFragment.findViewById(R.id.crew_wr_circle_3), viewFragment.findViewById(R.id.crew_answer_3));
-                break;
-            }
-            case 4:
-            {
-                ((TextView) viewFragment.findViewById(R.id.guess_4)).setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, viewFragment.findViewById(R.id.fruit_wr_circle_4), viewFragment.findViewById(R.id.fruit_answer_4));
-                AnimationManager.updateBounty(bounty, character, viewFragment.findViewById(R.id.bounty_wr_circle_4), viewFragment.findViewById(R.id.bounty_answer_4), viewFragment.findViewById(R.id.bounty_text_4));
-                AnimationManager.updateChapter(chapter, character, viewFragment.findViewById(R.id.chapter_wr_circle_4), viewFragment.findViewById(R.id.chapter_answer_4), viewFragment.findViewById(R.id.chapter_text_4));
-                AnimationManager.updateType(type, character, viewFragment.findViewById(R.id.type_wr_circle_4), viewFragment.findViewById(R.id.type_answer_4));
-                AnimationManager.updateAlive(alive, character, viewFragment.findViewById(R.id.alive_wr_circle_4), viewFragment.findViewById(R.id.alive_answer_4));
-                AnimationManager.updateAge(age, character, viewFragment.findViewById(R.id.age_wr_circle_4), viewFragment.findViewById(R.id.age_answer_4), viewFragment.findViewById(R.id.age_text_4));
-                AnimationManager.updateCrew(crew, character, viewFragment.findViewById(R.id.crew_wr_circle_4), viewFragment.findViewById(R.id.crew_answer_4));
-                break;
-            }
-            case 5:
-            {
-                ((TextView) viewFragment.findViewById(R.id.guess_5)).setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, viewFragment.findViewById(R.id.fruit_wr_circle_5), viewFragment.findViewById(R.id.fruit_answer_5));
-                AnimationManager.updateBounty(bounty, character, viewFragment.findViewById(R.id.bounty_wr_circle_5), viewFragment.findViewById(R.id.bounty_answer_5), viewFragment.findViewById(R.id.bounty_text_5));
-                AnimationManager.updateChapter(chapter, character, viewFragment.findViewById(R.id.chapter_wr_circle_5), viewFragment.findViewById(R.id.chapter_answer_5), viewFragment.findViewById(R.id.chapter_text_5));
-                AnimationManager.updateType(type, character, viewFragment.findViewById(R.id.type_wr_circle_5), viewFragment.findViewById(R.id.type_answer_5));
-                AnimationManager.updateAlive(alive, character, viewFragment.findViewById(R.id.alive_wr_circle_5), viewFragment.findViewById(R.id.alive_answer_5));
-                AnimationManager.updateAge(age, character, viewFragment.findViewById(R.id.age_wr_circle_5), viewFragment.findViewById(R.id.age_answer_5), viewFragment.findViewById(R.id.age_text_5));
-                AnimationManager.updateCrew(crew, character, viewFragment.findViewById(R.id.crew_wr_circle_5), viewFragment.findViewById(R.id.crew_answer_5));
-                break;
-            }
-            case 6:
-            {
-                ((TextView)viewFragment.findViewById(R.id.guess_6)).setText(selectedValue);
-                AnimationManager.updateFruit(hasFruit, character, viewFragment.findViewById(R.id.fruit_wr_circle_6), viewFragment.findViewById(R.id.fruit_answer_6));
-                AnimationManager.updateBounty(bounty, character, viewFragment.findViewById(R.id.bounty_wr_circle_6), viewFragment.findViewById(R.id.bounty_answer_6), viewFragment.findViewById(R.id.bounty_text_6));
-                AnimationManager.updateChapter(chapter, character, viewFragment.findViewById(R.id.chapter_wr_circle_6), viewFragment.findViewById(R.id.chapter_answer_6), viewFragment.findViewById(R.id.chapter_text_6));
-                AnimationManager.updateType(type, character, viewFragment.findViewById(R.id.type_wr_circle_6), viewFragment.findViewById(R.id.type_answer_6));
-                AnimationManager.updateAlive(alive, character, viewFragment.findViewById(R.id.alive_wr_circle_6), viewFragment.findViewById(R.id.alive_answer_6));
-                AnimationManager.updateAge(age, character, viewFragment.findViewById(R.id.age_wr_circle_6),  viewFragment.findViewById(R.id.age_answer_6), viewFragment.findViewById(R.id.age_text_6));
-                AnimationManager.updateCrew(crew, character, viewFragment.findViewById(R.id.crew_wr_circle_6), viewFragment.findViewById(R.id.crew_answer_6));
-                break;
-            }
-        }
+        answer = AnimationManager.updateBounty(GameManager.lookingForBounty(character, characterToFind), character);
+        getAnswerPrinted(NUMBER_GUESSED*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
+        answer = AnimationManager.updateChapter(GameManager.getAppearanceDiff(character, characterToFind), character);
+        getAnswerPrinted((NUMBER_GUESSED+1 )*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+
+        answer = AnimationManager.updateType(GameManager.getType(character, characterToFind), character);
+        getAnswerPrinted((NUMBER_GUESSED + 2)*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+
+        answer = AnimationManager.updateAlive(GameManager.isAlive(character, characterToFind), character);
+        getAnswerPrinted((NUMBER_GUESSED + 3)*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+
+        answer = AnimationManager.updateAge(GameManager.getAge(character, characterToFind), character);
+        getAnswerPrinted((NUMBER_GUESSED+4)*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+
+        answer = AnimationManager.updateCrew(GameManager.getCrew(character, characterToFind), character);
+        getAnswerPrinted((NUMBER_GUESSED + 5)*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+
+        ((TextView) viewFragment.findViewById(guessAnswer[NUMBER_GUESSED - 1])).setText(selectedValue);
 
         return GameManager.isSameName(character, characterToFind);
     }
 
     public void restart()
     {
-        CleanGameScreen.cleanPictures(viewFragment);
+        cleanPicture();
         try {
             characterToFind = gameInit.getCharacterToFound(suggestions);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         NUMBER_GUESSED = 0;
+    }
+
+    private void cleanPicture()
+    {
+        for(int i = 0; i < gridView.getCount(); i++)
+        {
+            ImageView imageViewBackground = gridView.getChildAt(i).findViewById(R.id.wr_circle);
+            imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
+            ImageView imageViewAnswer = gridView.getChildAt(i).findViewById(R.id.answer_circle);
+            imageViewAnswer.setImageResource(PicturesAlbum.getInstance().EMPTY_ANSWER);
+            TextView textView = gridView.getChildAt(i).findViewById(R.id.text_answer);
+            textView.setText("");
+        }
     }
 
     private void displayWinDialog()
@@ -260,5 +237,76 @@ public class GameScreenFragment extends Fragment {
         });
 
         dialog.show();
+    }
+
+
+    public void crossFading(final ImageView imageViewBackground, final ImageView imageViewAnswer, final TextView textView, final int imageBackgroundId, final int imageAnswerId, final String answer) {
+        if(imageViewBackground != null)
+        {
+            imageViewBackground.animate()
+                    .alpha(0f)
+                    .setDuration(500)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            imageViewBackground.setImageResource(imageBackgroundId);
+                            imageViewBackground.animate()
+                                    .alpha(1f)
+                                    .setDuration(500)
+                                    .setListener(null)
+                                    .start();
+                        }
+                    })
+                    .start();
+        }
+
+        if(imageViewAnswer != null)
+        {
+            imageViewAnswer.animate()
+                    .alpha(0f)
+                    .setDuration(500)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            imageViewAnswer.setImageResource(imageAnswerId);
+                            imageViewAnswer.animate()
+                                    .alpha(1f)
+                                    .setDuration(500)
+                                    .setListener(null)
+                                    .start();
+                        }
+                    })
+                    .start();
+        }
+
+        if(textView != null)
+        {
+            textView.animate()
+                    .alpha(0f)
+                    .setDuration(500)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            textView.setText(answer);
+                            textView.animate()
+                                    .alpha(1f)
+                                    .setDuration(500)
+                                    .setListener(null)
+                                    .start();
+                        }
+                    })
+                    .start();
+        }
+
+    }
+
+    public void getAnswerPrinted(int position, int imageBackgroundId, int answerImageId, String answer) {
+        ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
+        ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
+        TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
+        crossFading(imageBackground, imageAnswer, textAnswer, imageBackgroundId, answerImageId, answer);
     }
 }
