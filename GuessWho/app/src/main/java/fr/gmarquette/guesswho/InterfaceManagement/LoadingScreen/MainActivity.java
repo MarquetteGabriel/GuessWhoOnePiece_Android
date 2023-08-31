@@ -157,15 +157,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (currentFragmentId == R.id.gameScreenFragment) {
-                navHostFragment.getNavController().popBackStack(R.id.gameSelectionScreenFragment, false);
+                navController.popBackStack(R.id.gameSelectionScreenFragment, false);
             }
 
             if (currentFragmentId == R.id.helpFragment || currentFragmentId == R.id.settingsFragment || currentFragmentId == R.id.listOfCharactersFragment) {
                 if (backFragmentId == R.id.gameScreenFragment) {
-                    navHostFragment.getNavController().popBackStack(R.id.gameScreenFragment, false);
+                    navController.popBackStack(R.id.gameScreenFragment, false);
                 }
                 else {
-                    navHostFragment.getNavController().popBackStack(R.id.gameSelectionScreenFragment, false);
+                    navController.popBackStack(R.id.gameSelectionScreenFragment, false);
                 }
             }
         }
