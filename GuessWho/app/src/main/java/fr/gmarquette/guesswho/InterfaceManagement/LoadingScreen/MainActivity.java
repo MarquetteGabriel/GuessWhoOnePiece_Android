@@ -24,12 +24,12 @@ import fr.gmarquette.guesswho.R;
 public class MainActivity extends AppCompatActivity {
 
     NavController navController;
+    NavHostFragment navHostFragment;
+    int currentFragmentId, backFragmentId;
 
     private Animation fromBottom, toBottom, openMenu, closeMenu;
     private FloatingActionButton fab_menu, fab_list, fab_settings, fab_help;
     private boolean clicked;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,26 @@ public class MainActivity extends AppCompatActivity {
         fab_settings.setOnClickListener(view -> onSettingsClicked());
         fab_help.setOnClickListener(view -> onHelpClicked());
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         assert navHostFragment != null;
         navController = navHostFragment.getNavController();
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            currentFragmentId = destination.getId();
+
+            if(destination.getId() == R.id.gameScreenFragment || destination.getId() == R.id.gameSelectionScreenFragment)
+            {
+                backFragmentId = destination.getId();
+            }
+
+            if (destination.getId() == R.id.loadingScreenFragment) {
+                fab_menu.setVisibility(View.INVISIBLE);
+                fab_menu.setClickable(false);
+            } else {
+                fab_menu.setVisibility(View.VISIBLE);
+                fab_menu.setClickable(true);
+            }
+        });
     }
 
     private void onSettingsClicked() {
@@ -128,6 +145,33 @@ public class MainActivity extends AppCompatActivity {
             fab_list.setClickable(true);
             fab_settings.setClickable(true);
             fab_help.setClickable(true);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (navHostFragment != null) {
+
+            if (navHostFragment.getChildFragmentManager().getBackStackEntryCount() == 1) {
+                finish();
+            }
+
+            if (currentFragmentId == R.id.gameScreenFragment) {
+                navHostFragment.getNavController().popBackStack(R.id.gameSelectionScreenFragment, false);
+            }
+
+            if (currentFragmentId == R.id.helpFragment || currentFragmentId == R.id.settingsFragment || currentFragmentId == R.id.listOfCharactersFragment) {
+                if (backFragmentId == R.id.gameScreenFragment) {
+                    navHostFragment.getNavController().popBackStack(R.id.gameScreenFragment, false);
+                }
+                else {
+                    navHostFragment.getNavController().popBackStack(R.id.gameSelectionScreenFragment, false);
+                }
+            }
+        }
+        else
+        {
+            super.onBackPressed();
         }
     }
 }
