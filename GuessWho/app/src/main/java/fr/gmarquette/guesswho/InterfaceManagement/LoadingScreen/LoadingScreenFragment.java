@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.concurrent.ExecutionException;
@@ -46,7 +47,10 @@ public class LoadingScreenFragment extends Fragment {
         DataBase.getInstance(requireContext().getApplicationContext());
         possibleAddElements();
 
-        new Handler().postDelayed(() -> Navigation.findNavController(view).navigate(R.id.gameSelectionScreenFragment), LOADING_TIME);
+        new Handler().postDelayed(() -> {
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
+            navController.navigate(R.id.gameSelectionScreenFragment);
+        }, LOADING_TIME);
 
         return view;
     }
