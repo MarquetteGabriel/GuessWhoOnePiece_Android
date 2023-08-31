@@ -60,11 +60,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onSettingsClicked() {
+        onMenuButtonClicked();
         navController.navigate(R.id.settingsFragment);
     }
 
     private void onListButtonClicked()
     {
+        onMenuButtonClicked();
         navController.navigate(R.id.listOfCharactersFragment);
     }
 
