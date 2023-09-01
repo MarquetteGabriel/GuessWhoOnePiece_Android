@@ -21,18 +21,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
 
-public class GenerateDatas
+public class MultiGenerateDatas
 {
-    final String url_wikipedia_onepiece = "https://fr.wikipedia.org/wiki/Personnages_de_One_Piece";
+    List<String> list = new ArrayList<>();
+    final String url_fandom_listcharacter = "https://onepiece.fandom.com/fr/wiki/Liste_des_Personnages_Canon";
     final String url_fandom = "https://onepiece.fandom.com/fr/wiki/";
     final String class_characterData = "pi-item pi-group pi-border-color";
-    final String class_titles = "mw-headline";
     final String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
     final String class_occupation = "pi-item pi-data pi-item-spacing pi-border-color";
 
@@ -40,64 +42,65 @@ public class GenerateDatas
     private static final List<String> navyTypeList = Arrays.asList("Marine", "Cipher Pol", "Souverain", "Conseil des 5 doyens", "CP-AIGIS0");
     private static final List<String> revoTypeList = Arrays.asList("Armée Révolutionnaire", "Révolutionnaires", "armée révolutionnaire");
 
-
     public Thread getDatas_Thread;
-    public static List<String> nameList;
+    private List<String> nameList;
 
     public void getDatasFromOutside(Context context)
     {
         getDatas_Thread = new Thread(() -> {
-            extractValuesFromWiki();
-            for (String character : nameList)
-            {
-                Log.i("WIKI_HELP", character);
-                if(character != null)
-                {
-                    List<String> listCharacterDatas = extractValuesFromFandom(character);
-                    if(!listCharacterDatas.isEmpty())
-                    {
-                        createCharacterFromInformation(listCharacterDatas, context);
-                    }
-                }
-            }
+            nameList = getListofCharacters();
+            multiThreadForFandom(context, nameList);
             });
     }
 
-    void extractValuesFromWiki()
+    public void multiThreadForFandom(Context context, List<String> characterList)
     {
-        try {
-            Document doc = Jsoup.connect(url_wikipedia_onepiece).get();
-            nameList = new ArrayList<>();
-            List<String> bannedWordsList = new ArrayList<>();
+        ExecutorService executorService = Executors.newFixedThreadPool(43);
+        int batchSize = 28;
 
-            Elements bannedWords = doc.select("h3, h2");
-            for (Element h2Element : bannedWords) {
-                String text_raw = h2Element.text();
-                String text = text_raw.replace("[modifier | modifier le code]", "").trim();
-                bannedWordsList.add(text);
-            }
+        for (int i = 0; i < characterList.size(); i += batchSize) {
+            int endIndex = Math.min(i + batchSize, characterList.size());
+            List<String> subList = characterList.subList(i, endIndex);
 
-            Elements elements = doc.getElementsByClass(class_titles);
-            for (Element headline : elements) {
-                boolean temp = false;
-                String values = headline.select("span").text();
-                for(String bannedWord : bannedWordsList)
-                {
-                    if(values.equals(bannedWord))
-                    {
-                        temp = true;
-                        break;
+            executorService.submit(() ->
+            {
+                for (String character : subList) {
+                    List<String> listCharacterDatas = extractValuesFromFandom(character);
+                    if (!listCharacterDatas.isEmpty()) {
+                        createCharacterFromInformation(listCharacterDatas, context);
                     }
                 }
+            });
+        }
+    }
 
-                if(!temp)
-                {
-                    nameList.add(values);
+    private List<String> getListofCharacters()
+    {
+        List<String> characterList = new ArrayList<>();
+        Document doc;
+        try {
+            doc = Jsoup.connect(url_fandom_listcharacter).get();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String html = doc.getElementsByClass("tabber wds-tabber").html();
+        Document doc2 = Jsoup.parse(html);
+        Elements tables = doc2.select("table.wikitable");
+
+        for (Element table : tables)
+        {
+            if (table != null) {
+                Elements rows = table.select("tr");
+                for (Element row : rows) {
+                    Elements columns = row.select("td");
+                    if (columns.size() >= 6) {
+                        characterList.add(columns.get(1).text());
+                    }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+        return characterList;
     }
 
     List<String> extractValuesFromFandom(String character)
@@ -106,7 +109,6 @@ public class GenerateDatas
         try {
             Element occupation = null, affiliation = null;
             String url_character = character.replace(" ", "_").trim();
-            url_character = url_character.replace("'", "%27");
             String url = url_fandom + url_character;
 
             Document doc = Jsoup.connect(url).get();
@@ -134,8 +136,12 @@ public class GenerateDatas
             characterDataList.add(extractPatternAge(characterData));
             characterDataList.add(extractPatternCrew(affiliation));//characterData, "Affiliations : ([^;]+)")
             characterDataList.add("0");
+            Log.i("TAG", "New Perso : " + character);
         } catch (IOException e) {
+            nameList.remove(character);
+            Log.i("TAGNO", "Perso Delete " + character);
             e.printStackTrace();
+
         }
 
         return characterDataList;
@@ -198,24 +204,29 @@ public class GenerateDatas
     {
         try
         {
-            Characters characters = new Characters(
-                    characterData.get(0),
-                    stateFruit(characterData.get(1)),
-                    fixBounty(characterData.get(2), characterData.get(4)),
-                    Integer.parseInt(characterData.get(3)),
-                    characterData.get(4),
-                    stateAlive(characterData.get(5)),
-                    Integer.parseInt(characterData.get(6)),
-                    defineCrew(characterData.get(7)),
-                    Integer.parseInt(characterData.get(8)));
-
-            if(Integer.parseInt(characterData.get(3)) != 0)
+            if(Integer.parseInt(characterData.get(6)) != 0)
             {
-                DataBase.getInstance(context).dao().addCharacter(characters);
+                Characters characters = new Characters(
+                        characterData.get(0),
+                        stateFruit(characterData.get(1)),
+                        fixBounty(characterData.get(2), characterData.get(4)),
+                        Integer.parseInt(characterData.get(3)),
+                        characterData.get(4),
+                        stateAlive(characterData.get(5)),
+                        Integer.parseInt(characterData.get(6)),
+                        defineCrew(characterData.get(7)),
+                        Integer.parseInt(characterData.get(8)));
+
+                if(Integer.parseInt(characterData.get(3)) != 0)
+                {
+                    DataBase.getInstance(context).dao().addCharacter(characters);
+                }
             }
+
         }
         catch (Exception e)
         {
+            Log.i("TAGNO", "Perso Delete " + characterData.get(0));
             // ParseInt sur null;
         }
 

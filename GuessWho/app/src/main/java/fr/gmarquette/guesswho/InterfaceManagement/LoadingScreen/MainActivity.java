@@ -14,21 +14,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import fr.gmarquette.guesswho.GameData.Characters.GenerateDatas;
+import fr.gmarquette.guesswho.GameData.Characters.MultiGenerateDatas;
 import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {
 
     NavController navController;
-GenerateDatas generateDatas = new GenerateDatas();
+MultiGenerateDatas multiGenerateDatas = new MultiGenerateDatas();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        generateDatas.getDatasFromOutside(this);
-        generateDatas.getDatas_Thread.start();
+        multiGenerateDatas.getDatasFromOutside(this);
+        multiGenerateDatas.getDatas_Thread.start();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         assert navHostFragment != null;

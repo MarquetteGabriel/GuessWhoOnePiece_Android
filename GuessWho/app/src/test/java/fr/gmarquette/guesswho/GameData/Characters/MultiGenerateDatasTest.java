@@ -14,14 +14,14 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class GenerateDatasTest {
+public class MultiGenerateDatasTest {
 
     @Test
     public void extractValuesFromFandomTest()
     {
         String characterOne = "Nami";
-        GenerateDatas generateDatas = new GenerateDatas();
-        List<String> resultOne = generateDatas.extractValuesFromFandom(characterOne);
+        MultiGenerateDatas multiGenerateDatas = new MultiGenerateDatas();
+        List<String> resultOne = multiGenerateDatas.extractValuesFromFandom(characterOne);
 
         // Assert on Nami
         {
@@ -36,7 +36,7 @@ public class GenerateDatasTest {
         }
 
         String characterTwo = "Jango";
-        List<String> resultTwo = generateDatas.extractValuesFromFandom(characterTwo);
+        List<String> resultTwo = multiGenerateDatas.extractValuesFromFandom(characterTwo);
         
         // Assert on Jango
         {
@@ -51,7 +51,7 @@ public class GenerateDatasTest {
         }
 
         String characterThree = "Rob Lucci";
-        List<String> resultThree = generateDatas.extractValuesFromFandom(characterThree);
+        List<String> resultThree = multiGenerateDatas.extractValuesFromFandom(characterThree);
 
         // Assert on Lucci
         {
@@ -66,7 +66,7 @@ public class GenerateDatasTest {
         }
 
         String characterFour = "Monkey D. Dragon";
-        List<String> resultFour = generateDatas.extractValuesFromFandom(characterFour);
+        List<String> resultFour = multiGenerateDatas.extractValuesFromFandom(characterFour);
 
         // Assert on Dragon
         {
