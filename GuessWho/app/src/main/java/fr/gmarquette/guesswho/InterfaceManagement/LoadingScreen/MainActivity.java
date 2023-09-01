@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     NavController navController;
     NavHostFragment navHostFragment;
     int currentFragmentId, backFragmentId;
-
     private Animation fromBottom, toBottom, openMenu, closeMenu;
     private FloatingActionButton fab_menu, fab_list, fab_settings, fab_help;
     private boolean clicked;

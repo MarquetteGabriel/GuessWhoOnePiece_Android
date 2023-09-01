@@ -11,11 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GuessWho"
         tools:targetApi="31">
-
         <activity
             android:name=".InterfaceManagement.LoadingScreen.MainActivity"
-            android:screenOrientation="portrait"
             android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

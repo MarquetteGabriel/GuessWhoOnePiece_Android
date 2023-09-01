@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -42,14 +43,14 @@ import fr.gmarquette.guesswho.R;
 
 public class GameScreenFragment extends Fragment {
 
-    public static int NUMBER_GUESSED = 0;
+    public static int NUMBER_GUESSED = 1;
     Characters characterToFind;
     private CallDAOAsync callDAOAsync;
     private GameInit gameInit;
 
     private ArrayList<String> suggestions;
     View viewFragment;
-    GridView gridView;
+    private GridView gridView;
     Animation fadeIn, fadeOut;
 
     public GameScreenFragment() {
@@ -69,6 +70,7 @@ public class GameScreenFragment extends Fragment {
 
         fadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
         fadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
+        gridView = viewFragment.findViewById(R.id.grid_view);
 
         String[] textAnswer = {"","","","","","","","","","", "","","","","","","","","","", "","","","",
                 "","","","","","", "","","","","","","","","","", "", ""};
@@ -83,6 +85,9 @@ public class GameScreenFragment extends Fragment {
                 R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
                 R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,  R.drawable.empty_circle};
 
+        GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer,circleImages, answerImages);
+        gridView.setAdapter(gridAdapter);
+
         suggestions = GameSelectionScreenFragment.getListSuggestions();
 
         DataBase.getInstance(requireContext().getApplicationContext());
@@ -92,21 +97,32 @@ public class GameScreenFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, suggestions);
         AutoCompleteTextView autoCompleteTextView = viewFragment.findViewById(R.id.EnterTextAutoCompleted);
 
+
+
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setOnItemClickListener((adapterView, view, position, id) -> {
             String selectedValue = autoCompleteTextView.getAdapter().getItem(position).toString();
             autoCompleteTextView.setText(selectedValue);
+
             getAnswer(selectedValue);
             autoCompleteTextView.setText("");
         });
 
         PicturesAlbum.getInstance().setImages();
 
-        gridView = viewFragment.findViewById(R.id.grid_view);
-        GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer,circleImages, answerImages);
-        gridView.setAdapter(gridAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toast.makeText(requireContext().getApplicationContext(),"You Clicked on "+ i + " circle",Toast.LENGTH_SHORT).show();
+                //getAnswerPrinted(i, R.drawable.green_mark, R.drawable.fruit, null);
+                //characterToFind = new Characters("Charlotte Katakuri", true, "1.057 Md", 860, "Pirate", true, 48, "BigMom's Crew", 0);
+                //answerToRequest("Monkey D. Luffy");
+                restart();
+                getAnswer("Monkey D. Luffy");
+            }
+        });
 
-        restart();
+        //restart();
         
         return viewFragment;
     }
@@ -114,6 +130,8 @@ public class GameScreenFragment extends Fragment {
     public void getAnswer(String selectedValue)
     {
         NUMBER_GUESSED++;
+
+        getAnswerPrinted(NUMBER_GUESSED, R.drawable.green_mark, R.drawable.fruit, selectedValue);
         boolean result = answerToRequest(selectedValue);
         if(result)
         {
@@ -161,6 +179,12 @@ public class GameScreenFragment extends Fragment {
         return GameManager.isSameName(character, characterToFind);
     }
 
+    public void printAnswer(int number, Answering answering)
+    {
+        getAnswerPrinted((number) * 7, answering.getImageBackground(), answering.getImageAnswer(), answering.getAnswer());
+    }
+
+
     public void restart()
     {
         cleanPicture();
@@ -169,7 +193,7 @@ public class GameScreenFragment extends Fragment {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        NUMBER_GUESSED = 0;
+        NUMBER_GUESSED = 1;
     }
 
     private void cleanPicture()
@@ -241,7 +265,7 @@ public class GameScreenFragment extends Fragment {
 
 
     public void crossFading(final ImageView imageViewBackground, final ImageView imageViewAnswer, final TextView textView, final int imageBackgroundId, final int imageAnswerId, final String answer) {
-        if(imageViewBackground != null)
+        if(imageViewBackground != null && imageBackgroundId != 0)
         {
             imageViewBackground.animate()
                     .alpha(0f)
@@ -261,7 +285,7 @@ public class GameScreenFragment extends Fragment {
                     .start();
         }
 
-        if(imageViewAnswer != null)
+        if(imageViewAnswer != null && imageAnswerId != 0)
         {
             imageViewAnswer.animate()
                     .alpha(0f)
@@ -281,7 +305,7 @@ public class GameScreenFragment extends Fragment {
                     .start();
         }
 
-        if(textView != null)
+        if(textView != null && answer != null)
         {
             textView.animate()
                     .alpha(0f)
