@@ -9,7 +9,6 @@
 package fr.gmarquette.guesswho.GameData.Characters;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,24 +30,35 @@ import fr.gmarquette.guesswho.GameData.Database.DataBase;
 
 public class MultiGenerateDatas
 {
-    List<String> list = new ArrayList<>();
     final String url_fandom_listcharacter = "https://onepiece.fandom.com/fr/wiki/Liste_des_Personnages_Canon";
     final String url_fandom = "https://onepiece.fandom.com/fr/wiki/";
     final String class_characterData = "pi-item pi-group pi-border-color";
     final String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
     final String class_occupation = "pi-item pi-data pi-item-spacing pi-border-color";
 
-    private static final List<String> pirateTypeList = Arrays.asList("Pirate", "Pirates", "Bandit", "Bandits");
+    private static final List<String> pirateTypeList = Arrays.asList("Pirate", "Pirates", "Bandit", "Bandits", "Famille Charlotte", "Flotte de Happou");
     private static final List<String> navyTypeList = Arrays.asList("Marine", "Cipher Pol", "Souverain", "Conseil des 5 doyens", "CP-AIGIS0");
     private static final List<String> revoTypeList = Arrays.asList("Armée Révolutionnaire", "Révolutionnaires", "armée révolutionnaire");
 
     public Thread getDatas_Thread;
+
     private List<String> nameList;
+    private int countPercentage;
+
 
     public void getDatasFromOutside(Context context)
     {
         getDatas_Thread = new Thread(() -> {
+            countPercentage = 0;
             nameList = getListofCharacters();
+            for(int i = 0; i < nameList.size() ; i++)
+            {
+                if (nameList.get(i).contains("("))
+                {
+                    nameList.set(i, nameList.get(i).replaceAll("\\(.*?\\)", ""));
+                }
+            }
+
             multiThreadForFandom(context, nameList);
             });
     }
@@ -129,21 +139,16 @@ public class MultiGenerateDatas
 
             characterDataList.add(character);
             characterDataList.add((!fruitElement.contains("Fruit du Démon")) ? "No_Fruit" : "Fruit");
-            characterDataList.add(extractPattern(characterData, "Prime : ([\\d.,]+)").replaceAll("[.,]", "").trim());
-            characterDataList.add(extractPattern(characterData, "Première Apparition: Chapitre (\\d+)"));
+            characterDataList.add(extractPattern(characterData, "Prime : ([\\d.,\\s]+)").replaceAll("[.,\\s]", "").trim());
+            characterDataList.add(extractPattern(characterData, "Chapitre (\\d+)"));
             characterDataList.add(extractPatternType(occupation));
             characterDataList.add(extractPattern(characterData, "Statut : (Vivant|Décédé)"));
             characterDataList.add(extractPatternAge(characterData));
-            characterDataList.add(extractPatternCrew(affiliation));//characterData, "Affiliations : ([^;]+)")
-            characterDataList.add("0");
-            Log.i("TAG", "New Perso : " + character);
+            characterDataList.add(extractPatternCrew(affiliation));
+            characterDataList.add("6");
         } catch (IOException e) {
-            nameList.remove(character);
-            Log.i("TAGNO", "Perso Delete " + character);
             e.printStackTrace();
-
         }
-
         return characterDataList;
     }
 
@@ -152,7 +157,7 @@ public class MultiGenerateDatas
         try
         {
             List<String> affiliationCharacter = new ArrayList<>();
-            String[] affiliations = text.select(".pi-data-value").html().split("<br>");
+            String[] affiliations = text.select(".pi-data-value").html().split("<br>|<p>");
             for(String affiliation : affiliations)
             {
                 Document docSmallDatas = Jsoup.parse(affiliation);
@@ -174,9 +179,7 @@ public class MultiGenerateDatas
         }
         catch (Exception e)
         {
-            // Pas de crew
-            e.printStackTrace();
-            return "";
+            return "Citizen";
         }
     }
 
@@ -191,11 +194,11 @@ public class MultiGenerateDatas
 
     private static String extractPatternAge(String input)
     {
-        Matcher matcher = Pattern.compile("(\\d+) ans").matcher(input);
+        Matcher matcher = Pattern.compile("(\\d+\\s)?\\d+ ans").matcher(input);
         int maxAge = 0;
         while(matcher.find())
         {
-            maxAge = Math.max(maxAge, Integer.parseInt(Objects.requireNonNull(matcher.group(1))));
+            maxAge = Math.max(maxAge, Integer.parseInt(Objects.requireNonNull(matcher.group(0)).replaceAll("\\D", "")));
         }
         return String.valueOf(maxAge);
     }
@@ -204,32 +207,58 @@ public class MultiGenerateDatas
     {
         try
         {
-            if(Integer.parseInt(characterData.get(6)) != 0)
-            {
+            if(Integer.parseInt(characterData.get(6)) != 0) {
                 Characters characters = new Characters(
                         characterData.get(0),
                         stateFruit(characterData.get(1)),
                         fixBounty(characterData.get(2), characterData.get(4)),
                         Integer.parseInt(characterData.get(3)),
-                        characterData.get(4),
+                        fixOccupation(characterData.get(4), characterData.get(8)),
                         stateAlive(characterData.get(5)),
                         Integer.parseInt(characterData.get(6)),
-                        defineCrew(characterData.get(7)),
+                        defineCrew(characterData.get(7), characterData.get(4)),
                         Integer.parseInt(characterData.get(8)));
 
-                if(Integer.parseInt(characterData.get(3)) != 0)
-                {
-                    DataBase.getInstance(context).dao().addCharacter(characters);
-                }
-            }
 
+                DataBase.getInstance(context).dao().addCharacter(characters);
+                countPercentage++;
+            }
         }
         catch (Exception e)
         {
-            Log.i("TAGNO", "Perso Delete " + characterData.get(0));
-            // ParseInt sur null;
+            e.printStackTrace();
         }
 
+    }
+
+    private String fixOccupation(String value, String affiliation)
+    {
+        if(value.isEmpty())
+        {
+            for (String pirateType : pirateTypeList)
+            {
+                if (affiliation.contains(pirateType)) {
+                    value = "Pirate";
+                    break;
+                }
+            }
+            for (String navyType : navyTypeList)
+            {
+                if (affiliation.contains(navyType)) {
+                    value = "Navy";
+                    break;
+                }
+            }
+            for (String revoType : revoTypeList)
+            {
+                if (affiliation.contains(revoType)) {
+                    value = "Revolutionary";
+                    break;
+                }
+            }
+        }
+
+        return value;
     }
 
     private static String fixBounty(String bounty, String type)
@@ -290,20 +319,23 @@ public class MultiGenerateDatas
                             break;
                         }
                     }
+
+                    if(occupation.isEmpty())
+                    {
+                        type = "Citizen";
+                    }
                 }
             }
             return type;
         }
         catch (Exception e)
         {
-            // Pas d'affiliations
-            e.printStackTrace();
-            return "";
+            return "Citizen";
         }
 
     }
 
-    private String defineCrew(String rawCrew)
+    private String defineCrew(String rawCrew, String occupation)
     {
         if(rawCrew.startsWith("CP"))
         {
@@ -317,17 +349,29 @@ public class MultiGenerateDatas
         {
             return "Revolutionary's Crew";
         }
+        else if(rawCrew.isEmpty())
+        {
+            return occupation;
+        }
 
         return rawCrew;
     }
 
     private boolean stateAlive(String state)
     {
-        return(state.equals("Vivant"));
+        return (!state.equals("Décédé"));
     }
 
     private boolean stateFruit(String fruit)
     {
         return (fruit.equals("Fruit"));
+    }
+
+    public List<String> getNameList() {
+        return nameList;
+    }
+
+    public int getCountPercentage() {
+        return countPercentage;
     }
 }

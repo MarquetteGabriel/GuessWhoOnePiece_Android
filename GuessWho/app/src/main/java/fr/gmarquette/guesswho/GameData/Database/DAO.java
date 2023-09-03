@@ -18,7 +18,7 @@ import java.util.List;
 @Dao
 public interface DAO{
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addCharacter(Characters characters);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

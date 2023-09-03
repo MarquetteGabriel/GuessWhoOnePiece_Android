@@ -19,8 +19,9 @@ import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {
 
+
     NavController navController;
-MultiGenerateDatas multiGenerateDatas = new MultiGenerateDatas();
+    MultiGenerateDatas multiGenerateDatas = new MultiGenerateDatas();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
