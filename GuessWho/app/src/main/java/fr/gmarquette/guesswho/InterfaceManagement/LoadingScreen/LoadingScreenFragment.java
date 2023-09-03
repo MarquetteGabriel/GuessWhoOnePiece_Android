@@ -83,7 +83,9 @@ public class LoadingScreenFragment extends Fragment {
     {
         new Thread(() -> {
             while (avancement < 100) {
-                avancement = getAvancement();
+                float avancementCharacter = ((getAvancement() * 100)/70);
+                float avancementLevels = ((getAvancementLevels() * 100)/30);
+                avancement = avancementCharacter + avancementLevels;
                 // Mettez à jour la barre de chargement avec le pourcentage affiché, arrondi.
             }
             goToNextFragment();
@@ -99,6 +101,20 @@ public class LoadingScreenFragment extends Fragment {
             int value = multiGenerateDatas.getCountPercentage();
 
             return (value/max)*100;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    private float getAvancementLevels()
+    {
+        if(multiGenerateDatas.getNameList() != null)
+        {
+            int max = multiGenerateDatas.getNameList().size();
+            int value = multiGenerateDatas.getCountLevels();
+            return (value/max) * 100;
         }
         else
         {

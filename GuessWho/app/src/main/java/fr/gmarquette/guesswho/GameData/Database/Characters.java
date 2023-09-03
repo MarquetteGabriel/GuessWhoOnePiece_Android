@@ -25,7 +25,7 @@ public class Characters
     @ColumnInfo(name = "alive") private final boolean alive;
     @ColumnInfo(name = "age") private final int age;
     @ColumnInfo(name = "crew") private final String crew;
-    @ColumnInfo(name = "level") private final int level;
+    @ColumnInfo(name = "level") private int level;
 
     public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, String type, boolean alive, int age, String crew, int level) {
         this.name = name;
@@ -71,5 +71,10 @@ public class Characters
     }
     public int getLevel() {
         return level;
+    }
+
+    public void setLevel(int level)
+    {
+        this.level = level;
     }
 }

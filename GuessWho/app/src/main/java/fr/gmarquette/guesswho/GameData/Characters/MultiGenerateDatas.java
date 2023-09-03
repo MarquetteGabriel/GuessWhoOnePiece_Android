@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,8 +31,10 @@ import fr.gmarquette.guesswho.GameData.Database.DataBase;
 
 public class MultiGenerateDatas
 {
+    private final Integer NUMBER_OF_LEVELS = 2;
     final String url_fandom_listcharacter = "https://onepiece.fandom.com/fr/wiki/Liste_des_Personnages_Canon";
     final String url_fandom = "https://onepiece.fandom.com/fr/wiki/";
+    final String url_list_arcs = "https://onepiece.fandom.com/fr/wiki/Cat%C3%A9gorie:Arcs_de_One_Piece";
     final String class_characterData = "pi-item pi-group pi-border-color";
     final String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
     final String class_occupation = "pi-item pi-data pi-item-spacing pi-border-color";
@@ -43,13 +46,14 @@ public class MultiGenerateDatas
     public Thread getDatas_Thread;
 
     private List<String> nameList;
-    private int countPercentage;
+    private int countPercentage, countLevels;
 
 
     public void getDatasFromOutside(Context context)
     {
         getDatas_Thread = new Thread(() -> {
             countPercentage = 0;
+            countLevels = 0;
             nameList = getListofCharacters();
             for(int i = 0; i < nameList.size() ; i++)
             {
@@ -71,7 +75,7 @@ public class MultiGenerateDatas
         for (int i = 0; i < characterList.size(); i += batchSize) {
             int endIndex = Math.min(i + batchSize, characterList.size());
             List<String> subList = characterList.subList(i, endIndex);
-
+/*
             executorService.submit(() ->
             {
                 for (String character : subList) {
@@ -80,7 +84,8 @@ public class MultiGenerateDatas
                         createCharacterFromInformation(listCharacterDatas, context);
                     }
                 }
-            });
+            });*/
+            getCountLevelsDone(context);
         }
     }
 
@@ -367,11 +372,113 @@ public class MultiGenerateDatas
         return (fruit.equals("Fruit"));
     }
 
+    private void getCountLevelsDone(Context context)
+    {
+        new Thread(() ->
+        {
+            List<String> arcsList = getHistory();
+            int segmentSize = nameList.size() / NUMBER_OF_LEVELS;
+            for (String character : nameList) {
+                int occurences = 0;
+                for(String historyOfOnePiece : arcsList)
+                {
+                    occurences += getCountOccurences(historyOfOnePiece, character);
+                }
+
+                for (int i = 0; i < NUMBER_OF_LEVELS; i++)
+                {
+                    if (occurences <= i * segmentSize) {
+                        Characters characters = DataBase.getInstance(context).dao().getCharacterFromName(character);
+                        characters.setLevel(i);
+                        DataBase.getInstance(context).dao().updateCharater(characters);
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private List<String> getHistory()
+    {
+        List<String> history = new ArrayList<>();
+        List<String> listArcs = new ArrayList<>();
+        try
+        {
+            Document doc = Jsoup.connect(url_list_arcs).get();
+            Elements elements = doc.getElementsByClass("category-page__members-wrapper");
+            for (Element subSections : elements)
+            {
+                Elements listArc = subSections.select("li");
+                for(Element element : listArc)
+                {
+                    String arc = element.text();
+                    if(!arc.startsWith("Catégorie:"))
+                    {
+                        arc = arc.replaceAll("\\s", "_");
+                        listArcs.add(arc);
+                    }
+                }
+            }
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        ExecutorService executorService = Executors.newFixedThreadPool(listArcs.size());
+        for(String arcs : listArcs) {
+            executorService.submit(() ->
+            {
+                try {
+
+                    String url = url_fandom + arcs;
+                    Document page = Jsoup.connect(url).get();
+                    Element summuary = page.getElementsByClass("mw-parser-output").first();
+                    Elements stories = summuary.select("p");
+                    for (Element story : stories) {
+                        synchronized (history)
+                        {
+                            history.add(story.text());
+                        }
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+
+                }
+            });
+        }
+
+        executorService.shutdown();
+        try {
+            executorService.awaitTermination(1, TimeUnit.HOURS);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return history;
+    }
+
+    private int getCountOccurences(String text, String character)
+    {
+        int count = 0, lastIndex = 0;
+
+        while((lastIndex = text.indexOf(character, lastIndex)) != -1)
+        {
+            count++;
+            lastIndex += character.length();
+        }
+
+        return count;
+    }
+
     public List<String> getNameList() {
         return nameList;
     }
 
     public int getCountPercentage() {
         return countPercentage;
+    }
+
+    public int getCountLevels() {
+        return countLevels;
     }
 }

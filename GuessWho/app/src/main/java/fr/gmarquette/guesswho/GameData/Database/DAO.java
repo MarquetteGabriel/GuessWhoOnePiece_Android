@@ -12,6 +12,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public interface DAO{
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addCharacter(Characters characters);
+
+    @Update
+    void updateCharater(Characters characters);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addElements(List<Characters> charactersList);
