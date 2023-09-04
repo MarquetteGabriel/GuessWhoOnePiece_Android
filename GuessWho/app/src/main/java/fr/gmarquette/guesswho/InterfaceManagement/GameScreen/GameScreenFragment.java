@@ -25,6 +25,8 @@ import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
@@ -200,11 +202,15 @@ public class GameScreenFragment extends Fragment {
     public void restart()
     {
         CleanGameScreen.cleanPictures(viewFragment);
-        try {
-            characterToFind = gameInit.getCharacterToFound(suggestions);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.submit(() ->
+        {
+            try {
+                characterToFind = gameInit.getCharacterToFound(suggestions);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
         NUMBER_GUESSED = 0;
     }
 

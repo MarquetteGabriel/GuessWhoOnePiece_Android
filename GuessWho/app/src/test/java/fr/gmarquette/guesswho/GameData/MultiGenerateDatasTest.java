@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameData.Characters;
+package fr.gmarquette.guesswho.GameData;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,8 +19,8 @@ public class MultiGenerateDatasTest {
     @Test
     public void extractValuesFromFandomTest()
     {
-        String characterOne = "Kawamatsu";
-        MultiGenerateDatas multiGenerateDatas = new MultiGenerateDatas();
+        String characterOne = "Charlotte Uiro";
+        MultiGenerateDatas multiGenerateDatas = MultiGenerateDatas.getInstance();
         List<String> resultOne = multiGenerateDatas.extractValuesFromFandom(characterOne);
 
         // Assert on Nami
@@ -32,6 +32,7 @@ public class MultiGenerateDatasTest {
         assertEquals(resultOne.get(4), "Pirate");
         assertEquals(resultOne.get(5), "Vivant");
         assertEquals(resultOne.get(6), "20");*/
+            multiGenerateDatas.createCharacterFromInformation(resultOne, null);
         assertEquals(resultOne.get(7), "L'Équipage du Chapeau de Paille");
         }
 
@@ -80,30 +81,4 @@ public class MultiGenerateDatasTest {
             assertEquals(resultFour.get(7), "Armée de la Liberté");
         }
     }
-
-    /*
-    public void getDatasFromOutside(Context context) {
-    }
-
-    public void extractValuesFromWiki() {
-    }
-
-    public List<String> extractValuesFromFandom(String character) {
-    }
-
-    public static String extractPattern(String input, String pattern) {
-    }
-
-    public static String extractPatternAge(String input, String pattern) {
-    }
-
-    public void createCharacterFromInformation(List<String> characterData, Context context) {
-    }
-
-    private boolean stateAlive(String state) {
-    }
-
-    private static String setOccupation(String text) {
-    }*/
-
 }
