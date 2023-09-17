@@ -32,6 +32,8 @@ public class MultiGenerateDatasTest {
         assertEquals(resultOne.get(4), "Pirate");
         assertEquals(resultOne.get(5), "Vivant");
         assertEquals(resultOne.get(6), "20");*/
+            multiGenerateDatas.getLevels();
+            multiGenerateDatas.getMatchCharacterList();
             multiGenerateDatas.createCharacterFromInformation(resultOne, null);
         assertEquals(resultOne.get(7), "L'Équipage du Chapeau de Paille");
         }

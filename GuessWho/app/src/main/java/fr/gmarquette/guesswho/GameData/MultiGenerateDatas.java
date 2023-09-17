@@ -10,6 +10,8 @@ package fr.gmarquette.guesswho.GameData;
 
 import android.content.Context;
 
+import org.apache.commons.text.similarity.CosineSimilarity;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,7 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -117,8 +119,8 @@ public class MultiGenerateDatas
             Thread.currentThread().interrupt();
         }
 
-        getCountLevelsDone(context);
-
+        //getCountLevelsDone(context);
+        getLevels();
     }
 
     private List<String> getListofCharacters()
@@ -468,7 +470,7 @@ public class MultiGenerateDatas
         return (fruit.equals("Fruit"));
     }
 
-    private void getCountLevelsDone(Context context)
+    /*private void getCountLevelsDone(Context context)
     {
         new Thread(() ->
         {
@@ -595,6 +597,107 @@ public class MultiGenerateDatas
 
         }
         return occurences;
+    }*/
+    Map<String, Integer> dataMap = new LinkedHashMap<>();
+    List<String> listPopularity = new ArrayList<>();
+
+    public void getLevels() {
+        try {
+            Document doc = Jsoup.connect("http://www.volonte-d.com/details/popularite.php").get();
+            Elements elements = doc.getElementsByClass("gallery clearfix");
+            Elements tables = elements.last().select("table");
+
+            if(!tables.isEmpty())
+            {
+                Element table = tables.last();
+                Elements rows = table.select("tr");
+                for (int i = 1; i < rows.size(); i++)
+                {
+                    Element row = rows.get(i);
+                    Elements cols = row.select("td");
+                    listPopularity.add(cols.get(1).text());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        getMatchCharacterList();
+    }
+
+    void getMatchCharacterList()
+    {
+        for (String texte : nameList) {
+            double meilleureRessemblance = 0.0;
+            String texteRessemblant = null;
+
+            for (String texteHashMap : listPopularity) {
+
+                if(texteHashMap.contains("Donquixote"))
+                {
+                    texteHashMap = texteHashMap.replace("Donquixote", "Don Quichotte");
+                }
+
+                double ressemblance = calculateSimilarity(texte, texteHashMap);
+
+                if (ressemblance >= 0.6 && ressemblance > meilleureRessemblance) {
+                    meilleureRessemblance = ressemblance;
+                    texteRessemblant = texteHashMap;
+                }
+            }
+
+
+
+            for (String texteHashMap : dataMap.keySet()) {
+
+
+            if (texteRessemblant != null) {
+                if(texteRessemblant.contains("Don Quichotte"))
+                {
+                    texteRessemblant = texteRessemblant.replace("Don Quichotte", "Donquixote");
+                }
+
+                if(dataMap.get(texteRessemblant) != null)
+                {
+                    int nombreVotes = dataMap.get(texteRessemblant);
+                    System.out.println("Texte similaire : " + texteRessemblant + ", Nombre de votes : " + nombreVotes);
+                }
+            } else {
+                System.out.println("Aucune correspondance trouvée pour : " + texte);
+
+                LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+
+                int distance = levenshteinDistance.apply(texte, texteHashMap);
+
+                int seuilDistance = 6;
+
+                if (distance <= seuilDistance) {
+                    System.out.println("Les chaînes sont similaires (distance de Levenshtein : " + distance + ").");
+                } else {
+                    System.out.println("Les chaînes ne sont pas suffisamment similaires (distance de Levenshtein : " + distance + ").");
+                }
+            }
+        }
+        }
+    }
+
+    private static double calculateSimilarity(String texte1, String texte2) {
+        String[] termes1 = texte1.split(" ");
+        String[] termes2 = texte2.split(" ");
+
+        Map<CharSequence, Integer> vector1 = new HashMap<>();
+        Map<CharSequence, Integer> vector2 = new HashMap<>();
+
+        for (String terme : termes1) {
+            vector1.put(terme, 1);
+        }
+
+        for (String terme : termes2) {
+            vector2.put(terme, 1);
+        }
+
+        CosineSimilarity cosSimilarity = new CosineSimilarity();
+        return cosSimilarity.cosineSimilarity(vector1, vector2);
     }
 
     public List<String> getNameList()
