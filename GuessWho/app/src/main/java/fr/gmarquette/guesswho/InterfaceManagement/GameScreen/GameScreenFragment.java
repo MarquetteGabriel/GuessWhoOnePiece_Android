@@ -11,14 +11,14 @@ package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -51,7 +51,19 @@ public class GameScreenFragment extends Fragment {
     private ArrayList<String> suggestions;
     View viewFragment;
     private GridView gridView;
-    Animation fadeIn, fadeOut;
+    String[] textAnswer = {"","","","","","","","","","", "","","","","","","","","","", "","","","",
+            "","","","","","", "","","","","","","","","","", "", ""};
+    int[] circleImages = {R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
+            R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
+            R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
+            R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
+            R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,  R.drawable.gray_circle};
+    int[] answerImages = {R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
+            R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
+            R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
+            R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
+            R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,  R.drawable.empty_circle};
+
 
     public GameScreenFragment() {
         // Required empty public constructor
@@ -67,25 +79,9 @@ public class GameScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
-
-        fadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        fadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
         gridView = viewFragment.findViewById(R.id.grid_view);
 
-        String[] textAnswer = {"","","","","","","","","","", "","","","","","","","","","", "","","","",
-                "","","","","","", "","","","","","","","","","", "", ""};
-        int[] circleImages = {R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
-                R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
-                R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
-                R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
-                R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,  R.drawable.gray_circle};
-        int[] answerImages = {R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
-                R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
-                R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
-                R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
-                R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,  R.drawable.empty_circle};
-
-        GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer,circleImages, answerImages);
+        GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer, circleImages, answerImages);
         gridView.setAdapter(gridAdapter);
 
         suggestions = GameSelectionScreenFragment.getListSuggestions();
@@ -97,32 +93,21 @@ public class GameScreenFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, suggestions);
         AutoCompleteTextView autoCompleteTextView = viewFragment.findViewById(R.id.EnterTextAutoCompleted);
 
-
-
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setOnItemClickListener((adapterView, view, position, id) -> {
             String selectedValue = autoCompleteTextView.getAdapter().getItem(position).toString();
             autoCompleteTextView.setText(selectedValue);
 
+            InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
+
             getAnswer(selectedValue);
+
             autoCompleteTextView.setText("");
         });
 
         PicturesAlbum.getInstance().setImages();
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(requireContext().getApplicationContext(),"You Clicked on "+ i + " circle",Toast.LENGTH_SHORT).show();
-                //getAnswerPrinted(i, R.drawable.green_mark, R.drawable.fruit, null);
-                //characterToFind = new Characters("Charlotte Katakuri", true, "1.057 Md", 860, "Pirate", true, 48, "BigMom's Crew", 0);
-                //answerToRequest("Monkey D. Luffy");
-                restart();
-                getAnswer("Monkey D. Luffy");
-            }
-        });
-
-        //restart();
+        restart();
         
         return viewFragment;
     }
@@ -131,7 +116,6 @@ public class GameScreenFragment extends Fragment {
     {
         NUMBER_GUESSED++;
 
-        getAnswerPrinted(NUMBER_GUESSED, R.drawable.green_mark, R.drawable.fruit, selectedValue);
         boolean result = answerToRequest(selectedValue);
         if(result)
         {
@@ -154,34 +138,29 @@ public class GameScreenFragment extends Fragment {
 
         Answering answer = AnimationManager.updateFruit(GameManager.hasEatenDevilFruit(character, characterToFind), character);
         int[] guessAnswer = {R.id.guess_1, R.id.guess_2, R.id.guess_3, R.id.guess_4, R.id.guess_5, R.id.guess_6};
-        getAnswerPrinted((NUMBER_GUESSED -1) * 7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        getAnswerPrinted((NUMBER_GUESSED -1), answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
         answer = AnimationManager.updateBounty(GameManager.lookingForBounty(character, characterToFind), character);
-        getAnswerPrinted(NUMBER_GUESSED*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        getAnswerPrinted(((NUMBER_GUESSED -1) + 6), answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
         answer = AnimationManager.updateChapter(GameManager.getAppearanceDiff(character, characterToFind), character);
-        getAnswerPrinted((NUMBER_GUESSED+1 )*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        getAnswerPrinted((NUMBER_GUESSED -1) + 2*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
         answer = AnimationManager.updateType(GameManager.getType(character, characterToFind), character);
-        getAnswerPrinted((NUMBER_GUESSED + 2)*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        getAnswerPrinted((NUMBER_GUESSED -1)+3*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
         answer = AnimationManager.updateAlive(GameManager.isAlive(character, characterToFind), character);
-        getAnswerPrinted((NUMBER_GUESSED + 3)*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        getAnswerPrinted((NUMBER_GUESSED -1)+4*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
         answer = AnimationManager.updateAge(GameManager.getAge(character, characterToFind), character);
-        getAnswerPrinted((NUMBER_GUESSED+4)*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        getAnswerPrinted((NUMBER_GUESSED -1)+5*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
         answer = AnimationManager.updateCrew(GameManager.getCrew(character, characterToFind), character);
-        getAnswerPrinted((NUMBER_GUESSED + 5)*7, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        getAnswerPrinted((NUMBER_GUESSED -1)+6*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
         ((TextView) viewFragment.findViewById(guessAnswer[NUMBER_GUESSED - 1])).setText(selectedValue);
 
         return GameManager.isSameName(character, characterToFind);
-    }
-
-    public void printAnswer(int number, Answering answering)
-    {
-        getAnswerPrinted((number) * 7, answering.getImageBackground(), answering.getImageAnswer(), answering.getAnswer());
     }
 
 
@@ -193,20 +172,29 @@ public class GameScreenFragment extends Fragment {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        NUMBER_GUESSED = 1;
+        NUMBER_GUESSED = 0;
     }
 
     private void cleanPicture()
     {
-        for(int i = 0; i < gridView.getCount(); i++)
-        {
-            ImageView imageViewBackground = gridView.getChildAt(i).findViewById(R.id.wr_circle);
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-            ImageView imageViewAnswer = gridView.getChildAt(i).findViewById(R.id.answer_circle);
-            imageViewAnswer.setImageResource(PicturesAlbum.getInstance().EMPTY_ANSWER);
-            TextView textView = gridView.getChildAt(i).findViewById(R.id.text_answer);
-            textView.setText("");
-        }
+        gridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                for(int i = 0; i < gridView.getCount(); i++)
+                {
+                    ImageView imageViewBackground = gridView.getChildAt(i).findViewById(R.id.wr_circle);
+                    imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
+                    ImageView imageViewAnswer = gridView.getChildAt(i).findViewById(R.id.answer_circle);
+                    imageViewAnswer.setImageResource(PicturesAlbum.getInstance().EMPTY_ANSWER);
+                    TextView textView = gridView.getChildAt(i).findViewById(R.id.text_answer);
+                    textView.setText("");
+                }
+
+                gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+            }
+        });
+
     }
 
     private void displayWinDialog()
@@ -267,22 +255,14 @@ public class GameScreenFragment extends Fragment {
     public void crossFading(final ImageView imageViewBackground, final ImageView imageViewAnswer, final TextView textView, final int imageBackgroundId, final int imageAnswerId, final String answer) {
         if(imageViewBackground != null && imageBackgroundId != 0)
         {
-            imageViewBackground.animate()
-                    .alpha(0f)
-                    .setDuration(500)
+            imageViewBackground.animate().alpha(0f).setDuration(500)
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
                             imageViewBackground.setImageResource(imageBackgroundId);
-                            imageViewBackground.animate()
-                                    .alpha(1f)
-                                    .setDuration(500)
-                                    .setListener(null)
-                                    .start();
+                            imageViewBackground.animate().alpha(1f).setDuration(500).start();
                         }
-                    })
-                    .start();
+                    }).start();
         }
 
         if(imageViewAnswer != null && imageAnswerId != 0)
@@ -293,16 +273,10 @@ public class GameScreenFragment extends Fragment {
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
                             imageViewAnswer.setImageResource(imageAnswerId);
-                            imageViewAnswer.animate()
-                                    .alpha(1f)
-                                    .setDuration(500)
-                                    .setListener(null)
-                                    .start();
+                            imageViewAnswer.animate().alpha(1f).setDuration(500).start();
                         }
-                    })
-                    .start();
+                    }).start();
         }
 
         if(textView != null && answer != null)
@@ -313,21 +287,16 @@ public class GameScreenFragment extends Fragment {
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
                             textView.setText(answer);
-                            textView.animate()
-                                    .alpha(1f)
-                                    .setDuration(500)
-                                    .setListener(null)
-                                    .start();
+                            textView.animate().alpha(1f).setDuration(500).start();
                         }
-                    })
-                    .start();
+                    }).start();
         }
 
     }
 
     public void getAnswerPrinted(int position, int imageBackgroundId, int answerImageId, String answer) {
+
         ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
         ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
         TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
