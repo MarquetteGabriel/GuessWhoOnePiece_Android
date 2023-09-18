@@ -51,6 +51,7 @@ public class GameScreenFragment extends Fragment {
     private ArrayList<String> suggestions;
     View viewFragment;
     private GridView gridView;
+    private GameScreenViewModel viewModel;
     String[] textAnswer = {"","","","","","","","","","", "","","","","","","","","","", "","","","",
             "","","","","","", "","","","","","","","","","", "", ""};
     int[] circleImages = {R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
@@ -136,31 +137,31 @@ public class GameScreenFragment extends Fragment {
             throw new RuntimeException(e);
         }
 
-        Answering answer = AnimationManager.updateFruit(GameManager.hasEatenDevilFruit(character, characterToFind), character);
+        Answering answer = AnimationManager.updateFruit(GameManager.hasEatenDevilFruit(character, viewModel.getCharacterToFind()), character);
         int[] guessAnswer = {R.id.guess_1, R.id.guess_2, R.id.guess_3, R.id.guess_4, R.id.guess_5, R.id.guess_6};
         getAnswerPrinted((NUMBER_GUESSED -1), answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateBounty(GameManager.lookingForBounty(character, characterToFind), character);
+        answer = AnimationManager.updateBounty(GameManager.lookingForBounty(character, viewModel.getCharacterToFind()), character);
         getAnswerPrinted(((NUMBER_GUESSED -1) + 6), answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateChapter(GameManager.getAppearanceDiff(character, characterToFind), character);
+        answer = AnimationManager.updateChapter(GameManager.getAppearanceDiff(character, viewModel.getCharacterToFind()), character);
         getAnswerPrinted((NUMBER_GUESSED -1) + 2*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateType(GameManager.getType(character, characterToFind), character);
+        answer = AnimationManager.updateType(GameManager.getType(character, viewModel.getCharacterToFind()), character);
         getAnswerPrinted((NUMBER_GUESSED -1)+3*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateAlive(GameManager.isAlive(character, characterToFind), character);
+        answer = AnimationManager.updateAlive(GameManager.isAlive(character, viewModel.getCharacterToFind()), character);
         getAnswerPrinted((NUMBER_GUESSED -1)+4*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateAge(GameManager.getAge(character, characterToFind), character);
+        answer = AnimationManager.updateAge(GameManager.getAge(character, viewModel.getCharacterToFind()), character);
         getAnswerPrinted((NUMBER_GUESSED -1)+5*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateCrew(GameManager.getCrew(character, characterToFind), character);
+        answer = AnimationManager.updateCrew(GameManager.getCrew(character, viewModel.getCharacterToFind()), character);
         getAnswerPrinted((NUMBER_GUESSED -1)+6*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
         ((TextView) viewFragment.findViewById(guessAnswer[NUMBER_GUESSED - 1])).setText(selectedValue);
 
-        return GameManager.isSameName(character, characterToFind);
+        return GameManager.isSameName(character, viewModel.getCharacterToFind());
     }
 
 
@@ -168,7 +169,7 @@ public class GameScreenFragment extends Fragment {
     {
         cleanPicture();
         try {
-            characterToFind = gameInit.getCharacterToFound(suggestions);
+            viewModel.setCharacterToFind(gameInit.getCharacterToFound(suggestions));
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -208,7 +209,7 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
-        answer.setText(characterToFind.getName());
+        answer.setText(viewModel.getCharacterToFind().getName());
 
         yesButton.setOnClickListener(view -> {
             restart();
@@ -235,7 +236,7 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
-        answer.setText(characterToFind.getName());
+        answer.setText(viewModel.getCharacterToFind().getName());
 
         yesButton.setOnClickListener(view -> {
             restart();
