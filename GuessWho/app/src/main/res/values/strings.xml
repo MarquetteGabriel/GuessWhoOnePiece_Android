@@ -28,4 +28,5 @@
     <string name="guess_4_txt">Guess 4</string>
     <string name="guess_5_txt">Guess 5</string>
     <string name="guess_6_txt">Guess 6</string>
+    <string name="difficulty">Difficulty :</string>
 </resources>
