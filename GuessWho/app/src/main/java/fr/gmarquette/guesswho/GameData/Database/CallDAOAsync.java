@@ -52,4 +52,8 @@ public class CallDAOAsync extends Thread {
     public Future<Integer> getIdFromCharacterNameAsync(String name) {
         return executorService.submit(() -> this.dataBase.dao().getIdFromCharacterName(name));
     }
+
+    public Future<List<String>> getNamesAsync() {
+        return executorService.submit(() -> this.dataBase.dao().getNames());
+    }
 }

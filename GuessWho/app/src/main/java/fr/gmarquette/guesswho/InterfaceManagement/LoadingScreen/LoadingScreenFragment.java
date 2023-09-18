@@ -43,6 +43,7 @@ public class LoadingScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_loading_screen, container, false);
+
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
         DataBase.getInstance(requireContext().getApplicationContext());
         possibleAddElements();

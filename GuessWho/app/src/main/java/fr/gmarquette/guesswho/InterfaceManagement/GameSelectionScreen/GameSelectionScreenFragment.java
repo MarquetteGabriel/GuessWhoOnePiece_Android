@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -26,11 +27,13 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
+import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.GameScreenViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class GameSelectionScreenFragment extends Fragment{
 
     private CallDAOAsync callDAOAsync;
+    private GameScreenViewModel viewModel;
     public static ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
@@ -43,8 +46,11 @@ public class GameSelectionScreenFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         View viewFragment = inflater.inflate(R.layout.fragment_game_selection_screen, container, false);
+        viewModel = new ViewModelProvider(requireActivity()).get(GameScreenViewModel.class);
 
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
+
+        setListCharacters();
 
         VideoView videoView = viewFragment.findViewById(R.id.video_gear5);
         Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.presentation_gear5);
@@ -119,6 +125,15 @@ public class GameSelectionScreenFragment extends Fragment{
     {
         try {
             return new ArrayList<>(callDAOAsync.getNamesByDifficultyAsync(level).get());
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setListCharacters()
+    {
+        try {
+            viewModel.setListCharacter(callDAOAsync.getNamesAsync().get());
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }

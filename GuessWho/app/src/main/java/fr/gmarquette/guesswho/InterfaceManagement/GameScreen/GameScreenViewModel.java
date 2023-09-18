@@ -8,67 +8,69 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+import java.util.Map;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 
 public class GameScreenViewModel extends ViewModel {
 
     private MutableLiveData<List<String>> listCharacter = new MutableLiveData<>();
-    private MutableLiveData<List<int[]>> backgroundPictures = new MutableLiveData<>();
-    private MutableLiveData<List<int[]>> answerPictures = new MutableLiveData<>();
-    private MutableLiveData<List<String[]>> answerText = new MutableLiveData<>();
-    private Characters characterToFind;
-    private List<String> character;
+    private MutableLiveData<int[]> backgroundPictures = new MutableLiveData<>();
+    private MutableLiveData<int[]> answerPictures = new MutableLiveData<>();
+    private MutableLiveData<String[]> answerText = new MutableLiveData<>();
+    private MutableLiveData<Characters> characterToFind = new MutableLiveData<>();
+    private MutableLiveData<Map<Integer, String>> character = new MutableLiveData<>();
 
-    public MutableLiveData<List<String>> getListCharacter() {
+    public LiveData<List<String>> getListCharacter() {
         return listCharacter;
     }
 
-    public void setListCharacter(MutableLiveData<List<String>> listCharacter) {
-        this.listCharacter = listCharacter;
+    public void setListCharacter(List<String> listCharacter) {
+        this.listCharacter.setValue(listCharacter);
     }
 
-    public MutableLiveData<List<int[]>> getBackgroundPictures() {
+    public LiveData<int[]> getBackgroundPictures() {
         return backgroundPictures;
     }
 
-    public void setBackgroundPictures(MutableLiveData<List<int[]>> backgroundPictures) {
-        this.backgroundPictures = backgroundPictures;
+    public void setBackgroundPictures(int[] backgroundPictures) {
+        this.backgroundPictures.setValue(backgroundPictures);
     }
 
-    public MutableLiveData<List<int[]>> getAnswerPictures() {
+    public LiveData<int[]> getAnswerPictures() {
         return answerPictures;
     }
 
-    public void setAnswerPictures(MutableLiveData<List<int[]>> answerPictures) {
-        this.answerPictures = answerPictures;
+    public void setAnswerPictures(int[] answerPictures) {
+        this.answerPictures.setValue(answerPictures);
     }
 
-    public MutableLiveData<List<String[]>> getAnswerText() {
+    public LiveData<String[]> getAnswerText() {
         return answerText;
     }
 
-    public void setAnswerText(MutableLiveData<List<String[]>> answerText) {
-        this.answerText = answerText;
+    public void setAnswerText(String[] answerText) {
+        this.answerText.setValue(answerText);
     }
 
-    public Characters getCharacterToFind() {
+    public LiveData<Characters> getCharacterToFind() {
         return characterToFind;
     }
 
     public void setCharacterToFind(Characters characterToFind) {
-        this.characterToFind = characterToFind;
+        this.characterToFind.setValue(characterToFind);
     }
 
-    public List<String> getCharacter() {
+    public LiveData<Map<Integer, String>> getCharacter() {
         return character;
     }
 
-    public void setCharacter(List<String> character) {
-        this.character = character;
+    public void setCharacter(Map<Integer, String> character) {
+        this.character.setValue(character);
     }
 }

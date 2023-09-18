@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -44,7 +45,6 @@ import fr.gmarquette.guesswho.R;
 public class GameScreenFragment extends Fragment {
 
     public static int NUMBER_GUESSED = 1;
-    Characters characterToFind;
     private CallDAOAsync callDAOAsync;
     private GameInit gameInit;
 
@@ -52,19 +52,6 @@ public class GameScreenFragment extends Fragment {
     View viewFragment;
     private GridView gridView;
     private GameScreenViewModel viewModel;
-    String[] textAnswer = {"","","","","","","","","","", "","","","","","","","","","", "","","","",
-            "","","","","","", "","","","","","","","","","", "", ""};
-    int[] circleImages = {R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
-            R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
-            R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
-            R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
-            R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,  R.drawable.gray_circle};
-    int[] answerImages = {R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
-            R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
-            R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
-            R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
-            R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,  R.drawable.empty_circle};
-
 
     public GameScreenFragment() {
         // Required empty public constructor
@@ -80,9 +67,10 @@ public class GameScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
-        gridView = viewFragment.findViewById(R.id.grid_view);
+        viewModel = new ViewModelProvider(requireActivity()).get(GameScreenViewModel.class);
 
-        GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer, circleImages, answerImages);
+        gridView = viewFragment.findViewById(R.id.grid_view);
+        GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), viewModel.getAnswerText().getValue(), viewModel.getBackgroundPictures().getValue(), viewModel.getAnswerPictures().getValue());
         gridView.setAdapter(gridAdapter);
 
         suggestions = GameSelectionScreenFragment.getListSuggestions();
@@ -137,31 +125,60 @@ public class GameScreenFragment extends Fragment {
             throw new RuntimeException(e);
         }
 
-        Answering answer = AnimationManager.updateFruit(GameManager.hasEatenDevilFruit(character, viewModel.getCharacterToFind()), character);
+        Answering answer = AnimationManager.updateFruit(GameManager.hasEatenDevilFruit(character, viewModel.getCharacterToFind().getValue()), character);
         int[] guessAnswer = {R.id.guess_1, R.id.guess_2, R.id.guess_3, R.id.guess_4, R.id.guess_5, R.id.guess_6};
-        getAnswerPrinted((NUMBER_GUESSED -1), answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        getAnswerPrinted(NUMBER_GUESSED -1, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateBounty(GameManager.lookingForBounty(character, viewModel.getCharacterToFind()), character);
-        getAnswerPrinted(((NUMBER_GUESSED -1) + 6), answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+        viewModel.getAnswerPictures().getValue()[NUMBER_GUESSED-1] = answer.getImageAnswer();
+        viewModel.getBackgroundPictures().getValue()[NUMBER_GUESSED - 1] = answer.getImageBackground();
+        viewModel.getAnswerText().getValue()[NUMBER_GUESSED - 1] = answer.getAnswer();
 
-        answer = AnimationManager.updateChapter(GameManager.getAppearanceDiff(character, viewModel.getCharacterToFind()), character);
+        answer = AnimationManager.updateBounty(GameManager.lookingForBounty(character, viewModel.getCharacterToFind().getValue()), character);
+        getAnswerPrinted((NUMBER_GUESSED -1) + 6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
+
+        viewModel.getAnswerPictures().getValue()[NUMBER_GUESSED-1 + 6] = answer.getImageAnswer();
+        viewModel.getBackgroundPictures().getValue()[NUMBER_GUESSED - 1 + 6] = answer.getImageBackground();
+        viewModel.getAnswerText().getValue()[NUMBER_GUESSED - 1 + 6] = answer.getAnswer();
+
+        answer = AnimationManager.updateChapter(GameManager.getAppearanceDiff(character, viewModel.getCharacterToFind().getValue()), character);
         getAnswerPrinted((NUMBER_GUESSED -1) + 2*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateType(GameManager.getType(character, viewModel.getCharacterToFind()), character);
+        viewModel.getAnswerPictures().getValue()[NUMBER_GUESSED -1 + 2*6] = answer.getImageAnswer();
+        viewModel.getBackgroundPictures().getValue()[NUMBER_GUESSED -1 + 2*6] = answer.getImageBackground();
+        viewModel.getAnswerText().getValue()[NUMBER_GUESSED -1 + 2*6] = answer.getAnswer();
+
+        answer = AnimationManager.updateType(GameManager.getType(character, viewModel.getCharacterToFind().getValue()), character);
         getAnswerPrinted((NUMBER_GUESSED -1)+3*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateAlive(GameManager.isAlive(character, viewModel.getCharacterToFind()), character);
+        viewModel.getAnswerPictures().getValue()[(NUMBER_GUESSED -1)+3*6] = answer.getImageAnswer();
+        viewModel.getBackgroundPictures().getValue()[(NUMBER_GUESSED -1)+3*6] = answer.getImageBackground();
+        viewModel.getAnswerText().getValue()[(NUMBER_GUESSED -1)+3*6] = answer.getAnswer();
+
+        answer = AnimationManager.updateAlive(GameManager.isAlive(character, viewModel.getCharacterToFind().getValue()), character);
         getAnswerPrinted((NUMBER_GUESSED -1)+4*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateAge(GameManager.getAge(character, viewModel.getCharacterToFind()), character);
+        viewModel.getAnswerPictures().getValue()[(NUMBER_GUESSED -1)+4*6] = answer.getImageAnswer();
+        viewModel.getBackgroundPictures().getValue()[(NUMBER_GUESSED -1)+4*6] = answer.getImageBackground();
+        viewModel.getAnswerText().getValue()[(NUMBER_GUESSED -1)+4*6] = answer.getAnswer();
+
+        answer = AnimationManager.updateAge(GameManager.getAge(character, viewModel.getCharacterToFind().getValue()), character);
         getAnswerPrinted((NUMBER_GUESSED -1)+5*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        answer = AnimationManager.updateCrew(GameManager.getCrew(character, viewModel.getCharacterToFind()), character);
+        viewModel.getAnswerPictures().getValue()[(NUMBER_GUESSED -1)+5*6] = answer.getImageAnswer();
+        viewModel.getBackgroundPictures().getValue()[(NUMBER_GUESSED -1)+5*6] = answer.getImageBackground();
+        viewModel.getAnswerText().getValue()[(NUMBER_GUESSED -1)+5*6] = answer.getAnswer();
+
+        answer = AnimationManager.updateCrew(GameManager.getCrew(character, viewModel.getCharacterToFind().getValue()), character);
         getAnswerPrinted((NUMBER_GUESSED -1)+6*6, answer.getImageBackground(), answer.getImageAnswer(), answer.getAnswer());
 
-        ((TextView) viewFragment.findViewById(guessAnswer[NUMBER_GUESSED - 1])).setText(selectedValue);
+        viewModel.getAnswerPictures().getValue()[(NUMBER_GUESSED -1)+6*6] = answer.getImageAnswer();
+        viewModel.getBackgroundPictures().getValue()[(NUMBER_GUESSED -1)+6*6] = answer.getImageBackground();
+        viewModel.getAnswerText().getValue()[(NUMBER_GUESSED -1)+6*6] = answer.getAnswer();
 
-        return GameManager.isSameName(character, viewModel.getCharacterToFind());
+        ((TextView) viewFragment.findViewById(guessAnswer[NUMBER_GUESSED - 1])).setText(selectedValue);
+        viewModel.getCharacter().getValue().put(guessAnswer[NUMBER_GUESSED - 1], selectedValue);
+
+        return GameManager.isSameName(character, viewModel.getCharacterToFind().getValue());
     }
 
 
@@ -209,7 +226,7 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
-        answer.setText(viewModel.getCharacterToFind().getName());
+        answer.setText(viewModel.getCharacterToFind().getValue().getName());
 
         yesButton.setOnClickListener(view -> {
             restart();
@@ -236,7 +253,7 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
-        answer.setText(viewModel.getCharacterToFind().getName());
+        answer.setText(viewModel.getCharacterToFind().getValue().getName());
 
         yesButton.setOnClickListener(view -> {
             restart();
@@ -268,9 +285,7 @@ public class GameScreenFragment extends Fragment {
 
         if(imageViewAnswer != null && imageAnswerId != 0)
         {
-            imageViewAnswer.animate()
-                    .alpha(0f)
-                    .setDuration(500)
+            imageViewAnswer.animate().alpha(0f).setDuration(500)
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
@@ -282,9 +297,7 @@ public class GameScreenFragment extends Fragment {
 
         if(textView != null && answer != null)
         {
-            textView.animate()
-                    .alpha(0f)
-                    .setDuration(500)
+            textView.animate().alpha(0f).setDuration(500)
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
@@ -297,7 +310,6 @@ public class GameScreenFragment extends Fragment {
     }
 
     public void getAnswerPrinted(int position, int imageBackgroundId, int answerImageId, String answer) {
-
         ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
         ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
         TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
