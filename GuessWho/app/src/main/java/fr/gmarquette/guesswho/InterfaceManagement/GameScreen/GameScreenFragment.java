@@ -26,7 +26,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -41,12 +43,14 @@ import fr.gmarquette.guesswho.GameSystem.GameInit;
 import fr.gmarquette.guesswho.GameSystem.GameManager;
 import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameSelectionScreenFragment;
 import fr.gmarquette.guesswho.R;
+import fr.gmarquette.guesswho.databinding.FragmentGameScreenBinding;
 
 public class GameScreenFragment extends Fragment {
 
     public static int NUMBER_GUESSED = 1;
     private CallDAOAsync callDAOAsync;
     private GameInit gameInit;
+    private int[] old_backgroundPictures, old_answerPictures;
 
     private ArrayList<String> suggestions;
     View viewFragment;
@@ -66,9 +70,13 @@ public class GameScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
+        FragmentGameScreenBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game_screen, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(GameScreenViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
 
+
+        old_backgroundPictures = viewModel.getBackgroundPictures().getValue();
         gridView = viewFragment.findViewById(R.id.grid_view);
         GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), viewModel.getAnswerText().getValue(), viewModel.getBackgroundPictures().getValue(), viewModel.getAnswerPictures().getValue());
         gridView.setAdapter(gridAdapter);
@@ -97,6 +105,30 @@ public class GameScreenFragment extends Fragment {
 
         PicturesAlbum.getInstance().setImages();
         restart();
+
+        viewModel.getBackgroundPictures().observe(getViewLifecycleOwner(), new Observer<int[]>() {
+            @Override
+            public void onChanged(int[] ints) {
+                for(int i = 0; i < ints.length; i++)
+                {
+                    if(ints[i] != old_backgroundPictures[i])
+                    {
+                        int newPicureBackgroundId = ints[i];
+                        ImageView imageViewBackground = gridView.getChildAt(i).findViewById(R.id.wr_circle);
+                        imageViewBackground.animate().alpha(0f).setDuration(500)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        imageViewBackground.setImageResource(newPicureBackgroundId);
+                                        imageViewBackground.animate().alpha(1f).setDuration(500).start();
+                                    }
+                                }).start();
+
+                        old_backgroundPictures[i] = ints[i];
+                    }
+                }
+            }
+        });
         
         return viewFragment;
     }
@@ -184,7 +216,7 @@ public class GameScreenFragment extends Fragment {
 
     public void restart()
     {
-        cleanPicture();
+        //cleanPicture();
         try {
             viewModel.setCharacterToFind(gameInit.getCharacterToFound(suggestions));
         } catch (InterruptedException e) {
@@ -313,6 +345,6 @@ public class GameScreenFragment extends Fragment {
         ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
         ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
         TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
-        crossFading(imageBackground, imageAnswer, textAnswer, imageBackgroundId, answerImageId, answer);
+        //crossFading(imageBackground, imageAnswer, textAnswer, imageBackgroundId, answerImageId, answer);
     }
 }
