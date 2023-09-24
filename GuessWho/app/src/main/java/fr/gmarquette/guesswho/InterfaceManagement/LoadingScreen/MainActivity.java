@@ -19,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import fr.gmarquette.guesswho.InterfaceManagement.DataViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     NavController navController;
     NavHostFragment navHostFragment;
     int currentFragmentId, backFragmentId;
+    DataViewModel dataViewModel;
 
     private Animation fromBottom, toBottom, openMenu, closeMenu;
     private FloatingActionButton fab_menu, fab_list, fab_settings, fab_help;
@@ -50,6 +52,23 @@ public class MainActivity extends AppCompatActivity {
         fab_list.setOnClickListener(view -> onListButtonClicked());
         fab_settings.setOnClickListener(view -> onSettingsClicked());
         fab_help.setOnClickListener(view -> onHelpClicked());
+
+        // Initialisation des données pour vérifier le fonctionnement
+        /*
+        String url = "https://static.wikia.nocookie.net/onepiece/images/2/2e/Charlotte_Katakuri_Anime_Infobox.png/revision/latest?cb=20210420130426&path-prefix=fr";
+        dataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
+        List<String> characterName = new ArrayList<>(), characterLevel = new ArrayList<>();
+        List<String> picture = new ArrayList<>();
+        characterName.add("Monkey D. Luffy");characterName.add("Zoro");characterName.add("Nami");characterName.add("Sanji");characterName.add("Ener");characterName.add("Katakuri");characterName.add("Kaido");characterName.add("Marco");characterName.add("Shanks");characterName.add("Chopper");characterName.add("Usopp");characterName.add("Tama");
+        characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("2");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("2");
+        picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);
+
+
+        dataViewModel.setListCharacter(characterName);
+        dataViewModel.setListLevel(characterLevel);
+        dataViewModel.setListPictures(picture);
+
+*/
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         assert navHostFragment != null;
