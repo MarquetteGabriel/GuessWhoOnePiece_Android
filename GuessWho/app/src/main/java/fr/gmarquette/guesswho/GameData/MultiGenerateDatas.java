@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
+import fr.gmarquette.guesswho.GameData.Database.DAO;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
 
 public class MultiGenerateDatas
@@ -41,10 +42,10 @@ public class MultiGenerateDatas
     private final Integer NUMBER_OF_LEVELS = 2;
     final String url_fandom_listcharacter = "https://onepiece.fandom.com/fr/wiki/Liste_des_Personnages_Canon";
     final String url_fandom = "https://onepiece.fandom.com/fr/wiki/";
-    final String url_list_arcs = "https://onepiece.fandom.com/fr/wiki/Cat%C3%A9gorie:Arcs_de_One_Piece";
     final String class_characterData = "pi-item pi-group pi-border-color";
     final String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
     final String class_occupation = "pi-item pi-data pi-item-spacing pi-border-color";
+    private final LinkedHashMap<String, String> listPictures = new LinkedHashMap<>();
 
     private static final List<String> pirateTypeList = Arrays.asList("Pirate", "Pirates", "Bandit",
             "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria", "Équipage",
@@ -57,6 +58,7 @@ public class MultiGenerateDatas
 
     public List<String> nameList = new CopyOnWriteArrayList<>();
     private int countPercentage, countLevels;
+    private DAO database;
 
     private MultiGenerateDatas()
     {}
@@ -73,9 +75,8 @@ public class MultiGenerateDatas
 
     public void getDatasFromOutside(Context context)
     {
+        database = DataBase.getInstance(context).dao();
         getDatas_Thread = new Thread(() -> {
-            synchronized (nameList)
-            {
                 countPercentage = 0;
                 countLevels = 0;
                 nameList = getListofCharacters();
@@ -87,15 +88,14 @@ public class MultiGenerateDatas
                     }
                 }
 
-                multiThreadForFandom(context, nameList);
-            }
+                multiThreadForFandom(nameList);
         });
     }
 
-    public void multiThreadForFandom(Context context, List<String> characterList)
+    public void multiThreadForFandom(List<String> characterList)
     {
-        ExecutorService executorService = Executors.newFixedThreadPool(43);
-        int batchSize = 28;
+        ExecutorService executorService = Executors.newFixedThreadPool(86);
+        int batchSize = 14;
 
         for (int i = 0; i < characterList.size(); i += batchSize) {
             int endIndex = Math.min(i + batchSize, characterList.size());
@@ -106,7 +106,7 @@ public class MultiGenerateDatas
                 for (String character : subList) {
                     List<String> listCharacterDatas = extractValuesFromFandom(character);
                     if (!listCharacterDatas.isEmpty()) {
-                        createCharacterFromInformation(listCharacterDatas, context);
+                        createCharacterFromInformation(listCharacterDatas);
                     }
                 }
             });
@@ -114,12 +114,15 @@ public class MultiGenerateDatas
 
         executorService.shutdown();
         try {
-            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+            boolean result = executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+            if(!result)
+            {
+                executorService.shutdown();
+            }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
-        //getCountLevelsDone(context);
         getLevels();
     }
 
@@ -144,6 +147,7 @@ public class MultiGenerateDatas
                     Elements columns = row.select("td");
                     if (columns.size() >= 6) {
                         characterList.add(columns.get(1).text());
+                        listPictures.put(columns.get(1).text(), columns.select("img").attr("src"));
                     }
                 }
             }
@@ -184,6 +188,7 @@ public class MultiGenerateDatas
             characterDataList.add(extractPattern(characterData, "Statut : (Vivant|Décédé)"));
             characterDataList.add(extractPatternAge(characterData));
             characterDataList.add(extractPatternCrew(affiliation));
+            characterDataList.add(listPictures.get(character));
             characterDataList.add(String.valueOf(NUMBER_OF_LEVELS - 1));
 
 
@@ -244,12 +249,12 @@ public class MultiGenerateDatas
         return String.valueOf(maxAge);
     }
 
-    void createCharacterFromInformation(List<String> characterData, Context context)
+    void createCharacterFromInformation(List<String> characterData)
     {
         try
         {
             if(Integer.parseInt(characterData.get(6)) != 0) {
-                Characters charactersAlreadyExist = DataBase.getInstance(context).dao().getCharacterFromName(characterData.get(0));
+                Characters charactersAlreadyExist = database.getCharacterFromName(characterData.get(0));
                 if(charactersAlreadyExist != null)
                 {
                     charactersAlreadyExist.setDevilFruit(stateFruit(characterData.get(1)));
@@ -259,10 +264,11 @@ public class MultiGenerateDatas
                     charactersAlreadyExist.setAlive(stateAlive(characterData.get(5)));
                     charactersAlreadyExist.setAge(Integer.parseInt(characterData.get(6)));
                     charactersAlreadyExist.setCrew(defineCrew(characterData.get(7), characterData.get(4)));
+                    charactersAlreadyExist.setPicture(characterData.get(8));
 
                     charactersAlreadyExist.setType(fixType(charactersAlreadyExist.getType(), charactersAlreadyExist.getCrew()));
 
-                    DataBase.getInstance(context).dao().updateCharater(charactersAlreadyExist);
+                    database.updateCharacter(charactersAlreadyExist);
                 }
                 else
                 {
@@ -275,11 +281,12 @@ public class MultiGenerateDatas
                             stateAlive(characterData.get(5)),
                             Integer.parseInt(characterData.get(6)),
                             defineCrew(characterData.get(7), characterData.get(4)),
-                            Integer.parseInt(characterData.get(8)));
+                            characterData.get(8),
+                            Integer.parseInt(characterData.get(9)));
 
                     characters.setType(fixType(characters.getType(), characters.getCrew()));
 
-                    DataBase.getInstance(context).dao().addCharacter(characters);
+                    database.addCharacter(characters);
                 }
 
             }
@@ -470,215 +477,101 @@ public class MultiGenerateDatas
         return (fruit.equals("Fruit"));
     }
 
-    /*private void getCountLevelsDone(Context context)
-    {
-        new Thread(() ->
+    List<String> listPopularity = new ArrayList<>();
+
+    public void getLevels() {
+        try
         {
-            synchronized (nameList)
+            Document doc = Jsoup.connect("http://www.volonte-d.com/details/popularite.php").get();
+            Elements elements = doc.getElementsByClass("gallery clearfix");
+            if(elements.last() != null)
             {
-                Map<String, Integer> characterOccurrences = new HashMap<>();
-                List<String> arcsList = getHistory();
-                Iterator<String> iterator = nameList.iterator();
-                while(iterator.hasNext()) {
-                    String character = iterator.next();
-                    int occurences = 0;
-                    for (String historyOfOnePiece : arcsList) {
-                        occurences += getCountOccurences(historyOfOnePiece, character, occurences);
-                    }
-                    characterOccurrences.put(character, occurences);
-                }
-
-                int totalOccurences = 0;
-                for (int occurences : characterOccurrences.values())
+                Elements tables = Objects.requireNonNull(elements.last()).select("table");
+                if(!tables.isEmpty())
                 {
-                    totalOccurences += occurences;
-                }
-
-                int averageOccurences = totalOccurences/characterOccurrences.size();
-
-                int segmentSize = (averageOccurences / NUMBER_OF_LEVELS);
-                for(String character : characterOccurrences.keySet())
-                {
-                    for (int i = NUMBER_OF_LEVELS; i >= 0; i--) {
-                        if (characterOccurrences.get(character) <= i * segmentSize) {
-                            Characters characters = DataBase.getInstance(context).dao().getCharacterFromName(character);
-                            if (characters != null) {
-                                characters.setLevel(i);
-                                DataBase.getInstance(context).dao().updateCharater(characters);
-                            } else {
-                                try
-                                {
-                                    nameList.remove(character);
-                                }
-                                catch (Exception e)
-                                {
-
-                                }
-                            }
-                            countLevels++;
+                    Element table = tables.last();
+                    if (table != null)
+                    {
+                        Elements rows = table.select("tr");
+                        for (int i = 1; i < rows.size(); i++)
+                        {
+                            Element row = rows.get(i);
+                            Elements cols = row.select("td");
+                            listPopularity.add(cols.get(1).text());
                         }
                     }
                 }
-            }
-        }).start();
-    }
 
-    private List<String> getHistory()
-    {
-        List<String> history = new ArrayList<>();
-        List<String> listArcs = new ArrayList<>();
-        try
-        {
-            Document doc = Jsoup.connect(url_list_arcs).get();
-            Elements elements = doc.getElementsByClass("category-page__members-wrapper");
-            for (Element subSections : elements)
-            {
-                Elements listArc = subSections.select("li");
-                for(Element element : listArc)
-                {
-                    String arc = element.text();
-                    if(!arc.startsWith("Catégorie:"))
-                    {
-                        arc = arc.replaceAll("\\s", "_");
-                        listArcs.add(arc);
-                    }
-                }
             }
         }
         catch (IOException e)
         {
-            throw new RuntimeException(e);
-        }
-
-        ExecutorService executorService = Executors.newFixedThreadPool(listArcs.size());
-        for(String arcs : listArcs) {
-            executorService.submit(() ->
-            {
-                try {
-
-                    String url = url_fandom + arcs;
-                    Document page = Jsoup.connect(url).get();
-                    Element summuary = page.getElementsByClass("mw-parser-output").first();
-                    Elements stories = summuary.select("p");
-                    for (Element story : stories) {
-                        if(!story.text().isEmpty())
-                        {
-                            history.add(story.text());
-                        }
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-
-                }
-            });
-
-        }
-
-        executorService.shutdown();
-        try {
-            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-        return history;
-    }
-
-    private int getCountOccurences(String text, String character, Integer occurences)
-    {
-        int lastIndex = 0;
-
-        if(text != null)
-        {
-            while((lastIndex = text.indexOf(character, lastIndex)) != -1)
-            {
-                occurences++;
-                lastIndex += character.length();
-            }
-
-        }
-        return occurences;
-    }*/
-    Map<String, Integer> dataMap = new LinkedHashMap<>();
-    List<String> listPopularity = new ArrayList<>();
-
-    public void getLevels() {
-        try {
-            Document doc = Jsoup.connect("http://www.volonte-d.com/details/popularite.php").get();
-            Elements elements = doc.getElementsByClass("gallery clearfix");
-            Elements tables = elements.last().select("table");
-
-            if(!tables.isEmpty())
-            {
-                Element table = tables.last();
-                Elements rows = table.select("tr");
-                for (int i = 1; i < rows.size(); i++)
-                {
-                    Element row = rows.get(i);
-                    Elements cols = row.select("td");
-                    listPopularity.add(cols.get(1).text());
-                }
-            }
-        } catch (IOException e) {
             e.printStackTrace();
         }
 
         getMatchCharacterList();
     }
 
-    void getMatchCharacterList()
-    {
-        for (String texte : nameList) {
-            double meilleureRessemblance = 0.0;
-            String texteRessemblant = null;
+    void getMatchCharacterList() {
+        for (String character : nameList) {
+            int position = listPopularity.indexOf(character);
 
-            for (String texteHashMap : listPopularity) {
+            if (position == -1) {
+                String newCharacter = getMatcher(character);
+                position = listPopularity.indexOf(newCharacter);
+            }
 
-                if(texteHashMap.contains("Donquixote"))
-                {
-                    texteHashMap = texteHashMap.replace("Donquixote", "Don Quichotte");
-                }
-
-                double ressemblance = calculateSimilarity(texte, texteHashMap);
-
-                if (ressemblance >= 0.6 && ressemblance > meilleureRessemblance) {
-                    meilleureRessemblance = ressemblance;
-                    texteRessemblant = texteHashMap;
+            for (int i = 1; i <= (NUMBER_OF_LEVELS - 1); i++) {
+                if (position <= ((NUMBER_OF_LEVELS - 1) * i)) {
+                    Characters characters = database.getCharacterFromName(character);
+                    characters.setLevel(i - 1);
+                    database.updateCharacter(characters);
+                    countLevels++;
                 }
             }
 
+        }
+    }
 
+    String getMatcher(String character)
+    {
+        String newCharacter = "";
+        double meilleureRessemblance = 0.0;
+        String texteRessemblant = null;
+        for (String popularityCharacter : listPopularity)
+        {
+            if (character.contains("Don Quichotte")) {
+                character = character.replace("Don Quichotte", "Donquixote");
+            }
 
-            for (String texteHashMap : dataMap.keySet()) {
+            double ressemblance = calculateSimilarity(character, popularityCharacter);
 
+            if (ressemblance >= 0.6 && ressemblance > meilleureRessemblance) {
+                meilleureRessemblance = ressemblance;
+                texteRessemblant = popularityCharacter;
+            }
+        }
 
-            if (texteRessemblant != null) {
-                if(texteRessemblant.contains("Don Quichotte"))
-                {
-                    texteRessemblant = texteRessemblant.replace("Don Quichotte", "Donquixote");
-                }
-
-                if(dataMap.get(texteRessemblant) != null)
-                {
-                    int nombreVotes = dataMap.get(texteRessemblant);
-                    System.out.println("Texte similaire : " + texteRessemblant + ", Nombre de votes : " + nombreVotes);
-                }
-            } else {
-                System.out.println("Aucune correspondance trouvée pour : " + texte);
-
+        if(texteRessemblant != null)
+        {
+            newCharacter = texteRessemblant;
+        }
+        else
+        {
+            for (String popularityCharacter : listPopularity)
+            {
                 LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
 
-                int distance = levenshteinDistance.apply(texte, texteHashMap);
+                int distance = levenshteinDistance.apply(character, popularityCharacter);
 
                 int seuilDistance = 6;
 
                 if (distance <= seuilDistance) {
-                    System.out.println("Les chaînes sont similaires (distance de Levenshtein : " + distance + ").");
-                } else {
-                    System.out.println("Les chaînes ne sont pas suffisamment similaires (distance de Levenshtein : " + distance + ").");
+                    newCharacter = popularityCharacter;
                 }
             }
         }
-        }
+        return newCharacter;
     }
 
     private static double calculateSimilarity(String texte1, String texte2) {

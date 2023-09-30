@@ -71,7 +71,10 @@ public class GameSelectionScreenFragment extends Fragment{
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 LevelDifficulty levelDifficulty = LevelDifficulty.getLevelDifficultyByValue(progress);
-                textView.setText(levelDifficulty.toString());
+                if (levelDifficulty != null)
+                {
+                    textView.setText(levelDifficulty.toString());
+                }
             }
 
             @Override

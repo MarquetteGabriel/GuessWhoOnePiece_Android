@@ -1,15 +1,16 @@
-<resources>
-    <!-- App name -->
-    <string name="app_name" translatable="false">GuessWho One Piece</string>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ @brief Copyright (c) 2023 Gabriel Marquette
+  ~
+  ~ Copyright (c) 2023 Gabriel Marquette. All rights reserved.
+  ~
+  -->
 
-    <!-- Left Column -->
-    <string name="guess_who" translatable="false">Guess Who ?</string>
+<resources>
     <string name="play">Play</string>
     <string name="hard">Hard</string>
     <string name="logo_app">Logo</string>
     <string name="easy">Easy</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="guess_1">Guess 1</string>
     <string name="guess_2">Guess 2</string>
     <string name="guess_3">Guess 3</string>
@@ -20,7 +21,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="do_you_want_to_play_again">Do you want to play again ?</string>
-    <string name="the_answer_was">The answer was :</string>
-    <string name="MaxProgressBar" translatable="false">100 %</string>
+    <string name="the_answer_was">"The answer was : "</string>
     <string name="default_difficulty">EASY</string>
 </resources>

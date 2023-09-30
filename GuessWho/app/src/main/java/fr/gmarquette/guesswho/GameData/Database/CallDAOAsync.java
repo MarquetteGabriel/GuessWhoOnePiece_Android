@@ -25,31 +25,13 @@ public class CallDAOAsync extends Thread {
         this.executorService = Executors.newFixedThreadPool(NUMBER_THREAD);
     }
 
-    public void getAddElementsAsync(List<Characters> charactersList) {
-        executorService.execute(() -> this.dataBase.dao().addElements(charactersList));
-    }
 
-    public void deleteAllAsync() {
-        executorService.execute(() -> this.dataBase.dao().deleteAll());
-    }
 
     public Future<Characters> getCharacterFromNameAsync(String name) {
         return executorService.submit(() -> this.dataBase.dao().getCharacterFromName(name));
     }
 
-    public Future<Characters> getCharacterFromIdAsync(int id) {
-        return executorService.submit(() -> this.dataBase.dao().getCharacterFromId(id));
-    }
-
     public Future<List<String>> getNamesByDifficultyAsync(int level) {
         return executorService.submit(() -> this.dataBase.dao().getNamesByDifficulty(level));
-    }
-
-    public Future<Integer> getCountAsync() {
-        return executorService.submit(() -> this.dataBase.dao().getCount());
-    }
-
-    public Future<Integer> getIdFromCharacterNameAsync(String name) {
-        return executorService.submit(() -> this.dataBase.dao().getIdFromCharacterName(name));
     }
 }

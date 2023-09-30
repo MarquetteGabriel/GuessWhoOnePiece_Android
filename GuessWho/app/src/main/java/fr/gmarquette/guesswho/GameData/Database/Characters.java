@@ -25,9 +25,10 @@ public class Characters
     @ColumnInfo(name = "alive") private boolean alive;
     @ColumnInfo(name = "age") private int age;
     @ColumnInfo(name = "crew") private String crew;
+    @ColumnInfo(name = "picture") private String picture;
     @ColumnInfo(name = "level") private int level;
 
-    public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, String type, boolean alive, int age, String crew, int level) {
+    public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, String type, boolean alive, int age, String crew, String picture, int level) {
         this.name = name;
         this.devilFruit = devilFruit;
         this.bounty = bounty;
@@ -36,6 +37,7 @@ public class Characters
         this.alive = alive;
         this.age = age;
         this.crew = crew;
+        this.picture = picture;
         this.level = level;
     }
 
@@ -68,6 +70,10 @@ public class Characters
     }
     public String getCrew() {
         return crew;
+    }
+    public String getPicture()
+    {
+        return picture;
     }
     public int getLevel() {
         return level;
@@ -103,6 +109,11 @@ public class Characters
 
     public void setCrew(String crew) {
         this.crew = crew;
+    }
+
+    public void setPicture(String picture)
+    {
+        this.picture = picture;
     }
 
     public void setLevel(int level)

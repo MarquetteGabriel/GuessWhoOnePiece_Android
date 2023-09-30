@@ -51,7 +51,7 @@ public class LoadingScreenFragment extends Fragment {
         if(!NetworkUtils.isNetworkAvailable(requireContext().getApplicationContext()))
         {
             progressBar.setProgress(MAX_PROGRESS_BAR);
-            textView.setText("100 %");
+            textView.setText(R.string.MaxProgressBar);
         }
 
         multiGenerateDatas = MultiGenerateDatas.getInstance();
@@ -67,12 +67,9 @@ public class LoadingScreenFragment extends Fragment {
 
             if(progressBar.getProgress() != MAX_PROGRESS_BAR)
             {
-                while(multiGenerateDatas.getNameList() == null || multiGenerateDatas.getNameList().size() == 0){
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                while(multiGenerateDatas.getNameList() == null || multiGenerateDatas.getNameList().size() == 0)
+                {
+
                 }
             }
 
@@ -85,7 +82,8 @@ public class LoadingScreenFragment extends Fragment {
                 requireActivity().runOnUiThread(() -> {
                     progressBar.setProgress((int) avancement);
                     progressBar.setMax(MAX_PROGRESS_BAR);
-                    textView.setText((int) avancement + " %");
+                    String text = (int) avancement + " %";
+                    textView.setText(text);
                 });
             }
             requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.gameSelectionScreenFragment));
