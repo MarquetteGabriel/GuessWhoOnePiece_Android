@@ -9,6 +9,7 @@
 package fr.gmarquette.guesswho.GameData.Database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -22,6 +23,8 @@ public interface DAO{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addCharacter(Characters characters);
 
+    @Delete
+    void deleteCharacter(Characters characters);
     @Update
     void updateCharacter(Characters characters);
 

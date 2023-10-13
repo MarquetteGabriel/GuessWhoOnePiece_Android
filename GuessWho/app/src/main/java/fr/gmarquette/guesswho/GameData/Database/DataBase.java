@@ -16,11 +16,11 @@ import androidx.room.RoomDatabase;
 
 import java.io.Serializable;
 
-@Database(entities = {Characters.class}, version = 1)
+@Database(entities = {Characters.class}, version = 1, exportSchema = false)
 public abstract class DataBase extends RoomDatabase implements Serializable {
 
     private static DataBase database;
-    private static final String DATABASE_NAME = "database";
+    private static final String DATABASE_NAME = "One Piece Database";
 
     public synchronized static DataBase getInstance(Context context)
     {

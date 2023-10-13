@@ -8,6 +8,8 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.LoadingScreen;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,10 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import fr.gmarquette.guesswho.GameData.MultiGenerateDatas;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import fr.gmarquette.guesswho.GameData.ImportDataManager;
 import fr.gmarquette.guesswho.R;
 
 public class LoadingScreenFragment extends Fragment {
@@ -28,7 +33,8 @@ public class LoadingScreenFragment extends Fragment {
     private static final int MAX_PROGRESS_BAR = 100;
     private ProgressBar progressBar;
     private TextView textView;
-    private MultiGenerateDatas multiGenerateDatas;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private ImportDataManager importDataManager;
 
     public LoadingScreenFragment() {
     }
@@ -43,18 +49,27 @@ public class LoadingScreenFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_loading_screen, container, false);
 
-
         progressBar = view.findViewById(R.id.progressBar);
         textView = view.findViewById(R.id.textProgressBar);
         textView.setText("0 %");
 
-        if(!NetworkUtils.isNetworkAvailable(requireContext().getApplicationContext()))
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
+
+        if(isUpdated)
         {
             progressBar.setProgress(MAX_PROGRESS_BAR);
             textView.setText(R.string.MaxProgressBar);
         }
+        else
+        {
+            avancement = 0;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isUpdated", true);
+            editor.apply();
+        }
 
-        multiGenerateDatas = MultiGenerateDatas.getInstance();
+        importDataManager = ImportDataManager.getInstance();
         setLoadingBar();
 
         return view;
@@ -62,32 +77,31 @@ public class LoadingScreenFragment extends Fragment {
 
     private void setLoadingBar()
     {
-        new Thread(() -> {
-            avancement = 0;
-
+        executorService.submit(() ->
+        {
             if(progressBar.getProgress() != MAX_PROGRESS_BAR)
             {
-                while(multiGenerateDatas.getNameList() == null || multiGenerateDatas.getNameList().size() == 0)
+                while(importDataManager.getNameList() == null || importDataManager.getNameList().size() == 0)
                 {
 
                 }
+
+                int max = importDataManager.getNameList().size();
+                while (avancement < MAX_PROGRESS_BAR)
+                {
+                    avancement = importDataManager.getAvancement(max);
+
+                    requireActivity().runOnUiThread(() -> {
+                        progressBar.setProgress((int) avancement);
+                        progressBar.setMax(MAX_PROGRESS_BAR);
+                        String text = (int) avancement + " %";
+                        textView.setText(text);
+                    });
+                }
             }
 
-            int max = multiGenerateDatas.getNameList().size();
-            while (avancement < MAX_PROGRESS_BAR) {
-                float avancementCharacter = ((((multiGenerateDatas.getCountPercentage()/(float) max)*100)* 100)/70);
-                float avancementLevels = ((((multiGenerateDatas.getCountLevels()/(float) max) *100)* 100)/30);
-                avancement = avancementCharacter + avancementLevels;
-
-                requireActivity().runOnUiThread(() -> {
-                    progressBar.setProgress((int) avancement);
-                    progressBar.setMax(MAX_PROGRESS_BAR);
-                    String text = (int) avancement + " %";
-                    textView.setText(text);
-                });
-            }
             requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.gameSelectionScreenFragment));
 
-        }).start();
+        });
     }
 }
