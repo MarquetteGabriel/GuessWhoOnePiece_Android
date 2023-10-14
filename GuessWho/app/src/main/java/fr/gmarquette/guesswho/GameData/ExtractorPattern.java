@@ -26,7 +26,7 @@ public class ExtractorPattern
             "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria", "Équipage",
             "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land");
     private static final List<String> navyTypeList = Arrays.asList("Marine", "Marines", " Marines", "Cipher Pol",
-            "Souverain", "Conseil des 5 doyens", "CP-AIGIS0", "Gouvernement", "Impel", "Navy's Crew");
+            "Souverain", "Conseil des 5 doyens", "CP-AIGIS0", "Gouvernement", "Impel", "Navy's Crew", "Juge");
     private static final List<String> revoTypeList = Arrays.asList("Armée Révolutionnaire",
             "Révolutionnaires", "armée révolutionnaire", "Revolutionary's Crew");
 
@@ -40,8 +40,46 @@ public class ExtractorPattern
         return "";
     }
 
+    static String extractPatternBounty(String input)
+    {
+        Pattern regex = Pattern.compile("Prime : (.*?)(Statut|Anniversaire|Âge)");
+        Matcher matcher = regex.matcher(input);
+        long maxBounty = 0;
+        if(matcher.find())
+        {
+            if(!matcher.group(1).contains("Inconnue") && !matcher.group(1).contains("Aucune"))
+            {
+                String text = matcher.group(1).replaceAll("(?<!\\])\\s", ".").replaceAll(";", " ");
+                text = text.replaceAll("\\[.*?\\]", "").replaceAll("[,]", ".").replaceAll("\\(.*?\\)", "");
+                String[] bountys = text.split("\\s+");
+                for (String bounty : bountys)
+                {
+                    maxBounty = Math.max(maxBounty, Long.parseLong(bounty.replaceAll("\\.", "")));
+
+                }
+            }
+        }
+
+        if(maxBounty == 0)
+        {
+            return "";
+        }
+        else
+        {
+            return String.valueOf(maxBounty);
+        }
+    }
+
     static String fixBounty(String bounty, String type)
     {
+        for (String navyType : navyTypeList)
+        {
+            if (type.contains(navyType)) {
+                type = "Navy";
+                break;
+            }
+        }
+
         if(type.equals("Navy") || type.equals("Citizen"))
         {
             return "0";
@@ -55,11 +93,11 @@ public class ExtractorPattern
             double numBounty = Double.parseDouble(bounty);
             if(numBounty >= 1_000_000_000)
             {
-                return String.format(Locale.getDefault() ,"%.3f Md", numBounty / 1_000_000_000);
+                return String.format(Locale.getDefault() ,"%.3f Md", numBounty / 1_000_000_000).replaceAll("[,.]0+ Md", " Md");
             }
             else if (numBounty >= 1_000_000)
             {
-                return String.format(Locale.getDefault(), "%.3f Mi", numBounty / 1_000_000);
+                return String.format(Locale.getDefault(), "%.3f Mi", numBounty / 1_000_000).replaceAll("[,.]0+ Mi", " Mi");
             }
             else
             {
@@ -70,8 +108,6 @@ public class ExtractorPattern
 
     static String fixType(String value, String crew)
     {
-        if(value.isEmpty() || crew.equals("Citizen"))
-        {
             for (String pirateType : pirateTypeList)
             {
                 if (crew.contains(pirateType)) {
@@ -92,7 +128,6 @@ public class ExtractorPattern
                     value = "Revolutionary";
                     break;
                 }
-            }
         }
 
         return value;
@@ -109,13 +144,17 @@ public class ExtractorPattern
         {
             return "Navy's Crew";
         }
-        else if(rawCrew.contains("armée") || rawCrew.contains("Armée") || rawCrew.equals("Révolutionaires"))
+        else if(type.equals("Revolutionary"))
         {
             return "Revolutionary's Crew";
         }
         else if(rawCrew.isEmpty())
         {
             return type;
+        }
+        else if (type.equals("Citizen"))
+        {
+            return "Citizen";
         }
         else
         {
@@ -128,7 +167,7 @@ public class ExtractorPattern
         try
         {
             List<String> affiliationCharacter = new ArrayList<>();
-            String[] affiliations = text.select(".pi-data-value").html().split("<br>|<p>");
+            String[] affiliations = text.select(".pi-data-value").html().split("<br>|<p>|</a>");
             for(String affiliation : affiliations)
             {
                 Document docSmallDatas = Jsoup.parse(affiliation);
@@ -195,7 +234,7 @@ public class ExtractorPattern
                     }
                     for (String navyType : navyTypeList)
                     {
-                        if (typeData.contains(navyType)) {
+                        if (typeData.contains(navyType) && !typeData.contains("Prisonnier")) {
                             type = "Navy";
                             break;
                         }
@@ -219,6 +258,51 @@ public class ExtractorPattern
         catch (Exception e)
         {
             return "Citizen";
+        }
+    }
+
+    static String extractExceptions(String character)
+    {
+        switch (character)
+        {
+            case "Chadros Higelyges":
+                return "Barbe Brune";
+            case "Jabra":
+                return "Jabura";
+            default :
+                return character;
+        }
+    }
+
+    static String extractExceptionsPopularity(String character)
+    {
+        if (character.contains("Don Quichotte"))
+        {
+            return character.replace("Don Quichotte", "Donquixote");
+        }
+        else if(character.contains("Alber"))
+        {
+            return "King";
+        }
+        else if (character.contains("Linlin"))
+        {
+            return "Big Mom";
+        }
+        else if(character.contains("Galdino"))
+        {
+            return "Mr 3";
+        }
+        else if(character.contains("Marshall D. Teach"))
+        {
+            return "Babre Noire";
+        }
+        else if(character.contains("Edward Newgate"))
+        {
+            return "Barbe Blanche";
+        }
+        else
+        {
+            return character;
         }
     }
 }

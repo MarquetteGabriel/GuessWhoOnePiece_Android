@@ -20,18 +20,22 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
+import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class GameSelectionScreenFragment extends Fragment{
 
     private CallDAOAsync callDAOAsync;
+    private MainActivityViewModel activityViewModel;
     public static ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
@@ -44,6 +48,7 @@ public class GameSelectionScreenFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         View viewFragment = inflater.inflate(R.layout.fragment_game_selection_screen, container, false);
+        activityViewModel = new ViewModelProvider(requireActivity()).get(MainActivityViewModel.class);
 
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
 
@@ -105,13 +110,18 @@ public class GameSelectionScreenFragment extends Fragment{
 
     private void getSuggestions(int level)
     {
-        ArrayList<String> tempList = getListLevels(level);
-
-        for(String character : tempList)
+        for(String character : Objects.requireNonNull(activityViewModel.getCharacterNameList().getValue()))
         {
-            if(!arrayList.contains(character))
-            {
-                arrayList.add(character);
+            try {
+                if((callDAOAsync.getCharacterFromNameAsync(character)).get().getLevel() == level)
+                {
+                    if(!arrayList.contains(character))
+                    {
+                        arrayList.add(character);
+                    }
+                }
+            } catch (ExecutionException | InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }

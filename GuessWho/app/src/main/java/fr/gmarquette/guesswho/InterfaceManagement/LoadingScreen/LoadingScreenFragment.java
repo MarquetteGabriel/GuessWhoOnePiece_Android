@@ -18,12 +18,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import fr.gmarquette.guesswho.GameData.Database.DataBase;
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
+import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class LoadingScreenFragment extends Fragment {
@@ -35,6 +38,7 @@ public class LoadingScreenFragment extends Fragment {
     private TextView textView;
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     private ImportDataManager importDataManager;
+    private MainActivityViewModel mainActivityViewModel;
 
     public LoadingScreenFragment() {
     }
@@ -48,6 +52,7 @@ public class LoadingScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_loading_screen, container, false);
+        mainActivityViewModel = new ViewModelProvider(requireActivity()).get(MainActivityViewModel.class);
 
         progressBar = view.findViewById(R.id.progressBar);
         textView = view.findViewById(R.id.textProgressBar);
@@ -99,6 +104,7 @@ public class LoadingScreenFragment extends Fragment {
                     });
                 }
             }
+            mainActivityViewModel.setCharacterNameList(DataBase.getInstance(requireContext()).dao().getAllNames());
 
             requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.gameSelectionScreenFragment));
 

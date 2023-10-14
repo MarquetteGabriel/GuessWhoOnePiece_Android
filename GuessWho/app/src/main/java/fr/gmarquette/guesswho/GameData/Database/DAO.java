@@ -33,4 +33,7 @@ public interface DAO{
 
     @Query("SELECT name FROM Characters WHERE level LIKE:level")
     List<String> getNamesByDifficulty(int level);
+
+    @Query("SELECT name FROM Characters")
+    List<String> getAllNames();
 }

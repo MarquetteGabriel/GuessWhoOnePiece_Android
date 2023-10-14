@@ -40,12 +40,6 @@ public class ImportDataManager
     Variables //TODO:
      */
     private final Integer NUMBER_OF_LEVELS = 2;
-    private final String url_fandom_listcharacter = "https://onepiece.fandom.com/fr/wiki/Liste_des_Personnages_Canon";
-    private final String url_fandom = "https://onepiece.fandom.com/fr/wiki/";
-    private final String url_levels = "http://www.volonte-d.com/details/popularite.php";
-    private final String class_characterData = "pi-item pi-group pi-border-color";
-    private final String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
-    private final String class_type = "pi-item pi-data pi-item-spacing pi-border-color";
     public final List<String> characterNameList = new ArrayList<>();
     private final List<String> listPopularity = new ArrayList<>();
     private final CopyOnWriteArrayList<Characters> charactersList = new CopyOnWriteArrayList<>();
@@ -79,9 +73,9 @@ public class ImportDataManager
             getListOfCharacters();
             completedNameList = characterNameList;
             multiImport();
-            calculateLevelForCharacter();
+            countPercentage = characterNameList.size();
+            calculatePopularityForCharacter();
             addCharacterToDataBase(context);
-            countLevels++;
         });
         executorService.shutdown();
     }
@@ -107,6 +101,7 @@ public class ImportDataManager
     private void getListOfCharacters()
     {
         try {
+            String url_fandom_listcharacter = "https://onepiece.fandom.com/fr/wiki/Liste_des_Personnages_Canon";
             Document doc = Jsoup.connect(url_fandom_listcharacter).get();
             Elements tables = Jsoup.parse(doc.getElementsByClass("tabber wds-tabber").html()).select("table.wikitable");
 
@@ -118,8 +113,8 @@ public class ImportDataManager
                     for (Element row : rows) {
                         Elements columns = row.select("td");
                         if (columns.size() >= 6) {
-                            characterNameList.add(columns.get(1).text());
-                            listPictures.put(columns.get(1).text(), columns.select("img").attr("src"));
+                            characterNameList.add(ExtractorPattern.extractExceptions(columns.get(1).text()));
+                            listPictures.put(ExtractorPattern.extractExceptions(columns.get(1).text()), columns.select("img").attr("src"));
                         }
                     }
                 }
@@ -141,12 +136,16 @@ public class ImportDataManager
             if (matcher.matches()) {
                 url_character = matcher.group(1);
             }
+            String url_fandom = "https://onepiece.fandom.com/fr/wiki/";
             String url = url_fandom + url_character;
 
             Element typeElement = null, crewElement = null;
             Document doc = Jsoup.connect(url).get();
+            String class_characterData = "pi-item pi-group pi-border-color";
             String characterData = doc.getElementsByClass(class_characterData).text();
+            String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
             String fruitElement = doc.getElementsByClass(class_fruit).text();
+            String class_type = "pi-item pi-data pi-item-spacing pi-border-color";
             Elements bountyTypeCrewElements = doc.getElementsByClass(class_type);
 
             for (Element bountyTypeCrewElement : bountyTypeCrewElements) {
@@ -162,9 +161,9 @@ public class ImportDataManager
 
             String crew = ExtractorPattern.extractPatternCrew(crewElement);
             boolean fruit = fruitElement.contains("Fruit du Démon");
-            String bounty = ExtractorPattern.fixBounty(ExtractorPattern.extractPattern(characterData, "Prime : ([\\d.,\\s]+)").replaceAll("[.,\\s]", "").trim(), crew);
-            int chapter = Integer.parseInt(ExtractorPattern.extractPattern(characterData, "Chapitre (\\d+)"));
             String type = ExtractorPattern.fixType(ExtractorPattern.extractPatternType(typeElement), crew);
+            String bounty = ExtractorPattern.fixBounty(ExtractorPattern.extractPatternBounty(characterData).replaceAll("[.,\\s]", "").trim(), type);
+            int chapter = Integer.parseInt(ExtractorPattern.extractPattern(characterData, "Chapitre (\\d+)"));
             boolean alived = !ExtractorPattern.extractPattern(characterData, "Statut : (Vivant|Décédé)").equals("Décédé");
             int age = ExtractorPattern.extractPatternAge(characterData);
             crew = ExtractorPattern.fixCrew(crew, type);
@@ -173,8 +172,15 @@ public class ImportDataManager
                     age, crew, listPictures.get(character), NUMBER_OF_LEVELS + 1);
             charactersList.add(characters);
             countPercentage++;
+
+            if(countPercentage > characterNameList.size())
+            {
+                countPercentage = characterNameList.size();
+            }
             
         } catch (IOException e) {
+            Thread.currentThread().interrupt();
+            countPercentage++;
             e.printStackTrace();
         }
     }
@@ -182,9 +188,10 @@ public class ImportDataManager
     /*
     Define level for character
      */
-    private void calculateLevelForCharacter()
+    private void calculatePopularityForCharacter()
     {
         try {
+            String url_levels = "http://www.volonte-d.com/details/popularite.php";
             Document doc = Jsoup.connect(url_levels).get();
             Elements elements = doc.getElementsByClass("gallery clearfix");
             if(elements.last() != null)
@@ -207,28 +214,43 @@ public class ImportDataManager
             }
 
             for (String character : characterNameList) {
-                int position = listPopularity.indexOf(character);
+                String tempCharacterName = character;
+                if(tempCharacterName.contains("alias"))
+                {
+                    tempCharacterName = character.replaceAll("\\s*\\(.*?\\)", "");
+                }
+                int position = listPopularity.indexOf(tempCharacterName);
 
                 if (position == -1) {
-                    String newCharacter = getMatcher(character);
+                    String newCharacter = getMatcher(tempCharacterName);
                     position = listPopularity.indexOf(newCharacter);
+                    if(position == -1)
+                    {
+                        position = listPopularity.size();
+                    }
                 }
 
-                for (int i = 1; i <= (NUMBER_OF_LEVELS - 1); i++) {
-                    if (position <= ((NUMBER_OF_LEVELS - 1) * i)) {
-                        for (Characters characters : charactersList) {
-                            if (characters.getName().equals(character)) {
+                for (Characters characters : charactersList) {
+                    if (characters.getName().equals(character)) {
+                        for (int i = NUMBER_OF_LEVELS; i >= 1; i--) {
+                            if (position <= 200 * i) {
                                 characters.setLevel(i-1);
-                                countLevels++;
                             }
+                        }
+
+                        if(characters.getLevel() == NUMBER_OF_LEVELS + 1)
+                        {
+                            characters.setLevel(NUMBER_OF_LEVELS - 1);
                         }
                     }
                 }
+                countLevels++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private String getMatcher(String character)
     {
         String newCharacter = "";
@@ -236,10 +258,7 @@ public class ImportDataManager
         String texteRessemblant = null;
         for (String popularityCharacter : listPopularity)
         {
-            if (character.contains("Don Quichotte"))
-            {
-                character = character.replace("Don Quichotte", "Donquixote");
-            }
+            character = ExtractorPattern.extractExceptionsPopularity(character);
             double ressemblance = calculateSimilarity(character, popularityCharacter);
 
             if (ressemblance >= 0.6 && ressemblance > meilleureRessemblance) {
@@ -308,6 +327,7 @@ public class ImportDataManager
                 characterNameList.remove(character.getName());
             }
         }
+        countLevels++;
     }
 
     public List<String> getNameList()
@@ -317,8 +337,8 @@ public class ImportDataManager
 
     public int getAvancement(int max)
     {
-        float avancementCharacter = ((((countPercentage/(float) max)*100)* 100)/70);
-        float avancementLevels = ((((countLevels/((float) max + 1)) *100)* 100)/29);
+        float avancementCharacter = ((countPercentage/(float) max)*70);
+        float avancementLevels = ((countLevels/((float) max + 1)) *30);
         return (int) (avancementCharacter + avancementLevels);
     }
 }
