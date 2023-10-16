@@ -45,19 +45,26 @@ public class ExtractorPattern
         Pattern regex = Pattern.compile("Prime : (.*?)(Statut|Anniversaire|Âge)");
         Matcher matcher = regex.matcher(input);
         long maxBounty = 0;
-        if(matcher.find())
+        try
         {
-            if(!matcher.group(1).contains("Inconnue") && !matcher.group(1).contains("Aucune"))
+            if(matcher.find())
             {
-                String text = matcher.group(1).replaceAll("(?<!\\])\\s", ".").replaceAll(";", " ");
-                text = text.replaceAll("\\[.*?\\]", "").replaceAll("[,]", ".").replaceAll("\\(.*?\\)", "");
-                String[] bountys = text.split("\\s+");
-                for (String bounty : bountys)
+                if(!matcher.group(1).contains("Inconnue") && !matcher.group(1).contains("Aucune"))
                 {
-                    maxBounty = Math.max(maxBounty, Long.parseLong(bounty.replaceAll("\\.", "")));
+                    String text = matcher.group(1).replaceAll("(?<!\\])\\s", ".").replaceAll(";", " ");
+                    text = text.replaceAll("\\[.*?\\]", "").replaceAll(",", ".").replaceAll("\\(.*?\\)", "");
+                    String[] bountys = text.split("\\s+");
+                    for (String bounty : bountys)
+                    {
+                        maxBounty = Math.max(maxBounty, Long.parseLong(bounty.replaceAll("\\.", "")));
 
+                    }
                 }
             }
+        }
+        catch (Exception e)
+        {
+            maxBounty = 0;
         }
 
         if(maxBounty == 0)
