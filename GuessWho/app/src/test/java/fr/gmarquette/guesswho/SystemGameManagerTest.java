@@ -21,15 +21,15 @@ import fr.gmarquette.guesswho.GameSystem.GameManager;
 
 public class SystemGameManagerTest
 {
-    Characters testPirate = new Characters("Test Pirate", true, "300 Mi", 45, "Pirate", true, 26, "Pirate Crew", 0);
-    Characters testRevo = new Characters("Test Revo", false, "3 Md", 450, "Revolutionary", false, 36, "Revo Crew", 0);
-    Characters testNavy = new Characters("Test Navy", true, "0", 45, "Navy", true, 16, "Navy's Crew", 1);
-    Characters testCitizen = new Characters("Test Citizen", true, "Unknown", 45, "Citizen", true, 26, "Citizen", 0);
+    Characters testPirate = new Characters("Test Pirate", true, "300 Mi", 45, "Pirate", true, 26, "Pirate Crew", "" ,0);
+    Characters testRevo = new Characters("Test Revo", false, "3 Md", 450, "Revolutionary", false, 36, "Revo Crew", "",0);
+    Characters testNavy = new Characters("Test Navy", true, "0", 45, "Navy", true, 16, "Navy's Crew", "",1);
+    Characters testCitizen = new Characters("Test Citizen", true, "Unknown", 45, "Citizen", true, 26, "Citizen", "",0);
 
     @Test
     public void testFruit()
     {
-        Characters tester = new Characters("Tester", true, "0", 973, "Citizen", true, 76, "Citizen", 0);
+        Characters tester = new Characters("Tester", true, "0", 973, "Citizen", true, 76, "Citizen", "",0);
 
         assertTrue(GameManager.hasEatenDevilFruit(tester, testPirate));
         assertFalse(GameManager.hasEatenDevilFruit(tester, testRevo));
@@ -38,13 +38,13 @@ public class SystemGameManagerTest
     @Test
     public void testBounty()
     {
-        Characters testerMd = new Characters("Tester", true, "4 Md", 973, "Citizen", true, 76, "Citizen", 0);
-        Characters testerMi = new Characters("Tester", true, "600 Mi", 973, "Citizen", true, 76, "Citizen", 0);
-        Characters testerE = new Characters("Tester", true, "300 Mi", 973, "Citizen", true, 76, "Citizen", 0);
-        Characters testerMi2 = new Characters("Tester", true, "100 Mi", 973, "Citizen", true, 76, "Citizen", 0);
-        Characters tester0 = new Characters("Tester0", true, "0", 973, "Citizen", true, 76, "Citizen", 0);
-        Characters testerUnknown = new Characters("Tester0", true, "Unknown", 973, "Citizen", true, 76, "Citizen", 0);
-        Characters testerP = new Characters("TesterP", false, "700", 672, "Citizen", true, 34, "Citizen", 0);
+        Characters testerMd = new Characters("Tester", true, "4 Md", 973, "Citizen", true, 76, "Citizen", "", 0);
+        Characters testerMi = new Characters("Tester", true, "600 Mi", 973, "Citizen", true, 76, "Citizen", "", 0);
+        Characters testerE = new Characters("Tester", true, "300 Mi", 973, "Citizen", true, 76, "Citizen", "", 0);
+        Characters testerMi2 = new Characters("Tester", true, "100 Mi", 973, "Citizen", true, 76, "Citizen", "", 0);
+        Characters tester0 = new Characters("Tester0", true, "0", 973, "Citizen", true, 76, "Citizen", "", 0);
+        Characters testerUnknown = new Characters("Tester0", true, "Unknown", 973, "Citizen", true, 76, "Citizen", "", 0);
+        Characters testerP = new Characters("TesterP", false, "700", 672, "Citizen", true, 34, "Citizen", "", 0);
 
         assertEquals(GameManager.lookingForBounty(testerMd, testPirate), BountyType.LOWER);
         assertEquals(GameManager.lookingForBounty(testerMi, testPirate), BountyType.LOWER);
@@ -91,7 +91,7 @@ public class SystemGameManagerTest
     @Test
     public void testAlive()
     {
-        Characters tester = new Characters("Tester", true, "0", 973, "Citizen", false, 76, "Citizen", 0);
+        Characters tester = new Characters("Tester", true, "0", 973, "Citizen", false, 76, "Citizen","",  0);
 
 
 

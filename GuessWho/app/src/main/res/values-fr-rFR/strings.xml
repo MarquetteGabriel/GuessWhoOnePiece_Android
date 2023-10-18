@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ @brief Copyright (c) 2023 Gabriel Marquette
+  ~
+  ~ Copyright (c) 2023 Gabriel Marquette. All rights reserved.
+  ~
+  -->
+
+<resources>
+    <string name="play">Jouer</string>
+    <string name="hard">Difficile</string>
+    <string name="logo_app">Logo</string>
+    <string name="easy">Facile</string>
+    <string name="guess_1">Choix 1</string>
+    <string name="guess_2">Choix 2</string>
+    <string name="guess_3">Choix 3</string>
+    <string name="guess_4">Choix 4</string>
+    <string name="guess_5">Choix 5</string>
+    <string name="guess_6">Choix 6</string>
+    <string name="make_your_guess">Entrez votre proposition</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="do_you_want_to_play_again">Voulez-vous rejouer ?</string>
+    <string name="the_answer_was">La réponse était :</string>
+    <string name="default_difficulty">FACILE</string>
+</resources>

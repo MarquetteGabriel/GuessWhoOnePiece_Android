@@ -15,22 +15,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
+import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class GameSelectionScreenFragment extends Fragment{
 
     private CallDAOAsync callDAOAsync;
+    private MainActivityViewModel activityViewModel;
     public static ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
@@ -43,6 +48,7 @@ public class GameSelectionScreenFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         View viewFragment = inflater.inflate(R.layout.fragment_game_selection_screen, container, false);
+        activityViewModel = new ViewModelProvider(requireActivity()).get(MainActivityViewModel.class);
 
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
 
@@ -63,31 +69,36 @@ public class GameSelectionScreenFragment extends Fragment{
         });
 
         Button button = viewFragment.findViewById(R.id.playButton);
-        RadioButton easyRadioButton = viewFragment.findViewById(R.id.easyRadioButton);
-        RadioButton hardRadioButton = viewFragment.findViewById(R.id.hardRadioButton);
+        SeekBar seekBar = viewFragment.findViewById(R.id.seekBarDifficulty);
+        TextView textView = viewFragment.findViewById(R.id.text_difficulty);
 
-        easyRadioButton.setOnClickListener(view -> {
-            easyRadioButton.setChecked(true);
-            hardRadioButton.setChecked(false);
-        });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                LevelDifficulty levelDifficulty = LevelDifficulty.getLevelDifficultyByValue(progress);
+                if (levelDifficulty != null)
+                {
+                    textView.setText(levelDifficulty.toString());
+                }
+            }
 
-        hardRadioButton.setOnClickListener(view -> {
-            easyRadioButton.setChecked(false);
-            hardRadioButton.setChecked(true);
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
         });
 
         button.setOnClickListener(view -> {
 
-            if (easyRadioButton.isChecked())
+            arrayList.clear();
+            for (int i = 0; i <= seekBar.getProgress(); i++)
             {
-                arrayList.clear();
-                getSuggestions(LevelDifficulty.EASY.ordinal());
-            }
-            else if (hardRadioButton.isChecked())
-            {
-                arrayList.clear();
-                getSuggestions(LevelDifficulty.EASY.ordinal());
-                getSuggestions(LevelDifficulty.HARD.ordinal());
+                getSuggestions(i);
             }
 
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
@@ -99,13 +110,18 @@ public class GameSelectionScreenFragment extends Fragment{
 
     private void getSuggestions(int level)
     {
-        ArrayList<String> tempList = getListLevels(level);
-
-        for(String character : tempList)
+        for(String character : Objects.requireNonNull(activityViewModel.getCharacterNameList().getValue()))
         {
-            if(!arrayList.contains(character))
-            {
-                arrayList.add(character);
+            try {
+                if((callDAOAsync.getCharacterFromNameAsync(character)).get().getLevel() == level)
+                {
+                    if(!arrayList.contains(character))
+                    {
+                        arrayList.add(character);
+                    }
+                }
+            } catch (ExecutionException | InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }

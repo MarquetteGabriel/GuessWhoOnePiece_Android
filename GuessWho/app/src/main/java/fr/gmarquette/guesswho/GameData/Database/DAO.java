@@ -9,33 +9,31 @@
 package fr.gmarquette.guesswho.GameData.Database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
 @Dao
 public interface DAO{
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void addElements(List<Characters> charactersList);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void addCharacter(Characters characters);
+
+    @Delete
+    void deleteCharacter(Characters characters);
+    @Update
+    void updateCharacter(Characters characters);
 
     @Query("SELECT * FROM Characters WHERE name LIKE:name")
     Characters getCharacterFromName(String name);
 
-    @Query("SELECT * FROM Characters WHERE id LIKE:id")
-    Characters getCharacterFromId(int id);
-
     @Query("SELECT name FROM Characters WHERE level LIKE:level")
     List<String> getNamesByDifficulty(int level);
 
-    @Query("SELECT COUNT(*) FROM Characters")
-    int getCount();
-
-    @Query("SELECT id FROM Characters WHERE name LIKE:name")
-    int getIdFromCharacterName(String name);
-
-    @Query("DELETE FROM Characters")
-    void deleteAll();
+    @Query("SELECT name FROM Characters")
+    List<String> getAllNames();
 }

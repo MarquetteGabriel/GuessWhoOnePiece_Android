@@ -132,12 +132,12 @@ public class CleanGameScreen
 
     private static void clearText(View view)
     {
-        ((TextView) view.findViewById(R.id.guess_1)).setText(R.string.guess_1_txt);
-        ((TextView) view.findViewById(R.id.guess_2)).setText(R.string.guess_2_txt);
-        ((TextView) view.findViewById(R.id.guess_3)).setText(R.string.guess_3_txt);
-        ((TextView) view.findViewById(R.id.guess_4)).setText(R.string.guess_4_txt);
-        ((TextView) view.findViewById(R.id.guess_5)).setText(R.string.guess_5_txt);
-        ((TextView) view.findViewById(R.id.guess_6)).setText(R.string.guess_6_txt);
+        ((TextView) view.findViewById(R.id.guess_1)).setText(R.string.guess_1);
+        ((TextView) view.findViewById(R.id.guess_2)).setText(R.string.guess_2);
+        ((TextView) view.findViewById(R.id.guess_3)).setText(R.string.guess_3);
+        ((TextView) view.findViewById(R.id.guess_4)).setText(R.string.guess_4);
+        ((TextView) view.findViewById(R.id.guess_5)).setText(R.string.guess_5);
+        ((TextView) view.findViewById(R.id.guess_6)).setText(R.string.guess_6);
 
         ((TextView) view.findViewById(R.id.bounty_text_1)).setText("");
         ((TextView) view.findViewById(R.id.bounty_text_2)).setText("");

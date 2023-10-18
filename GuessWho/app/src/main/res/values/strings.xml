@@ -1,16 +1,15 @@
 <resources>
     <!-- App name -->
-    <string name="app_name">GuessWho One Piece</string>
+    <string name="app_name" translatable="false">GuessWho One Piece</string>
 
     <!-- Left Column -->
-    <string name="guess1">Guess n°1</string>
-    <string name="guess_who">Guess Who ?</string>
+    <string name="guess_who" translatable="false">Guess Who ?</string>
     <string name="play">Play</string>
     <string name="hard">Hard</string>
     <string name="logo_app">Logo</string>
     <string name="easy">Easy</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="guess_1">Guess 1</string>
     <string name="guess_2">Guess 2</string>
     <string name="guess_3">Guess 3</string>
@@ -22,11 +21,6 @@
     <string name="no">No</string>
     <string name="do_you_want_to_play_again">Do you want to play again ?</string>
     <string name="the_answer_was">The answer was :</string>
-    <string name="guess_1_txt">Guess 1</string>
-    <string name="guess_2_txt">Guess 2</string>
-    <string name="guess_3_txt">Guess 3</string>
-    <string name="guess_4_txt">Guess 4</string>
-    <string name="guess_5_txt">Guess 5</string>
-    <string name="guess_6_txt">Guess 6</string>
-    <string name="difficulty">Difficulty :</string>
+    <string name="MaxProgressBar" translatable="false">100 %</string>
+    <string name="default_difficulty">EASY</string>
 </resources>

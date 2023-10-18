@@ -20,6 +20,7 @@ import fr.gmarquette.guesswho.GameData.Database.Characters;
 public class GameInit extends Thread
 {
     CallDAOAsync callDAOAsync;
+    private final Random rand = new Random();
 
     public GameInit(Context context) {
         callDAOAsync = new CallDAOAsync(context);
@@ -27,7 +28,6 @@ public class GameInit extends Thread
 
     public Characters getCharacterToFound(List<String> characterNameList) throws InterruptedException
     {
-        Random rand = new Random();
         int id = rand.nextInt(characterNameList.size());
         try {
             return callDAOAsync.getCharacterFromNameAsync(characterNameList.get(id)).get();

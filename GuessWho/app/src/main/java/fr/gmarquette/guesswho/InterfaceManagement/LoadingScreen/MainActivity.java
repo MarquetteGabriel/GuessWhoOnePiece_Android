@@ -8,6 +8,8 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.LoadingScreen;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,6 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.util.Calendar;
+
+import fr.gmarquette.guesswho.GameData.ImportDataManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import fr.gmarquette.guesswho.InterfaceManagement.DataViewModel;
@@ -38,6 +43,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
+
+        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        if(currentDay == 1)
+        {
+            isUpdated = !isUpdated;
+        }
+
+        if (!isUpdated) {
+            if (NetworkUtils.isNetworkAvailable(this)) {
+                ImportDataManager.getInstance().importManager(this);
+            }
+        }
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         fab_menu = findViewById(R.id.menubtn);
         fab_list = findViewById(R.id.listbtn);
         fab_settings = findViewById(R.id.settingsbtn);

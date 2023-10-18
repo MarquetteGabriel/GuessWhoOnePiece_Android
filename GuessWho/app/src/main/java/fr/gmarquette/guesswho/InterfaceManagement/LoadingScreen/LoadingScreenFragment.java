@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.concurrent.ExecutionException;
@@ -27,9 +26,14 @@ import fr.gmarquette.guesswho.R;
 
 public class LoadingScreenFragment extends Fragment {
 
-
-    private static final int LOADING_TIME = 2000;
-    private CallDAOAsync callDAOAsync;
+    private float avancement;
+    private View view;
+    private static final int MAX_PROGRESS_BAR = 100;
+    private ProgressBar progressBar;
+    private TextView textView;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private ImportDataManager importDataManager;
+    private MainActivityViewModel mainActivityViewModel;
 
     public LoadingScreenFragment() {
     }
@@ -42,34 +46,63 @@ public class LoadingScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_loading_screen, container, false);
-        callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
-        DataBase.getInstance(requireContext().getApplicationContext());
-        possibleAddElements();
+        view = inflater.inflate(R.layout.fragment_loading_screen, container, false);
+        mainActivityViewModel = new ViewModelProvider(requireActivity()).get(MainActivityViewModel.class);
 
-        new Handler().postDelayed(() -> {
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
-            navController.navigate(R.id.gameSelectionScreenFragment);
-        }, LOADING_TIME);
+        progressBar = view.findViewById(R.id.progressBar);
+        textView = view.findViewById(R.id.textProgressBar);
+        textView.setText("0 %");
+
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
+
+        if(isUpdated)
+        {
+            progressBar.setProgress(MAX_PROGRESS_BAR);
+            textView.setText(R.string.MaxProgressBar);
+        }
+        else
+        {
+            avancement = 0;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isUpdated", true);
+            editor.apply();
+        }
+
+        importDataManager = ImportDataManager.getInstance();
+        setLoadingBar();
 
         return view;
     }
 
-    private void possibleAddElements()
+    private void setLoadingBar()
     {
-        try {
-            if(callDAOAsync.getCountAsync().get() == 0)
+        executorService.submit(() ->
+        {
+            if(progressBar.getProgress() != MAX_PROGRESS_BAR)
             {
-                callDAOAsync.deleteAllAsync();
-                callDAOAsync.getAddElementsAsync(InitialiseDatabase.getDatabaseValues());
+                while(importDataManager.getNameList() == null || importDataManager.getNameList().size() == 0)
+                {
+
+                }
+
+                int max = importDataManager.getNameList().size();
+                while (avancement < MAX_PROGRESS_BAR)
+                {
+                    avancement = importDataManager.getAvancement(max);
+
+                    requireActivity().runOnUiThread(() -> {
+                        progressBar.setProgress((int) avancement);
+                        progressBar.setMax(MAX_PROGRESS_BAR);
+                        String text = (int) avancement + " %";
+                        textView.setText(text);
+                    });
+                }
             }
-            else if(callDAOAsync.getCountAsync().get() < InitialiseDatabase.getDatabaseValues().size())
-            {
-                callDAOAsync.deleteAllAsync();
-                callDAOAsync.getAddElementsAsync(InitialiseDatabase.getDatabaseValues());
-            }
-        } catch (ExecutionException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+            mainActivityViewModel.setCharacterNameList(DataBase.getInstance(requireContext()).dao().getAllNames());
+
+            requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.gameSelectionScreenFragment));
+
+        });
     }
 }
