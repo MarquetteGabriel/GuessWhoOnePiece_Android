@@ -39,6 +39,7 @@ public class ListOfCharactersFragment extends Fragment implements ListOfCharacte
 
     private MainActivityViewModel itemViewModel;
     private ListFragmentAdapter adapter;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     public ListOfCharactersFragment() {
     }
@@ -83,7 +84,7 @@ public class ListOfCharactersFragment extends Fragment implements ListOfCharacte
         adapter = new ListFragmentAdapter(getContext(),
                 itemViewModel.getCharacterNameList().getValue(),
                 itemViewModel.getCharacterLevelList().getValue(),
-                itemViewModel.getCharacterPicturesList().getValue(), this);
+                itemViewModel.getCharacterPicturesList().getValue(), this, itemViewModel);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -91,9 +92,8 @@ public class ListOfCharactersFragment extends Fragment implements ListOfCharacte
     @Override
     public void onItemClick(int positon) {
 
-        final String characters = itemViewModel.getCharacterNameList().getValue().get(positon);
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(() -> {
+            String characters = itemViewModel.getCharacterNameList().getValue().get(positon);
             Characters character = DataBase.getInstance(requireContext()).dao().getCharacterFromName(characters);
             itemViewModel.setCharacterInfo(character);
 
