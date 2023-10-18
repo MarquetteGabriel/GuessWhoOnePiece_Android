@@ -39,7 +39,7 @@ public class ImportDataManager
     /*
     Variables //TODO:
      */
-    private final Integer NUMBER_OF_LEVELS = 2;
+    final Integer NUMBER_OF_LEVELS = 2;
     public final List<String> characterNameList = new ArrayList<>();
     private final List<String> listPopularity = new ArrayList<>();
     private final CopyOnWriteArrayList<Characters> charactersList = new CopyOnWriteArrayList<>();

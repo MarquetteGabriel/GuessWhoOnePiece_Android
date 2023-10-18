@@ -49,15 +49,18 @@ public class ExtractorPattern
         {
             if(matcher.find())
             {
-                if(!matcher.group(1).contains("Inconnue") && !matcher.group(1).contains("Aucune"))
+                if(matcher.group(1) != null)
                 {
-                    String text = matcher.group(1).replaceAll("(?<!\\])\\s", ".").replaceAll(";", " ");
-                    text = text.replaceAll("\\[.*?\\]", "").replaceAll(",", ".").replaceAll("\\(.*?\\)", "");
-                    String[] bountys = text.split("\\s+");
-                    for (String bounty : bountys)
+                    if(!matcher.group(1).contains("Inconnue") && !matcher.group(1).contains("Aucune"))
                     {
-                        maxBounty = Math.max(maxBounty, Long.parseLong(bounty.replaceAll("\\.", "")));
+                        String text = matcher.group(1).replaceAll("(?<!\\])\\s", ".").replaceAll(";", " ");
+                        text = text.replaceAll("\\[.*?\\]", "").replaceAll(",", ".").replaceAll("\\(.*?\\)", "");
+                        String[] bountys = text.split("\\s+");
+                        for (String bounty : bountys)
+                        {
+                            maxBounty = Math.max(maxBounty, Long.parseLong(bounty.replaceAll("\\.", "")));
 
+                        }
                     }
                 }
             }
@@ -202,11 +205,31 @@ public class ExtractorPattern
 
     static int extractPatternAge(String input)
     {
-        Matcher matcher = Pattern.compile("(\\d+\\s)?\\d+ ans | Âge\\s*:\\s*(\\d+)").matcher(input);
+        Matcher matcherChoice = Pattern.compile("Âge : (.*?) Taille").matcher(input);
         int maxAge = 0;
-        while(matcher.find())
+        if(matcherChoice.find())
         {
-            maxAge = Math.max(maxAge, Integer.parseInt(Objects.requireNonNull(matcher.group(0)).replaceAll("\\D", "")));
+            String textAge = matcherChoice.group(0);
+            if(textAge.contains("lors de sa mort") || textAge.contains("lors du décès"))
+            {
+                Matcher matcher = Pattern.compile("(\\d+\\s)?\\d+ ans \\(lors d").matcher(input);
+                while ((matcher.find()))
+                {
+                    maxAge = Math.max(maxAge, Integer.parseInt(Objects.requireNonNull(matcher.group(0)).replaceAll("\\D", "")));
+                }
+            }
+            else
+            {
+                textAge = textAge.replaceAll("\\s", "").replaceAll("\\(.*?\\)", " ").replaceAll("\\[.*?\\]", " ");
+                String[] ages = textAge.split("[\\D+]");
+                for (String age : ages)
+                {
+                    if(!age.isEmpty())
+                    {
+                        maxAge = Math.max(maxAge, Integer.parseInt(age));
+                    }
+                }
+            }
         }
         return maxAge;
     }
@@ -276,6 +299,8 @@ public class ExtractorPattern
                 return "Barbe Brune";
             case "Jabra":
                 return "Jabura";
+            case "Tama":
+                return "Kurozumi Tama";
             default :
                 return character;
         }

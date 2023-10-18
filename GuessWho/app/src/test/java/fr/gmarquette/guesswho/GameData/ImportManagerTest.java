@@ -8,6 +8,8 @@
 
 package fr.gmarquette.guesswho.GameData;
 
+import static org.junit.Assert.assertEquals;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,61 +22,24 @@ import java.util.regex.Pattern;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 
-public class MultiGenerateDatasTest {
+public class ImportManagerTest {
 
     @Test
     public void extractValuesFromFandomTest() {
-        String character = "Orlu";
-        getDatasForEachCharacter(character);
-        /*
+        String character = "Zunesh";
+        Characters characters = getDatasForEachCharacter(character);
 
-        String characterTwo = "Jango";
-        List<String> resultTwo = multiGenerateDatas.extractValuesFromFandom(characterTwo);
-        
-        // Assert on Jango
-        {
-            assertEquals(resultTwo.get(0), "Jango");
-            assertEquals(resultTwo.get(1), "No_Fruit");
-            assertEquals(resultTwo.get(2), "9000000");
-            assertEquals(resultTwo.get(3), "25");
-            assertEquals(resultTwo.get(4), "Navy");
-            assertEquals(resultTwo.get(5), "Vivant");
-            assertEquals(resultTwo.get(6), "29");
-            assertEquals(resultTwo.get(7), "Marine");
-        }
-
-        String characterThree = "Rob Lucci";
-        List<String> resultThree = multiGenerateDatas.extractValuesFromFandom(characterThree);
-
-        // Assert on Lucci
-        {
-            assertEquals(resultThree.get(0), "Rob Lucci");
-            assertEquals(resultThree.get(1), "Fruit");
-            assertEquals(resultThree.get(2), "");
-            assertEquals(resultThree.get(3), "323");
-            assertEquals(resultThree.get(4), "Navy");
-            assertEquals(resultThree.get(5), "Vivant");
-            assertEquals(resultThree.get(6), "30");
-            assertEquals(resultThree.get(7), "CP-AIGIS0");
-        }
-
-        String characterFour = "Monkey D. Dragon";
-        List<String> resultFour = multiGenerateDatas.extractValuesFromFandom(characterFour);
-
-        // Assert on Dragon
-        {
-            assertEquals(resultFour.get(0), "Monkey D. Dragon");
-            assertEquals(resultFour.get(1), "No_Fruit");
-            assertEquals(resultFour.get(2), "");
-            assertEquals(resultFour.get(3), "100");
-            assertEquals(resultFour.get(4), "Revolutionary");
-            assertEquals(resultFour.get(5), "Vivant");
-            assertEquals(resultFour.get(6), "55");
-            assertEquals(resultFour.get(7), "Armée de la Liberté");
-        }*/
+        assert characters != null;
+        assertEquals(characters.getName(), "Zunesh");
+        assertEquals(characters.getAge(), 1000);
+        assertEquals(characters.getBounty(), "0");
+        assertEquals(characters.getType(), "Citizen");
+        assertEquals(characters.getLevel(), ImportDataManager.getInstance().NUMBER_OF_LEVELS + 1);
+        assertEquals(characters.getCrew(), "Citizen");
+        assertEquals(characters.getFirstAppearance(), 802);
     }
 
-    Characters getDatasForEachCharacter(String character)
+    private Characters getDatasForEachCharacter(String character)
     {
         try {
             String url_character = character.replace(" ", "_").trim();
