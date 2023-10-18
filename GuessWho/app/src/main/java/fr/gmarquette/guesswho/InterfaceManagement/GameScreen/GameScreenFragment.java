@@ -9,6 +9,8 @@
 package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +19,14 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -216,6 +221,11 @@ public class GameScreenFragment extends Fragment {
 
     private void displayWinDialog()
     {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("wins", sharedPreferences.getInt("wins", 0) + 1);
+        editor.apply();
+
         final Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -225,7 +235,9 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
+        ImageView pictureCharacter = dialog.findViewById(R.id.characterPicture);
         answer.setText(characterToFind.getName());
+        Picasso.get().load(characterToFind.getPicture()).into(pictureCharacter);
 
         yesButton.setOnClickListener(view -> {
             restart();
@@ -243,6 +255,12 @@ public class GameScreenFragment extends Fragment {
 
     private void displayLooseDialog()
     {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("loses", sharedPreferences.getInt("loses", 0) + 1);
+        editor.apply();
+
+
         final Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -252,7 +270,9 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
+        ImageView pictureCharacter = dialog.findViewById(R.id.characterPictureFinal);
         answer.setText(characterToFind.getName());
+        Picasso.get().load(characterToFind.getPicture()).into(pictureCharacter);
 
         yesButton.setOnClickListener(view -> {
             restart();

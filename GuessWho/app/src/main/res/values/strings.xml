@@ -23,4 +23,5 @@
     <string name="the_answer_was">The answer was :</string>
     <string name="MaxProgressBar" translatable="false">100 %</string>
     <string name="default_difficulty">EASY</string>
+    <string name="difficulty">"Difficulty : "</string>
 </resources>

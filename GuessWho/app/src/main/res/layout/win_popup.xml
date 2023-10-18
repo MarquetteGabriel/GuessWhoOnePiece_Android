@@ -80,4 +80,12 @@
         android:contentDescription="TODO"
         tools:ignore="ContentDescription,HardcodedText,VisualLintBounds" />
 
+    <ImageView
+        android:id="@+id/characterPictureFinal"
+        android:layout_width="91dp"
+        android:layout_height="94dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

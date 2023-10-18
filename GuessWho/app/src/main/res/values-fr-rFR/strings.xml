@@ -24,4 +24,5 @@
     <string name="do_you_want_to_play_again">Voulez-vous rejouer ?</string>
     <string name="the_answer_was">La réponse était :</string>
     <string name="default_difficulty">FACILE</string>
+    <string name="difficulty">"Difficulté : "</string>
 </resources>

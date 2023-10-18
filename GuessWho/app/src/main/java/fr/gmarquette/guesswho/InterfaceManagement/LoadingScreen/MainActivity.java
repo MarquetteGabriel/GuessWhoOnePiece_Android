@@ -19,12 +19,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.Calendar;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import fr.gmarquette.guesswho.InterfaceManagement.DataViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     NavController navController;
     NavHostFragment navHostFragment;
     int currentFragmentId, backFragmentId;
-    DataViewModel dataViewModel;
 
     private Animation fromBottom, toBottom, openMenu, closeMenu;
     private FloatingActionButton fab_menu, fab_list, fab_settings, fab_help;
@@ -43,22 +41,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
-        boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
-
-        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        if(currentDay == 1)
-        {
-            isUpdated = !isUpdated;
-        }
-
-        if (!isUpdated) {
-            if (NetworkUtils.isNetworkAvailable(this)) {
-                ImportDataManager.getInstance().importManager(this);
-            }
-        }
-
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         fab_menu = findViewById(R.id.menubtn);
         fab_list = findViewById(R.id.listbtn);
         fab_settings = findViewById(R.id.settingsbtn);
@@ -74,22 +56,22 @@ public class MainActivity extends AppCompatActivity {
         fab_settings.setOnClickListener(view -> onSettingsClicked());
         fab_help.setOnClickListener(view -> onHelpClicked());
 
-        // Initialisation des données pour vérifier le fonctionnement
-        /*
-        String url = "https://static.wikia.nocookie.net/onepiece/images/2/2e/Charlotte_Katakuri_Anime_Infobox.png/revision/latest?cb=20210420130426&path-prefix=fr";
-        dataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
-        List<String> characterName = new ArrayList<>(), characterLevel = new ArrayList<>();
-        List<String> picture = new ArrayList<>();
-        characterName.add("Monkey D. Luffy");characterName.add("Zoro");characterName.add("Nami");characterName.add("Sanji");characterName.add("Ener");characterName.add("Katakuri");characterName.add("Kaido");characterName.add("Marco");characterName.add("Shanks");characterName.add("Chopper");characterName.add("Usopp");characterName.add("Tama");
-        characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("2");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("1");characterLevel.add("2");
-        picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);picture.add(url);
+        SharedPreferences sharedPreferences = getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
+        sharedPreferences.getInt("wins", 0);
+        sharedPreferences.getInt("loses", 0);
 
+        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        if(currentDay == 1)
+        {
+            isUpdated = !isUpdated;
+        }
 
-        dataViewModel.setListCharacter(characterName);
-        dataViewModel.setListLevel(characterLevel);
-        dataViewModel.setListPictures(picture);
-
-*/
+        if (!isUpdated) {
+            if (NetworkUtils.isNetworkAvailable(this)) {
+                ImportDataManager.getInstance().importManager(this);
+            }
+        }
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
         assert navHostFragment != null;
@@ -200,13 +182,19 @@ public class MainActivity extends AppCompatActivity {
                 navController.popBackStack(R.id.gameSelectionScreenFragment, false);
             }
 
-            if (currentFragmentId == R.id.helpFragment || currentFragmentId == R.id.settingsFragment || currentFragmentId == R.id.listOfCharactersFragment) {
+            if (currentFragmentId == R.id.helpFragment || currentFragmentId == R.id.settingsFragment || currentFragmentId == R.id.listOfCharactersFragment)
+            {
                 if (backFragmentId == R.id.gameScreenFragment) {
                     navController.popBackStack(R.id.gameScreenFragment, false);
                 }
                 else {
                     navController.popBackStack(R.id.gameSelectionScreenFragment, false);
                 }
+            }
+
+            if(currentFragmentId == R.id.characterDatasFragment )
+            {
+                navController.popBackStack(R.id.listOfCharactersFragment, false);
             }
         }
         else

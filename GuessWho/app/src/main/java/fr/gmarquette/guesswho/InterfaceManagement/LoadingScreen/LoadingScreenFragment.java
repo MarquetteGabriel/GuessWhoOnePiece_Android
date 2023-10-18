@@ -8,20 +8,25 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.LoadingScreen;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import fr.gmarquette.guesswho.GameData.Characters.InitialiseDatabase;
-import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
+import fr.gmarquette.guesswho.GameData.ImportDataManager;
+import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class LoadingScreenFragment extends Fragment {
@@ -100,6 +105,8 @@ public class LoadingScreenFragment extends Fragment {
                 }
             }
             mainActivityViewModel.setCharacterNameList(DataBase.getInstance(requireContext()).dao().getAllNames());
+            mainActivityViewModel.setCharacterLevelList(DataBase.getInstance(requireContext()).dao().getAllLevels());
+            mainActivityViewModel.setCharacterPicturesList(DataBase.getInstance(requireContext()).dao().getAllPictures());
 
             requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.gameSelectionScreenFragment));
 
