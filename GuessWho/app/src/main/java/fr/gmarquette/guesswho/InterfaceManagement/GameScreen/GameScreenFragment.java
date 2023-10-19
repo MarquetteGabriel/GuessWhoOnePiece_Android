@@ -236,7 +236,7 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
-        ImageView pictureCharacter = dialog.findViewById(R.id.characterPicture);
+        ImageView pictureCharacter = dialog.findViewById(R.id.characterPictureFinal);
         answer.setText(characterToFind.getName());
         Picasso.get().load(characterToFind.getPicture()).into(pictureCharacter);
 

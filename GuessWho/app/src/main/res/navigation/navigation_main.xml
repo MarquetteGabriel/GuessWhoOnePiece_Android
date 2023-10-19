@@ -22,7 +22,9 @@
             android:id="@+id/action_loadingScreenFragment_to_gameSelectionScreenFragment"
             app:destination="@id/gameSelectionScreenFragment"
             app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out" />
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/gameSelectionScreenFragment"
@@ -45,7 +47,18 @@
             app:popExitAnim="@anim/to_bottom" />
         <action
             android:id="@+id/action_gameSelectionScreenFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
+            app:destination="@id/helpFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_gameSelectionScreenFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/gameScreenFragment"
@@ -59,6 +72,20 @@
             app:exitAnim="@anim/to_up"
             app:popEnterAnim="@anim/from_up"
             app:popExitAnim="@anim/to_bottom" />
+        <action
+            android:id="@+id/action_gameScreenFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_gameScreenFragment_to_helpFragment"
+            app:destination="@id/helpFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <dialog
         android:id="@+id/listOfCharactersFragment"
@@ -82,13 +109,44 @@
             android:id="@+id/action_settingsFragment_to_loadingScreenFragment"
             app:destination="@id/loadingScreenFragment"
             app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out" />
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_settingsFragment_to_helpFragment"
+            app:destination="@id/helpFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_settingsFragment_to_listOfCharactersFragment"
+            app:destination="@id/listOfCharactersFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <dialog
         android:id="@+id/helpFragment"
         android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.HelpFragment"
         android:label="fragment_help"
-        tools:layout="@layout/fragment_help" />
+        tools:layout="@layout/fragment_help" >
+        <action
+            android:id="@+id/action_helpFragment_to_listOfCharactersFragment"
+            app:destination="@id/listOfCharactersFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_bottom" />
+        <action
+            android:id="@+id/action_helpFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </dialog>
     <dialog
         android:id="@+id/characterDatasFragment"
         android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.ListOfCharacters.CharacterDatasFragment"

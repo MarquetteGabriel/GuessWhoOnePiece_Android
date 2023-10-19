@@ -24,7 +24,7 @@
     <string name="MaxProgressBar" translatable="false">100 %</string>
     <string name="default_difficulty">EASY</string>
     <string name="difficulty">"Difficulty : "</string>
-    <string name="ge">Âge :</string>
+    <string name="age">Âge :</string>
     <string name="type">Type :</string>
     <string name="prime">Prime :</string>
     <string name="chapitre">Chapitre :</string>
@@ -32,4 +32,8 @@
     <string name="statut">Statut :</string>
     <string name="equipage">Equipage :</string>
     <string name="niveau">Niveau :</string>
+    <string name="import_datas">Import Datas</string>
+    <string name="wins">Wins :</string>
+    <string name="loses">Loses :</string>
+    <string name="last_update">Last Update :</string>
 </resources>

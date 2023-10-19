@@ -15,7 +15,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,11 +29,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
+import fr.gmarquette.guesswho.GameSystem.Music.PlayNikaLaugh;
 import fr.gmarquette.guesswho.R;
 
 public class SettingsFragment extends BottomSheetDialogFragment {
 
-    private String ratio;
+    private ImageButton imageButtonVolume;
+    private ImageButton imageButtonNotifications;
+    private SharedPreferences sharedPreferences;
+    private Switch switchNotifications, switchVolume;
     public SettingsFragment() {
     }
 
@@ -59,37 +65,111 @@ public class SettingsFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textView = view.findViewById(R.id.wins);
-        TextView textView1 = view.findViewById(R.id.loses);
-        TextView textView2 = view.findViewById(R.id.textRatio);
-        Button button = view.findViewById(R.id.importData);
+        TextView winsTextView = view.findViewById(R.id.wins);
+        TextView losesTextView = view.findViewById(R.id.loses);
+        TextView ratioTextView = view.findViewById(R.id.textRatio);
+        ImageButton button = view.findViewById(R.id.importData);
+        ProgressBar progressBar = view.findViewById(R.id.progressBarRatioWinLoses);
+        imageButtonVolume = view.findViewById(R.id.imageButtonVolume);
+        imageButtonNotifications = view.findViewById(R.id.imageButtonNotifications);
+        switchNotifications = view.findViewById(R.id.switchNotifications);
+        switchVolume = view.findViewById(R.id.switchVolume);
+        ImageButton nikaButton = view.findViewById(R.id.playNika);
+        TextView dateOfUpdateTextView = view.findViewById(R.id.dateOfUpdate);
 
-        button.setOnClickListener(buttonView -> {
-            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+        sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int wins = sharedPreferences.getInt("wins", 0);
+        int loses = sharedPreferences.getInt("loses", 0);
+        boolean volume = sharedPreferences.getBoolean("Volume", true);
+        boolean notification = sharedPreferences.getBoolean("Notification", true);
+        String dateOfUpdate = sharedPreferences.getString("Date of Update", "26/07/2001");
+
+        button.setOnClickListener(view1 -> {
             editor.putBoolean("isUpdated", false);
             editor.apply();
-
             ImportDataManager.getInstance().importManager(requireContext());
-
             Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5).navigate(R.id.action_settingsFragment_to_loadingScreenFragment);
         });
 
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
-        int wins = sharedPreferences.getInt("wins", 0);
-        int loses = sharedPreferences.getInt("loses", 0);
+        nikaButton.setOnClickListener(view1 -> PlayNikaLaugh.play(view));
 
+        switchNotifications.setOnClickListener(view1 -> {
+            if(switchNotifications.isChecked())
+            {
+                editor.putBoolean("Notification", true);
+                editor.apply();
+                imageButtonNotifications.setImageResource(R.drawable.notifications_on);
+            }
+            else
+            {
+                editor.putBoolean("Notification", false);
+                editor.apply();
+                imageButtonNotifications.setImageResource(R.drawable.notifications_none);
+            }
+        });
+        switchVolume.setOnClickListener(view1 -> {
+            if(switchVolume.isChecked())
+            {
+                editor.putBoolean("Volume", true);
+                editor.apply();
+                imageButtonVolume.setImageResource(R.drawable.volume_up);
+            }
+            else
+            {
+                editor.putBoolean("Volume", false);
+                editor.apply();
+                imageButtonVolume.setImageResource(R.drawable.volume_off);
+            }
+        });
+
+
+        int ratio;
         if(loses == 0 && wins == 0)
         {
-            ratio = "0%";
+            ratio = 0;
         }
         else
         {
-             ratio = (wins * 100)/(loses + wins) + "%";
+             ratio = (wins * 100)/(loses + wins);
         }
 
-        textView.setText(String.valueOf(wins));
-        textView1.setText(String.valueOf(loses));
-        textView2.setText(ratio);
+        winsTextView.setText(String.valueOf(wins));
+        losesTextView.setText(String.valueOf(loses));
+        ratioTextView.setText(ratio + " %");
+
+        progressBar.setProgress(ratio);
+        dateOfUpdateTextView.setText(dateOfUpdate);
+        updateVolume(volume);
+        updateNotifications(notification);
+
+    }
+
+    private void updateVolume(boolean state)
+    {
+        if(state)
+        {
+            switchVolume.setChecked(true);
+            imageButtonVolume.setImageResource(R.drawable.volume_up);
+        }
+        else
+        {
+            switchVolume.setChecked(false);
+            imageButtonVolume.setImageResource(R.drawable.volume_off);
+        }
+    }
+
+    private void updateNotifications(boolean state)
+    {
+        if(state)
+        {
+            switchNotifications.setChecked(true);
+            imageButtonNotifications.setImageResource(R.drawable.notifications_on);
+        }
+        else
+        {
+            switchNotifications.setChecked(false);
+            imageButtonNotifications.setImageResource(R.drawable.notifications_none);
+        }
     }
 }

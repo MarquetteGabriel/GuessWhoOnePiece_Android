@@ -21,6 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -60,6 +63,7 @@ public class LoadingScreenFragment extends Fragment {
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
         boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
+        String dateOfUpdate = sharedPreferences.getString("Date of Update", "26/07/2001");
 
         if(isUpdated)
         {
@@ -69,8 +73,10 @@ public class LoadingScreenFragment extends Fragment {
         else
         {
             avancement = 0;
+            String today = getToday();
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("isUpdated", true);
+            editor.putString("Date of Update", today);
             editor.apply();
         }
 
@@ -111,5 +117,22 @@ public class LoadingScreenFragment extends Fragment {
             requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.action_loadingScreenFragment_to_gameSelectionScreenFragment));
 
         });
+    }
+
+    private static String getToday()
+    {
+        LocalDate date = LocalDate.now();
+        Locale locale = Locale.getDefault();
+        DateTimeFormatter formatter;
+        // Etats-Unis, Philippines, Belize, Canada (Quebec), Bahamas
+        if (locale.getCountry().equals("US") || locale.getCountry().equals("PH") || locale.getCountry().equals("BZ")
+                || locale.getCountry().equals("CA") || locale.getCountry().equals("BS")) {
+            formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy", locale);
+        }
+        else
+        {
+            formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy").withLocale(locale);
+        }
+        return date.format(formatter);
     }
 }
