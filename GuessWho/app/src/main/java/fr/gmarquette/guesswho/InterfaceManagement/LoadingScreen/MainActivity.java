@@ -103,7 +103,14 @@ public class MainActivity extends AppCompatActivity {
     private void onListButtonClicked()
     {
         onMenuButtonClicked();
-        navController.navigate(R.id.listOfCharactersFragment);
+        if(currentFragmentId == R.id.gameScreenFragment)
+        {
+            navController.navigate(R.id.action_gameScreenFragment_to_listOfCharactersFragment);
+        }
+        else if (currentFragmentId == R.id.gameSelectionScreenFragment)
+        {
+            navController.navigate(R.id.action_gameSelectionScreenFragment_to_listOfCharactersFragment);
+        }
     }
 
     private void onHelpClicked()
@@ -192,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            if(currentFragmentId == R.id.characterDatasFragment )
+            if(currentFragmentId == R.id.characterDatasFragment)
             {
                 navController.popBackStack(R.id.listOfCharactersFragment, false);
             }

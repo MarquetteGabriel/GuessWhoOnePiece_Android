@@ -30,6 +30,13 @@
         <action
             android:id="@+id/action_gameSelectionScreenFragment_to_gameScreenFragment"
             app:destination="@id/gameScreenFragment" />
+        <action
+            android:id="@+id/action_gameSelectionScreenFragment_to_listOfCharactersFragment"
+            app:destination="@id/listOfCharactersFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <fragment
         android:id="@+id/gameScreenFragment"
@@ -39,12 +46,33 @@
         <action
             android:id="@+id/action_gameScreenFragment_to_gameSelectionScreenFragment"
             app:destination="@id/gameSelectionScreenFragment" />
+        <action
+            android:id="@+id/action_gameScreenFragment_to_listOfCharactersFragment"
+            app:destination="@id/listOfCharactersFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <fragment
         android:id="@+id/listOfCharactersFragment"
         android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.ListOfCharacters.ListOfCharactersFragment"
         android:label="fragment_list_of_characters"
-        tools:layout="@layout/fragment_list_of_characters" />
+        tools:layout="@layout/fragment_list_of_characters" >
+        <action
+            android:id="@+id/action_listOfCharactersFragment_to_characterDatasFragment"
+            app:destination="@id/characterDatasFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_listOfCharactersFragment_to_gameScreenFragment"
+            app:destination="@id/gameScreenFragment" />
+        <action
+            android:id="@+id/action_listOfCharactersFragment_to_gameSelectionScreenFragment"
+            app:destination="@id/gameSelectionScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.SettingsFragment"
@@ -62,6 +90,10 @@
         tools:layout="@layout/fragment_character_datas" >
         <action
             android:id="@+id/action_characterDatasFragment_to_listOfCharactersFragment"
-            app:destination="@id/listOfCharactersFragment" />
+            app:destination="@id/listOfCharactersFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
 </navigation>

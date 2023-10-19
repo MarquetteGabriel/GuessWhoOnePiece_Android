@@ -64,14 +64,10 @@ public class ListOfCharactersFragment extends Fragment implements ListOfCharacte
         EditText editText = view.findViewById(R.id.filterCharacter);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -99,7 +95,7 @@ public class ListOfCharactersFragment extends Fragment implements ListOfCharacte
 
             requireActivity().runOnUiThread(() -> {
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
-                navController.navigate(R.id.characterDatasFragment);
+                navController.navigate(R.id.action_listOfCharactersFragment_to_characterDatasFragment);
             });
         });
     }
@@ -108,18 +104,16 @@ public class ListOfCharactersFragment extends Fragment implements ListOfCharacte
     {
         List<String> filteredListName = new ArrayList<>();
         List<String> filteredListPicture = new ArrayList<>();
-        List<Integer> filteredListLevel = new ArrayList<>();
         for (String character : itemViewModel.getCharacterNameList().getValue())
         {
             if(character.toLowerCase().contains(text.toLowerCase()))
             {
                 filteredListName.add(character);
                 int position = itemViewModel.getCharacterNameList().getValue().indexOf(character);
-                filteredListLevel.add(itemViewModel.getCharacterLevelList().getValue().get(position));
                 filteredListPicture.add(itemViewModel.getCharacterPicturesList().getValue().get(position));
             }
         }
 
-        adapter.filterList(filteredListName, filteredListPicture, filteredListLevel);
+        adapter.filterList(filteredListName, filteredListPicture);
     }
 }

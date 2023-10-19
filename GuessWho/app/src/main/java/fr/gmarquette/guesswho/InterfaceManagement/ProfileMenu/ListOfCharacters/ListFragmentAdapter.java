@@ -26,7 +26,6 @@ import com.squareup.picasso.Target;
 
 import java.util.List;
 
-import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.LevelDifficulty;
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
@@ -63,11 +62,8 @@ public class ListFragmentAdapter extends RecyclerView.Adapter<ListFragmentAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
         String name = characterNameList.get(position);
-        int level = characterLevelList.get(position);
         resizePicture(holder, position);
-
         holder.characterName.setText(name);
-        holder.characterDifficulty.setText(String.valueOf(LevelDifficulty.getLevelDifficultyByValue(level)));
     }
 
     @Override
@@ -75,13 +71,11 @@ public class ListFragmentAdapter extends RecyclerView.Adapter<ListFragmentAdapte
         return characterNameList.size();
     }
 
-    public void filterList(List<String> filteredListName, List<String> filteredListPicture, List<Integer> filteredListLevel) {
+    public void filterList(List<String> filteredListName, List<String> filteredListPicture) {
         characterNameList = filteredListName;
-        characterLevelList = filteredListLevel;
         characterPictureList = filteredListPicture;
         notifyDataSetChanged();
     }
-
 
     private void resizePicture(ViewHolder holder, int position)
     {
@@ -120,7 +114,7 @@ public class ListFragmentAdapter extends RecyclerView.Adapter<ListFragmentAdapte
             super(itemView);
             characterPicture = itemView.findViewById(R.id.characterPicture);
             characterName = itemView.findViewById(R.id.characterName);
-            characterDifficulty = itemView.findViewById(R.id.Level);
+            //characterDifficulty = itemView.findViewById(R.id.Level);
 
             itemView.setOnClickListener(view -> {
                 if(listOfCharacterInterface != null)
