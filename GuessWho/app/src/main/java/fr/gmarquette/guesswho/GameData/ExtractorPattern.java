@@ -205,7 +205,7 @@ public class ExtractorPattern
 
     static int extractPatternAge(String input)
     {
-        Matcher matcherChoice = Pattern.compile("Âge : (.*?) Taille").matcher(input);
+        Matcher matcherChoice = Pattern.compile("Âge : (.*?) Voix | Âge : (.*?) Taille").matcher(input);
         int maxAge = 0;
         if(matcherChoice.find())
         {

@@ -8,21 +8,25 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import fr.gmarquette.guesswho.R;
 
-public class HelpFragment extends BottomSheetDialogFragment {
+public class HelpFragment extends Fragment {
 
     public HelpFragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -32,15 +36,7 @@ public class HelpFragment extends BottomSheetDialogFragment {
     }
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState)
-    {
-        BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        View view = View.inflate(requireContext(), R.layout.fragment_help, null);
-        dialog.setContentView(view);
-
-        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
-        bottomSheetBehavior.setDraggable(false);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        return dialog;
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }

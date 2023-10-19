@@ -127,7 +127,7 @@
             app:popEnterAnim="@anim/from_up"
             app:popExitAnim="@anim/to_bottom" />
     </fragment>
-    <dialog
+    <fragment
         android:id="@+id/helpFragment"
         android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.HelpFragment"
         android:label="fragment_help"
@@ -146,7 +146,7 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
-    </dialog>
+    </fragment>
     <dialog
         android:id="@+id/characterDatasFragment"
         android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.ListOfCharacters.CharacterDatasFragment"

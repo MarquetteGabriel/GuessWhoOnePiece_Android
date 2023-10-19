@@ -97,7 +97,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void onSettingsClicked() {
         onMenuButtonClicked();
-        navController.navigate(R.id.settingsFragment);
+        if(currentFragmentId == R.id.gameSelectionScreenFragment)
+        {
+            navController.navigate(R.id.action_gameSelectionScreenFragment_to_settingsFragment);
+        }
+        else if (currentFragmentId == R.id.gameScreenFragment)
+        {
+            navController.navigate(R.id.action_gameScreenFragment_to_settingsFragment);
+        }
+        else if (currentFragmentId == R.id.helpFragment)
+        {
+            navController.navigate(R.id.action_helpFragment_to_settingsFragment);
+        }
+        else
+        {
+            navController.navigate(R.id.settingsFragment);
+        }
     }
 
     private void onListButtonClicked()
@@ -111,6 +126,14 @@ public class MainActivity extends AppCompatActivity {
         {
             navController.navigate(R.id.action_gameSelectionScreenFragment_to_listOfCharactersFragment);
         }
+        else if (currentFragmentId == R.id.helpFragment)
+        {
+            navController.navigate(R.id.action_helpFragment_to_listOfCharactersFragment);
+        }
+        else if(currentFragmentId == R.id.settingsFragment)
+        {
+            navController.navigate(R.id.action_settingsFragment_to_listOfCharactersFragment);
+        }
         else
         {
             navController.navigate(R.id.listOfCharactersFragment);
@@ -120,7 +143,22 @@ public class MainActivity extends AppCompatActivity {
     private void onHelpClicked()
     {
         onMenuButtonClicked();
-        navController.navigate(R.id.action_gameSelectionScreenFragment_to_helpFragment);
+        if(currentFragmentId == R.id.gameScreenFragment)
+        {
+            navController.navigate(R.id.action_gameScreenFragment_to_helpFragment);
+        }
+        else if (currentFragmentId == R.id.gameSelectionScreenFragment)
+        {
+            navController.navigate(R.id.action_gameSelectionScreenFragment_to_helpFragment);
+        }
+        else if(currentFragmentId == R.id.settingsFragment)
+        {
+            navController.navigate(R.id.action_settingsFragment_to_helpFragment);
+        }
+        else
+        {
+            navController.navigate(R.id.helpFragment);
+        }
     }
 
     private void onMenuButtonClicked()
