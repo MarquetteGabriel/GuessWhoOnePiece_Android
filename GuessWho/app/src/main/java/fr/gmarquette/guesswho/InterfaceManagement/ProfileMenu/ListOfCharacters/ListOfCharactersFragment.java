@@ -8,6 +8,7 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.ListOfCharacters;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,12 +19,15 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,7 @@ import fr.gmarquette.guesswho.GameData.Database.DataBase;
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
-public class ListOfCharactersFragment extends Fragment implements ListOfCharacterInterface{
+public class ListOfCharactersFragment extends BottomSheetDialogFragment implements ListOfCharacterInterface{
 
     private MainActivityViewModel itemViewModel;
     private ListFragmentAdapter adapter;
@@ -43,10 +47,17 @@ public class ListOfCharactersFragment extends Fragment implements ListOfCharacte
 
     public ListOfCharactersFragment() {
     }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public Dialog onCreateDialog(Bundle savedInstanceState)
+    {
+        BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
+        View view = View.inflate(requireContext(), R.layout.fragment_list_of_characters, null);
+        dialog.setContentView(view);
+
+        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheetBehavior.setDraggable(false);
+        return dialog;
     }
 
     @Override
@@ -79,7 +90,6 @@ public class ListOfCharactersFragment extends Fragment implements ListOfCharacte
 
         adapter = new ListFragmentAdapter(getContext(),
                 itemViewModel.getCharacterNameList().getValue(),
-                itemViewModel.getCharacterLevelList().getValue(),
                 itemViewModel.getCharacterPicturesList().getValue(), this, itemViewModel);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

@@ -8,6 +8,7 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,12 +20,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
 import fr.gmarquette.guesswho.R;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends BottomSheetDialogFragment {
 
     private String ratio;
     public SettingsFragment() {
@@ -32,8 +37,16 @@ public class SettingsFragment extends Fragment {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public Dialog onCreateDialog(Bundle savedInstanceState)
+    {
+        BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
+        View view = View.inflate(requireContext(), R.layout.fragment_settings, null);
+        dialog.setContentView(view);
+
+        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
+        bottomSheetBehavior.setDraggable(false);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        return dialog;
     }
 
     @Override
@@ -51,7 +64,16 @@ public class SettingsFragment extends Fragment {
         TextView textView2 = view.findViewById(R.id.textRatio);
         Button button = view.findViewById(R.id.importData);
 
-        button.setOnClickListener(view1 -> ImportDataManager.getInstance().importManager(requireContext()));
+        button.setOnClickListener(buttonView -> {
+            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isUpdated", false);
+            editor.apply();
+
+            ImportDataManager.getInstance().importManager(requireContext());
+
+            Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5).navigate(R.id.action_settingsFragment_to_loadingScreenFragment);
+        });
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
         int wins = sharedPreferences.getInt("wins", 0);

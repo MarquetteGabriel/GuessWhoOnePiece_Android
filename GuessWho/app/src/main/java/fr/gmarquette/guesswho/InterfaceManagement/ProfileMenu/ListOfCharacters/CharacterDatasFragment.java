@@ -8,6 +8,7 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.ListOfCharacters;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.squareup.picasso.Picasso;
@@ -29,11 +30,15 @@ import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.LevelDiffi
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
-public class CharacterDatasFragment extends Fragment {
+public class CharacterDatasFragment extends DialogFragment {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public Dialog onCreateDialog(Bundle savedInstanceState)
+    {
+        Dialog dialog = (Dialog) super.onCreateDialog(savedInstanceState);
+        View view = View.inflate(requireContext(), R.layout.fragment_character_datas, null);
+        dialog.setContentView(view);
+        return dialog;
     }
 
     @Override

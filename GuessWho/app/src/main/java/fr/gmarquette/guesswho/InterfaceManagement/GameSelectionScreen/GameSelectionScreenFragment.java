@@ -26,7 +26,6 @@ import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
@@ -96,13 +95,10 @@ public class GameSelectionScreenFragment extends Fragment{
         button.setOnClickListener(view -> {
 
             arrayList.clear();
-            for (int i = 0; i <= seekBar.getProgress(); i++)
-            {
-                getSuggestions(i);
-            }
+            getSuggestions(seekBar.getProgress());
 
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView5);
-            navController.navigate(R.id.gameScreenFragment);
+            navController.navigate(R.id.action_gameSelectionScreenFragment_to_gameScreenFragment);
         });
 
         return viewFragment;
@@ -112,31 +108,15 @@ public class GameSelectionScreenFragment extends Fragment{
     {
         for(String character : Objects.requireNonNull(activityViewModel.getCharacterNameList().getValue()))
         {
-            try {
-                if((callDAOAsync.getCharacterFromNameAsync(character)).get().getLevel() == level)
+            int position = activityViewModel.getCharacterNameList().getValue().indexOf(character);
+            if(Objects.requireNonNull(activityViewModel.getCharacterLevelList().getValue()).get(position) <= level)
+            {
+                if(!arrayList.contains(character))
                 {
-                    if(!arrayList.contains(character))
-                    {
-                        arrayList.add(character);
-                    }
+                    arrayList.add(character);
                 }
-            } catch (ExecutionException | InterruptedException e) {
-                throw new RuntimeException(e);
             }
         }
-    }
-
-    public static ArrayList<String> getListSuggestions()
-    {
-        return arrayList;
-    }
-
-    private ArrayList<String> getListLevels(int level)
-    {
-        try {
-            return new ArrayList<>(callDAOAsync.getNamesByDifficultyAsync(level).get());
-        } catch (ExecutionException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        activityViewModel.setSuggestions(arrayList);
     }
 }

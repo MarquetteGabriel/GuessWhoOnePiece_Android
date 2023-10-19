@@ -35,16 +35,13 @@ public class ListFragmentAdapter extends RecyclerView.Adapter<ListFragmentAdapte
     Context context;
     MainActivityViewModel mainActivityViewModel;
     List<String> characterNameList, characterPictureList;
-    List<Integer> characterLevelList;
 
-    public ListFragmentAdapter(Context context, List<String> characterNameList,
-                               List<Integer> characterLevelList, List<String> characterPictureList,
+    public ListFragmentAdapter(Context context, List<String> characterNameList, List<String> characterPictureList,
                                ListOfCharacterInterface listOfCharacterInterface,
                                MainActivityViewModel mainActivityViewModel)
     {
         this.context = context;
         this.characterNameList = characterNameList;
-        this.characterLevelList = characterLevelList;
         this.characterPictureList = characterPictureList;
         this.listOfCharacterInterface = listOfCharacterInterface;
         this.mainActivityViewModel = mainActivityViewModel;

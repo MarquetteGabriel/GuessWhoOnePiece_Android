@@ -25,4 +25,12 @@
     <string name="the_answer_was">La réponse était :</string>
     <string name="default_difficulty">FACILE</string>
     <string name="difficulty">"Difficulté : "</string>
+    <string name="ge">Âge :</string>
+    <string name="type">Type :</string>
+    <string name="prime">Prime :</string>
+    <string name="chapitre">Chapitre :</string>
+    <string name="fruit">Fruit :</string>
+    <string name="statut">Statut :</string>
+    <string name="equipage">Equipage :</string>
+    <string name="niveau">Niveau :</string>
 </resources>

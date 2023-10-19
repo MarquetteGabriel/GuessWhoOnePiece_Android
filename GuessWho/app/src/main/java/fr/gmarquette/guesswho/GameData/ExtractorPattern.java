@@ -301,6 +301,10 @@ public class ExtractorPattern
                 return "Jabura";
             case "Tama":
                 return "Kurozumi Tama";
+            case "Kaku (Wano)":
+                return "Kaku";
+            case "Enel":
+                return "Ener";
             default :
                 return character;
         }

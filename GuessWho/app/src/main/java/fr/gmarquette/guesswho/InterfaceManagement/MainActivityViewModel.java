@@ -23,6 +23,7 @@ public class MainActivityViewModel extends ViewModel {
     private MutableLiveData<List<Integer>> characterLevelList = new MutableLiveData<>();
 
     private MutableLiveData<Characters> characterInfo = new MutableLiveData<>();
+    private MutableLiveData<List<String>> charactersSuggestions = new MutableLiveData<>();
 
     public LiveData<List<String>> getCharacterNameList() {
         return characterNameList;
@@ -56,5 +57,15 @@ public class MainActivityViewModel extends ViewModel {
     public void setCharacterInfo(Characters characterInfo)
     {
         this.characterInfo.postValue(characterInfo);
+    }
+
+    public void setSuggestions(List<String> characters)
+    {
+        this.charactersSuggestions.setValue(characters);
+    }
+
+    public LiveData<List<String>> getSuggestions()
+    {
+        return this.charactersSuggestions;
     }
 }

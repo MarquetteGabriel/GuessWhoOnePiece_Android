@@ -108,7 +108,7 @@ public class LoadingScreenFragment extends Fragment {
             mainActivityViewModel.setCharacterLevelList(DataBase.getInstance(requireContext()).dao().getAllLevels());
             mainActivityViewModel.setCharacterPicturesList(DataBase.getInstance(requireContext()).dao().getAllPictures());
 
-            requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.gameSelectionScreenFragment));
+            requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.action_loadingScreenFragment_to_gameSelectionScreenFragment));
 
         });
     }

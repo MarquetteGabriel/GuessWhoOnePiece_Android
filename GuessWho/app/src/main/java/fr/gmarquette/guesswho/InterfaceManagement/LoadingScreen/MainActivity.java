@@ -111,12 +111,16 @@ public class MainActivity extends AppCompatActivity {
         {
             navController.navigate(R.id.action_gameSelectionScreenFragment_to_listOfCharactersFragment);
         }
+        else
+        {
+            navController.navigate(R.id.listOfCharactersFragment);
+        }
     }
 
     private void onHelpClicked()
     {
         onMenuButtonClicked();
-        navController.navigate(R.id.helpFragment);
+        navController.navigate(R.id.action_gameSelectionScreenFragment_to_helpFragment);
     }
 
     private void onMenuButtonClicked()
@@ -201,7 +205,16 @@ public class MainActivity extends AppCompatActivity {
 
             if(currentFragmentId == R.id.characterDatasFragment)
             {
-                navController.popBackStack(R.id.listOfCharactersFragment, false);
+                if(backFragmentId == R.id.gameSelectionScreenFragment)
+                {
+                    navController.popBackStack(R.id.gameSelectionScreenFragment, false);
+                    //navController.navigate(R.id.action_gameSelectionScreenFragment_to_listOfCharactersFragment);
+                }
+                else if (backFragmentId == R.id.gameScreenFragment)
+                {
+                    navController.popBackStack(R.id.gameScreenFragment, false);
+                    //navController.navigate(R.id.action_gameScreenFragment_to_listOfCharactersFragment);
+                }
             }
         }
         else

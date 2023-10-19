@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -41,7 +42,7 @@ import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
 import fr.gmarquette.guesswho.GameSystem.ChapterType;
 import fr.gmarquette.guesswho.GameSystem.GameInit;
 import fr.gmarquette.guesswho.GameSystem.GameManager;
-import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameSelectionScreenFragment;
+import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class GameScreenFragment extends Fragment {
@@ -68,8 +69,8 @@ public class GameScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
-
-        suggestions = GameSelectionScreenFragment.getListSuggestions();
+        MainActivityViewModel mainActivityViewModel = new ViewModelProvider(requireActivity()).get(MainActivityViewModel.class);
+        suggestions = (ArrayList<String>) mainActivityViewModel.getSuggestions().getValue();
 
         DataBase.getInstance(requireContext().getApplicationContext());
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
