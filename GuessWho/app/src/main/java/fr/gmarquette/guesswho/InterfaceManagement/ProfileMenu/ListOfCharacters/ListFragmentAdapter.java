@@ -104,14 +104,13 @@ public class ListFragmentAdapter extends RecyclerView.Adapter<ListFragmentAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView characterName, characterDifficulty;
+        TextView characterName;
         ImageView characterPicture;
 
         public ViewHolder(@NonNull View itemView, ListOfCharacterInterface listOfCharacterInterface, MainActivityViewModel viewModel) {
             super(itemView);
             characterPicture = itemView.findViewById(R.id.characterPicture);
             characterName = itemView.findViewById(R.id.characterName);
-            //characterDifficulty = itemView.findViewById(R.id.Level);
 
             itemView.setOnClickListener(view -> {
                 if(listOfCharacterInterface != null)

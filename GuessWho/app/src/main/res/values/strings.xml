@@ -44,4 +44,14 @@
     <string name="wins">Wins :</string>
     <string name="loses">Loses :</string>
     <string name="last_update">Last Update :</string>
+
+    <!-- String for Help Menu -->
+    <string name="fruitHelp"> </string>
+    <string name="bountyHelp"> </string>
+    <string name="ChapterHelp"> </string>
+    <string name="TypeHelp"> </string>
+    <string name="AliveHelp"> </string>
+    <string name="AgeHelp"> </string>
+    <string name="CrewHelp"> </string>
+
 </resources>

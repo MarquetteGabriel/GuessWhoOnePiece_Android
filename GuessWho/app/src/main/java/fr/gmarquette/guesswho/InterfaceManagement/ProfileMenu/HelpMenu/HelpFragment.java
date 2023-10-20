@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu;
+package fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.HelpMenu;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

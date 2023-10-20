@@ -129,7 +129,7 @@
     </fragment>
     <fragment
         android:id="@+id/helpFragment"
-        android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.HelpFragment"
+        android:name="fr.gmarquette.guesswho.InterfaceManagement.ProfileMenu.HelpMenu.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" >
         <action
