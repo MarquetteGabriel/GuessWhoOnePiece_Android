@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ @brief Copyright (c) 2023 Gabriel Marquette
+  ~
+  ~ Copyright (c) 2023 Gabriel Marquette. All rights reserved.
+  ~
+  -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"

@@ -1,4 +1,12 @@
 <resources>
+    <!--
+  ~
+  ~ @brief Copyright (c) 2023 Gabriel Marquette
+  ~
+  ~ Copyright (c) 2023 Gabriel Marquette. All rights reserved.
+  ~
+  -->
+
     <!-- App name -->
     <string name="app_name" translatable="false">GuessWho One Piece</string>
 
