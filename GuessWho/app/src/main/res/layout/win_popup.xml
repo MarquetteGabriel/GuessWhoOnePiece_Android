@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ @brief Copyright (c) 2023 Gabriel Marquette
+  ~
+  ~ Copyright (c) 2023 Gabriel Marquette. All rights reserved.
+  ~
+  -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -79,5 +86,13 @@
         app:srcCompat="@drawable/popup_bottom"
         android:contentDescription="TODO"
         tools:ignore="ContentDescription,HardcodedText,VisualLintBounds" />
+
+    <ImageView
+        android:id="@+id/characterPictureFinal"
+        android:layout_width="91dp"
+        android:layout_height="94dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

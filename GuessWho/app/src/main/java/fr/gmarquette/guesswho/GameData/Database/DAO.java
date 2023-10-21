@@ -28,6 +28,12 @@ public interface DAO{
     @Update
     void updateCharacter(Characters characters);
 
+    @Query("SELECT picture FROM Characters")
+    List<String> getAllPictures();
+
+    @Query("SELECT level FROM Characters")
+    List<Integer> getAllLevels();
+
     @Query("SELECT * FROM Characters WHERE name LIKE:name")
     Characters getCharacterFromName(String name);
 

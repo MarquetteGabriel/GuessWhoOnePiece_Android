@@ -9,6 +9,8 @@
 package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +19,15 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -36,7 +42,7 @@ import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
 import fr.gmarquette.guesswho.GameSystem.ChapterType;
 import fr.gmarquette.guesswho.GameSystem.GameInit;
 import fr.gmarquette.guesswho.GameSystem.GameManager;
-import fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen.GameSelectionScreenFragment;
+import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class GameScreenFragment extends Fragment {
@@ -63,8 +69,8 @@ public class GameScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
-
-        suggestions = GameSelectionScreenFragment.getListSuggestions();
+        MainActivityViewModel mainActivityViewModel = new ViewModelProvider(requireActivity()).get(MainActivityViewModel.class);
+        suggestions = (ArrayList<String>) mainActivityViewModel.getSuggestions().getValue();
 
         DataBase.getInstance(requireContext().getApplicationContext());
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
@@ -216,6 +222,11 @@ public class GameScreenFragment extends Fragment {
 
     private void displayWinDialog()
     {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("wins", sharedPreferences.getInt("wins", 0) + 1);
+        editor.apply();
+
         final Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -225,7 +236,9 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
+        ImageView pictureCharacter = dialog.findViewById(R.id.characterPictureFinal);
         answer.setText(characterToFind.getName());
+        Picasso.get().load(characterToFind.getPicture()).into(pictureCharacter);
 
         yesButton.setOnClickListener(view -> {
             restart();
@@ -243,6 +256,12 @@ public class GameScreenFragment extends Fragment {
 
     private void displayLooseDialog()
     {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("loses", sharedPreferences.getInt("loses", 0) + 1);
+        editor.apply();
+
+
         final Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -252,7 +271,9 @@ public class GameScreenFragment extends Fragment {
         Button noButton = dialog.findViewById(R.id.noButton);
 
         TextView answer = dialog.findViewById(R.id.answer);
+        ImageView pictureCharacter = dialog.findViewById(R.id.characterPictureFinal);
         answer.setText(characterToFind.getName());
+        Picasso.get().load(characterToFind.getPicture()).into(pictureCharacter);
 
         yesButton.setOnClickListener(view -> {
             restart();

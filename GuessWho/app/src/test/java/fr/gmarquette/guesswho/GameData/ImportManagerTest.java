@@ -59,6 +59,8 @@ public class ImportManagerTest {
             String fruitElement = doc.getElementsByClass(class_fruit).text();
             String class_type = "pi-item pi-data pi-item-spacing pi-border-color";
             Elements bountyTypeCrewElements = doc.getElementsByClass(class_type);
+            String class_picture = "pi-navigation pi-item-spacing pi-secondary-font";
+            String pictureElement = doc.getElementsByClass(class_picture).select("img").attr("src");
 
             for (Element bountyTypeCrewElement : bountyTypeCrewElements) {
                 String dataSource = bountyTypeCrewElement.attr("data-source");
@@ -80,7 +82,7 @@ public class ImportManagerTest {
             int age = ExtractorPattern.extractPatternAge(characterData);
             crew = ExtractorPattern.fixCrew(crew, type);
 
-            return new Characters(character, fruit, bounty, chapter, type, alived, age, crew, "" , 2 + 1);
+            return new Characters(character, fruit, bounty, chapter, type, alived, age, crew, pictureElement , 2 + 1);
 
         } catch (IOException e) {
             return null;

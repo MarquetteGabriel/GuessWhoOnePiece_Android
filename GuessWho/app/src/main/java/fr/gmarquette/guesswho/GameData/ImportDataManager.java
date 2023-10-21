@@ -20,7 +20,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -43,7 +42,6 @@ public class ImportDataManager
     public final List<String> characterNameList = new ArrayList<>();
     private final List<String> listPopularity = new ArrayList<>();
     private final CopyOnWriteArrayList<Characters> charactersList = new CopyOnWriteArrayList<>();
-    private final LinkedHashMap<String, String> listPictures = new LinkedHashMap<>();
     private List<String> completedNameList = new ArrayList<>();
     private int countPercentage, countLevels;
 
@@ -98,7 +96,7 @@ public class ImportDataManager
     /*
     Import Datas from websites (Api update later)
      */
-    private void getListOfCharacters()
+    void getListOfCharacters()
     {
         try {
             String url_fandom_listcharacter = "https://onepiece.fandom.com/fr/wiki/Liste_des_Personnages_Canon";
@@ -113,8 +111,8 @@ public class ImportDataManager
                     for (Element row : rows) {
                         Elements columns = row.select("td");
                         if (columns.size() >= 6) {
-                            characterNameList.add(ExtractorPattern.extractExceptions(columns.get(1).text()));
-                            listPictures.put(ExtractorPattern.extractExceptions(columns.get(1).text()), columns.select("img").attr("src"));
+                            String character = ExtractorPattern.extractExceptions(columns.get(1).text());
+                            characterNameList.add(character);
                         }
                     }
                 }
@@ -146,6 +144,8 @@ public class ImportDataManager
             String class_fruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
             String fruitElement = doc.getElementsByClass(class_fruit).text();
             String class_type = "pi-item pi-data pi-item-spacing pi-border-color";
+            String class_picture = "pi-navigation pi-item-spacing pi-secondary-font";
+            String pictureElement = doc.getElementsByClass(class_picture).select("img").attr("src");
             Elements bountyTypeCrewElements = doc.getElementsByClass(class_type);
 
             for (Element bountyTypeCrewElement : bountyTypeCrewElements) {
@@ -169,7 +169,7 @@ public class ImportDataManager
             crew = ExtractorPattern.fixCrew(crew, type);
 
             Characters characters = new Characters(character, fruit, bounty, chapter, type, alived,
-                    age, crew, listPictures.get(character), NUMBER_OF_LEVELS + 1);
+                    age, crew, pictureElement, NUMBER_OF_LEVELS + 1);
             charactersList.add(characters);
             countPercentage++;
 

@@ -23,4 +23,9 @@
     <string name="do_you_want_to_play_again">Do you want to play again ?</string>
     <string name="the_answer_was">"The answer was : "</string>
     <string name="default_difficulty">EASY</string>
+    <string name="difficulty">"Difficulty : "</string>
+    <string name="import_datas">Import Datas</string>
+    <string name="wins">Wins :</string>
+    <string name="loses">Loses :</string>
+    <string name="last_update">Last Update :</string>
 </resources>

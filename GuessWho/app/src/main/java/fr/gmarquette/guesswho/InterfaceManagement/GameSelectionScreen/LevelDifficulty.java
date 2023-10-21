@@ -11,6 +11,7 @@ package fr.gmarquette.guesswho.InterfaceManagement.GameSelectionScreen;
 public enum LevelDifficulty
 {
     EASY,
+    MEDIUM,
     HARD;
 
     public static LevelDifficulty getLevelDifficultyByValue(int value)
