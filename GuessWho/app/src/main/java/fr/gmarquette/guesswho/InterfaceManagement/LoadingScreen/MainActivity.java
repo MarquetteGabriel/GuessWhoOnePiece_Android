@@ -24,6 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Calendar;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
+import fr.gmarquette.guesswho.GameSystem.Music.PlaylistEditor;
 import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         fab_list.setOnClickListener(view -> onListButtonClicked());
         fab_settings.setOnClickListener(view -> onSettingsClicked());
         fab_help.setOnClickListener(view -> onHelpClicked());
+
+        PlaylistEditor playlistEditor = new PlaylistEditor(this);
+        playlistEditor.start();
 
         SharedPreferences sharedPreferences = getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
         boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
