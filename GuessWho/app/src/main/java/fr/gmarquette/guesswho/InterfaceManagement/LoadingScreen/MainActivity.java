@@ -101,17 +101,17 @@ public class MainActivity extends AppCompatActivity {
     {
         if(!clicked)
         {
-            fab_menu.setAnimation(openMenu);
+            fab_menu.startAnimation(openMenu);
             fab_list.startAnimation(fromBottom);
             fab_settings.startAnimation(fromBottom);
-            fab_help.setAnimation(fromBottom);
+            fab_help.startAnimation(fromBottom);
         }
         else
         {
             fab_menu.startAnimation(closeMenu);
             fab_list.startAnimation(toBottom);
             fab_settings.startAnimation(toBottom);
-            fab_help.setAnimation(toBottom);
+            fab_help.startAnimation(toBottom);
         }
     }
 

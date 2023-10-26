@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -48,8 +50,10 @@ public class GameScreenFragment extends Fragment {
     private CallDAOAsync callDAOAsync;
     private GameInit gameInit;
 
+    Animation fadein, fadeout;
     private ArrayList<String> suggestions;
     View viewFragment;
+    GridAdapter gridAdapter;
     private GridView gridView;
     String[] textAnswer = {"","","","","","","","","","", "","","","","","","","","","", "","","","",
             "","","","","","", "","","","","","","","","","", "", ""};
@@ -81,8 +85,11 @@ public class GameScreenFragment extends Fragment {
         viewFragment = inflater.inflate(R.layout.fragment_game_screen, container, false);
         gridView = viewFragment.findViewById(R.id.grid_view);
 
-        GridAdapter gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer, circleImages, answerImages);
+        gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer, circleImages, answerImages);
         gridView.setAdapter(gridAdapter);
+
+        fadein = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in);
+        fadeout = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out);
 
         suggestions = GameSelectionScreenFragment.getListSuggestions();
 
@@ -253,16 +260,12 @@ public class GameScreenFragment extends Fragment {
 
 
     public void crossFading(final ImageView imageViewBackground, final ImageView imageViewAnswer, final TextView textView, final int imageBackgroundId, final int imageAnswerId, final String answer) {
+
         if(imageViewBackground != null && imageBackgroundId != 0)
         {
-            imageViewBackground.animate().alpha(0f).setDuration(500)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            imageViewBackground.setImageResource(imageBackgroundId);
-                            imageViewBackground.animate().alpha(1f).setDuration(500).start();
-                        }
-                    }).start();
+            imageViewBackground.startAnimation(fadein);
+            imageViewBackground.setImageResource(imageBackgroundId);
+            imageViewBackground.startAnimation(fadeout);
         }
 
         if(imageViewAnswer != null && imageAnswerId != 0)
@@ -281,25 +284,28 @@ public class GameScreenFragment extends Fragment {
 
         if(textView != null && answer != null)
         {
-            textView.animate()
-                    .alpha(0f)
-                    .setDuration(500)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            textView.setText(answer);
-                            textView.animate().alpha(1f).setDuration(500).start();
-                        }
-                    }).start();
+            textView.startAnimation(fadein);
+            textView.setText(answer);
+            textView.startAnimation(fadeout);
         }
 
     }
 
     public void getAnswerPrinted(int position, int imageBackgroundId, int answerImageId, String answer) {
 
-        ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
-        ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
-        TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
-        crossFading(imageBackground, imageAnswer, textAnswer, imageBackgroundId, answerImageId, answer);
+        //ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
+        //ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
+        //TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
+
+        gridAdapter.setText(position, answer);
+        gridAdapter.setWr_circle(position, imageBackgroundId);
+        gridAdapter.setAnswer_circle(position, answerImageId);
+        gridAdapter.notifyDataSetChanged();
+
+
+        //textAnswer.setText(answer);
+        //imageAnswer.setImageResource(answerImageId);
+        //imageBackground.setImageResource(imageBackgroundId);
+        //crossFading(imageBackground, imageAnswer, textAnswer, imageBackgroundId, answerImageId, answer);
     }
 }
