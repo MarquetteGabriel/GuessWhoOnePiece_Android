@@ -34,6 +34,8 @@ import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
@@ -68,7 +70,7 @@ public class GameScreenFragment extends Fragment {
             R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
             R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,  R.drawable.empty_circle};
 
-
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
     public GameScreenFragment() {
         // Required empty public constructor
     }
@@ -107,8 +109,10 @@ public class GameScreenFragment extends Fragment {
 
             InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
-
-            getAnswer(selectedValue);
+            new Thread(() ->
+            {
+                getAnswer(selectedValue);
+            }).start();
 
             autoCompleteTextView.setText("");
         });
@@ -263,9 +267,16 @@ public class GameScreenFragment extends Fragment {
 
         if(imageViewBackground != null && imageBackgroundId != 0)
         {
-            imageViewBackground.startAnimation(fadein);
-            imageViewBackground.setImageResource(imageBackgroundId);
-            imageViewBackground.startAnimation(fadeout);
+            imageViewBackground.animate()
+                    .alpha(0f)
+                    .setDuration(500)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            imageViewBackground.setImageResource(imageBackgroundId);
+                            imageViewBackground.animate().alpha(1f).setDuration(500).start();
+                        }
+                    }).start();
         }
 
         if(imageViewAnswer != null && imageAnswerId != 0)
@@ -282,25 +293,48 @@ public class GameScreenFragment extends Fragment {
                     }).start();
         }
 
-        if(textView != null && answer != null)
+        if(textView != null)
         {
-            textView.startAnimation(fadein);
-            textView.setText(answer);
-            textView.startAnimation(fadeout);
+            textView.animate()
+                    .alpha(0f)
+                    .setDuration(500)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            textView.setText(answer);
+                            textView.animate().alpha(1f).setDuration(500).start();
+                        }
+                    }).start();
         }
 
-    }
 
+    }
+final Object lock = new Object();
     public void getAnswerPrinted(int position, int imageBackgroundId, int answerImageId, String answer) {
 
         //ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
         //ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
         //TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
 
-        gridAdapter.setText(position, answer);
-        gridAdapter.setWr_circle(position, imageBackgroundId);
-        gridAdapter.setAnswer_circle(position, answerImageId);
-        gridAdapter.notifyDataSetChanged();
+        synchronized (lock)
+        {
+
+        }
+
+        synchronized (lock)
+        {
+            requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    gridAdapter.setText(position, answer);
+                    gridAdapter.setWr_circle(position, imageBackgroundId);
+                    gridAdapter.setAnswer_circle(position, answerImageId);
+                    gridAdapter.notifyDataSetChanged();
+                    lock.notify();
+                }
+            });
+        }
+
 
 
         //textAnswer.setText(answer);
