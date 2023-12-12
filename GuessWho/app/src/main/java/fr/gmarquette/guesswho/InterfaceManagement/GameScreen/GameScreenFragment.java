@@ -12,7 +12,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,7 +25,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -38,8 +36,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
@@ -94,8 +90,6 @@ public class GameScreenFragment extends Fragment {
 
         gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer, circleImages, answerImages);
         gridView.setAdapter(gridAdapter);
-
-        suggestions = GameSelectionScreenFragment.getListSuggestions();
 
         DataBase.getInstance(requireContext().getApplicationContext());
         callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
@@ -176,16 +170,6 @@ public class GameScreenFragment extends Fragment {
 
     public void restart()
     {
-        CleanGameScreen.cleanPictures(viewFragment);
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(() ->
-        {
-            try {
-                characterToFind = gameInit.getCharacterToFound(suggestions);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
         cleanPicture();
         try {
             characterToFind = gameInit.getCharacterToFound(suggestions);
@@ -197,24 +181,41 @@ public class GameScreenFragment extends Fragment {
 
     private void cleanPicture()
     {
-        gridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                for(int i = 0; i < gridView.getCount(); i++)
-                {
-                    ImageView imageViewBackground = gridView.getChildAt(i).findViewById(R.id.wr_circle);
-                    imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-                    ImageView imageViewAnswer = gridView.getChildAt(i).findViewById(R.id.answer_circle);
-                    imageViewAnswer.setImageResource(PicturesAlbum.getInstance().EMPTY_ANSWER);
-                    TextView textView = gridView.getChildAt(i).findViewById(R.id.text_answer);
-                    textView.setText("");
-                }
-
-                gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
+        try {
+            cleanGridView(gridView);
+            for (int i = 0; i < 6; i++) {
+                String guess = "guess_" + (i + 1);
+                int id = getResources().getIdentifier(guess, "id", requireContext().getPackageName());
+                TextView textView = viewFragment.findViewById(id);
+                int stringId = getResources().getIdentifier(guess, "string", requireContext().getPackageName());
+                String guessString = getResources().getString(stringId);
+                textView.setText(guessString);
             }
-        });
+        }
+        catch (Exception e)
+        {
+            gridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    cleanGridView(gridView);
+                    gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
+                }
+            });
+        }
+    }
+
+    private void cleanGridView(GridView gridView)
+    {
+        for(int i = 0; i < gridView.getCount(); i++)
+        {
+            ImageView imageViewBackground = gridView.getChildAt(i).findViewById(R.id.wr_circle);
+            imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
+            ImageView imageViewAnswer = gridView.getChildAt(i).findViewById(R.id.answer_circle);
+            imageViewAnswer.setImageResource(PicturesAlbum.getInstance().EMPTY_ANSWER);
+            TextView textView = gridView.getChildAt(i).findViewById(R.id.text_answer);
+            textView.setText("");
+        }
     }
 
     private void displayWinDialog()

@@ -190,165 +190,71 @@ public class AnimationManager
             case "Citizen":
                 return (PicturesAlbum.getInstance().CREW_CITIZEN);
             case "Navy's Crew":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_NAVY);
-                break;
+                return (PicturesAlbum.getInstance().CREW_NAVY);
             case "Clan d'Ener":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_ENER);
-                break;
+                return (PicturesAlbum.getInstance().CREW_ENER);
             case "L'Équipage aux Cent Bêtes":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_KAIDO);
-                break;
+                return (PicturesAlbum.getInstance().CREW_KAIDO);
             case "L'Équipage de Barbe Noire":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_TEACH);
-                break;
+                return (PicturesAlbum.getInstance().CREW_TEACH);
             case "L'Équipage de Big Mom":
             case "Équipage de Big Mom":
             case "Famille Charlotte":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_BIGMOM);
-                break;
-            case "L'Équipage du Clown":
-            case "Alliance Baggy et Alvida":
-            case "":
-                return (PicturesAlbum.getInstance().CREW_NAVY);
-            case "Ener's Crew":
-                return (PicturesAlbum.getInstance().CREW_ENER);
-            case "Kaido's Crew":
-                return (PicturesAlbum.getInstance().CREW_KAIDO);
-            case "Teach's Crew":
-                return (PicturesAlbum.getInstance().CREW_TEACH);
-            case "BigMom's Crew":
                 return (PicturesAlbum.getInstance().CREW_BIGMOM);
             case "Cross Guild":
                 return (PicturesAlbum.getInstance().CROSS_GUILD);
-            case "Shanks's Crew":
-                return (PicturesAlbum.getInstance().CREW_SHANKS);
-            case "Newgate's Crew":
-                return (PicturesAlbum.getInstance().CREW_NEWGATE);
-            case "Mugiwara's Crew":
-            case "Mugiwara's Armada Crew":
-                return (PicturesAlbum.getInstance().CREW_MUGIWARA);
-                imageView.setImageResource(PicturesAlbum.getInstance().CROSS_GUILD);
-                break;
             case "L'Équipage du Roux":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_SHANKS);
-                break;
+                return (PicturesAlbum.getInstance().CREW_SHANKS);
             case "L'Équipage de Barbe Blanche":
             case "Subordonné de L'Équipage de Barbe Blanche":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_NEWGATE);
-                break;
+                return (PicturesAlbum.getInstance().CREW_NEWGATE);
             case "L'Équipage du Chapeau de Paille":
             case "Allié de L'Équipage du Chapeau de Paille":
             case "La Grande Flotte du Chapeau de Paille":
             case "Alliance de l'Équipage du Chapeau de Paille":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_MUGIWARA);
-                break;
+                return (PicturesAlbum.getInstance().CREW_MUGIWARA);
             case "Revolutionary's Crew":
                 return (PicturesAlbum.getInstance().CREW_REVOLUTIONARY_ARMY);
-            case "World Government":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_REVOLUTIONARY_ARMY);
-                break;
             case "Gouvernement Mondial":
             case "Cipher Pol":
                 return (PicturesAlbum.getInstance().CREW_WORLDGOV);
-            case "Arlong's Crew":
+            case "L'Équipage d'Arlong":
                 return (PicturesAlbum.getInstance().CREW_ARLONG);
             case "Baroque Works":
                 return (PicturesAlbum.getInstance().CREW_BW);
-            case "Don Krieg's Crew":
-                return (PicturesAlbum.getInstance().CREW_KRIEG);
-            case "Moria's Crew" :
-                return (PicturesAlbum.getInstance().CREW_MORIA);
-            case "Heart's Crew" :
-                return (PicturesAlbum.getInstance().CREW_LAW);
-            case "Kidd's Crew" :
-                return (PicturesAlbum.getInstance().CREW_KIDD);
-            case "Kuja's Crew" :
-                return (PicturesAlbum.getInstance().CREW_KUJA);
-            case "Caribou's Crew" :
-                return (PicturesAlbum.getInstance().CREW_CARIBOU);
-            case "Sun Pirates' Crew" :
-                return (PicturesAlbum.getInstance().CREW_SUNPIRATES);
-            case "Roger's Crew" :
-                return (PicturesAlbum.getInstance().CREW_ROGER);
-            case "Doflamingo's Crew" :
-                return (PicturesAlbum.getInstance().CREW_DOFFY);
-            case "Rumbar's Crew" :
-                return (PicturesAlbum.getInstance().CREW_RUMBAR);
-            case "Fishmen's Crew" :
-                return (PicturesAlbum.getInstance().CREW_NEWFISH);
-            case "Giants' Crew":
-                return (PicturesAlbum.getInstance().CREW_GIANTS);
-            case "Celestial Dragons" :
-                return (PicturesAlbum.getInstance().CREW_CELESTIAL);
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_WORLDGOV);
-                break;
-            case "L'Équipage d'Arlong":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_ARLONG);
-                break;
             case "L'Armada Pirate de Don Krieg":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_KRIEG);
-                break;
+                return (PicturesAlbum.getInstance().CREW_KRIEG);
             case "Gecko Moria" :
             case "Hogback":
             case "Thriller Bark":
             case "Dracule Mihawk":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_MORIA);
-                break;
+                return (PicturesAlbum.getInstance().CREW_MORIA);
             case "L'Équipage du Heart" :
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_LAW);
-                break;
+                return (PicturesAlbum.getInstance().CREW_LAW);
             case "L'Équipage de Kid" :
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_KIDD);
-                break;
+                return (PicturesAlbum.getInstance().CREW_KIDD);
             case "Kujas" :
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_KUJA);
-                break;
+                return (PicturesAlbum.getInstance().CREW_KUJA);
             case "Capitaine de l'Equipage de Caribou" :
             case "L'Équipage de Caribou":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_CARIBOU);
-                break;
+                return (PicturesAlbum.getInstance().CREW_CARIBOU);
             case "L'Équipage des Pirates du Soleil" :
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_SUNPIRATES);
-                break;
+                return (PicturesAlbum.getInstance().CREW_SUNPIRATES);
             case "L'Équipage des Pirates Roger" :
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_ROGER);
-                break;
+                return (PicturesAlbum.getInstance().CREW_ROGER);
             case "L'Équipage du New Age":
             case "L'Équipage de Don Quichotte Doflamingo" :
             case "César Clown (espionnage)":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_DOFFY);
-                break;
+                return (PicturesAlbum.getInstance().CREW_DOFFY);
             case "L'Équipage du Rumbar " :
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_RUMBAR);
-                break;
+                return (PicturesAlbum.getInstance().CREW_RUMBAR);
             case "L'Équipage des Pirates Volants":
             case "L'Équipage des Nouveaux Hommes-Poissons" :
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_NEWFISH);
-                break;
+                return (PicturesAlbum.getInstance().CREW_NEWFISH);
             case "L'Équipage des Géants":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_GIANTS);
-                break;
-            case "Impel Down":
-                return (PicturesAlbum.getInstance().CREW_ID);
-            case "Monkey's Forces Crew":
-            case "Weeble's Crew" :
-            case "Black Cat's Crew" :
-            case "Foxy's Crew" :
-            case "Bege's Crew" :
-            case "Bonney's Crew" :
-            case "Urouge's Crew" :
-            case "Nox's Crew":
-            case "Assassin's Mogalo":
-            case "Vegapunk's Factory" :
-            case "Bluejam's Crew" :
-            case "False Mugiwara's Crew" :
-            case "Caesar's Crew" :
-            case "Dadan's Crew":
-            case "Mountain's Bandits":
-            case "Zeff's Crew":
-            case "8 Treasure's Navy":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_ID);
-                break;
+                return (PicturesAlbum.getInstance().CREW_GIANTS);
+            case "Celestial Dragons" :
+                return (PicturesAlbum.getInstance().CREW_CELESTIAL);
             case "Ligue des Primates":
             case "Edward Weeble":
             case "L'Équipage du Chat Noir" :
