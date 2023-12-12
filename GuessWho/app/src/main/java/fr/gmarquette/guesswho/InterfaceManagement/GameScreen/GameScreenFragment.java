@@ -18,8 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -34,8 +32,6 @@ import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
@@ -52,11 +48,12 @@ public class GameScreenFragment extends Fragment {
     private CallDAOAsync callDAOAsync;
     private GameInit gameInit;
 
-    Animation fadein, fadeout;
     private ArrayList<String> suggestions;
     View viewFragment;
     GridAdapter gridAdapter;
     private GridView gridView;
+
+    AutoCompleteTextView autoCompleteTextView;
     String[] textAnswer = {"","","","","","","","","","", "","","","","","","","","","", "","","","",
             "","","","","","", "","","","","","","","","","", "", ""};
     int[] circleImages = {R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle, R.drawable.gray_circle,
@@ -69,8 +66,6 @@ public class GameScreenFragment extends Fragment {
             R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
             R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,
             R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle, R.drawable.empty_circle,  R.drawable.empty_circle};
-
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
     public GameScreenFragment() {
         // Required empty public constructor
     }
@@ -90,9 +85,6 @@ public class GameScreenFragment extends Fragment {
         gridAdapter = new GridAdapter(requireContext().getApplicationContext(), textAnswer, circleImages, answerImages);
         gridView.setAdapter(gridAdapter);
 
-        fadein = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in);
-        fadeout = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out);
-
         suggestions = GameSelectionScreenFragment.getListSuggestions();
 
         DataBase.getInstance(requireContext().getApplicationContext());
@@ -100,7 +92,7 @@ public class GameScreenFragment extends Fragment {
         gameInit = new GameInit(requireContext().getApplicationContext());
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, suggestions);
-        AutoCompleteTextView autoCompleteTextView = viewFragment.findViewById(R.id.EnterTextAutoCompleted);
+        autoCompleteTextView = viewFragment.findViewById(R.id.EnterTextAutoCompleted);
 
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setOnItemClickListener((adapterView, view, position, id) -> {
@@ -109,11 +101,8 @@ public class GameScreenFragment extends Fragment {
 
             InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
-            new Thread(() ->
-            {
-                getAnswer(selectedValue);
-            }).start();
 
+            getAnswer(selectedValue);
             autoCompleteTextView.setText("");
         });
 
@@ -269,7 +258,7 @@ public class GameScreenFragment extends Fragment {
         {
             imageViewBackground.animate()
                     .alpha(0f)
-                    .setDuration(500)
+                    .setDuration(300)
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
@@ -283,7 +272,7 @@ public class GameScreenFragment extends Fragment {
         {
             imageViewAnswer.animate()
                     .alpha(0f)
-                    .setDuration(500)
+                    .setDuration(300)
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
@@ -297,7 +286,7 @@ public class GameScreenFragment extends Fragment {
         {
             textView.animate()
                     .alpha(0f)
-                    .setDuration(500)
+                    .setDuration(300)
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
@@ -306,40 +295,21 @@ public class GameScreenFragment extends Fragment {
                         }
                     }).start();
         }
-
-
     }
-final Object lock = new Object();
     public void getAnswerPrinted(int position, int imageBackgroundId, int answerImageId, String answer) {
 
-        //ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
-        //ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
-        //TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
+        ImageView imageBackground = gridView.getChildAt(position).findViewById(R.id.wr_circle);
+        ImageView imageAnswer = gridView.getChildAt(position).findViewById(R.id.answer_circle);
+        TextView textAnswer = gridView.getChildAt(position).findViewById(R.id.text_answer);
 
-        synchronized (lock)
-        {
+        // With animation partially working
+        /*
+        crossFading(imageBackground, imageAnswer, textAnswer, imageBackgroundId, answerImageId, answer);
+         */
 
-        }
-
-        synchronized (lock)
-        {
-            requireActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    gridAdapter.setText(position, answer);
-                    gridAdapter.setWr_circle(position, imageBackgroundId);
-                    gridAdapter.setAnswer_circle(position, answerImageId);
-                    gridAdapter.notifyDataSetChanged();
-                    lock.notify();
-                }
-            });
-        }
-
-
-
-        //textAnswer.setText(answer);
-        //imageAnswer.setImageResource(answerImageId);
-        //imageBackground.setImageResource(imageBackgroundId);
-        //crossFading(imageBackground, imageAnswer, textAnswer, imageBackgroundId, answerImageId, answer);
+        // Without animation
+        imageBackground.setImageResource(imageBackgroundId);
+        imageAnswer.setImageResource(answerImageId);
+        textAnswer.setText(answer);
     }
 }
