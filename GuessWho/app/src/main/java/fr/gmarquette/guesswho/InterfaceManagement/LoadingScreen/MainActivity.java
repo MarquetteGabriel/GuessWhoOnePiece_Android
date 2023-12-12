@@ -25,7 +25,6 @@ import java.util.Calendar;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
 import fr.gmarquette.guesswho.GameSystem.Music.BandeSon;
-import fr.gmarquette.guesswho.GameSystem.Music.PlayNikaLaugh;
 import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -137,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(currentFragmentId == R.id.settingsFragment)
         {
-            PlayNikaLaugh.stop();
             navController.navigate(R.id.action_settingsFragment_to_listOfCharactersFragment);
         }
         else
@@ -159,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(currentFragmentId == R.id.settingsFragment)
         {
-            PlayNikaLaugh.stop();
             navController.navigate(R.id.action_settingsFragment_to_helpFragment);
         }
         else
@@ -240,7 +237,6 @@ public class MainActivity extends AppCompatActivity {
 
             if (currentFragmentId == R.id.helpFragment || currentFragmentId == R.id.settingsFragment || currentFragmentId == R.id.listOfCharactersFragment)
             {
-                PlayNikaLaugh.stop();
                 if (backFragmentId == R.id.gameScreenFragment) {
                     navController.popBackStack(R.id.gameScreenFragment, false);
                 }

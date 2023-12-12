@@ -22,10 +22,6 @@ public class PlayNikaLaugh
         mediaPlayer = MediaPlayer.create(view.getContext(), R.raw.nika_laugh);
         mediaPlayer.setVolume(volumeNika, volumeNika);
         mediaPlayer.start();
-    }
-
-    public static void stop()
-    {
-        mediaPlayer.stop();
+        mediaPlayer.setOnCompletionListener(MediaPlayer::release);
     }
 }
