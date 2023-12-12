@@ -15,12 +15,12 @@ import fr.gmarquette.guesswho.R;
 
 public class PlayNikaLaugh
 {
-    private static final int volume = 50;
+    private static final int volumeNika = BandeSon.volume + 20;
     private static MediaPlayer mediaPlayer;
     public static void play(View view)
     {
         mediaPlayer = MediaPlayer.create(view.getContext(), R.raw.nika_laugh);
-        mediaPlayer.setVolume(volume, volume);
+        mediaPlayer.setVolume(volumeNika, volumeNika);
         mediaPlayer.start();
     }
 

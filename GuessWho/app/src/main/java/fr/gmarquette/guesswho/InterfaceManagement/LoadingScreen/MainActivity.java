@@ -24,6 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Calendar;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
+import fr.gmarquette.guesswho.GameSystem.Music.BandeSon;
 import fr.gmarquette.guesswho.GameSystem.Music.PlayNikaLaugh;
 import fr.gmarquette.guesswho.R;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Animation fromBottom, toBottom, openMenu, closeMenu;
     private FloatingActionButton fab_menu, fab_list, fab_settings, fab_help;
     private boolean clicked;
+    private BandeSon bandeSon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
         sharedPreferences.getInt("wins", 0);
         sharedPreferences.getInt("loses", 0);
+
+        bandeSon = BandeSon.getInstance();
+        bandeSon.init(this);
 
         int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         if(currentDay == 1)
@@ -262,5 +267,17 @@ public class MainActivity extends AppCompatActivity {
         {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        bandeSon.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bandeSon.resume();
     }
 }

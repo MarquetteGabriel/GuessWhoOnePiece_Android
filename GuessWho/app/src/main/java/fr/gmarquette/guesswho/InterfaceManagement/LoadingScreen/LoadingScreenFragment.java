@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -30,6 +29,7 @@ import java.util.concurrent.Executors;
 
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
+import fr.gmarquette.guesswho.GameSystem.Music.BandeSon;
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
@@ -43,6 +43,7 @@ public class LoadingScreenFragment extends Fragment {
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     private ImportDataManager importDataManager;
     private MainActivityViewModel mainActivityViewModel;
+    private BandeSon bandeSon;
 
     public LoadingScreenFragment() {
     }
@@ -65,6 +66,9 @@ public class LoadingScreenFragment extends Fragment {
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
         boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
         String dateOfUpdate = sharedPreferences.getString("Date of Update", "26/07/2001");
+
+        bandeSon = BandeSon.getInstance();
+        bandeSon.playOpening();
 
         if(isUpdated)
         {
@@ -115,7 +119,11 @@ public class LoadingScreenFragment extends Fragment {
             mainActivityViewModel.setCharacterLevelList(DataBase.getInstance(requireContext()).dao().getAllLevels());
             mainActivityViewModel.setCharacterPicturesList(DataBase.getInstance(requireContext()).dao().getAllPictures());
 
-            requireActivity().runOnUiThread(() -> Navigation.findNavController(view).navigate(R.id.action_loadingScreenFragment_to_gameSelectionScreenFragment));
+            requireActivity().runOnUiThread(() -> {
+                bandeSon.stop();
+                bandeSon.startPlaying();
+                Navigation.findNavController(view).navigate(R.id.action_loadingScreenFragment_to_gameSelectionScreenFragment);
+            });
 
         });
     }
