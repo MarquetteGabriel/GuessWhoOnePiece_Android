@@ -8,9 +8,6 @@
 
 package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameSystem.AgeType;
 import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
@@ -18,118 +15,118 @@ import fr.gmarquette.guesswho.GameSystem.ChapterType;
 
 public class AnimationManager
 {
-    public static void updateFruit(boolean eatenFruit, Characters characters, ImageView imageViewBackground, ImageView imageViewAnswer)
+    public static Answering updateFruit(boolean eatenFruit, Characters characters)
     {
+        int circle, answer;
         if (characters.hasDevilFruit())
         {
-            imageViewAnswer.setImageResource(PicturesAlbum.getInstance().DEVIL_FRUIT);
+            answer = (PicturesAlbum.getInstance().DEVIL_FRUIT);
         }
         else
         {
-            imageViewAnswer.setImageResource(PicturesAlbum.getInstance().NO_DEVIL_FRUIT);
+            answer = (PicturesAlbum.getInstance().NO_DEVIL_FRUIT);
         }
 
         if(eatenFruit)
         {
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().CORRECT_ANSWER);
+            circle = (PicturesAlbum.getInstance().CORRECT_ANSWER);
         }
         else
         {
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
+            circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
         }
+
+        return new Answering(circle, answer);
     }
 
-    public static void updateBounty(BountyType bountyType, Characters characters, ImageView imageViewBackground, ImageView imageViewAnswer, TextView textView)
+    public static Answering updateBounty(BountyType bountyType, Characters characters)
     {
-        String bounty = characters.getBounty();
+        int circle = 0, answer = 0;
+        String text = characters.getBounty();
         switch (bountyType)
         {
             case EQUAL:
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().CORRECT_ANSWER);
-                textView.setText(bounty);
+                circle = (PicturesAlbum.getInstance().CORRECT_ANSWER);
                 break;
             case LOWER:
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-                imageViewAnswer.setImageResource(PicturesAlbum.getInstance().ARROW_DOWN);
-                textView.setText(bounty);
+                circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
+                answer = (PicturesAlbum.getInstance().ARROW_DOWN);
                 break;
             case UPPER:
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-                imageViewAnswer.setImageResource(PicturesAlbum.getInstance().ARROW_UP);
-                textView.setText(bounty);
+                circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
+                answer = (PicturesAlbum.getInstance().ARROW_UP);
                 break;
             case WRONG_UNKNOWN :
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-                textView.setText(bounty);
+                circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
                 break;
             default:
                 break;
         }
+        return new Answering(circle, answer, text);
     }
 
-    public static void updateAge(AgeType ageType, Characters characters, ImageView imageViewBackground, ImageView imageViewArrows, TextView textView)
+    public static Answering updateAge(AgeType ageType, Characters characters)
     {
-        String age = String.valueOf(characters.getAge());
+        int circle = 0, answer = 0;
+        String text = String.valueOf(characters.getAge());
         switch (ageType)
         {
             case YOUNGER: // Arrow above
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-                imageViewArrows.setImageResource(PicturesAlbum.getInstance().ARROW_UP);
-                textView.setText(age);
+                circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
+                answer = (PicturesAlbum.getInstance().ARROW_UP);
                 break;
             case OLDER: // Arrow down
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-                imageViewArrows.setImageResource(PicturesAlbum.getInstance().ARROW_DOWN);
-                textView.setText(age);
+                circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
+                answer = (PicturesAlbum.getInstance().ARROW_DOWN);
                 break;
             case EQUAL:
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().CORRECT_ANSWER);
-                textView.setText(age);
+                circle = (PicturesAlbum.getInstance().CORRECT_ANSWER);
                 break;
             default:
                 break;
         }
+        return new Answering(circle, answer, text);
     }
 
-    public static void updateChapter(ChapterType chapterType, Characters characters, ImageView imageViewBackground, ImageView imageViewArrows, TextView textView)
+    public static Answering updateChapter(ChapterType chapterType, Characters characters)
     {
-        String chapter = String.valueOf(characters.getFirstAppearance());
+        int circle = 0, answer = 0;
+        String text = String.valueOf(characters.getFirstAppearance());
         switch (chapterType)
         {
             case NEWER_CHAPTER: // Arrow down
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-                imageViewArrows.setImageResource(PicturesAlbum.getInstance().ARROW_UP);
-                textView.setText(chapter);
+                circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
+                answer = (PicturesAlbum.getInstance().ARROW_UP);
                 break;
             case PREVIOUS_CHAPTER: // Arrow above
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
-                imageViewArrows.setImageResource(PicturesAlbum.getInstance().ARROW_DOWN);
-                textView.setText(chapter);
+                circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
+                answer = (PicturesAlbum.getInstance().ARROW_DOWN);
                 break;
             case SAME_CHAPTER:
-                imageViewBackground.setImageResource(PicturesAlbum.getInstance().CORRECT_ANSWER);
-                textView.setText(chapter);
+                circle = (PicturesAlbum.getInstance().CORRECT_ANSWER);
                 break;
             default:
                 break;
         }
+        return new Answering(circle, answer, text);
     }
 
-    public static void updateType(boolean getType, Characters characters, ImageView imageViewBackground, ImageView imageViewAnswer)
+    public static Answering updateType(boolean getType, Characters characters)
     {
+        int circle, answer = 0;
         switch (characters.getType())
         {
             case "Pirate":
-                imageViewAnswer.setImageResource(PicturesAlbum.getInstance().PIRATES);
+                answer = (PicturesAlbum.getInstance().PIRATES);
                 break;
             case "Revolutionary":
-                imageViewAnswer.setImageResource(PicturesAlbum.getInstance().REVOLUTIONARY_ARMY);
+                answer = (PicturesAlbum.getInstance().REVOLUTIONARY_ARMY);
                 break;
             case "Navy":
-                imageViewAnswer.setImageResource(PicturesAlbum.getInstance().NAVY_GOVERNMENT);
+                answer = (PicturesAlbum.getInstance().NAVY_GOVERNMENT);
                 break;
             case "Citizen":
-                imageViewAnswer.setImageResource(PicturesAlbum.getInstance().CITIZENS);
+                answer = (PicturesAlbum.getInstance().CITIZENS);
                 break;
             default:
                 break;
@@ -137,57 +134,61 @@ public class AnimationManager
 
         if (getType)
         {
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().CORRECT_ANSWER);
+            circle = (PicturesAlbum.getInstance().CORRECT_ANSWER);
         }
         else
         {
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
+            circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
         }
+        return new Answering(circle, answer);
     }
 
-    public static void updateAlive(boolean alived, Characters characters, ImageView imageViewBackground, ImageView imageViewAnswer)
+    public static Answering updateAlive(boolean alived, Characters characters)
     {
+        int circle, answer;
         if (characters.isAlive())
         {
-            imageViewAnswer.setImageResource(PicturesAlbum.getInstance().ALIVE);
+            answer = (PicturesAlbum.getInstance().ALIVE);
         }
         else
         {
-            imageViewAnswer.setImageResource(PicturesAlbum.getInstance().NOT_ALIVE);
+            answer = (PicturesAlbum.getInstance().NOT_ALIVE);
         }
 
         if(alived)
         {
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().CORRECT_ANSWER);
+            circle = (PicturesAlbum.getInstance().CORRECT_ANSWER);
 
         }
         else
         {
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
+            circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
         }
+        return new Answering(circle, answer);
     }
 
-    public static void updateCrew(boolean belongingCrew, Characters characters, ImageView imageViewBackground, ImageView imageViewAnswer)
+    public static Answering updateCrew(boolean belongingCrew, Characters characters)
     {
+        int circle, answer;
         if(belongingCrew)
         {
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().CORRECT_ANSWER);
+            circle = (PicturesAlbum.getInstance().CORRECT_ANSWER);
         }
         else
         {
-            imageViewBackground.setImageResource(PicturesAlbum.getInstance().WRONG_ANSWER);
+            circle = (PicturesAlbum.getInstance().WRONG_ANSWER);
         }
 
-        setPictureFromCrew(characters, imageViewAnswer);
+        answer = setPictureFromCrew(characters);
+        return new Answering(circle, answer);
     }
 
-    private static void setPictureFromCrew(Characters characters, ImageView imageView)
+    private static int setPictureFromCrew(Characters characters)
     {
         switch (characters.getCrew())
         {
             case "Citizen":
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_CITIZEN);
-                break;
+                return (PicturesAlbum.getInstance().CREW_CITIZEN);
             case "Navy's Crew":
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_NAVY);
                 break;
@@ -208,7 +209,24 @@ public class AnimationManager
             case "L'Équipage du Clown":
             case "Alliance Baggy et Alvida":
             case "":
+                return (PicturesAlbum.getInstance().CREW_NAVY);
+            case "Ener's Crew":
+                return (PicturesAlbum.getInstance().CREW_ENER);
+            case "Kaido's Crew":
+                return (PicturesAlbum.getInstance().CREW_KAIDO);
+            case "Teach's Crew":
+                return (PicturesAlbum.getInstance().CREW_TEACH);
+            case "BigMom's Crew":
+                return (PicturesAlbum.getInstance().CREW_BIGMOM);
             case "Cross Guild":
+                return (PicturesAlbum.getInstance().CROSS_GUILD);
+            case "Shanks's Crew":
+                return (PicturesAlbum.getInstance().CREW_SHANKS);
+            case "Newgate's Crew":
+                return (PicturesAlbum.getInstance().CREW_NEWGATE);
+            case "Mugiwara's Crew":
+            case "Mugiwara's Armada Crew":
+                return (PicturesAlbum.getInstance().CREW_MUGIWARA);
                 imageView.setImageResource(PicturesAlbum.getInstance().CROSS_GUILD);
                 break;
             case "L'Équipage du Roux":
@@ -225,10 +243,43 @@ public class AnimationManager
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_MUGIWARA);
                 break;
             case "Revolutionary's Crew":
+                return (PicturesAlbum.getInstance().CREW_REVOLUTIONARY_ARMY);
+            case "World Government":
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_REVOLUTIONARY_ARMY);
                 break;
             case "Gouvernement Mondial":
             case "Cipher Pol":
+                return (PicturesAlbum.getInstance().CREW_WORLDGOV);
+            case "Arlong's Crew":
+                return (PicturesAlbum.getInstance().CREW_ARLONG);
+            case "Baroque Works":
+                return (PicturesAlbum.getInstance().CREW_BW);
+            case "Don Krieg's Crew":
+                return (PicturesAlbum.getInstance().CREW_KRIEG);
+            case "Moria's Crew" :
+                return (PicturesAlbum.getInstance().CREW_MORIA);
+            case "Heart's Crew" :
+                return (PicturesAlbum.getInstance().CREW_LAW);
+            case "Kidd's Crew" :
+                return (PicturesAlbum.getInstance().CREW_KIDD);
+            case "Kuja's Crew" :
+                return (PicturesAlbum.getInstance().CREW_KUJA);
+            case "Caribou's Crew" :
+                return (PicturesAlbum.getInstance().CREW_CARIBOU);
+            case "Sun Pirates' Crew" :
+                return (PicturesAlbum.getInstance().CREW_SUNPIRATES);
+            case "Roger's Crew" :
+                return (PicturesAlbum.getInstance().CREW_ROGER);
+            case "Doflamingo's Crew" :
+                return (PicturesAlbum.getInstance().CREW_DOFFY);
+            case "Rumbar's Crew" :
+                return (PicturesAlbum.getInstance().CREW_RUMBAR);
+            case "Fishmen's Crew" :
+                return (PicturesAlbum.getInstance().CREW_NEWFISH);
+            case "Giants' Crew":
+                return (PicturesAlbum.getInstance().CREW_GIANTS);
+            case "Celestial Dragons" :
+                return (PicturesAlbum.getInstance().CREW_CELESTIAL);
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_WORLDGOV);
                 break;
             case "L'Équipage d'Arlong":
@@ -278,6 +329,24 @@ public class AnimationManager
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_GIANTS);
                 break;
             case "Impel Down":
+                return (PicturesAlbum.getInstance().CREW_ID);
+            case "Monkey's Forces Crew":
+            case "Weeble's Crew" :
+            case "Black Cat's Crew" :
+            case "Foxy's Crew" :
+            case "Bege's Crew" :
+            case "Bonney's Crew" :
+            case "Urouge's Crew" :
+            case "Nox's Crew":
+            case "Assassin's Mogalo":
+            case "Vegapunk's Factory" :
+            case "Bluejam's Crew" :
+            case "False Mugiwara's Crew" :
+            case "Caesar's Crew" :
+            case "Dadan's Crew":
+            case "Mountain's Bandits":
+            case "Zeff's Crew":
+            case "8 Treasure's Navy":
                 imageView.setImageResource(PicturesAlbum.getInstance().CREW_ID);
                 break;
             case "Ligue des Primates":
@@ -302,8 +371,8 @@ public class AnimationManager
             case "L'Équipage des Magnifiques Pirates":
             case "L'Équipage du Lion d'Or":
             default:
-                imageView.setImageResource(PicturesAlbum.getInstance().CREW_DEFAULT);
-                break;
+                return (PicturesAlbum.getInstance().CREW_DEFAULT);
         }
     }
+
 }

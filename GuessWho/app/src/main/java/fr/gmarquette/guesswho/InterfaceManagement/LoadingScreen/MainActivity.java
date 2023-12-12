@@ -24,11 +24,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Calendar;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {
 
     NavController navController;
+    NavHostFragment navHostFragment;
+    int currentFragmentId, backFragmentId;
+    private Animation fromBottom, toBottom, openMenu, closeMenu;
+    private FloatingActionButton fab_menu, fab_list, fab_settings, fab_help;
+    private boolean clicked;
     NavHostFragment navHostFragment;
     int currentFragmentId, backFragmentId;
 

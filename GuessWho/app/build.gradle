@@ -33,14 +33,6 @@ android {
 }
 
 dependencies {
-    constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
-            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
-        }
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
-            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
-        }
-    }
 
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -65,4 +57,6 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.14.3'
     implementation 'org.apache.commons:commons-text:1.9'
 
+
+    implementation "com.getbase:floatingactionbutton:1.10.1"
 }

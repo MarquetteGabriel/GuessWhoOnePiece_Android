@@ -52,7 +52,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linear_layout_grid"
+        app:layout_constraintBottom_toTopOf="@+id/grid_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -62,31 +62,15 @@
     </LinearLayout>
 
     <!-- Guess Part -->
-    <LinearLayout
-        android:id="@+id/linear_layout_grid"
+    <GridView
+        android:id="@+id/grid_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="450dp"
         android:layout_marginBottom="100dp"
-        android:orientation="vertical"
+        android:numColumns="6"
+        android:rowCount="7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <include layout="@layout/devil_fruit_layout" />
-
-        <include layout="@layout/bounty_layout" />
-
-        <include layout="@layout/chapter_layout" />
-
-        <include layout="@layout/type_layout" />
-
-        <include layout="@layout/alive_layout" />
-
-        <include layout="@layout/age_layout" />
-
-        <include layout="@layout/crew_layout" />
-
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
