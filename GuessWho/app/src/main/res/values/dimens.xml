@@ -9,5 +9,5 @@
 
 <resources>
     <dimen name="size_item">60dp</dimen>
-    <dimen name="startCharacterName">15dp</dimen>
+    <dimen name="startCharacterName">10dp</dimen>
 </resources>

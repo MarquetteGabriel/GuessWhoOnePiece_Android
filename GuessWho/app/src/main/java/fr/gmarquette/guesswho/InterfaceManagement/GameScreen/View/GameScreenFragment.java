@@ -190,14 +190,6 @@ public class GameScreenFragment extends Fragment {
     {
         try {
             cleanGridView(gridView);
-            for (int i = 0; i < 6; i++) {
-                String guess = "guess_" + (i + 1);
-                int id = getResources().getIdentifier(guess, "id", requireContext().getPackageName());
-                TextView textView = viewFragment.findViewById(id);
-                int stringId = getResources().getIdentifier(guess, "string", requireContext().getPackageName());
-                String guessString = getResources().getString(stringId);
-                textView.setText(guessString);
-            }
         }
         catch (Exception e)
         {
@@ -214,6 +206,15 @@ public class GameScreenFragment extends Fragment {
 
     private void cleanGridView(GridView gridView)
     {
+        for (int i = 0; i < 6; i++) {
+            String guess = "guess_" + (i + 1);
+            int id = getResources().getIdentifier(guess, "id", requireContext().getPackageName());
+            TextView textView = viewFragment.findViewById(id);
+            int stringId = getResources().getIdentifier(guess, "string", requireContext().getPackageName());
+            String guessString = getResources().getString(stringId);
+            textView.setText(guessString);
+        }
+
         for(int i = 0; i < gridView.getCount(); i++)
         {
             ImageView imageViewBackground = gridView.getChildAt(i).findViewById(R.id.wr_circle);
