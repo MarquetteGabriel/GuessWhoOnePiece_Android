@@ -67,8 +67,11 @@ public class LoadingScreenFragment extends Fragment {
         boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
         String dateOfUpdate = sharedPreferences.getString("Date of Update", "26/07/2001");
 
+        boolean volume = sharedPreferences.getBoolean("Volume", true);
         bandeSon = BandeSon.getInstance();
         bandeSon.playOpening();
+        bandeSon.setVolume(volume);
+
 
         if(isUpdated)
         {
@@ -122,6 +125,9 @@ public class LoadingScreenFragment extends Fragment {
             requireActivity().runOnUiThread(() -> {
                 bandeSon.stop();
                 bandeSon.startPlaying();
+                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+                boolean volume = sharedPreferences.getBoolean("Volume", true);
+                bandeSon.setVolume(volume);
                 Navigation.findNavController(view).navigate(R.id.action_loadingScreenFragment_to_gameSelectionScreenFragment);
             });
 

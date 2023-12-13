@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameScreenFragment"
-        android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.GameScreenFragment"
+        android:name="fr.gmarquette.guesswho.InterfaceManagement.GameScreen.View.GameScreenFragment"
         android:label="fragment_game_screen"
         tools:layout="@layout/fragment_game_screen" >
         <action

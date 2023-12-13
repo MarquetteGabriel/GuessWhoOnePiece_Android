@@ -9,9 +9,9 @@
 package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
-import fr.gmarquette.guesswho.GameSystem.AgeType;
 import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
-import fr.gmarquette.guesswho.GameSystem.ChapterType;
+import fr.gmarquette.guesswho.GameSystem.EnumsDatas.AgeType;
+import fr.gmarquette.guesswho.GameSystem.EnumsDatas.ChapterType;
 
 public class AnimationManager
 {

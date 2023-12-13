@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foregroundGravity="center"
-            tools:context=".InterfaceManagement.GameScreen.GameScreenFragment">
+            tools:context=".InterfaceManagement.GameScreen.View.GameScreenFragment">
 
             <AutoCompleteTextView
                 android:id="@+id/EnterTextAutoCompleted"

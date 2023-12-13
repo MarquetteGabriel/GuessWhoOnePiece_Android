@@ -9,6 +9,7 @@
 package fr.gmarquette.guesswho.GameSystem.Music;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 
 import java.util.ArrayList;
@@ -93,6 +94,8 @@ public class BandeSon {
 
     private void playSongs(int trackIndex)
     {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
+        boolean volumeState = sharedPreferences.getBoolean("Volume", true);
         if(trackIndex == this.playlist.size())
         {
             trackIndex = 0;
@@ -100,9 +103,21 @@ public class BandeSon {
 
         int currentIndex = trackIndex;
         mediaPlayer = MediaPlayer.create(context, playlist.get(trackIndex));
-        mediaPlayer.setVolume(volume, volume);
         mediaPlayer.start();
+        setVolume(volumeState);
         mediaPlayer.setOnCompletionListener(mp -> playSongs(currentIndex + 1));
+    }
+
+    public void setVolume(boolean state)
+    {
+        if(state)
+        {
+            mediaPlayer.setVolume(volume, volume);
+        }
+        else
+        {
+            mediaPlayer.setVolume(0, 0);
+        }
     }
 }
 

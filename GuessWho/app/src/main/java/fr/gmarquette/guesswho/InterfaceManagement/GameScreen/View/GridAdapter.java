@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
+package fr.gmarquette.guesswho.InterfaceManagement.GameScreen.View;
 
 import android.content.Context;
 import android.view.LayoutInflater;

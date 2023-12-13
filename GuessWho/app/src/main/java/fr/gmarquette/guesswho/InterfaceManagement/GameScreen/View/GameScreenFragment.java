@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
+package fr.gmarquette.guesswho.InterfaceManagement.GameScreen.View;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -42,6 +42,9 @@ import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
 import fr.gmarquette.guesswho.GameSystem.GameInit;
 import fr.gmarquette.guesswho.GameSystem.GameManager;
+import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.AnimationManager;
+import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.Answering;
+import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.PicturesAlbum;
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 

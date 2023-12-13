@@ -29,7 +29,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
+import fr.gmarquette.guesswho.GameSystem.Music.BandeSon;
 import fr.gmarquette.guesswho.GameSystem.Music.PlayNikaLaugh;
+import fr.gmarquette.guesswho.GameSystem.Notifications.NotificationManager;
 import fr.gmarquette.guesswho.R;
 
 public class SettingsFragment extends BottomSheetDialogFragment {
@@ -100,12 +102,14 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                 editor.putBoolean("Notification", true);
                 editor.apply();
                 imageButtonNotifications.setImageResource(R.drawable.notifications_on);
+                NotificationManager.sendNotifications(requireContext());
             }
             else
             {
                 editor.putBoolean("Notification", false);
                 editor.apply();
                 imageButtonNotifications.setImageResource(R.drawable.notifications_none);
+                NotificationManager.cancelNotification(requireContext());
             }
         });
         switchVolume.setOnClickListener(view1 -> {
@@ -114,6 +118,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                 editor.putBoolean("Volume", true);
                 editor.apply();
                 imageButtonVolume.setImageResource(R.drawable.volume_up);
+                BandeSon.getInstance().startPlaying();
             }
             else
             {
@@ -121,6 +126,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                 editor.apply();
                 imageButtonVolume.setImageResource(R.drawable.volume_off);
             }
+            BandeSon.getInstance().setVolume(sharedPreferences.getBoolean("Volume", true));
         });
 
 

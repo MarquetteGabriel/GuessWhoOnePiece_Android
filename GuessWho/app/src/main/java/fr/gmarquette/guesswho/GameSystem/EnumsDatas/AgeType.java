@@ -6,10 +6,10 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem;
+package fr.gmarquette.guesswho.GameSystem.EnumsDatas;
 
-public enum ChapterType {
-    PREVIOUS_CHAPTER,
-    SAME_CHAPTER,
-    NEWER_CHAPTER
+public enum AgeType {
+    YOUNGER,
+    EQUAL,
+    OLDER
 }

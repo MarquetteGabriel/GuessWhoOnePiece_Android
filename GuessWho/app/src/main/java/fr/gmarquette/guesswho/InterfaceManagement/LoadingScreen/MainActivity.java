@@ -25,6 +25,7 @@ import java.util.Calendar;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
 import fr.gmarquette.guesswho.GameSystem.Music.BandeSon;
+import fr.gmarquette.guesswho.GameSystem.Notifications.NotificationManager;
 import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
             if (NetworkUtils.isNetworkAvailable(this)) {
                 ImportDataManager.getInstance().importManager(this);
             }
+        }
+
+        if(sharedPreferences.getBoolean("Notifications", true))
+        {
+            NotificationManager.sendNotifications(this);
         }
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView5);
