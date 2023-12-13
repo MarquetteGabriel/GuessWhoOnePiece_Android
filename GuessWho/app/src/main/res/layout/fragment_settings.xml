@@ -16,6 +16,17 @@
     tools:context=".InterfaceManagement.ProfileMenu.SettingsFragment">
 
     <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:id="@+id/playNika"
         android:layout_width="100dp"
         android:layout_height="130dp"

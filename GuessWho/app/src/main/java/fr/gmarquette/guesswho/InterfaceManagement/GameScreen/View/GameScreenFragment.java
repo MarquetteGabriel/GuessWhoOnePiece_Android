@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -112,6 +113,9 @@ public class GameScreenFragment extends Fragment {
             getAnswer(selectedValue);
             autoCompleteTextView.setText("");
         });
+
+        ImageButton backButton = viewFragment.findViewById(R.id.backButton);
+        backButton.setOnClickListener(view -> requireActivity().onBackPressed());
 
         PicturesAlbum.getInstance().setImages();
         restart();

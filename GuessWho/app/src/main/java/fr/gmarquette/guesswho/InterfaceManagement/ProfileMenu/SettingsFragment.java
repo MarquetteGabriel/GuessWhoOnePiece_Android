@@ -149,6 +149,9 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         updateVolume(volume);
         updateNotifications(notification);
 
+        ImageButton backButton = view.findViewById(R.id.backButton);
+        backButton.setOnClickListener(view1 -> requireActivity().onBackPressed());
+
     }
 
     private void updateVolume(boolean state)
