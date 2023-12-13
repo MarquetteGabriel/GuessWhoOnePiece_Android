@@ -65,7 +65,6 @@ public class LoadingScreenFragment extends Fragment {
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("GuessWhoApp", Context.MODE_PRIVATE);
         boolean isUpdated = sharedPreferences.getBoolean("isUpdated", false);
-        String dateOfUpdate = sharedPreferences.getString("Date of Update", "26/07/2001");
 
         boolean volume = sharedPreferences.getBoolean("Volume", true);
         bandeSon = BandeSon.getInstance();

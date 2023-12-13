@@ -10,7 +10,6 @@ package fr.gmarquette.guesswho.GameData.Database;
 
 import android.content.Context;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -29,9 +28,5 @@ public class CallDAOAsync extends Thread {
 
     public Future<Characters> getCharacterFromNameAsync(String name) {
         return executorService.submit(() -> this.dataBase.dao().getCharacterFromName(name));
-    }
-
-    public Future<List<String>> getNamesByDifficultyAsync(int level) {
-        return executorService.submit(() -> this.dataBase.dao().getNamesByDifficulty(level));
     }
 }

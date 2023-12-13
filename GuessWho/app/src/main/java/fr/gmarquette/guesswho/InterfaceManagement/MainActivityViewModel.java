@@ -18,12 +18,12 @@ import fr.gmarquette.guesswho.GameData.Database.Characters;
 
 public class MainActivityViewModel extends ViewModel {
 
-    private MutableLiveData<List<String>> characterNameList = new MutableLiveData<>();
-    private MutableLiveData<List<String>> characterPicturesList = new MutableLiveData<>();
-    private MutableLiveData<List<Integer>> characterLevelList = new MutableLiveData<>();
+    private final MutableLiveData<List<String>> characterNameList = new MutableLiveData<>();
+    private final MutableLiveData<List<String>> characterPicturesList = new MutableLiveData<>();
+    private final MutableLiveData<List<Integer>> characterLevelList = new MutableLiveData<>();
 
-    private MutableLiveData<Characters> characterInfo = new MutableLiveData<>();
-    private MutableLiveData<List<String>> charactersSuggestions = new MutableLiveData<>();
+    private final MutableLiveData<Characters> characterInfo = new MutableLiveData<>();
+    private final MutableLiveData<List<String>> charactersSuggestions = new MutableLiveData<>();
 
     public LiveData<List<String>> getCharacterNameList() {
         return characterNameList;

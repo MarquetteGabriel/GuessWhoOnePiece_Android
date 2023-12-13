@@ -10,9 +10,9 @@ package fr.gmarquette.guesswho.InterfaceManagement.GameScreen;
 
 public class Answering
 {
-    private int imageBackground;
-    private int imageAnswer;
-    private String answer;
+    private final int imageBackground;
+    private final int imageAnswer;
+    private final String answer;
 
     public Answering(int imageBackground, int imageAnswer) {
         this.imageBackground = imageBackground;

@@ -18,14 +18,14 @@ public class Characters
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") private int id;
     @ColumnInfo(name = "name") private String name;
-    @ColumnInfo(name = "devilFruit") private boolean devilFruit;
-    @ColumnInfo(name = "bounty") private String bounty;
-    @ColumnInfo(name = "firstAppearance") private int firstAppearance;
+    @ColumnInfo(name = "devilFruit") private final boolean devilFruit;
+    @ColumnInfo(name = "bounty") private final String bounty;
+    @ColumnInfo(name = "firstAppearance") private final int firstAppearance;
     @ColumnInfo(name = "type") private String type;
-    @ColumnInfo(name = "alive") private boolean alive;
+    @ColumnInfo(name = "alive") private final boolean alive;
     @ColumnInfo(name = "age") private int age;
-    @ColumnInfo(name = "crew") private String crew;
-    @ColumnInfo(name = "picture") private String picture;
+    @ColumnInfo(name = "crew") private final String crew;
+    @ColumnInfo(name = "picture") private final String picture;
     @ColumnInfo(name = "level") private int level;
 
     public Characters(String name, boolean devilFruit, String bounty, int firstAppearance, String type, boolean alive, int age, String crew, String picture, int level) {
@@ -83,37 +83,12 @@ public class Characters
         this.name = name;
     }
 
-    public void setDevilFruit(boolean devilFruit) {
-        this.devilFruit = devilFruit;
-    }
-
-    public void setBounty(String bounty) {
-        this.bounty = bounty;
-    }
-
-    public void setFirstAppearance(int firstAppearance) {
-        this.firstAppearance = firstAppearance;
-    }
-
     public void setType(String type) {
         this.type = type;
     }
 
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public void setCrew(String crew) {
-        this.crew = crew;
-    }
-
-    public void setPicture(String picture)
-    {
-        this.picture = picture;
     }
 
     public void setLevel(int level)

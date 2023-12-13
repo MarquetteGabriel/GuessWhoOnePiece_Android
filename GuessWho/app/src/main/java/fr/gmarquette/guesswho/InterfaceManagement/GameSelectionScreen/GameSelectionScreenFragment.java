@@ -27,13 +27,11 @@ import androidx.navigation.Navigation;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
 public class GameSelectionScreenFragment extends Fragment{
 
-    private CallDAOAsync callDAOAsync;
     private MainActivityViewModel activityViewModel;
     public static ArrayList<String> arrayList = new ArrayList<>();
 
@@ -49,10 +47,8 @@ public class GameSelectionScreenFragment extends Fragment{
         View viewFragment = inflater.inflate(R.layout.fragment_game_selection_screen, container, false);
         activityViewModel = new ViewModelProvider(requireActivity()).get(MainActivityViewModel.class);
 
-        callDAOAsync = new CallDAOAsync(requireContext().getApplicationContext());
-
         VideoView videoView = viewFragment.findViewById(R.id.video_gear5);
-        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.presentation_gear5);
+        Uri uri = Uri.parse("android.resource://" + requireActivity().getPackageName() + "/" + R.raw.presentation_gear5);
         videoView.setVideoURI(uri);
         videoView.setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
 
