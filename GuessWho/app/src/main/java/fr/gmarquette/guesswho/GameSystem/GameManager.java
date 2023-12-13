@@ -11,6 +11,8 @@ package fr.gmarquette.guesswho.GameSystem;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyFactory;
 import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
+import fr.gmarquette.guesswho.GameSystem.EnumsDatas.AgeType;
+import fr.gmarquette.guesswho.GameSystem.EnumsDatas.ChapterType;
 
 public class GameManager
 {

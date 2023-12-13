@@ -21,7 +21,9 @@ public class PicturesAlbum
             CREW_BIGMOM, CREW_ENER, CREW_NAVY, CREW_REVOLUTIONARY_ARMY, CREW_CITIZEN, CREW_ARLONG,
             CREW_BW, CREW_CARIBOU, CREW_CELESTIAL, CREW_DOFFY, CREW_GIANTS, CREW_ID, CREW_KIDD,
             CREW_KRIEG, CREW_KUJA, CREW_LAW, CREW_MORIA, CREW_NEWFISH, CREW_ROGER, CREW_RUMBAR,
-            CREW_SUNPIRATES, CREW_WORLDGOV, CREW_DEFAULT;
+            CREW_SUNPIRATES, CREW_WORLDGOV, CREW_DEFAULT, CREW_IDEO, CREW_FOXY, CREW_CHATNOIR,
+            CREW_WEEBLE, CREW_HAWKINS, CREW_APOO, CREW_PRIMATES, CREW_UROUGE, CREW_SHIKI,
+            CREW_FIRETANK, CREW_BONNEY, CREW_XBARRELS;
     private PicturesAlbum()
     {}
 
@@ -83,6 +85,18 @@ public class PicturesAlbum
         CREW_ROGER = R.drawable.crew_roger;
         CREW_RUMBAR = R.drawable.crew_rumbar;
         CREW_SUNPIRATES = R.drawable.crew_sunpirates;
+        CREW_APOO = R.drawable.crew_apoo;
+        CREW_FOXY = R.drawable.crew_foxy;
+        CREW_CHATNOIR = R.drawable.crew_chatnoir;
+        CREW_WEEBLE = R.drawable.crew_weeble;
+        CREW_HAWKINS = R.drawable.crew_hawkins;
+        CREW_IDEO = R.drawable.crew_ideo;
+        CREW_PRIMATES = R.drawable.crew_singes;
+        CREW_UROUGE = R.drawable.crew_urouge;
+        CREW_SHIKI = R.drawable.crew_shiki;
+        CREW_FIRETANK = R.drawable.crew_bege;
+        CREW_BONNEY = R.drawable.crew_bonney;
+        CREW_XBARRELS = R.drawable.crew_xbarrels;
         CREW_WORLDGOV = R.drawable.crew_world_government;
         CREW_DEFAULT = R.drawable.crew_default;
 

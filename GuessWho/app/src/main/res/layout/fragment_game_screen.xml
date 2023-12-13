@@ -27,22 +27,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foregroundGravity="center"
-            tools:context=".InterfaceManagement.GameScreen.GameScreenFragment">
+            tools:context=".InterfaceManagement.GameScreen.View.GameScreenFragment">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:src="@drawable/back_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/EnterTextAutoCompleted"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <AutoCompleteTextView
                 android:id="@+id/EnterTextAutoCompleted"
-                android:layout_width="242dp"
+                style="@style/CustomAutoComplete"
+                android:layout_width="282dp"
                 android:layout_height="48dp"
-                android:textColor="@color/white"
+                android:layout_marginEnd="50dp"
                 android:hint="@string/make_your_guess"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                tools:ignore="LabelFor,SpeakableTextPresentCheck"
-                style="@style/CustomAutoComplete"/>
+                tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

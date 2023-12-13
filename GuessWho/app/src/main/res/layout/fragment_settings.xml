@@ -16,6 +16,17 @@
     tools:context=".InterfaceManagement.ProfileMenu.SettingsFragment">
 
     <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:id="@+id/playNika"
         android:layout_width="100dp"
         android:layout_height="130dp"
@@ -94,10 +105,8 @@
 
     <ImageButton
         android:id="@+id/importData"
-        android:layout_width="170dp"
+        android:layout_width="200dp"
         android:layout_height="27dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/round_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -106,7 +115,8 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
-        android:layout_width="92dp"
+        android:id="@+id/textImportData"
+        android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:text="@string/import_datas"
         android:gravity="center"
