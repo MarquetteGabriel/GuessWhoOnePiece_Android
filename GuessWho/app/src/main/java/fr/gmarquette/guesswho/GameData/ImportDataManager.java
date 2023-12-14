@@ -167,6 +167,7 @@ public class ImportDataManager
             boolean alived = !ExtractorPattern.extractPattern(characterData, "Statut : (Vivant|Décédé)").equals("Décédé");
             int age = ExtractorPattern.extractPatternAge(characterData);
             crew = ExtractorPattern.fixCrew(crew, type);
+            type = ExtractorPattern.fixType(type, crew);
 
             Characters characters = new Characters(character, fruit, bounty, chapter, type, alived,
                     age, crew, pictureElement, NUMBER_OF_LEVELS + 1);

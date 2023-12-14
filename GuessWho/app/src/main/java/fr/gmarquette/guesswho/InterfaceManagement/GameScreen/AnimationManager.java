@@ -198,20 +198,16 @@ public class AnimationManager
             case "L'Équipage de Barbe Noire":
                 return PicturesAlbum.getInstance().CREW_TEACH;
             case "L'Équipage de Big Mom":
-            case "Équipage de Big Mom":
-            case "Famille Charlotte":
                 return PicturesAlbum.getInstance().CREW_BIGMOM;
             case "Cross Guild":
                 return PicturesAlbum.getInstance().CROSS_GUILD;
             case "L'Équipage du Roux":
                 return PicturesAlbum.getInstance().CREW_SHANKS;
             case "L'Équipage de Barbe Blanche":
-            case "Subordonné de L'Équipage de Barbe Blanche":
                 return PicturesAlbum.getInstance().CREW_NEWGATE;
             case "L'Équipage du Chapeau de Paille":
             case "Allié de L'Équipage du Chapeau de Paille":
-            case "La Grande Flotte du Chapeau de Paille":
-            case "Alliance de l'Équipage du Chapeau de Paille":
+                // Fake Straw Hat Pirates
             case "Faux Équipage du Chapeau de Paille" :
                 return PicturesAlbum.getInstance().CREW_MUGIWARA;
             case "Revolutionary's Crew":
@@ -225,10 +221,7 @@ public class AnimationManager
                 return PicturesAlbum.getInstance().CREW_BW;
             case "L'Armada Pirate de Don Krieg":
                 return PicturesAlbum.getInstance().CREW_KRIEG;
-            case "Gecko Moria" :
-            case "Hogback":
             case "Thriller Bark":
-            case "Dracule Mihawk":
                 return PicturesAlbum.getInstance().CREW_MORIA;
             case "L'Équipage du Heart" :
                 return PicturesAlbum.getInstance().CREW_LAW;
@@ -236,22 +229,16 @@ public class AnimationManager
                 return PicturesAlbum.getInstance().CREW_KIDD;
             case "Kujas" :
                 return PicturesAlbum.getInstance().CREW_KUJA;
-            case "Capitaine de l'Equipage de Caribou" :
             case "L'Équipage de Caribou":
                 return PicturesAlbum.getInstance().CREW_CARIBOU;
             case "L'Équipage des Pirates du Soleil" :
                 return PicturesAlbum.getInstance().CREW_SUNPIRATES;
             case "L'Équipage des Pirates Roger" :
                 return PicturesAlbum.getInstance().CREW_ROGER;
-            case "L'Équipage du New Age":
             case "L'Équipage de Don Quichotte Doflamingo" :
-            case "L'Équipage de Barbe Brune(dissout)":
-            case "César Clown":
-            case "César Clown (espionnage)":
                 return PicturesAlbum.getInstance().CREW_DOFFY;
             case "L'Équipage du Rumbar " :
                 return PicturesAlbum.getInstance().CREW_RUMBAR;
-            case "L'Équipage des Pirates Volants":
             case "L'Équipage des Nouveaux Hommes-Poissons" :
                 return PicturesAlbum.getInstance().CREW_NEWFISH;
             case "L'Équipage des Géants":
@@ -274,8 +261,6 @@ public class AnimationManager
                 return PicturesAlbum.getInstance().CREW_BONNEY;
             case "L'Équipage des Moines Dépravés":
                 return PicturesAlbum.getInstance().CREW_UROUGE;
-            case "L'Équipage d'Idéo":
-                return PicturesAlbum.getInstance().CREW_IDEO;
             case "L'Équipage de X. Barrels":
                 return PicturesAlbum.getInstance().CREW_XBARRELS;
             case "L'Équipage du On-Air" :
@@ -284,12 +269,12 @@ public class AnimationManager
                 return PicturesAlbum.getInstance().CREW_HAWKINS;
             case "L'Équipage du Lion d'Or":
                 return PicturesAlbum.getInstance().CREW_SHIKI;
-            case "L'Équipage des Magnifiques Pirates":
             case "L'Équipage du Rolling":
             case "Gang du Pays des Fleurs (Famille Chinjao)":
             case "Bandit":
             case "L'Équipage de Bluejam" :
             case "Bandits des montagnes":
+            case "L'Équipage de Wapol":
             default:
                 return PicturesAlbum.getInstance().CREW_DEFAULT;
         }

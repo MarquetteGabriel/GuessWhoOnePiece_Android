@@ -65,9 +65,8 @@ public class ExtractorPattern
                 }
             }
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
-            maxBounty = 0;
         }
 
         if(maxBounty == 0)
@@ -118,26 +117,34 @@ public class ExtractorPattern
 
     static String fixType(String value, String crew)
     {
-            for (String pirateType : pirateTypeList)
-            {
-                if (crew.contains(pirateType)) {
-                    value = "Pirate";
-                    break;
-                }
+        if(crew.contains("Celestial Dragons"))
+        {
+            return "Navy";
+        }
+        else if (value.contains("Dragon Celestes")) {
+            return value;
+        }
+
+        for (String pirateType : pirateTypeList)
+        {
+            if (crew.contains(pirateType)) {
+                value = "Pirate";
+                break;
             }
-            for (String navyType : navyTypeList)
-            {
-                if (crew.contains(navyType)) {
-                    value = "Navy";
-                    break;
-                }
+        }
+        for (String navyType : navyTypeList)
+        {
+            if (crew.contains(navyType)) {
+                value = "Navy";
+                break;
             }
-            for (String revoType : revoTypeList)
-            {
-                if (crew.contains(revoType)) {
-                    value = "Revolutionary";
-                    break;
-                }
+        }
+        for (String revoType : revoTypeList)
+        {
+            if (crew.contains(revoType)) {
+                value = "Revolutionary";
+                break;
+            }
         }
 
         return value;
@@ -166,9 +173,47 @@ public class ExtractorPattern
         {
             return "Citizen";
         }
+        else if(type.equals("Dragon Celestes"))
+        {
+            return "Celestial Dragons";
+        }
         else
         {
-            return rawCrew;
+            switch (rawCrew)
+            {
+                case "Subordonné de L'Équipage de Barbe Blanche":
+                    return "L'Équipage de Barbe Blanche";
+                case "La Grande Flotte du Chapeau de Paille":
+                case "Alliance de l'Équipage du Chapeau de Paille":
+                case "Flotte de Happou":
+                case "L'Équipage d'Idéo":
+                case "Erbaf":
+                case "L'Équipage des Magnifiques Pirates":
+                case "L'Équipage d'Ideo":
+                    return "Allié de L'Équipage du Chapeau de Paille";
+                case "Équipage de Big Mom":
+                case "Famille Charlotte":
+                    return "L'Équipage de Big Mom";
+                case "Spiders Café":
+                    return "Baroque Works";
+                case "Capitaine de l'Equipage de Caribou" :
+                    return "L'Équipage de Caribou";
+                case "L'Équipage de Barbe Brune(dissout)":
+                case "César Clown":
+                case "César Clown (espionnage)":
+                case "L'Équipage du New Age":
+                    return "L'Équipage de Don Quichotte Doflamingo";
+                case "L'Équipage des Pirates Volants":
+                    return "L'Équipage des Nouveaux Hommes-Poissons";
+                case "L'Équipage du Firetank" :
+                    return "L'Équipage du Fire Tank";
+                case "Gecko Moria" :
+                case "Hogback":
+                case "Dracule Mihawk":
+                    return "Thriller Bark";
+                default:
+                    return rawCrew;
+            }
         }
     }
 
@@ -177,7 +222,7 @@ public class ExtractorPattern
         try
         {
             List<String> affiliationCharacter = new ArrayList<>();
-            String[] affiliations = text.select(".pi-data-value").html().split("<br>|<p>|</a>");
+            String[] affiliations = text.select(".pi-data-value").html().split("<br>|<p>|<a>");
             for(String affiliation : affiliations)
             {
                 Document docSmallDatas = Jsoup.parse(affiliation);
@@ -239,7 +284,7 @@ public class ExtractorPattern
         try
         {
             List<String> typeCharacter = new ArrayList<>();
-            String[] types = text.select(".pi-data-value").html().split("<br>");
+            String[] types = text.select(".pi-data-value").html().split("<br>|<p>|<a>");
             for(String type : types)
             {
                 Document docSmallDatas = Jsoup.parse(type);
@@ -255,6 +300,13 @@ public class ExtractorPattern
                 typeData = typeData.replaceAll("\\[.*?]\\s*$", "");
                 if(!typeData.contains("anciennement") && !typeData.contains("temporairement"))
                 {
+                    if (typeData.contains("Dragons Celestes") || typeData.contains("Dragons Célestes")
+                            || typeData.contains("Nobles Mondiaux"))
+                    {
+                        type = "Dragon Celestes";
+                        break;
+                    }
+
                     for (String pirateType : pirateTypeList)
                     {
                         if (typeData.contains(pirateType)) {
@@ -305,6 +357,8 @@ public class ExtractorPattern
                 return "Kaku";
             case "Enel":
                 return "Ener";
+            case "Buckingham Stussy":
+                return "Bakkin";
             default :
                 return character;
         }
