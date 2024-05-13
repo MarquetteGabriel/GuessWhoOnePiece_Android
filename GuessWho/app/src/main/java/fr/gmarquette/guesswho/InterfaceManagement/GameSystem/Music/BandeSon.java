@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem.Music;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Music;
 
 import android.content.Context;
 import android.content.SharedPreferences;

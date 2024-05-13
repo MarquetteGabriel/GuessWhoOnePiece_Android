@@ -24,8 +24,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Calendar;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
-import fr.gmarquette.guesswho.GameSystem.Music.BandeSon;
-import fr.gmarquette.guesswho.GameSystem.Notifications.NotificationManager;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Music.BandeSon;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Notifications.NotificationManager;
 import fr.gmarquette.guesswho.R;
 
 public class MainActivity extends AppCompatActivity {

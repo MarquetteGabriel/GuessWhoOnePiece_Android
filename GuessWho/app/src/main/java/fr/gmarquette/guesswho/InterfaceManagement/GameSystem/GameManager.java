@@ -6,13 +6,13 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
-import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyFactory;
-import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
-import fr.gmarquette.guesswho.GameSystem.EnumsDatas.AgeType;
-import fr.gmarquette.guesswho.GameSystem.EnumsDatas.ChapterType;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.BountyManager.BountyFactory;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.BountyManager.BountyType;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.EnumsDatas.AgeType;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.EnumsDatas.ChapterType;
 
 public class GameManager
 {

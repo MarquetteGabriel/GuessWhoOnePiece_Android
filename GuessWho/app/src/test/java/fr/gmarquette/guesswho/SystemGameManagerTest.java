@@ -15,9 +15,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
-import fr.gmarquette.guesswho.GameSystem.BountyManager.BountyType;
-import fr.gmarquette.guesswho.GameSystem.EnumsDatas.AgeType;
-import fr.gmarquette.guesswho.GameSystem.GameManager;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.BountyManager.BountyType;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.EnumsDatas.AgeType;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.GameManager;
 
 public class SystemGameManagerTest
 {

@@ -6,11 +6,10 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem.BountyManager;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem.EnumsDatas;
 
-public enum BountyType {
-    LOWER,
-    UPPER,
+public enum AgeType {
+    YOUNGER,
     EQUAL,
-    WRONG_UNKNOWN
+    OLDER
 }

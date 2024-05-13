@@ -11,6 +11,7 @@ package fr.gmarquette.guesswho.GameData;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,11 +25,12 @@ public class ExtractorPattern
 {
     private static final List<String> pirateTypeList = Arrays.asList("Pirate", "Pirates", "Bandit",
             "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria", "Équipage",
-            "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land");
+            "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land",
+            "Spiders Café");
     private static final List<String> navyTypeList = Arrays.asList("Marine", "Marines", " Marines", "Cipher Pol",
             "Souverain", "Conseil des 5 doyens", "CP-AIGIS0", "Gouvernement", "Impel", "Navy's Crew", "Juge");
     private static final List<String> revoTypeList = Arrays.asList("Armée Révolutionnaire",
-            "Révolutionnaires", "armée révolutionnaire", "Revolutionary's Crew");
+            "Révolutionnaires", "armée révolutionnaire", "Revolutionary's Crew", "Armée de la Liberté");
 
 
     static String extractPattern(String input, String pattern) {
@@ -157,14 +159,6 @@ public class ExtractorPattern
         {
             return "Cipher Pol";
         }
-        else if(rawCrew.equals("Marine") || rawCrew.equals("Marines") || rawCrew.equals(" Marines"))
-        {
-            return "Navy's Crew";
-        }
-        else if(type.equals("Revolutionary"))
-        {
-            return "Revolutionary's Crew";
-        }
         else if(rawCrew.isEmpty())
         {
             return type;
@@ -173,14 +167,18 @@ public class ExtractorPattern
         {
             return "Citizen";
         }
-        else if(type.equals("Dragon Celestes"))
-        {
-            return "Celestial Dragons";
-        }
         else
         {
             switch (rawCrew)
             {
+                case "Dragon Celestes":
+                    return "Celestial Dragons";
+                case "Revolutionary":
+                    return "Revolutionary's Crew";
+                case "Marine":
+                case "Marines":
+                case " Marines":
+                    return "Navy's Crew";
                 case "Subordonné de L'Équipage de Barbe Blanche":
                     return "L'Équipage de Barbe Blanche";
                 case "La Grande Flotte du Chapeau de Paille":
@@ -195,6 +193,7 @@ public class ExtractorPattern
                 case "Famille Charlotte":
                     return "L'Équipage de Big Mom";
                 case "Spiders Café":
+                case "Spider's Café":
                     return "Baroque Works";
                 case "Capitaine de l'Equipage de Caribou" :
                     return "L'Équipage de Caribou";
@@ -211,6 +210,11 @@ public class ExtractorPattern
                 case "Hogback":
                 case "Dracule Mihawk":
                     return "Thriller Bark";
+                case "Alliance Baggy et Alvida":
+                case "L'Équipage du Clown":
+                    return "Cross Guild";
+                case "L'Équipage du Capitaine Usopp":
+                    return "Citizen";
                 default:
                     return rawCrew;
             }
@@ -222,15 +226,19 @@ public class ExtractorPattern
         try
         {
             List<String> affiliationCharacter = new ArrayList<>();
-            String[] affiliations = text.select(".pi-data-value").html().split("<br>|<p>|<a>");
-            for(String affiliation : affiliations)
+            Elements affiliations = text.select(".pi-data-value > a");
+            for (Element affiliation : affiliations)
             {
-                Document docSmallDatas = Jsoup.parse(affiliation);
-                String smallText = docSmallDatas.select("small").text();
-                affiliation = Jsoup.parse(affiliation).text().replaceAll("\\(.;*?\\)", "").trim() + smallText;
-                affiliationCharacter.addAll(Arrays.asList(affiliation.split("[;,]")));
+                String affilationText = affiliation.text();
+                if(affiliation.nextElementSibling() != null && affiliation.nextElementSibling().text().contains("anciennement")
+                    || affiliation.nextElementSibling().text().contains("temporairement") ||
+                affiliation.nextElementSibling().text().contains("dissous"))
+                {
+                    String smallText = affiliation.nextElementSibling().text();
+                    affilationText += smallText;
+                }
+                affiliationCharacter.add(affilationText);
             }
-            affiliationCharacter.removeIf(String::isEmpty);
 
             for(String affiliation : affiliationCharacter)
             {

@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".GameSystem.Notifications.NotificationManager"/>
+        <receiver android:name=".InterfaceManagement.GameSystem.Notifications.NotificationManager"/>
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@ public class ImportManagerTest {
 
     @Test
     public void extractValuesFromFandomTest() {
-        String character = "Crocodile";
+        String character = "Piment";
         Characters characters = getDatasForEachCharacter(character);
 
         assert characters != null;

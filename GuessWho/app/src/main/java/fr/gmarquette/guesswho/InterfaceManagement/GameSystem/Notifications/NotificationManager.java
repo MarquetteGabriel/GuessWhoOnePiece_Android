@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem.Notifications;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Notifications;
 
 import android.Manifest;
 import android.app.AlarmManager;
