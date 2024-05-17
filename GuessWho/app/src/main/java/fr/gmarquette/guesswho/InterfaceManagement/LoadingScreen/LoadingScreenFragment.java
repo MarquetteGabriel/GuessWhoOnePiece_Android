@@ -99,7 +99,7 @@ public class LoadingScreenFragment extends Fragment {
         {
             if(progressBar.getProgress() != MAX_PROGRESS_BAR)
             {
-                while(importDataManager.getNameList() == null || importDataManager.getNameList().size() == 0)
+                while(importDataManager.getNameList() == null || importDataManager.getNameList().isEmpty())
                 {
 
                 }

@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class ExtractorPattern
 {
@@ -34,12 +35,20 @@ public class ExtractorPattern
 
 
     static String extractPattern(String input, String pattern) {
-        Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher(input);
-        if (matcher.find()) {
-            return matcher.group(1);
+        try
+        {
+            Pattern regex = Pattern.compile(pattern);
+            Matcher matcher = regex.matcher(input);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+            return "";
         }
-        return "";
+        catch (IndexOutOfBoundsException | PatternSyntaxException ignored)
+        {
+            return "";
+        }
+
     }
 
     static String extractPatternBounty(String input)
@@ -47,28 +56,22 @@ public class ExtractorPattern
         Pattern regex = Pattern.compile("Prime : (.*?)(Statut|Anniversaire|Âge)");
         Matcher matcher = regex.matcher(input);
         long maxBounty = 0;
-        try
+        if(matcher.find())
         {
-            if(matcher.find())
+            if(matcher.group(1) != null)
             {
-                if(matcher.group(1) != null)
+                if(!matcher.group(1).contains("Inconnue") && !matcher.group(1).contains("Aucune"))
                 {
-                    if(!matcher.group(1).contains("Inconnue") && !matcher.group(1).contains("Aucune"))
+                    String text = matcher.group(1).replaceAll("(?<!\\])\\s", ".").replaceAll(";", " ").replaceAll("\\(", "");
+                    text = text.replaceAll("\\[.*?\\]", "").replaceAll(",", ".").replaceAll("\\(.*?\\)", "");
+                    String[] bountys = text.split("\\s+");
+                    for (String bounty : bountys)
                     {
-                        String text = matcher.group(1).replaceAll("(?<!\\])\\s", ".").replaceAll(";", " ");
-                        text = text.replaceAll("\\[.*?\\]", "").replaceAll(",", ".").replaceAll("\\(.*?\\)", "");
-                        String[] bountys = text.split("\\s+");
-                        for (String bounty : bountys)
-                        {
-                            maxBounty = Math.max(maxBounty, Long.parseLong(bounty.replaceAll("\\.", "")));
+                        maxBounty = Math.max(maxBounty, Long.parseLong(bounty.replaceAll("\\.", "")));
 
-                        }
                     }
                 }
             }
-        }
-        catch (Exception ignored)
-        {
         }
 
         if(maxBounty == 0)
@@ -230,9 +233,8 @@ public class ExtractorPattern
             for (Element affiliation : affiliations)
             {
                 String affilationText = affiliation.text();
-                if(affiliation.nextElementSibling() != null && affiliation.nextElementSibling().text().contains("anciennement")
-                    || affiliation.nextElementSibling().text().contains("temporairement") ||
-                affiliation.nextElementSibling().text().contains("dissous"))
+                if((affiliation.nextElementSibling() != null) && (affiliation.nextElementSibling().text().contains("anciennement") || affiliation.nextElementSibling().text().contains("temporairement") ||
+                affiliation.nextElementSibling().text().contains("dissous")))
                 {
                     String smallText = affiliation.nextElementSibling().text();
                     affilationText += smallText;
@@ -243,7 +245,7 @@ public class ExtractorPattern
             for(String affiliation : affiliationCharacter)
             {
                 affiliation = affiliation.replaceAll("\\[.*?]\\s*$", "");
-                if(!affiliation.contains("anciennement") && !affiliation.contains("temporairement"))
+                if(!affiliation.contains("anciennement") && !affiliation.contains("temporairement") && !affiliation.contains("dissous"))
                 {
                     return affiliation;
                 }
@@ -392,7 +394,7 @@ public class ExtractorPattern
         }
         else if(character.contains("Marshall D. Teach"))
         {
-            return "Babre Noire";
+            return "Barbe Noire";
         }
         else if(character.contains("Edward Newgate"))
         {

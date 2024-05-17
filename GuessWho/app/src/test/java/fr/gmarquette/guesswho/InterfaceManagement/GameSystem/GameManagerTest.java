@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -17,27 +17,31 @@ import org.junit.Test;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.BountyManager.BountyType;
 import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.EnumsDatas.AgeType;
-import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.GameManager;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.EnumsDatas.ChapterType;
 
-public class SystemGameManagerTest
-{
+public class GameManagerTest {
+
     Characters testPirate = new Characters("Test Pirate", true, "300 Mi", 45, "Pirate", true, 26, "Pirate Crew", "" ,0);
     Characters testRevo = new Characters("Test Revo", false, "3 Md", 450, "Revolutionary", false, 36, "Revo Crew", "",0);
     Characters testNavy = new Characters("Test Navy", true, "0", 45, "Navy", true, 16, "Navy's Crew", "",1);
     Characters testCitizen = new Characters("Test Citizen", true, "Unknown", 45, "Citizen", true, 26, "Citizen", "",0);
 
-    @Test
-    public void testFruit()
-    {
-        Characters tester = new Characters("Tester", true, "0", 973, "Citizen", true, 76, "Citizen", "",0);
 
+    @Test
+    public void isAlive() {
+        assertTrue(GameManager.isAlive(testCitizen, testPirate));
+        assertFalse(GameManager.isAlive(testRevo, testPirate));
+    }
+
+    @Test
+    public void hasEatenDevilFruit() {
+        Characters tester = new Characters("Tester", true, "0", 973, "Citizen", true, 76, "Citizen", "",0);
         assertTrue(GameManager.hasEatenDevilFruit(tester, testPirate));
         assertFalse(GameManager.hasEatenDevilFruit(tester, testRevo));
     }
 
     @Test
-    public void testBounty()
-    {
+    public void lookingForBounty() {
         Characters testerMd = new Characters("Tester", true, "4 Md", 973, "Citizen", true, 76, "Citizen", "", 0);
         Characters testerMi = new Characters("Tester", true, "600 Mi", 973, "Citizen", true, 76, "Citizen", "", 0);
         Characters testerE = new Characters("Tester", true, "300 Mi", 973, "Citizen", true, 76, "Citizen", "", 0);
@@ -77,26 +81,41 @@ public class SystemGameManagerTest
         assertEquals(GameManager.lookingForBounty(testerUnknown, testCitizen), BountyType.EQUAL);
         assertEquals(GameManager.lookingForBounty(testerE, testCitizen), BountyType.WRONG_UNKNOWN);
         assertEquals(GameManager.lookingForBounty(testerP, testCitizen), BountyType.WRONG_UNKNOWN);
+
     }
 
     @Test
-    public void testAge()
-    {
+    public void isSameName() {
+        Characters testPirate2 = new Characters("Test Pirate", true, "300 Mi", 45, "Pirate", true, 26, "Pirate Crew", "" ,0);
+        assertFalse(GameManager.isSameName(testCitizen, testPirate));
+        assertTrue(GameManager.isSameName(testPirate2, testPirate));
+    }
+
+    @Test
+    public void getAppearanceDiff() {
+        assertEquals(GameManager.getAppearanceDiff(testRevo, testPirate), ChapterType.PREVIOUS_CHAPTER);
+        assertEquals(GameManager.getAppearanceDiff(testPirate, testCitizen), ChapterType.SAME_CHAPTER);
+        assertEquals(GameManager.getAppearanceDiff(testPirate, testRevo), ChapterType.NEWER_CHAPTER);
+    }
+
+    @Test
+    public void getType() {
+        Characters testCitizen2 = new Characters("Test Citizen", true, "Unknown", 45, "Citizen", true, 26, "Citizen", "",0);
+        assertFalse(GameManager.getType(testCitizen, testRevo));
+        assertTrue(GameManager.getType(testCitizen, testCitizen2));
+    }
+
+    @Test
+    public void getAge() {
         assertEquals(GameManager.getAge(testPirate, testRevo), AgeType.YOUNGER);
         assertEquals(GameManager.getAge(testPirate, testNavy), AgeType.OLDER);
         assertEquals(GameManager.getAge(testPirate, testCitizen), AgeType.EQUAL);
     }
 
-
     @Test
-    public void testAlive()
-    {
-        Characters tester = new Characters("Tester", true, "0", 973, "Citizen", false, 76, "Citizen","",  0);
-
-
-
-
+    public void getCrew() {
+        Characters testCitizen2 = new Characters("Test Citizen", true, "Unknown", 45, "Citizen", true, 26, "Citizen", "",0);
+        assertFalse(GameManager.getCrew(testCitizen, testRevo));
+        assertTrue(GameManager.getCrew(testCitizen, testCitizen2));
     }
-
-
 }

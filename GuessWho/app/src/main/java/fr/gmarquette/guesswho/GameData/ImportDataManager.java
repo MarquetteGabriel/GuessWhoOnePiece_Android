@@ -117,8 +117,8 @@ public class ImportDataManager
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
+
         }
     }
 
@@ -182,7 +182,6 @@ public class ImportDataManager
         } catch (IOException e) {
             Thread.currentThread().interrupt();
             countPercentage++;
-            e.printStackTrace();
         }
     }
     
@@ -247,8 +246,7 @@ public class ImportDataManager
                 }
                 countLevels++;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 
