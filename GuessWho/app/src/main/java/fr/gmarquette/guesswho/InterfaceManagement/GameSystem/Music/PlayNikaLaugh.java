@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem.Music;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Music;
 
 import android.media.MediaPlayer;
 import android.view.View;

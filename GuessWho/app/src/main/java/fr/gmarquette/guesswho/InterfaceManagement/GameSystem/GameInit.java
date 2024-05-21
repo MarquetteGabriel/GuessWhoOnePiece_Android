@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem;
 
 import android.content.Context;
 

@@ -13,7 +13,6 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import java.util.List;
 
@@ -25,8 +24,6 @@ public interface DAO{
 
     @Delete
     void deleteCharacter(Characters characters);
-    @Update
-    void updateCharacter(Characters characters);
 
     @Query("SELECT picture FROM Characters")
     List<String> getAllPictures();
@@ -37,8 +34,6 @@ public interface DAO{
     @Query("SELECT * FROM Characters WHERE name LIKE:name")
     Characters getCharacterFromName(String name);
 
-    @Query("SELECT name FROM Characters WHERE level LIKE:level")
-    List<String> getNamesByDifficulty(int level);
 
     @Query("SELECT name FROM Characters")
     List<String> getAllNames();

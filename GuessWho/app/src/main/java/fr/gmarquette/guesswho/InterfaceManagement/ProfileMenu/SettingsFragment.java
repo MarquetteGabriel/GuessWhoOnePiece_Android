@@ -29,9 +29,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
-import fr.gmarquette.guesswho.GameSystem.Music.BandeSon;
-import fr.gmarquette.guesswho.GameSystem.Music.PlayNikaLaugh;
-import fr.gmarquette.guesswho.GameSystem.Notifications.NotificationManager;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Music.BandeSon;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Music.PlayNikaLaugh;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Notifications.NotificationManager;
 import fr.gmarquette.guesswho.R;
 
 public class SettingsFragment extends BottomSheetDialogFragment {

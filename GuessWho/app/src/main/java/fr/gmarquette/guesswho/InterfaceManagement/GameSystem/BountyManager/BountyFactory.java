@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem.BountyManager;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem.BountyManager;
 
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 

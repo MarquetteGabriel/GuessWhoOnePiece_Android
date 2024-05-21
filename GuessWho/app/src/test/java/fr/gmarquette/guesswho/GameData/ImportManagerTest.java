@@ -26,7 +26,7 @@ public class ImportManagerTest {
 
     @Test
     public void extractValuesFromFandomTest() {
-        String character = "Zunesh";
+        String character = "Piment";
         Characters characters = getDatasForEachCharacter(character);
 
         assert characters != null;
@@ -81,6 +81,7 @@ public class ImportManagerTest {
             boolean alived = !ExtractorPattern.extractPattern(characterData, "Statut : (Vivant|Décédé)").equals("Décédé");
             int age = ExtractorPattern.extractPatternAge(characterData);
             crew = ExtractorPattern.fixCrew(crew, type);
+            type = ExtractorPattern.fixType(type, crew);
 
             return new Characters(character, fruit, bounty, chapter, type, alived, age, crew, pictureElement , 2 + 1);
 

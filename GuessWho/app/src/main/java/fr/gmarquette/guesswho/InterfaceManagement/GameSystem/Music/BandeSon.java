@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem.Music;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Music;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -63,9 +63,8 @@ public class BandeSon {
             mediaPlayer = MediaPlayer.create(context, R.raw.bs_op_quinze_wego);
             mediaPlayer.start();
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
-            e.printStackTrace();
         }
 
     }

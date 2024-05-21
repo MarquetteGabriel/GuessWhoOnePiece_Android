@@ -6,7 +6,7 @@
  *
  */
 
-package fr.gmarquette.guesswho.GameSystem.EnumsDatas;
+package fr.gmarquette.guesswho.InterfaceManagement.GameSystem.EnumsDatas;
 
 public enum ChapterType {
     PREVIOUS_CHAPTER,

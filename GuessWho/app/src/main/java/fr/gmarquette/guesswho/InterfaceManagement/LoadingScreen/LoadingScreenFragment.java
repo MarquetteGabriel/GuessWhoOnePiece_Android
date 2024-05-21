@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
 import fr.gmarquette.guesswho.GameData.ImportDataManager;
-import fr.gmarquette.guesswho.GameSystem.Music.BandeSon;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.Music.BandeSon;
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
@@ -99,7 +99,7 @@ public class LoadingScreenFragment extends Fragment {
         {
             if(progressBar.getProgress() != MAX_PROGRESS_BAR)
             {
-                while(importDataManager.getNameList() == null || importDataManager.getNameList().size() == 0)
+                while(importDataManager.getNameList() == null || importDataManager.getNameList().isEmpty())
                 {
 
                 }

@@ -41,11 +41,11 @@ import java.util.concurrent.ExecutionException;
 import fr.gmarquette.guesswho.GameData.Database.CallDAOAsync;
 import fr.gmarquette.guesswho.GameData.Database.Characters;
 import fr.gmarquette.guesswho.GameData.Database.DataBase;
-import fr.gmarquette.guesswho.GameSystem.GameInit;
-import fr.gmarquette.guesswho.GameSystem.GameManager;
 import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.AnimationManager;
 import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.Answering;
 import fr.gmarquette.guesswho.InterfaceManagement.GameScreen.PicturesAlbum;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.GameInit;
+import fr.gmarquette.guesswho.InterfaceManagement.GameSystem.GameManager;
 import fr.gmarquette.guesswho.InterfaceManagement.MainActivityViewModel;
 import fr.gmarquette.guesswho.R;
 
