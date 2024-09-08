@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace GuessWhoOnePiece.Components.Elements;
 
-public partial class ItemList(Character character) : ComponentBase
+public partial class ItemList : ComponentBase
 {
-    [Parameter] public Character Character { get; set; } = character;
+    [Parameter] public Character Character { get; set; }
 }

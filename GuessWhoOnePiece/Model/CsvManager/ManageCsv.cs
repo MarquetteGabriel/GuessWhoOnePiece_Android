@@ -47,16 +47,16 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <returns>The string formatted.</returns>
         private static string SetCharacterToCsv(Character character)
         {
-            var name = character.name + Separator;
-            var age = character.age + Separator;
-            var devilFruit = character.devilFruit + Separator;
-            var bounty = character.bounty + Separator;
-            var firstAppearance = character.firstAppearance + Separator;
-            var type = character.type + Separator;
-            var alive = character.alive + Separator;
-            var crew = character.crew + Separator;
-            var picture = character.picture + Separator;
-            var level = character.level + Separator;
+            var name = character.Name + Separator;
+            var age = character.Age + Separator;
+            var devilFruit = character.DevilFruit + Separator;
+            var bounty = character.Bounty + Separator;
+            var firstAppearance = character.FirstAppearance + Separator;
+            var type = character.Type + Separator;
+            var alive = character.Alive + Separator;
+            var crew = character.Crew + Separator;
+            var picture = character.Picture + Separator;
+            var level = character.Level + Separator;
             
             return (name + age + devilFruit + firstAppearance + bounty + type + crew + picture + level + alive);
         }

@@ -31,16 +31,16 @@ namespace GuessWhoOnePiece.Model.Characters
 
         #region Private declarations
     
-        internal string name { get; set; } = name;
-        internal bool devilFruit { get; set; } = devilFruit;
-        internal string bounty { get; set; } = bounty;
-        internal int firstAppearance { get; set; } = firstAppearance;
-        internal string type { get; set; } = type;
-        internal bool alive { get; set; } = alive;
-        internal int age { get; set; } = age;
-        internal string crew { get; set; } = crew;
-        internal string picture { get; set; } = picture;
-        internal int level { get; set; } = level;
+        internal string Name { get; set; } = name;
+        internal bool DevilFruit { get; set; } = devilFruit;
+        internal string Bounty { get; set; } = bounty;
+        internal int FirstAppearance { get; set; } = firstAppearance;
+        internal string Type { get; set; } = type;
+        internal bool Alive { get; set; } = alive;
+        internal int Age { get; set; } = age;
+        internal string Crew { get; set; } = crew;
+        internal string Picture { get; set; } = picture;
+        internal int Level { get; set; } = level;
 
         #endregion
     

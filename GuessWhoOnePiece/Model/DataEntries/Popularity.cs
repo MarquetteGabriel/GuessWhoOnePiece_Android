@@ -66,19 +66,19 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 foreach (var characters in characterList)
                 {
-                    if (characters.name.Equals(character))
+                    if (characters.Name.Equals(character))
                     {
                         for (var i = ControlRoom.NumberOfLevels; i >= 1; i--)
                         {
                             if (position <= 200 * i)
                             {
-                                characters.level = i - 1;
+                                characters.Level = i - 1;
                             }
                         }
 
-                        if (characters.level == ControlRoom.NumberOfLevels + 1)
+                        if (characters.Level == ControlRoom.NumberOfLevels + 1)
                         {
-                            characters.level = (ControlRoom.NumberOfLevels - 1);
+                            characters.Level = (ControlRoom.NumberOfLevels - 1);
                         }
                     }
                 }
