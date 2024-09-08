@@ -1,0 +1,36 @@
+﻿@inject IJSRuntime Js
+
+<div class="tab-bar">
+    <nav class="nav justify-content-around">
+        <div class="nav-item">
+            <NavLink class="nav-link" href="counter" @onclick="() => OnTabClick(1)">
+                <img class="nav-icon" src="icons/today_icon.png" alt=""/>
+                <span class="nav-text">Daily</span>
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="gameSelect" @onclick="() => OnTabClick(2)">
+                <img class="nav-icon" src="icons/game_icon.png" alt=""/>
+                <span class="nav-text">Game</span>
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="() => OnTabClick(3)">
+                <img class="nav-icon" src="icons/home_icon.png" alt=""/>
+                <span class="nav-text">Home</span>
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="characters" @onclick="() => OnTabClick(4)">
+                <img class="nav-icon" src="icons/characters_icon.png" alt=""/>
+                <span class="nav-text">Characters</span>
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="weather" @onclick="() => OnTabClick(5)">
+                <img class="nav-icon" src="icons/settings_icon.png" alt=""/>
+                <span class="nav-text">Settings</span>
+            </NavLink>
+        </div>
+    </nav>
+</div>

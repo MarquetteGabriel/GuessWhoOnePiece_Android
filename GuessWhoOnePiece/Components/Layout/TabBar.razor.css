@@ -1,4 +1,4 @@
-/* Global Style for Body */
+﻿/* Global Style for Body */
 body {
     margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ body {
 
 /* Main content section */
 .content {
-    flex-grow: 1;
+    flex-grow: 3;
 }
 
 /* Tab Bar */
@@ -28,11 +28,15 @@ body {
 nav.nav {
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    position: relative;
+    z-index: 2; /* Ensure icons are above the ball */
 }
 
 /* Styling for each Tab Link */
 .nav-item {
     text-align: center;
+    flex: 1;
 }
 
 .nav-link {
@@ -42,34 +46,30 @@ nav.nav {
     flex-direction: column;
     align-items: center;
     transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link .nav-text {
+    font-size: 12px;
+    margin-top: 5px;
+    display: none; /* Hide text by default */
+}
+
+.nav-link.active .nav-text {
+    display: block; /* Show text when active */
 }
 
 .nav-icon {
-    width: 24px; /* Adjust size as needed */
-    height: 24px; /* Adjust size as needed */
+    width: 24px;
+    height: 24px;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .nav-link:hover .nav-icon,
 .nav-link.active .nav-icon {
-    filter: hue-rotate(180deg); /* Change color on hover and active state */
-    transform: scale(1.2); /* Slightly enlarge the icon */
-}
-
-.nav-text {
-    display: none; /* Hide text by default */
-    font-size: 12px; /* Adjust font size as needed */
-    margin-top: 5px;
-}
-
-.nav-link:hover {
-    color: #000000; /* Blue color on hover */
+    transform: scale(1.2); /* Slightly enlarge the icon on hover or active state */
 }
 
 .nav-link.active {
-    color: #007bff; /* Active link color */
-}
-
-.nav-link.active .nav-text {
-    display: block; /* Show text when active */
+    color: #007bff; /* Change color for the active link */
 }
