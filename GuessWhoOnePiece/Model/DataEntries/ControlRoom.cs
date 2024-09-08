@@ -6,6 +6,7 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 using GuessWhoOnePiece.Model.Characters;
+using GuessWhoOnePiece.Model.CsvManager;
 using HtmlAgilityPack;
 
 namespace GuessWhoOnePiece.Model.DataEntries
@@ -47,20 +48,38 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Get the list of character from the fandom webpage and add each character into <see cref="_characterNameList"/>.</summary>
         private async Task ReceivedCharactersList()
         {
-            var web = new HtmlWeb();
-            var doc = await web.LoadFromWebAsync(UrlFandomListCharacter);
-            var tables = doc.DocumentNode.SelectNodes("//div[contains(@class, 'tabber wds-tabber')]//table[contains(@class, 'wikitable')]");
-
-            foreach (var table in tables)
+            try
             {
-                var rows = table.SelectNodes("tr");
-                foreach (var row in rows)
+                var web = new HtmlWeb();
+                var doc = await web.LoadFromWebAsync(UrlFandomListCharacter);
+                var tables = doc.DocumentNode.SelectNodes("//div[contains(@class, 'tabber wds-tabber')]//table[contains(@class, 'wikitable')]");
+
+                foreach (var table in tables)
                 {
-                    var columns = row.SelectNodes("td");
-                    if (columns.Count < 6) continue;
-                    var character = DataControl.ExtractExceptions(columns[1].InnerText);
-                    _characterNameList.Add(character);
+                    var rows = table.SelectNodes("//td");
+                    foreach (var row in rows)
+                    {
+                        // TODO
+                        var link = row.SelectSingleNode(".//a");
+                        if (link != null)
+                        {
+                            var text = link.InnerText.Trim();
+                        }
+
+                        /*
+                        var columns = row.SelectNodes("//td");
+                        var value = row.FirstChild.GetAttributeValue("a", string.Empty);
+                        if (columns != null && columns.Count < 6)
+                        {
+                            var character = DataControl.ExtractExceptions(columns[1].InnerText);
+                            _characterNameList.Add(character);
+                        }*/
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 
@@ -74,11 +93,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 var web = new HtmlWeb();
                 var doc = await web.LoadFromWebAsync(url);
-                // TODO
-
-           //     const string classFruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
-           //     var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
-           //    var fruit = fruitElement.Contains("Fruit du Démon");
                 
                 const string classCharacterData = "pi-item pi-group pi-border-color";
                 var characterData = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classCharacterData}')]").Select(n => n.InnerText));
@@ -123,6 +137,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 {
                     _countPercentage = _characterNameList.Count;
                 }
+                
+                ManageCsv.SaveCharacterToCsv(characters);
 
                 return characters;
             }

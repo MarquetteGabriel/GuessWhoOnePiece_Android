@@ -1,5 +1,36 @@
 ﻿@page "/"
+@using GuessWhoOnePiece.Model.CsvManager
+@using GuessWhoOnePiece.Model.DataEntries
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<button @onclick="@OnClickChargement">Data</button>
+
+<div>
+    <button @onclick="@OnShowCharacter">Show Character</button>
+    <span>@_value</span>
+</div>
+
+
+@code
+{
+
+    readonly ControlRoom _controlRoom = new ControlRoom();
+    private string _value = string.Empty;
+
+    private async void OnClickChargement()
+    {
+        await _controlRoom.GenerateThreads();
+    }
+
+    private async void OnShowCharacter()
+    {
+        var characters = await ReceiveDataCsv.ReceiveAllCharacters();
+        foreach (var character in characters)
+        {
+            _value += character.name + " ";
+        }
+    }
+}
