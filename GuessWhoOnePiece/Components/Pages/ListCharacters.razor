@@ -1,0 +1,13 @@
+﻿@page "/characters"
+@using GuessWhoOnePiece.Components.Elements
+
+<h3>ListCharacters</h3>
+
+<ul class="list-character">
+    @foreach (var character in characters)
+    {
+        <li>
+            <ItemList Character="character"/>
+        </li>
+    }
+</ul>
