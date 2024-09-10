@@ -20,6 +20,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Number of levels.</summary>
         internal const int NumberOfLevels = 2;
         
+        /// <summary>Pattern to have only alphanumerical letters.</summary>
+        private const string Pattern = @"^[a-zA-Z0-9\s]*$";
+        
         /// <summary>List of characters' name.</summary>
         private readonly List<string> _characterNameList = [];
 
@@ -37,8 +40,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
                 if (character != null)
                     charactersList.Add(character);
-                await Task.Delay(65);
+                // await Task.Delay(65);
             }
+            ManageCsv.SaveCharactersToCsv(charactersList.ToList());
 
             Popularity.SetPopularity(_characterNameList, charactersList.ToList());
 
@@ -56,24 +60,18 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 foreach (var table in tables)
                 {
+                    var previousText = string.Empty;
                     var rows = table.SelectNodes("//td");
                     foreach (var row in rows)
                     {
-                        // TODO
                         var link = row.SelectSingleNode(".//a");
                         if (link != null)
                         {
-                            var text = link.InnerText.Trim();
+                            var character = DataControl.ExtractExceptions(link.InnerHtml.Trim());
+                            if (character != "" && previousText == "" && Regex.IsMatch(character, Pattern) && !_characterNameList.Contains(character))
+                                _characterNameList.Add(character);
+                            previousText = row.InnerText.Trim();
                         }
-
-                        /*
-                        var columns = row.SelectNodes("//td");
-                        var value = row.FirstChild.GetAttributeValue("a", string.Empty);
-                        if (columns != null && columns.Count < 6)
-                        {
-                            var character = DataControl.ExtractExceptions(columns[1].InnerText);
-                            _characterNameList.Add(character);
-                        }*/
                     }
                 }
             }
@@ -137,9 +135,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 {
                     _countPercentage = _characterNameList.Count;
                 }
-                
-                ManageCsv.SaveCharacterToCsv(characters);
-
                 return characters;
             }
             catch

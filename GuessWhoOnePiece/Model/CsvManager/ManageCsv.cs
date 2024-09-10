@@ -18,12 +18,13 @@ namespace GuessWhoOnePiece.Model.CsvManager
 
         /// <summary>Add a character to the Csv.</summary>
         /// <param name="character">The character to add.</param>
-        public static void SaveCharacterToCsv(Character character)
+        public static void SaveCharactersToCsv(List<Character> characters)
         {
             CreateCsvFile(CsvPath);
 
             using var sw = File.CreateText(CsvPath);
-            sw.WriteLine(SetCharacterToCsv(character));
+            foreach (var character in characters)
+                sw.WriteLine(SetCharacterToCsv(character));
         }
     
         /// <summary>Create a CSV file.</summary>
