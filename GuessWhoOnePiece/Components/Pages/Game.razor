@@ -1,0 +1,16 @@
+﻿@page "/game"
+@using GuessWhoOnePiece.Components.Elements
+
+<div>
+    <div class="top-bar-menu">
+        <BackButton/>
+        <TextEntry/>
+    </div>
+
+    <div class="grid-game">
+        @for (var index = 0; index < 36; index++)
+        {
+        <Answer/>
+        }
+    </div>  
+</div>

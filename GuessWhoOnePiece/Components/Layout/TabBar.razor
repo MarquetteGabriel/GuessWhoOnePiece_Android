@@ -1,36 +1,68 @@
-﻿@inject IJSRuntime Js
-
-<div class="tab-bar">
-    <nav class="nav justify-content-around">
+﻿<div class="tab-bar">
+    <div class="nav-list">
         <div class="nav-item">
-            <NavLink class="nav-link" href="counter" @onclick="() => OnTabClick(1)">
-                <img class="nav-icon" src="icons/today_icon.png" alt=""/>
-                <span class="nav-text">Daily</span>
+            <NavLink class="nav-link" href="counter" @onclick="() => ChangeActiveState(1)">
+                @*<img class="nav-icon" src="icons/today_icon.png" alt=""/>*@
+                @if (Index == 1)
+                {
+                    <img class="nav-icon" src="icons/today_icon_on.svg" alt=""/>
+                }
+                else
+                {
+                    <img class="nav-icon" src="icons/today_icon_off.svg" alt=""/>
+                }
             </NavLink>
         </div>
         <div class="nav-item">
-            <NavLink class="nav-link" href="gameSelect" @onclick="() => OnTabClick(2)">
-                <img class="nav-icon" src="icons/game_icon.png" alt=""/>
-                <span class="nav-text">Game</span>
+            <NavLink class="nav-link" href="game" @onclick="() => ChangeActiveState(2)">
+                @*<img class="nav-icon" src="icons/game_icon.png" alt=""/>*@
+                @if (Index == 2)
+                {
+                    <img class="nav-icon" src="icons/infinity_icon_on.svg" alt=""/>
+                }
+                else
+                {
+                    <img class="nav-icon" src="icons/infinity_icon_off.svg" alt=""/>
+                }
             </NavLink>
         </div>
         <div class="nav-item">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="() => OnTabClick(3)">
-                <img class="nav-icon" src="icons/home_icon.png" alt=""/>
-                <span class="nav-text">Home</span>
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="() => ChangeActiveState(3)">
+            @if (Index == 3)
+            {
+                <img class="nav-icon" src="icons/home_icon_on.svg" alt=""/>
+            }
+            else
+            {
+                <img class="nav-icon" src="icons/home_icon_off.svg" alt=""/>
+            }
             </NavLink>
         </div>
         <div class="nav-item">
-            <NavLink class="nav-link" href="characters" @onclick="() => OnTabClick(4)">
-                <img class="nav-icon" src="icons/characters_icon.png" alt=""/>
-                <span class="nav-text">Characters</span>
+            <NavLink class="nav-link" href="characters" @onclick="() => ChangeActiveState(4)">
+                @*<img class="nav-icon" src="icons/characters_icon.png" alt=""/>*@
+                @if (Index == 4)
+                {
+                <img class="nav-icon" src="icons/characters_icon_on.svg" alt=""/>
+                }
+                else
+                {
+                <img class="nav-icon" src="icons/characters_icon_off.svg" alt=""/>
+                }
             </NavLink>
         </div>
         <div class="nav-item">
-            <NavLink class="nav-link" href="weather" @onclick="() => OnTabClick(5)">
-                <img class="nav-icon" src="icons/settings_icon.png" alt=""/>
-                <span class="nav-text">Settings</span>
+            <NavLink class="nav-link" href="weather" @onclick="() => ChangeActiveState(5)">
+                @*<img class="nav-icon" src="icons/settings_icon.png" alt=""/>*@
+                @if (Index == 5)
+                {
+                <img class="nav-icon" src="icons/settings_icon_on.svg" alt=""/>
+                }
+                else
+                {
+                <img class="nav-icon" src="icons/settings_icon_off.svg" alt=""/>
+                }
             </NavLink>
         </div>
-    </nav>
+    </div>
 </div>
