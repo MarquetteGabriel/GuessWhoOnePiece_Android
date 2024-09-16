@@ -1,5 +1,7 @@
 .page {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
 }
 
@@ -7,20 +9,8 @@ main {
     flex: 1;
 }
 
-.bottom-bar {
-    position: fixed;
-    z-index: 100;
-}
-
 @media (min-width: 641px) {
     .page {
         flex-direction: row;
-    }
-
-    .bottom-bar {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
     }
 }
