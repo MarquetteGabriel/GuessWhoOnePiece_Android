@@ -4,8 +4,10 @@
 // <author>Gabriel Marquette</author>
 
 using System.Collections.Concurrent;
+using System.Text;
 using System.Text.RegularExpressions;
 using GuessWhoOnePiece.Model.Characters;
+using GuessWhoOnePiece.Model.CsvManager;
 using HtmlAgilityPack;
 
 namespace GuessWhoOnePiece.Model.DataEntries
@@ -19,6 +21,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Number of levels.</summary>
         internal const int NumberOfLevels = 2;
         
+        /// <summary>Pattern to have only alphanumerical letters.</summary>
+        private const string Pattern = @"^[a-zA-Z0-9\s]*$";
+        
         /// <summary>List of characters' name.</summary>
         private readonly List<string> _characterNameList = [];
 
@@ -29,15 +34,17 @@ namespace GuessWhoOnePiece.Model.DataEntries
         public async Task<List<Character>> GenerateThreads()
         {
             await ReceivedCharactersList();
-            
+
             var charactersList = new ConcurrentBag<Character>();
-            foreach (var characterName in _characterNameList)
+
+            await Parallel.ForEachAsync(_characterNameList, async (characterName, token) =>
             {
                 var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
                 if (character != null)
                     charactersList.Add(character);
-                await Task.Delay(65);
-            }
+            });
+            
+            ManageCsv.SaveCharactersToCsv(charactersList.ToList());
 
             Popularity.SetPopularity(_characterNameList, charactersList.ToList());
 
@@ -47,20 +54,33 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Get the list of character from the fandom webpage and add each character into <see cref="_characterNameList"/>.</summary>
         private async Task ReceivedCharactersList()
         {
-            var web = new HtmlWeb();
-            var doc = await web.LoadFromWebAsync(UrlFandomListCharacter);
-            var tables = doc.DocumentNode.SelectNodes("//div[contains(@class, 'tabber wds-tabber')]//table[contains(@class, 'wikitable')]");
-
-            foreach (var table in tables)
+            try
             {
-                var rows = table.SelectNodes("tr");
-                foreach (var row in rows)
+                var web = new HtmlWeb
                 {
-                    var columns = row.SelectNodes("td");
-                    if (columns.Count < 6) continue;
-                    var character = DataControl.ExtractExceptions(columns[1].InnerText);
-                    _characterNameList.Add(character);
+                    OverrideEncoding = Encoding.UTF8
+                };
+                var doc = await web.LoadFromWebAsync(UrlFandomListCharacter);
+                var tables = doc.DocumentNode.SelectNodes("//div[contains(@class, 'tabber wds-tabber')]//table[contains(@class, 'wikitable')]");
+
+                foreach (var table in tables)
+                {
+                    var rows = table.SelectNodes("//tr");
+                    foreach (var row in rows)
+                    {
+                        var link = row.SelectSingleNode("td[2]/a");
+                        if (link != null)
+                        {
+                            var character = DataControl.ExtractExceptions(link.InnerHtml.Trim());
+                            if(!_characterNameList.Contains(character))
+                                _characterNameList.Add(character);
+                        }
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 
@@ -72,13 +92,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             try
             {
-                var web = new HtmlWeb();
+                var web = new HtmlWeb
+                {
+                    OverrideEncoding = System.Text.Encoding.UTF8
+                };
                 var doc = await web.LoadFromWebAsync(url);
-                // TODO
-
-           //     const string classFruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
-           //     var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
-           //    var fruit = fruitElement.Contains("Fruit du Démon");
                 
                 const string classCharacterData = "pi-item pi-group pi-border-color";
                 var characterData = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classCharacterData}')]").Select(n => n.InnerText));
@@ -86,7 +104,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
                 const string classType = "pi-item pi-data pi-item-spacing pi-border-color";
                 const string classPicture = "pi-navigation pi-item-spacing pi-secondary-font";
-                var pictureElement = doc.DocumentNode.SelectSingleNode($"//*[contains(@class, '{classPicture}')]//img")?.GetAttributeValue("src", "");
+                var pictureElement = doc.DocumentNode.SelectSingleNode($"//*[contains(@class, '{classPicture}')]//img")?.GetAttributeValue("src", "").Split(";")[0];
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
                 HtmlNode typeElement = null!, crewElement = null!;
             
@@ -123,7 +141,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 {
                     _countPercentage = _characterNameList.Count;
                 }
-
                 return characters;
             }
             catch
