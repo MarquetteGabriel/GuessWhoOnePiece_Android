@@ -4,6 +4,7 @@
     list-style-type: none;
     overflow: auto;
     white-space: nowrap;
+    display: flex;
 }
 
 .answers {
