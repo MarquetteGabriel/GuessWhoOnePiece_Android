@@ -1,5 +1,8 @@
 ﻿@page "/game"
 @using GuessWhoOnePiece.Components.Elements
+@using GuessWhoOnePiece.Components.Elements.Answer
+@using GuessWhoOnePiece.Components.Elements.BackButton
+@using GuessWhoOnePiece.Components.Elements.TextEntry
 
 <div>
     <div class="top-bar-menu">
@@ -10,7 +13,7 @@
     <div class="grid-game">
         @for (var index = 0; index < 36; index++)
         {
-        <Answer/>
+        <answer/>
         }
     </div>  
 </div>

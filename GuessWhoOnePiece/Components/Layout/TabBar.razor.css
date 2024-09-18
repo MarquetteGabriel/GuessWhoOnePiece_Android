@@ -20,6 +20,7 @@
     box-shadow: 0 2px 16px hsla(228, 95%, 4%, .1);
     border-radius: 4rem;
     place-content: center;
+    z-index: 100;
 }
 
 .nav-list {

@@ -1,5 +1,6 @@
 ﻿@page "/weather"
 @using GuessWhoOnePiece.Components.Elements
+@using GuessWhoOnePiece.Components.Elements.Loading
 
 <h1>Weather</h1>
 
@@ -7,7 +8,7 @@
 
 @if (forecasts == null)
 {
-    <Loading></Loading>
+    <loading></loading>
 }
 else
 {

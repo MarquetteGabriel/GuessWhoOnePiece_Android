@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace GuessWhoOnePiece.Components.Elements;
+namespace GuessWhoOnePiece.Components.Elements.TextEntry;
 
 public partial class TextEntry : ComponentBase
 {

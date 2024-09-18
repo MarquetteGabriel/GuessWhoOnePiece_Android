@@ -1,0 +1,12 @@
+﻿.answer-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.answers {
+    margin-left: 10px;
+    display: inline;
+}
