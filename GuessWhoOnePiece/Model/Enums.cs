@@ -38,4 +38,12 @@ namespace GuessWhoOnePiece.Model
         Hard = 2,
         Error = 3
     }
+    
+    /// <summary>The state of the answer.</summary>
+    public enum AnswerState
+    {
+        Correct = 0, 
+        Wrong = 1, 
+        NotAnswered = 2,
+    }
 }

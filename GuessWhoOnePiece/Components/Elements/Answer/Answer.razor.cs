@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using GuessWhoOnePiece.Model;
+using Microsoft.AspNetCore.Components;
 
 namespace GuessWhoOnePiece.Components.Elements.Answer
 {
@@ -6,27 +7,20 @@ namespace GuessWhoOnePiece.Components.Elements.Answer
     {
         [Parameter] public string? AnswerText { get; set; }
         
-        // Correct, Wrong, Not Answered
+        [Parameter] public string? AnswerImage { get; set; }
         [Parameter] public AnswerState? AnswerState { get; set; }
 
         private void DefineColor()
         {
             switch (AnswerState)
             {
-                case Elements.Answer.AnswerState.Correct:
-                case Elements.Answer.AnswerState.Wrong:
-                case Elements.Answer.AnswerState.NotAnswered:
+                case Model.AnswerState.Correct:
+                case Model.AnswerState.Wrong:
+                case Model.AnswerState.NotAnswered:
                 default:
                     break;
             }
         }
-    }
-
-    public enum AnswerState
-    {
-        Correct = 0, 
-        Wrong = 1, 
-        NotAnswered = 2,
     }
 }
 
