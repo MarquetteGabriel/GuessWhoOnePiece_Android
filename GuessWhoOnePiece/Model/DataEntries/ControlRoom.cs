@@ -158,14 +158,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
             var urlCharacter = characterName.Replace(" ", "_").Trim();
             const string pattern = @"(.+)_\(.*\)";
             var matcher = Regex.Match(urlCharacter, pattern);
-            if (matcher.Success) {
-                urlCharacter = matcher.Groups[1].Value ;
+            if (matcher.Success)
+            {
+                urlCharacter = matcher.Groups[1].Value;
             }
+
             const string urlFandom = "https://onepiece.fandom.com/fr/wiki/";
             return urlFandom + urlCharacter;
         }
-        
-        
     }
 }
 

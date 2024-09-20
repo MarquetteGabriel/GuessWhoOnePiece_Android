@@ -19,8 +19,8 @@ namespace GuessWhoOnePiece.Model
         /// <returns>The position of the bounty.</returns>
         public static BountyType WhatBounty(Character characters, Character characterSearched)
         {
-            var bountyCharacter = characters.bounty;
-            var bountyCharacterSearched = characterSearched.bounty;
+            var bountyCharacter = characters.Bounty;
+            var bountyCharacterSearched = characterSearched.Bounty;
 
             if (bountyCharacterSearched.Contains(NoBounty))
             {
