@@ -13,9 +13,27 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <summary>Receive the character from the character name.</summary>
         /// <param name="characterName">The character's name to get data.</param>
         /// <returns>The character to get.</returns>
-        public static Character ReceiveCharacter(string characterName)
+        public static async Task<Character> ReceiveCharacter(string characterName)
         {
-            return null;
+            Character? character = null;
+            await using var stream = File.OpenRead(ManageCsv.CsvPath);
+            using var reader = new StreamReader(stream);
+            while (await reader.ReadLineAsync() is { } line)
+            {
+                var values = line.Split(ManageCsv.Separator);
+
+                if (values.Length == 10 && values[0].Equals(characterName))
+                {
+                    character = new Character(
+                        values[0], bool.Parse(values[1]),
+                        values[2], int.Parse(values[3]), 
+                        values[4], bool.Parse(values[5]),
+                        int.Parse(values[6]), values[7], values[8],
+                        int.Parse(values[9]));
+                }
+            }
+
+            return character!;
         }
 
         /// <summary>Receive all characters.</summary>

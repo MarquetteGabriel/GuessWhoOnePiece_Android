@@ -1,14 +1,22 @@
 ﻿@page "/characters"
-@using GuessWhoOnePiece.Components.Elements
+@using Bunit.Extensions
 @using GuessWhoOnePiece.Components.Elements.ItemList
+@using GuessWhoOnePiece.Components.Elements.Loading
 
 <h3>ListCharacters</h3>
 
 <ul class="list-character">
-    @foreach (var character in characters)
+    @if (characters.IsNullOrEmpty())
     {
-        <li>
-            <ItemList Character="character"/>
-        </li>
+        <Loading></Loading>
+    }
+    else
+    {
+        @foreach (var character in characters)
+        {
+            <li>
+                <ItemList Character="character"/>
+            </li>
+        }
     }
 </ul>

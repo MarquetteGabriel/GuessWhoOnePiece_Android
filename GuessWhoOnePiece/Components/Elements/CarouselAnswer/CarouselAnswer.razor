@@ -2,28 +2,25 @@
 <div class="answer">
     <div class="answer-list">
         <div class="answers">
-            <Answer AnswerImage="@Character?.Picture"></Answer>
+            <Answer AnswerImage="@Character?.Picture" AnswerText="@Character?.Name" AnswerState="@Character?.AnswerStateList?.Name"></Answer>
         </div>
         <div class="answers">
-            <Answer AnswerText="@Character?.Name" AnswerState="AnswerState"></Answer>
+            <Answer AnswerText="@Character?.Age.ToString()" AnswerImage="@Character?.AnswerImageLink?.Age" AnswerState="@Character?.AnswerStateList?.Age"></Answer>
         </div>
         <div class="answers">
-            <Answer AnswerText="@Character?.Age.ToString()" AnswerState="AnswerState"></Answer>
+            <Answer AnswerText="@Character?.DevilFruit.ToString()" AnswerImage="@Character?.AnswerImageLink?.DevilFruit" AnswerState="@Character?.AnswerStateList?.DevilFruit"></Answer>
         </div>
         <div class="answers">
-            <Answer AnswerText="@Character?.DevilFruit.ToString()" AnswerState="AnswerState"></Answer>
+            <Answer AnswerText="@Character?.Bounty" AnswerImage="@Character?.AnswerImageLink?.Bounty" AnswerState="@Character?.AnswerStateList?.Bounty"></Answer>
         </div>
         <div class="answers">
-            <Answer AnswerText="@Character?.Bounty" AnswerState="AnswerState"></Answer>
+            <Answer AnswerText="@Character?.Alive.ToString()" AnswerImage="@Character?.AnswerImageLink?.Alive" AnswerState="@Character?.AnswerStateList?.Alive"></Answer>
         </div>
         <div class="answers">
-            <Answer AnswerText="@Character?.Alive.ToString()" AnswerState="AnswerState"></Answer>
+            <Answer AnswerText="@Character?.FirstAppearance.ToString()" AnswerImage="@Character?.AnswerImageLink?.FirstAppearance" AnswerState="@Character?.AnswerStateList?.FirstAppearance"></Answer>
         </div>
         <div class="answers">
-            <Answer AnswerText="@Character?.FirstAppearance.ToString()" AnswerState="AnswerState"></Answer>
-        </div>
-        <div class="answers">
-            <Answer AnswerText="@Character?.Crew" AnswerState="AnswerState"></Answer>
+            <Answer AnswerText="@Character?.Crew" AnswerImage="@Character?.AnswerImageLink?.Crew" AnswerState="@Character?.AnswerStateList?.Crew"></Answer>
         </div>
     </div>
 </div>

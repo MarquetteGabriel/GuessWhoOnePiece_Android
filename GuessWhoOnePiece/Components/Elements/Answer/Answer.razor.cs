@@ -10,16 +10,15 @@ namespace GuessWhoOnePiece.Components.Elements.Answer
         [Parameter] public string? AnswerImage { get; set; }
         [Parameter] public AnswerState? AnswerState { get; set; }
 
-        private void DefineColor()
+        private string DefineColor()
         {
-            switch (AnswerState)
+            return AnswerState switch
             {
-                case Model.AnswerState.Correct:
-                case Model.AnswerState.Wrong:
-                case Model.AnswerState.NotAnswered:
-                default:
-                    break;
-            }
+                Model.AnswerState.Correct => "answer-correct",
+                Model.AnswerState.Wrong => "answer-wrong",
+                Model.AnswerState.NotAnswered => "answer-not-answered",
+                _ => "answer-no-answer"
+            };
         }
     }
 }

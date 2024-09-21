@@ -1,8 +1,15 @@
-﻿.grid-game {
+﻿.top-bar-menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.grid-game {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 5px;
     place-content: center;
 }
+
+
 

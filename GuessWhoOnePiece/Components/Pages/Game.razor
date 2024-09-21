@@ -6,8 +6,18 @@
 <div>
     <div class="top-bar-menu">
         <BackButton/>
-        <TextEntry/>
+        <TextEntry Items="_gameViewModel.CharacterNameList" OnItemSelected="OnCharacterClicked"/>
     </div>
 
-    <CarouselAnswer></CarouselAnswer>
+    <div class="list-answers">
+        @if (_gameViewModel.AnswersList.Any())
+        {
+        @foreach (var character in _gameViewModel.AnswersList)
+        {
+        <div class="answer-character">
+            <CarouselAnswer Character="character" AnswerState="character.AnswerStateList" AnswerImageLink="character.AnswerImageLink"></CarouselAnswer>
+        </div>
+        }
+        }
+    </div>
 </div>

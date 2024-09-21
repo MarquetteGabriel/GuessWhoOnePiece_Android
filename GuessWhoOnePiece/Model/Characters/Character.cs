@@ -3,6 +3,8 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.AnswerModel;
+
 namespace GuessWhoOnePiece.Model.Characters
 {
     /// <summary>Represents a character.</summary>
@@ -42,7 +44,10 @@ namespace GuessWhoOnePiece.Model.Characters
         internal string Picture { get; set; } = picture;
         internal int Level { get; set; } = level;
 
+        internal AnswerStateList? AnswerStateList { get; set; } = new();
+        internal AnswerImageLink? AnswerImageLink { get; set; } = new();
+
         #endregion
-    
+
     }
 }

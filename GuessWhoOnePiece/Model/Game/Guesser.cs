@@ -3,9 +3,9 @@ using GuessWhoOnePiece.Model.CsvManager;
 
 namespace GuessWhoOnePiece.Model.Game
 {
-    public class Guesser
+    public static class Guesser
     {
-        public async Task<Character> SetCharacterToFind()
+        public static async Task<Character> SetCharacterToFind()
         {
             var listCharacters = await ReceiveDataCsv.ReceiveAllCharacters();
             var index = RandomizeNumber(listCharacters.Count);
