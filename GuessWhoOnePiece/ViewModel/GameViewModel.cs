@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using GuessWhoOnePiece.Model;
 using GuessWhoOnePiece.Model.Characters;
+using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.Game;
 
 namespace GuessWhoOnePiece.ViewModel
@@ -9,7 +10,7 @@ namespace GuessWhoOnePiece.ViewModel
     {
         public ObservableCollection<Character> AnswersList = [];
         
-        public List<string>? CharacterNameList { get; internal set; } = [];
+        public List<string> CharacterNameList = [];
 
         private Character _characterToFind;
         private readonly JudgementAnswer _judgementAnswer;
@@ -17,6 +18,7 @@ namespace GuessWhoOnePiece.ViewModel
         public GameViewModel()
         {
             _ = DefineCharacter();
+            SetCharacterNames();
             _judgementAnswer = new JudgementAnswer(_characterToFind!);
         }
 
@@ -58,6 +60,8 @@ namespace GuessWhoOnePiece.ViewModel
             character.AnswerImageLink.Bounty = DefinePictures.SetBountyPicture(answerBounty);
             character.AnswerImageLink.Name = string.Empty;
             character.AnswerImageLink.Crew = DefinePictures.SetCrewPictures(character.Crew);
+            
+            AddAnswer(character);
         }
         
         public void AddAnswer(Character? character)
@@ -65,6 +69,16 @@ namespace GuessWhoOnePiece.ViewModel
             if (character != null)
                 AnswersList.Add(character);
         }
+
+        private async void SetCharacterNames()
+        {
+            var characterlist = await ReceiveDataCsv.ReceiveAllCharacters();
+            foreach (var character in characterlist)
+            {
+                CharacterNameList.Add(character.Name);
+            }
+        }
+        
     }
 }
 

@@ -40,16 +40,13 @@ public partial class TextEntry : ComponentBase
     // Méthode pour filtrer les items en fonction de la saisie de l'utilisateur
     private void FilterItems()
     {
+        _filteredItems.Clear();
         if (!string.IsNullOrEmpty(SearchText))
         {
             foreach (var item in Items.Where(item => item.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)))
             {
                 _filteredItems.Add(item);
             }
-        }
-        else
-        {
-            _filteredItems.Clear();            
         }
     }
 }

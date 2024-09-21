@@ -6,7 +6,7 @@ namespace GuessWhoOnePiece.Components.Pages;
 
 public partial class ListCharacters : ComponentBase
 {
-    private readonly List<Character> _characters = new List<Character>
+   /* private readonly List<Character> _characters = new List<Character>
     {
         new Character("Katakuri", false, "",
             0, "", false, 48, "", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMfXMi4Z4XqroQx_0UKomNs2Hx_aAz12KMhYZGLmdy6z9c7Iy_I8kycSL0nKaozBes0E&usqp=CAU", 0),
@@ -54,8 +54,13 @@ new Character("Ener", false, "",
             0, "", false, 23, "", "", 0),
 
     };
+    
+    */
 
-    // private readonly List<Character> _characters = await ReceiveDataCsv.ReceiveAllCharacters();
+    private List<Character> _characters;
 
-
+    protected override async Task OnInitializedAsync()
+    {
+        _characters = await ReceiveDataCsv.ReceiveAllCharacters();
+    }
 }
