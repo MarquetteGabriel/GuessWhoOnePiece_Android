@@ -6,13 +6,13 @@
 <h3>ListCharacters</h3>
 
 <ul class="list-character">
-    @if (characters.IsNullOrEmpty())
+    @if (_characters.IsNullOrEmpty())
     {
         <Loading></Loading>
     }
     else
     {
-        @foreach (var character in characters)
+        @foreach (var character in _characters)
         {
             <li>
                 <ItemList Character="character"/>
