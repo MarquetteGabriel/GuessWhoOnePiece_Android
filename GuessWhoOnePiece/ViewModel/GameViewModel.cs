@@ -78,6 +78,13 @@ namespace GuessWhoOnePiece.ViewModel
                 CharacterNameList.Add(character.Name);
             }
         }
+
+        private void PlayAgain()
+        {
+            _ = DefineCharacter();
+            _judgementAnswer.SetCharacter(_characterToFind);
+            AnswersList.Clear();
+        }
         
     }
 }

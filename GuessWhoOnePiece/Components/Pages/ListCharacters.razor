@@ -2,8 +2,9 @@
 @using Bunit.Extensions
 @using GuessWhoOnePiece.Components.Elements.ItemList
 @using GuessWhoOnePiece.Components.Elements.Loading
+@using GuessWhoOnePiece.Components.Elements.TextEntry
 
-<h3>ListCharacters</h3>
+<TextEntry WithAutoComplete="false" Items="_characterNames" OnItemSelected="OnSelectedCharacter" OnKeyPressed="OnKeyPressed" OnInputKeys="OnInputAsync"></TextEntry>
 
 <ul class="list-character">
     @if (_characters.IsNullOrEmpty())
