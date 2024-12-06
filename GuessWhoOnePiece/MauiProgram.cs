@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using GuessWhoOnePiece.ViewModel;
+using Microsoft.Extensions.Logging;
 
 namespace GuessWhoOnePiece
 {
@@ -15,6 +16,7 @@ namespace GuessWhoOnePiece
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddSingleton<GameViewModel>();
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();

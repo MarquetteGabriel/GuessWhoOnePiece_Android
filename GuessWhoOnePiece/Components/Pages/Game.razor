@@ -12,12 +12,13 @@
     <div class="list-answers">
         @if (_gameViewModel.AnswersList.Any())
         {
-        @foreach (var character in _gameViewModel.AnswersList)
-        {
-        <div class="answer-character">
-            <CarouselAnswer Character="character" AnswerState="character.AnswerStateList" AnswerImageLink="character.AnswerImageLink"></CarouselAnswer>
-        </div>
-        }
+            @foreach (var character in _gameViewModel.AnswersList)
+            {
+                <h3 class="answer"> @character.Name</h3>
+                /*<div class="answer-character">
+                    <CarouselAnswer Character="character" AnswerState="character.AnswerStateList" AnswerImageLink="character.AnswerImageLink"></CarouselAnswer>
+                </div>*/
+            }
         }
     </div>
 </div>

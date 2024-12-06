@@ -9,9 +9,10 @@ public partial class Game : ComponentBase
     public GameViewModel _gameViewModel = new();
 
     private async void OnCharacterClicked(string characterName)
-    {
-        var character = await ReceiveDataCsv.ReceiveCharacter(characterName);
-        _gameViewModel.GetJudgmentDay(character);
-        _gameViewModel.AddAnswer(character);
+    {  
+         var character = await ReceiveDataCsv.ReceiveCharacter(characterName);
+         _gameViewModel.GetJudgmentDay(character);
+         _gameViewModel.AddAnswer(character);
+        StateHasChanged();
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using GuessWhoOnePiece.Model;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
@@ -6,14 +8,14 @@ using GuessWhoOnePiece.Model.Game;
 
 namespace GuessWhoOnePiece.ViewModel
 {
-    public class GameViewModel
+    public class GameViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Character> AnswersList = [];
+        public readonly ObservableCollection<Character> AnswersList = [];
         
         public List<string> CharacterNameList = [];
 
         private Character _characterToFind;
-        private readonly JudgementAnswer _judgementAnswer;
+        private JudgementAnswer _judgementAnswer;
 
         public GameViewModel()
         {
@@ -30,6 +32,8 @@ namespace GuessWhoOnePiece.ViewModel
 
         public void GetJudgmentDay(Character character)
         {
+            _judgementAnswer.SetCharacter(_characterToFind);
+            
             var answerAlive = _judgementAnswer.IsAlive(character);
             var answerChapter = _judgementAnswer.IsNewer(character);
             var answerAge = _judgementAnswer.IsOlder(character);
@@ -60,20 +64,18 @@ namespace GuessWhoOnePiece.ViewModel
             character.AnswerImageLink.Bounty = DefinePictures.SetBountyPicture(answerBounty);
             character.AnswerImageLink.Name = string.Empty;
             character.AnswerImageLink.Crew = DefinePictures.SetCrewPictures(character.Crew);
-            
-            AddAnswer(character);
         }
         
-        public void AddAnswer(Character? character)
+        public void AddAnswer(Character character)
         {
-            if (character != null)
-                AnswersList.Add(character);
+            AnswersList.Add(character);
+            OnPropertyChanged();
         }
 
         private async void SetCharacterNames()
         {
             var characterlist = await ReceiveDataCsv.ReceiveAllCharacters();
-            foreach (var character in characterlist)
+            foreach (var character in characterlist.Where(character => character != null))
             {
                 CharacterNameList.Add(character.Name);
             }
@@ -85,7 +87,13 @@ namespace GuessWhoOnePiece.ViewModel
             _judgementAnswer.SetCharacter(_characterToFind);
             AnswersList.Clear();
         }
-        
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
 
