@@ -5,6 +5,7 @@
     overflow: auto;
     white-space: nowrap;
     display: flex;
+    margin-bottom: 10px;
 }
 
 .answers {

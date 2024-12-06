@@ -3,7 +3,7 @@
 @using GuessWhoOnePiece.Components.Elements.TextEntry
 @using GuessWhoOnePiece.Components.Elements.CarouselAnswer
 
-<div>
+<div class="game-page">
     <div class="top-bar-menu">
         <BackButton/>
         <TextEntry WithAutoComplete="true" Items="_gameViewModel.CharacterNameList" OnItemSelected="OnCharacterClicked"/>
@@ -14,10 +14,10 @@
         {
             @foreach (var character in _gameViewModel.AnswersList)
             {
-                <h3 class="answer"> @character.Name</h3>
-                /*<div class="answer-character">
-                    <CarouselAnswer Character="character" AnswerState="character.AnswerStateList" AnswerImageLink="character.AnswerImageLink"></CarouselAnswer>
-                </div>*/
+                //<h3 class="answer"> @character.Name</h3>
+                <div class="answer-character">
+                    <CarouselAnswer Character="character"></CarouselAnswer>
+                </div>
             }
         }
     </div>
