@@ -1,0 +1,23 @@
+﻿.game-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.top-bar-menu {
+    display: flex;
+    flex-direction: row;
+    z-index: 999;
+    height: 50px;
+}
+
+.grid-game {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 5px;
+    place-content: center;
+    z-index:500;
+    margin-top: 70px;
+}
+
