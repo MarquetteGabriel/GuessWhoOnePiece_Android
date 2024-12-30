@@ -1,0 +1,23 @@
+﻿@page "/game"
+@using GuessWhoOnePiece.Components.Elements.BackButton
+@using GuessWhoOnePiece.Components.Elements.TextEntry
+@using GuessWhoOnePiece.Components.Elements.CarouselAnswer
+
+<div class="game-page">
+    <div class="top-bar-menu">
+        <BackButton/>
+        <TextEntry WithAutoComplete="true" Items="_gameViewModel.CharacterNameList" OnItemSelected="OnCharacterClicked"/>
+    </div>
+
+    <div class="list-answers">
+        @if (_gameViewModel.AnswersList.Any())
+        {
+            @foreach (var character in _gameViewModel.AnswersList)
+            {
+                <div class="answer-character">
+                    <CarouselAnswer Character="character"></CarouselAnswer>
+                </div>
+            }
+        }
+    </div>
+</div>

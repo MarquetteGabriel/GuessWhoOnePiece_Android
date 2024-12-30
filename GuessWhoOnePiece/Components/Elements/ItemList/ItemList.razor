@@ -1,0 +1,16 @@
+﻿<div class="card-character">
+    <NavLink class="nav-link" href="@($"characters/{Character.Name}")" Match="NavLinkMatch.All">
+        <div class="card-picture">
+            <img src="@Character.Picture" alt="@Character.Name">
+        </div>
+        <div class="card-details">
+            <div class="card-name">
+                <h4>@Character.Name</h4>
+            </div>
+            <div class="card-level">
+                Level : @Character.Level
+            </div>
+        </div>
+    </NavLink>
+</div>
+
