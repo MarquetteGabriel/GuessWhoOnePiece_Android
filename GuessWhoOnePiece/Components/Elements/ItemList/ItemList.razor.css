@@ -1,4 +1,11 @@
-﻿.card-character {
+﻿.nav-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+.card-character {
     display: flex;
     width: 100%;
     border-radius: 15px;
