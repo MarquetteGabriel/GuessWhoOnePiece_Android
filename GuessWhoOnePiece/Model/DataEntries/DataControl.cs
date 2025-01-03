@@ -4,6 +4,7 @@
 // <author>Gabriel Marquette</author>
 
 using System.Globalization;
+using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
@@ -158,6 +159,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
             var affiliationCharacter = new List<string>();
             var affiliations = text.SelectNodes(".//*[contains(@class, 'pi-data-value')]/a");
 
+            if (affiliations == null)
+                return "Citizen";
+
             foreach (var affiliation in affiliations)
             {
                 var affiliationText = affiliation.InnerText;
@@ -189,27 +193,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
     internal static int ExtractPatternAge(string input)
     {
-        var matchChoice = Regex.Match(input, "Âge : (.*?) Voix | Âge : (.*?) Taille");
+        var matchChoice = Regex.Match(input, @"Âge(\s)?:(.*?)(Anniversaire|Taille|Voix)");
         var maxAge = 0;
         if(matchChoice.Success)
         {
-            var textAge = matchChoice.Groups[0].Value;
-            if(textAge.Contains("lors de sa mort") || textAge.Contains("lors du décès"))
+            var listAge = Regex.Matches(matchChoice.Groups[0].Value, @"(\d+\s)?\d+ (ans)?");
+            foreach (var age in listAge.Where(age => !string.IsNullOrEmpty(age.ToString())).Select(age => age.ToString().Replace(" ans", "").Replace(" ", "")))
             {
-                var match = Regex.Match(input, @"(\d+\s)?\d+ ans \(lors d");
-                while (match.Success)
-                {
-                    maxAge = Math.Max(maxAge, int.Parse(match.Groups[0].Value.Replace("\\D", "")));
-                }
-            }
-            else
-            {
-                textAge = textAge.Replace("\\s", "").Replace("\\(.*?\\)", " ").Replace("\\[.*?\\]", " ");
-                var ages = textAge.Split("[\\D+]");
-                foreach (var age in ages.Where(age => !string.IsNullOrEmpty(age)))
-                {
-                    maxAge = Math.Max(maxAge, int.Parse(age));
-                }
+                maxAge = Math.Max(maxAge, int.Parse(age));
             }
         }
         return maxAge;

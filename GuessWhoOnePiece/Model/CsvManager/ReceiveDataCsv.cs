@@ -47,11 +47,11 @@ namespace GuessWhoOnePiece.Model.CsvManager
             {
                 var values = line.Split(ManageCsv.Separator);
 
-                if (values.Length == 10)
+                if (values.Length == 11)
                 {
                     characters.Add(new Character(
                         values[0], bool.Parse(values[1]),
-                        values[2], int.Parse(values[3]), 
+                        values[2], int.Parse(values[3]),
                         values[4], bool.Parse(values[5]),
                         int.Parse(values[6]), values[7], values[8],
                         int.Parse(values[9])));

@@ -12,8 +12,8 @@ namespace GuessWhoOnePiece.Model.CsvManager
     public static class ManageCsv
     {
         /// <summary>Path of the Csv.</summary>
-// internal static readonly string CsvPath = Path.Combine(FileSystem.Current.AppDataDirectory,"Characters.csv");
-        internal const string CsvPath = @"C:\Users\Gabriel Marquette\Desktop\Classeur1.csv";
+ internal static readonly string CsvPath = Path.Combine(FileSystem.Current.AppDataDirectory,"Characters.csv");
+//        internal const string CsvPath = @"C:\Users\Gabriel Marquette\Desktop\Classeur1.csv";
 
         /// <summary>Separator of the Csv.</summary>
         internal const string Separator = ";";
@@ -62,10 +62,8 @@ namespace GuessWhoOnePiece.Model.CsvManager
             var picture = character.Picture + Separator;
             var level = character.Level + Separator;
             
-            return (name + age + devilFruit + firstAppearance + bounty + type + crew + picture + level + alive);
+            return (name + devilFruit + bounty + firstAppearance + type + alive + age + crew + picture+ level);
         }
-        
-        
     }
 }
 

@@ -4,6 +4,8 @@
 // <author>Gabriel Marquette</author>
 
 using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using GuessWhoOnePiece.Model.Characters;
@@ -12,7 +14,7 @@ using HtmlAgilityPack;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
-    /// <summary>Represent the control of threads for web call.</summary>
+    /// <summary>Represents the control of threads for web call.</summary>
     public class ControlRoom
     {
         /// <summary>Url of the list of characters in the One Piece Fandom.</summary>
@@ -27,6 +29,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>List of characters' name.</summary>
         private readonly List<string> _characterNameList = [];
 
+        /// <summary>Percentage of advencement for loading characters.</summary>
         private int _countPercentage;
         
         /// <summary>Generate threads to get data.</summary>
@@ -80,7 +83,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
             catch (Exception)
             {
-                // ignored
+                // Empty on purpose.
             }
         }
 
@@ -88,7 +91,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="url">The url of the character.</param>
         /// <param name="characterName">The name of the character.</param>
         /// <returns>The character.</returns>
-        private async Task<Character> DataForCharacter(string url, string characterName)
+        private async Task<Character?> DataForCharacter(string url, string characterName)
         {
             try
             {
@@ -99,7 +102,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var doc = await web.LoadFromWebAsync(url);
                 
                 const string classCharacterData = "pi-item pi-group pi-border-color";
-                var characterData = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classCharacterData}')]").Select(n => n.InnerText));
+
+                var data = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classCharacterData}')]");
+                var characterData = string.Join(" ", (data != null ? data.Select(n => n.InnerText) : throw new InvalidOperationException("No character data")));
+
                 const string classFruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
                 var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
                 const string classType = "pi-item pi-data pi-item-spacing pi-border-color";
@@ -108,7 +114,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
                 HtmlNode typeElement = null!, crewElement = null!;
             
-            
+                characterData = CleanWebHtmlString(characterData);
+                fruitElement = CleanWebHtmlString(fruitElement);
+                pictureElement = CleanWebHtmlString(pictureElement);
+
                 foreach (var bountyTypeCrewElement in bountyTypeCrewElements)
                 {
                     var dataSource = bountyTypeCrewElement.GetAttributeValue("data-source", "");
@@ -123,18 +132,24 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     }
                 }
 
-                var crew = DataControl.ExtractPatternCrew(crewElement);
+                var crew = crewElement == null ? "Citizen" : DataControl.ExtractPatternCrew(crewElement);
                 var fruit = fruitElement.Contains("Fruit du Démon");
-                var type = DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
+                var type = typeElement == null ? "Citizen" : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
                 var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "").Trim(), type);
-                var chapter = int.Parse(DataControl.ExtractPattern(characterData, "Chapitre (\\d+)"));
+
+                var chapterString = DataControl.ExtractPattern(characterData, "Chapitre (\\d+)");
+                var chapter = !string.IsNullOrEmpty(chapterString) ? int.Parse(chapterString) : throw new InvalidOperationException("Invalid Chapter");
+
                 var alived = !DataControl.ExtractPattern(characterData, "Statut : (Vivant|Décédé)").Equals("Décédé");
+
                 var age = DataControl.ExtractPatternAge(characterData);
+                if(age == 0)
+                    throw new InvalidOperationException("No age for the chracter");
+
                 crew = DataControl.FixCrew(crew, type);
                 type = DataControl.FixType(type, crew);
 
-                var characters = new Character(characterName, fruit, bounty, chapter, type, alived,
-                        age, crew, pictureElement!, 2 + 1);
+                var characters = new Character(characterName, fruit, bounty, chapter, type, alived, age, crew, pictureElement!, NumberOfLevels + 1);
                 _countPercentage++;
 
                 if(_countPercentage > _characterNameList.Count)
@@ -143,7 +158,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 }
                 return characters;
             }
-            catch
+            catch (InvalidOperationException)
             {
                 _countPercentage++;
                 return null;
@@ -166,6 +181,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
             const string urlFandom = "https://onepiece.fandom.com/fr/wiki/";
             return urlFandom + urlCharacter;
         }
+
+        /// <summary>Clean string from web and html format.</summary>
+        /// <param name="webString">String to clean.</param>
+        /// <returns>The string cleaned.</returns>
+        private static string CleanWebHtmlString(string? webString) => webString != null ? WebUtility.HtmlDecode(webString).Replace("\n", "").Replace("\t", "") : "";
     }
 }
 
