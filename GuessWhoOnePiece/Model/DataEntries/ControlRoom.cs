@@ -110,7 +110,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
                 const string classType = "pi-item pi-data pi-item-spacing pi-border-color";
                 const string classPicture = "pi-navigation pi-item-spacing pi-secondary-font";
-                var pictureElement = doc.DocumentNode.SelectSingleNode($"//*[contains(@class, '{classPicture}')]//img")?.GetAttributeValue("src", "").Split(";")[0];
+                var pictureElement = doc.DocumentNode.SelectSingleNode($"//*[contains(@class, 'image')]//img")?.GetAttributeValue("src", "").Split(";")[0];
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
                 HtmlNode typeElement = null!, crewElement = null!;
             
