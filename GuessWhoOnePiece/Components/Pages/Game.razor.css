@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-bottom: 80px;
+    padding-top: 60px;
 }
 
 .top-bar-menu {
@@ -9,15 +11,18 @@
     flex-direction: row;
     z-index: 999;
     height: 50px;
+    position: fixed;
+    top: 10px;
+    width: 100%;
 }
 
-.grid-game {
+.list-answer {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 5px;
     place-content: center;
-    z-index:500;
+    z-index: 500;
     margin-top: 70px;
 }
 
