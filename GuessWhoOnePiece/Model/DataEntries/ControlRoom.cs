@@ -140,7 +140,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var chapterString = DataControl.ExtractPattern(characterData, "Chapitre (\\d+)");
                 var chapter = !string.IsNullOrEmpty(chapterString) ? int.Parse(chapterString) : throw new InvalidOperationException("Invalid Chapter");
 
-                var alived = !DataControl.ExtractPattern(characterData, "Statut : (Vivant|Décédé)").Equals("Décédé");
+                var alived = !DataControl.ExtractPattern(characterData, @"Statut\s:(Vivant|Décédé)").Equals("Décédé");
 
                 var age = DataControl.ExtractPatternAge(characterData);
                 if(age == 0)
