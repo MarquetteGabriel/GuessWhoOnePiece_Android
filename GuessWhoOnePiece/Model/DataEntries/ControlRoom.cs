@@ -110,7 +110,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
                 const string classType = "pi-item pi-data pi-item-spacing pi-border-color";
                 const string classPicture = "pi-navigation pi-item-spacing pi-secondary-font";
-                var pictureElement = doc.DocumentNode.SelectSingleNode($"//*[contains(@class, 'image')]//img")?.GetAttributeValue("src", "").Split(";")[0];
+                var pictureElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, 'image')]//img");
+                var pictureElement = GetPictureLink(pictureElements, characterName);
+
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
                 HtmlNode typeElement = null!, crewElement = null!;
             
@@ -149,7 +151,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 crew = DataControl.FixCrew(crew, type);
                 type = DataControl.FixType(type, crew);
 
-                var characters = new Character(characterName, fruit, bounty, chapter, type, alived, age, crew, pictureElement!, NumberOfLevels + 1);
+                var characters = new Character(characterName, fruit, bounty, chapter, type, alived, age, crew, pictureElement, NumberOfLevels + 1);
                 _countPercentage++;
 
                 if(_countPercentage > _characterNameList.Count)
@@ -186,6 +188,29 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="webString">String to clean.</param>
         /// <returns>The string cleaned.</returns>
         private static string CleanWebHtmlString(string? webString) => webString != null ? WebUtility.HtmlDecode(webString).Replace("\n", "").Replace("\t", "") : "";
+    
+        private static string GetPictureLink(HtmlNodeCollection listOfPictures, string characterName)
+        {
+            string pictureElement = string.Empty;
+
+            foreach (var picture in listOfPictures.Select(picture => picture.GetAttributeValue("src", "").Split(";")[0]))
+            {
+                if (picture.Contains(characterName))
+                {
+                    return picture;
+                }
+                else
+                {
+                    foreach (var character in characterName.Split(" "))
+                    {
+                        if (picture.Contains(WebUtility.UrlEncode(character)))
+                            return picture;
+                    }
+                }
+            }
+
+            return string.Empty;
+        }
     }
 }
 

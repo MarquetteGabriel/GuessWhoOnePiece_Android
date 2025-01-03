@@ -12,7 +12,6 @@
     background-color: #e4d7b5; /* Couleur du fond beige */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    margin-bottom: 10px; /* Espacement entre les items */
 }
 
 .card-picture img {
