@@ -5,6 +5,8 @@
 
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -39,14 +41,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
             await ReceivedCharactersList();
 
             var charactersList = new ConcurrentBag<Character>();
-
+            
             await Parallel.ForEachAsync(_characterNameList, async (characterName, token) =>
             {
                 var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
                 if (character != null)
                     charactersList.Add(character);
             });
-            
+
             ManageCsv.SaveCharactersToCsv(charactersList.ToList());
 
             Popularity.SetPopularity(_characterNameList, charactersList.ToList());
@@ -75,7 +77,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         if (link != null)
                         {
                             var character = DataControl.ExtractExceptions(link.InnerHtml.Trim());
-                            if(!_characterNameList.Contains(character))
+                            if(!_characterNameList.Contains(character, StringComparison.OrdinalIgnoreCase))
                                 _characterNameList.Add(character);
                         }
                     }
@@ -108,11 +110,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 const string classFruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
                 var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
-                const string classType = "pi-item pi-data pi-item-spacing pi-border-color";
-                const string classPicture = "pi-navigation pi-item-spacing pi-secondary-font";
+
                 var pictureElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, 'image')]//img");
                 var pictureElement = GetPictureLink(pictureElements, characterName);
 
+                const string classType = "pi-item pi-data pi-item-spacing pi-border-color";
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
                 HtmlNode typeElement = null!, crewElement = null!;
             
@@ -135,7 +137,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 }
 
                 var crew = crewElement == null ? "Citizen" : DataControl.ExtractPatternCrew(crewElement);
-                var fruit = fruitElement.Contains("Fruit du Démon");
+                var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase);
                 var type = typeElement == null ? "Citizen" : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
                 var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "").Trim(), type);
 
@@ -189,12 +191,22 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The string cleaned.</returns>
         private static string CleanWebHtmlString(string? webString) => webString != null ? WebUtility.HtmlDecode(webString).Replace("\n", "").Replace("\t", "") : "";
     
+        /// <summary>Gets the link of the image for a character.</summary>
+        /// <param name="listOfPictures">List of picture in the web page.</param>
+        /// <param name="characterName">Name of the character.</param>
+        /// <returns>The link of the image for the character.</returns>
         private static string GetPictureLink(HtmlNodeCollection listOfPictures, string characterName)
         {
             string pictureElement = string.Empty;
 
             foreach (var picture in listOfPictures.Select(picture => picture.GetAttributeValue("src", "").Split(";")[0]))
             {
+                if (picture.Contains("data:image/gif", StringComparison.OrdinalIgnoreCase) || picture.Contains("Site-logo", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                if (picture.Contains("Manga_Post_Ellipse", StringComparison.OrdinalIgnoreCase) || picture.Contains("Manga_Pre_Ellipse", StringComparison.OrdinalIgnoreCase) ||
+                    picture.Contains("Anime_Post_Ellipse", StringComparison.OrdinalIgnoreCase) || picture.Contains("Anime_Pre_Ellipse", StringComparison.OrdinalIgnoreCase))
+                    return picture;
+
                 if (picture.Contains(characterName))
                 {
                     return picture;
@@ -203,13 +215,90 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 {
                     foreach (var character in characterName.Split(" "))
                     {
-                        if (picture.Contains(WebUtility.UrlEncode(character)))
+                        if (picture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase))
+                            return picture;
+                        else if (RemoveDiacritics(WebUtility.UrlDecode(picture)).Contains(RemoveDiacritics(character), StringComparison.OrdinalIgnoreCase))
                             return picture;
                     }
+
+                    if (CalculateMatchPercentage(picture, characterName) > 0.11)
+                        return picture;
                 }
+
+                if (characterName.Equals("And", StringComparison.OrdinalIgnoreCase) && picture.Contains("Baskerville", StringComparison.OrdinalIgnoreCase))
+                    return picture;
+                else if (characterName.Equals("Belmer", StringComparison.OrdinalIgnoreCase) && picture.Contains("Bell", StringComparison.OrdinalIgnoreCase))
+                    return picture;
+                else if (characterName.Equals("Rock", StringComparison.OrdinalIgnoreCase) && picture.Contains("Yeti", StringComparison.OrdinalIgnoreCase))
+                    return picture;
             }
 
             return string.Empty;
+        }
+
+        /// <summary>Removes diacritics from a string.</summary>
+        /// <param name="text">Text to analyse.</param>
+        /// <returns>The new text.</returns>
+        private static string RemoveDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+
+        /// <summary>Calculate the percentage of match between two strings.</summary>
+        /// <param name="picture">Url of the picture.</param>
+        /// <param name="characterName">Name of the character.</param>
+        /// <returns>The percentage.</returns>
+        static double CalculateMatchPercentage(string picture, string characterName)
+        {
+            int levenshteinDistance = ComputeLevenshteinDistance(picture, characterName);
+            int maxLength = Math.Max(picture.Length, characterName.Length);
+
+            return maxLength == 0 ? 1.0 : 1.0 - (double)levenshteinDistance / maxLength;
+        }
+
+        /// <summary>Compute the Levenshtein distance.</summary>
+        /// <param name="s">First string to compare.</param>
+        /// <param name="t">Second string to compare.</param>
+        /// <returns>The Levenshtein distance.</returns>
+        static int ComputeLevenshteinDistance(string s, string t)
+        {
+            int n = s.Length;
+            int m = t.Length;
+            int[,] d = new int[n + 1, m + 1];
+
+            if (n == 0)
+                return m;
+
+            if (m == 0)
+                return n;
+            
+            for (int i = 0; i <= n; d[i, 0] = i++) { }
+            for (int j = 0; j <= m; d[0, j] = j++) { }
+
+            for (int j = 1; j <= m; j++)
+            {
+                for (int i = 1; i <= n; i++)
+                {
+                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+                    d[i, j] = Math.Min(
+                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                        d[i - 1, j - 1] + cost);
+                }
+            }
+
+            return d[n, m];
         }
     }
 }
