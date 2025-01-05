@@ -4,9 +4,7 @@
 // <author>Gabriel Marquette</author>
 
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -77,7 +75,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         if (link != null)
                         {
                             var character = DataControl.ExtractExceptions(link.InnerHtml.Trim());
-                            if(!_characterNameList.Contains(character, StringComparison.OrdinalIgnoreCase))
+                            if(!_characterNameList.Contains(character))
                                 _characterNameList.Add(character);
                         }
                     }
@@ -125,15 +123,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 foreach (var bountyTypeCrewElement in bountyTypeCrewElements)
                 {
                     var dataSource = bountyTypeCrewElement.GetAttributeValue("data-source", "");
-                    switch (dataSource)
-                    {
-                        case "occupation":
-                            typeElement = bountyTypeCrewElement;
-                            break;
-                        case "affiliation":
-                            crewElement = bountyTypeCrewElement;
-                            break;
-                    }
+                    if(dataSource == "occupation")
+                        typeElement = bountyTypeCrewElement;
+                    if(dataSource == "affiliation")
+                        crewElement = bountyTypeCrewElement;
                 }
 
                 var crew = crewElement == null ? "Citizen" : DataControl.ExtractPatternCrew(crewElement);

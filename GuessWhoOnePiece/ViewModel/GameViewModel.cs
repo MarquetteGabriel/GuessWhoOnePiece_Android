@@ -21,7 +21,7 @@ namespace GuessWhoOnePiece.ViewModel
         {
             _ = DefineCharacter();
             SetCharacterNames();
-            _judgementAnswer = new JudgementAnswer(_characterToFind!);
+            _judgementAnswer = new JudgementAnswer(_characterToFind);
         }
 
         private async Task DefineCharacter()

@@ -97,7 +97,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 character = DataControl.ExtractExceptionsPopularity(character);
                 var ressemblance = CalculateSimilarity(character, popularityCharacter);
 
-                if (!(ressemblance >= 0.6) || !(ressemblance > meilleureRessemblance)) continue;
+                if (ressemblance < 0.6 || !(ressemblance > meilleureRessemblance)) continue;
                 meilleureRessemblance = ressemblance;
                 texteRessemblant = popularityCharacter;
             }

@@ -23,48 +23,27 @@ namespace GuessWhoOnePiece.Model
             var bountyCharacterSearched = characterSearched.Bounty;
 
             if (bountyCharacterSearched.Contains(NoBounty))
-            {
                 return bountyCharacter.Contains(NoBounty) ? BountyType.Equal : BountyType.WrongUnknown;
-            }
 
             if (bountyCharacter.Contains(NoBounty))
-            {
                 return BountyType.WrongUnknown;
-            }
 
-            var bounty = float.Parse(bountyCharacter.Replace("[^\\d.]", ""));
-            var bountySearched = float.Parse(bountyCharacterSearched.Replace("[^\\d.]", ""));
+            var bountyCharacterValue = float.Parse(bountyCharacter.Replace("Md", "", StringComparison.OrdinalIgnoreCase)
+                .Replace("Mi", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase));
+            var bountyCharacterSearchedValue = float.Parse(bountyCharacterSearched.Replace("Md", "", StringComparison.OrdinalIgnoreCase)
+                .Replace("Mi", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase));
 
-            if (bountyCharacter.Contains("Md") && bountyCharacterSearched.Contains("Mi"))
-            {
-                bounty *= 1000;
-            }
-            else if (bountyCharacter.Contains("Mi") && bountyCharacterSearched.Contains("Md"))
-            {
-                bountySearched *= 1000;
-            }
-            else if (bountyCharacter.Contains("Md") && (!bountyCharacterSearched.Contains("Md") &&
-                                                        !bountyCharacterSearched.Contains("Mi")))
-            {
-                bounty *= 1000000000;
-            }
-            else if (bountyCharacter.Contains("Mi") && (!bountyCharacterSearched.Contains("Md") &&
-                                                        !bountyCharacterSearched.Contains("Mi")))
-            {
-                bounty *= 1000000;
-            }
-            else if (bountyCharacterSearched.Contains("Md") &&
-                     (!bountyCharacter.Contains("Md") && !bountyCharacter.Contains("Mi")))
-            {
-                bountySearched *= 1000000000;
-            }
-            else if (bountyCharacterSearched.Contains("Mi") &&
-                     (!bountyCharacter.Contains("Md") && !bountyCharacter.Contains("Mi")))
-            {
-                bountySearched *= 1000000;
-            }
+            if (bountyCharacter.Contains("Mi"))
+                bountyCharacterValue *= 1000000;
+            else if (bountyCharacter.Contains("Md"))
+                bountyCharacterValue *= 1000000000;
 
-            var diff = bounty - bountySearched;
+            if (bountyCharacterSearched.Contains("Mi"))
+                bountyCharacterSearchedValue *= 1000000;
+            else if (bountyCharacterSearched.Contains("Md"))
+                bountyCharacterSearchedValue *= 1000000000;
+            
+            var diff = bountyCharacterValue - bountyCharacterSearchedValue;
 
             if (diff < 0)
             {
