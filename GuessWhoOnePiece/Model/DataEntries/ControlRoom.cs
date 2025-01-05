@@ -47,9 +47,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     charactersList.Add(character);
             });
 
-            ManageCsv.SaveCharactersToCsv(charactersList.ToList());
-
             Popularity.SetPopularity(_characterNameList, charactersList.ToList());
+
+            ManageCsv.SaveCharactersToCsv(charactersList.ToList());
 
             return charactersList.ToList();
         }
@@ -255,7 +255,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The percentage.</returns>
         static double CalculateMatchPercentage(string picture, string characterName)
         {
-            int levenshteinDistance = ComputeLevenshteinDistance(picture, characterName);
+            int levenshteinDistance = LevenshteinDistance(picture, characterName);
             int maxLength = Math.Max(picture.Length, characterName.Length);
 
             return maxLength == 0 ? 1.0 : 1.0 - (double)levenshteinDistance / maxLength;
@@ -265,7 +265,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="s">First string to compare.</param>
         /// <param name="t">Second string to compare.</param>
         /// <returns>The Levenshtein distance.</returns>
-        static int ComputeLevenshteinDistance(string s, string t)
+        internal static int LevenshteinDistance(string s, string t)
         {
             int n = s.Length;
             int m = t.Length;
