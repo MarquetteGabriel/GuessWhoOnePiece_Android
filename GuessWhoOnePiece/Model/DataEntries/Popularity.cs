@@ -9,7 +9,7 @@ using HtmlAgilityPack;
 namespace GuessWhoOnePiece.Model.DataEntries
 {
     /// <summary>Represent the definition of the popularity for each character.</summary>
-    public class Popularity
+    public static class Popularity
     {
         private const string UrlLevels = "http://www.volonte-d.com/details/popularite.php";
 
@@ -71,22 +71,19 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     }
                 }
 
-                foreach (var characters in characterList)
+                foreach (var characters in characterList.Where(character => character.Name.Equals(tempCharacterName)))
                 {
-                    if (characters.Name.Equals(tempCharacterName))
+                    for (var i = ControlRoom.NumberOfLevels; i >= 1; i--)
                     {
-                        for (var i = ControlRoom.NumberOfLevels; i >= 1; i--)
+                        if (position <= (ListPopularity.Count % ControlRoom.NumberOfLevels) * i)
                         {
-                            if (position <= (ListPopularity.Count % ControlRoom.NumberOfLevels) * i)
-                            {
-                                characters.Level = i - 1;
-                            }
+                            characters.Level = i - 1;
                         }
+                    }
 
-                        if (characters.Level == ControlRoom.NumberOfLevels + 1)
-                        {
-                            characters.Level = (ControlRoom.NumberOfLevels - 1);
-                        }
+                    if (characters.Level == ControlRoom.NumberOfLevels + 1)
+                    {
+                        characters.Level = (ControlRoom.NumberOfLevels - 1);
                     }
                 }
 

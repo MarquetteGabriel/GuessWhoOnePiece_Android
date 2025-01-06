@@ -22,7 +22,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         /// <summary>Number of levels.</summary>
         internal const int NumberOfLevels = 2;
-        
+
+        private const double AcceptanceCritera = 0.11;
+
+        internal const string Citizen = "Citizen";
+
         /// <summary>Pattern to have only alphanumerical letters.</summary>
         private const string Pattern = @"^[a-zA-Z0-9\s]*$";
         
@@ -40,7 +44,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
             var charactersList = new ConcurrentBag<Character>();
             
-            await Parallel.ForEachAsync(_characterNameList, async (characterName, token) =>
+            await Parallel.ForEachAsync(_characterNameList, async (characterName, _) =>
             {
                 var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
                 if (character != null)
@@ -114,7 +118,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 const string classType = "pi-item pi-data pi-item-spacing pi-border-color";
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
-                HtmlNode typeElement = null!, crewElement = null!;
+                HtmlNode typeElement = null!;
+                HtmlNode crewElement = null!;
             
                 characterData = CleanWebHtmlString(characterData);
                 fruitElement = CleanWebHtmlString(fruitElement);
@@ -129,9 +134,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         crewElement = bountyTypeCrewElement;
                 }
 
-                var crew = crewElement == null ? "Citizen" : DataControl.ExtractPatternCrew(crewElement);
+                var crew = crewElement == null ? Citizen : DataControl.ExtractPatternCrew(crewElement);
                 var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase);
-                var type = typeElement == null ? "Citizen" : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
+                var type = typeElement == null ? Citizen : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
                 var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "", StringComparison.OrdinalIgnoreCase).Trim(), type);
 
                 var chapterString = DataControl.ExtractPattern(characterData, "Chapitre (\\d+)");
@@ -213,9 +218,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
                             return picture;
                         else if (RemoveDiacritics(WebUtility.UrlDecode(picture)).Contains(RemoveDiacritics(character), StringComparison.OrdinalIgnoreCase))
                             return picture;
+                        else
+                        {
+                            // Empty on purpose.
+                        }
                     }
 
-                    if (CalculateMatchPercentage(picture, characterName) > 0.11)
+                    if (CalculateMatchPercentage(picture, characterName) > AcceptanceCritera)
                         return picture;
                 }
 
@@ -225,6 +234,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     return picture;
                 else if (characterName.Equals("Rock", StringComparison.OrdinalIgnoreCase) && picture.Contains("Yeti", StringComparison.OrdinalIgnoreCase))
                     return picture;
+                else
+                {
+                    // Empty on purpose.
+                }
             }
 
             return string.Empty;
@@ -278,8 +291,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
             if (m == 0)
                 return n;
             
-            for (int i = 0; i <= n; d[i, 0] = i++) { }
-            for (int j = 0; j <= m; d[0, j] = j++) { }
+            for (int i = 0; i <= n; d[i, 0] = i++) { 
+                // Empty on purpose.
+                }
+
+            for (int j = 0; j <= m; d[0, j] = j++) {
+                // Empty on purpose.
+            }
 
             for (int j = 1; j <= m; j++)
             {

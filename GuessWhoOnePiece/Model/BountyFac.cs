@@ -8,7 +8,7 @@ using GuessWhoOnePiece.Model.Characters;
 namespace GuessWhoOnePiece.Model
 {
     /// <summary>Represents the manage of bounties before being printed.</summary>
-    public class BountyFac
+    public static class BountyFac
     {
         /// <summary>The string to return when there is no bounty.</summary>
         private const string NoBounty = "Unknown";
@@ -43,12 +43,20 @@ namespace GuessWhoOnePiece.Model
                 bountyCharacterValue *= MillionsDollarsValue;
             else if (bountyCharacter.Contains("Md"))
                 bountyCharacterValue *= BillionsDollarsValue;
+            else
+            {
+                // Empty on purpose.
+            }
 
             if (bountyCharacterSearched.Contains("Mi"))
                 bountyCharacterSearchedValue *= MillionsDollarsValue;
             else if (bountyCharacterSearched.Contains("Md"))
                 bountyCharacterSearchedValue *= BillionsDollarsValue;
-            
+            else
+            {
+                // Empty on purpose.
+            }
+
             var diff = bountyCharacterValue - bountyCharacterSearchedValue;
 
             if (diff < 0)

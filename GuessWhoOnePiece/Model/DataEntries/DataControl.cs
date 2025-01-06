@@ -11,7 +11,7 @@ using HtmlAgilityPack;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
-    public class DataControl
+    public static class DataControl
     {
         private static readonly List<string> PirateTypeList =
         [
@@ -43,28 +43,26 @@ namespace GuessWhoOnePiece.Model.DataEntries
             const string pattern = @"Prime\s:(.*?)(Statut|Anniversaire|Âge)";
             var match = Regex.Match(input, pattern);
             long maxBounty = 0;
-            if(match.Success)
-            {
-                if (!match.Groups[1].Value.Contains("Inconnue") && !match.Groups[1].Value.Contains("Aucune"))
-                {
-                    var text = match.Groups[1].Value.Replace(@"(?<!\])\s", ".", StringComparison.OrdinalIgnoreCase)
-                        .Replace(";", " ", StringComparison.OrdinalIgnoreCase)
-                        .Replace("(", "", StringComparison.OrdinalIgnoreCase)
-                        .Replace(")", "", StringComparison.OrdinalIgnoreCase)
-                        .Replace(@"\[.*?\]", "", StringComparison.OrdinalIgnoreCase)
-                        .Replace(",", ".", StringComparison.OrdinalIgnoreCase)
-                        .Replace(@"\(.*?\)", "", StringComparison.OrdinalIgnoreCase);
-                    var bountys = text.Split(@" ");
-                    foreach (var bounty in bountys)
-                    {
-                        foreach (var splitedBounty in Regex.Split(bounty, @"\[\d+\]"))
-                        {
-                            var splitBounty = Regex.Match(splitedBounty.Replace(".", ""), @"\d+").Value;
-                            if (string.IsNullOrEmpty(splitBounty))
-                                continue;
 
-                            maxBounty = Math.Max(maxBounty, long.Parse(splitBounty));
-                        }
+            if(match.Success  && !match.Groups[1].Value.Contains("Inconnue") && !match.Groups[1].Value.Contains("Aucune"))
+            {
+                var text = match.Groups[1].Value.Replace(@"(?<!\])\s", ".", StringComparison.OrdinalIgnoreCase)
+                    .Replace(";", " ", StringComparison.OrdinalIgnoreCase)
+                    .Replace("(", "", StringComparison.OrdinalIgnoreCase)
+                    .Replace(")", "", StringComparison.OrdinalIgnoreCase)
+                    .Replace(@"\[.*?\]", "", StringComparison.OrdinalIgnoreCase)
+                    .Replace(",", ".", StringComparison.OrdinalIgnoreCase)
+                    .Replace(@"\(.*?\)", "", StringComparison.OrdinalIgnoreCase);
+                var bountys = text.Split(@" ");
+                foreach (var bounty in bountys)
+                {
+                    foreach (var splitedBounty in Regex.Split(bounty, @"\[\d+\]"))
+                    {
+                        var splitBounty = Regex.Match(splitedBounty.Replace(".", ""), @"\d+").Value;
+                        if (string.IsNullOrEmpty(splitBounty))
+                            continue;
+
+                        maxBounty = Math.Max(maxBounty, long.Parse(splitBounty));
                     }
                 }
             }
@@ -79,11 +77,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 type = "Navy";
             }
 
-            if(type.Equals("Navy") || type.Equals("Citizen"))
+            if(type.Equals("Navy") || type.Equals(ControlRoom.Citizen))
             {
                 return "0";
             }
-            else if(bounty.Equals("") || bounty.Equals("Inconnue") || bounty.Equals("Aucune"))
+            else if(string.IsNullOrEmpty(bounty) || bounty.Equals("Inconnue") || bounty.Equals("Aucune"))
             {
                 return "Unknown";
             }
@@ -109,6 +107,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
             else if (value.Contains("Dragon Celestes")) {
                 return value;
+            }
+            else
+            {
+                // Empty on purpose.
             }
 
             foreach (var pirateType in PirateTypeList.Where(crew.Contains))
@@ -136,9 +138,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 return type;
             }
-            else if (type.Equals("Citizen"))
+            else if (type.Equals(ControlRoom.Citizen))
             {
-                return "Citizen";
+                return ControlRoom.Citizen;
             }
             else
             {
@@ -160,7 +162,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     "L'Équipage du Firetank" => "L'Équipage du Fire Tank",
                     "Gecko Moria" or "Hogback" or "Dracule Mihawk" => "Thriller Bark",
                     "Alliance Baggy et Alvida" or "L'Équipage du Clown" => "Cross Guild",
-                    "L'Équipage du Capitaine Usopp" => "Citizen",
+                    "L'Équipage du Capitaine Usopp" => ControlRoom.Citizen,
                     _ => rawCrew
                 };
             }
@@ -174,7 +176,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var affiliations = text.SelectNodes(".//*[contains(@class, 'pi-data-value')]/a");
 
                 if (affiliations == null)
-                    return "Citizen";
+                    return ControlRoom.Citizen;
 
                 foreach (var affiliation in affiliations)
                 {
@@ -197,11 +199,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         return cleanedAffiliation;
                     }
                 }
-                return "Citizen";
+                return ControlRoom.Citizen;
             }
-            catch
+            catch (Exception)
             {
-                return "Citizen";
+                return ControlRoom.Citizen;
             }
         }
 
@@ -240,15 +242,16 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     typeCharacters.AddRange(cleanedType.Split(new[] { ";", "," }, StringSplitOptions.RemoveEmptyEntries));
                 }
 
-                var typeCharacter = "Citizen";
+                var typeCharacter = ControlRoom.Citizen;
                 foreach (var typeData in typeCharacters.Select(typeData => typeData.Replace("\\[.*?]\\s*$", "", StringComparison.OrdinalIgnoreCase))
-                             .Where(typeData => !typeData.Contains("anciennement") && !typeData.Contains("temporairement")))
+                             .Where(typeData => !typeData.Contains("anciennement", StringComparison.OrdinalIgnoreCase) 
+                             && !typeData.Contains("temporairement", StringComparison.OrdinalIgnoreCase)))
                 {
-                    if (typeData.Contains("Dragons Celestes") || typeData.Contains("Dragons Célestes") 
-                                                              || typeData.Contains("Nobles Mondiaux"))
+                    if (typeData.Contains("Dragons Celestes", StringComparison.OrdinalIgnoreCase) 
+                        || typeData.Contains("Dragons Célestes", StringComparison.OrdinalIgnoreCase) 
+                        || typeData.Contains("Nobles Mondiaux", StringComparison.OrdinalIgnoreCase))
                     {
-                        typeCharacter = "Dragon Celestes";
-                        break;
+                        return "Dragon Celestes";
                     }
 
                     foreach (var pirateType in PirateTypeList.Where(pirateType => typeData.Contains(pirateType))) {
@@ -264,14 +267,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                     if(string.IsNullOrEmpty(typeData))
                     {
-                        typeCharacter = "Citizen";
+                        typeCharacter = ControlRoom.Citizen;
                     }
                 }
                 return typeCharacter;
             }
             catch
             {
-                return "Citizen";
+                return ControlRoom.Citizen;
             }
         }
 

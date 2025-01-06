@@ -27,12 +27,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
 
                 if (values.Length == DataCharacterLength && values[0].Equals(characterName))
                 {
-                    character = new Character(
-                        values[0], bool.Parse(values[1]),
-                        values[2], int.Parse(values[3]),
-                        values[4], bool.Parse(values[5]),
-                        int.Parse(values[6]), values[7], values[8],
-                        int.Parse(values[9]));
+                    character = CreateCharacterFromFile(values);
                 }
             }
 
@@ -52,16 +47,24 @@ namespace GuessWhoOnePiece.Model.CsvManager
 
                 if (values.Length == DataCharacterLength)
                 {
-                    characters.Add(new Character(
-                        values[0], bool.Parse(values[1]),
-                        values[2], int.Parse(values[3]),
-                        values[4], bool.Parse(values[5]),
-                        int.Parse(values[6]), values[7], values[8],
-                        int.Parse(values[9])));
+                    characters.Add(CreateCharacterFromFile(values));
                 }
             }
 
             return characters;
+        }
+
+        /// <summary>Create a character from datas in the csv file.</summary>
+        /// <param name="characterDatas">Datas from the csv file.</param>
+        /// <returns>Character created.</returns>
+        private static Character CreateCharacterFromFile(string[] characterDatas)
+        {
+            return new Character(
+                        characterDatas[0], bool.Parse(characterDatas[1]),
+                        characterDatas[2], int.Parse(characterDatas[3]),
+                        characterDatas[4], bool.Parse(characterDatas[5]),
+                        int.Parse(characterDatas[6]), characterDatas[7], characterDatas[8],
+                        int.Parse(characterDatas[9]));
         }
     }
 }

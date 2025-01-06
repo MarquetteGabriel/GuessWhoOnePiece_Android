@@ -13,7 +13,6 @@ namespace GuessWhoOnePiece.Model.CsvManager
     {
         /// <summary>Path of the Csv.</summary>
         internal static readonly string CsvPath = Path.Combine(FileSystem.Current.AppDataDirectory,"Characters.csv");
-//        internal const string CsvPath = @"C:\Users\Gabriel Marquette\Desktop\Classeur1.csv";
 
         /// <summary>Separator of the Csv.</summary>
         internal const string Separator = ";";

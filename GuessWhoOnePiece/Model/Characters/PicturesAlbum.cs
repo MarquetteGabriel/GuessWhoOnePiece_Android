@@ -5,7 +5,7 @@
 
 namespace GuessWhoOnePiece.Model.Characters;
 
-public class PicturesAlbum
+public static class PicturesAlbum
 {
     #region Arrows
 
