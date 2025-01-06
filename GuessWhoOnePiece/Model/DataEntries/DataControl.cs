@@ -47,8 +47,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 if (!match.Groups[1].Value.Contains("Inconnue") && !match.Groups[1].Value.Contains("Aucune"))
                 {
-                    var text = match.Groups[1].Value.Replace(@"(?<!\])\s", ".").Replace(";", " ").Replace("(", "").Replace(")", "")
-                            .Replace(@"\[.*?\]", "").Replace(",", ".").Replace(@"\(.*?\)", "");
+                    var text = match.Groups[1].Value.Replace(@"(?<!\])\s", ".", StringComparison.OrdinalIgnoreCase)
+                        .Replace(";", " ", StringComparison.OrdinalIgnoreCase)
+                        .Replace("(", "", StringComparison.OrdinalIgnoreCase)
+                        .Replace(")", "", StringComparison.OrdinalIgnoreCase)
+                        .Replace(@"\[.*?\]", "", StringComparison.OrdinalIgnoreCase)
+                        .Replace(",", ".", StringComparison.OrdinalIgnoreCase)
+                        .Replace(@"\(.*?\)", "", StringComparison.OrdinalIgnoreCase);
                     var bountys = text.Split(@" ");
                     foreach (var bounty in bountys)
                     {
@@ -64,7 +69,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 }
             }
 
-            return maxBounty == 0 ? "" : maxBounty.ToString();
+            return maxBounty == 0 ? "" : maxBounty.ToString(CultureInfo.InvariantCulture);
         }
 
         internal static string FixBounty(string bounty, string type)
@@ -84,13 +89,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
             else
             {
-                var numBounty = double.Parse(bounty);
+                var numBounty = double.Parse(bounty, CultureInfo.InvariantCulture);
                 return numBounty switch
                 {
                     >= 1_000_000_000 => string.Format(CultureInfo.CurrentCulture, "{0:0.###} Md", numBounty / 1_000_000_000)
-                        .Replace("[,.]0+ Md", " Md"),
+                        .Replace("[,.]0+ Md", " Md", StringComparison.OrdinalIgnoreCase),
                     >= 1_000_000 => string.Format(CultureInfo.CurrentCulture, "{0:0.###} Mi", numBounty / 1_000_000)
-                        .Replace("[,.]0+ Mi", " Mi"),
+                        .Replace("[,.]0+ Mi", " Mi", StringComparison.OrdinalIgnoreCase),
                     _ => bounty
                 };
             }
@@ -122,7 +127,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         internal static string FixCrew(string rawCrew, string type)
         {
-            rawCrew = rawCrew.Replace("\\s+$", "");
+            rawCrew = rawCrew.Replace("\\s+$", "", StringComparison.OrdinalIgnoreCase);
             if(rawCrew.StartsWith("CP"))
             {
                 return "Cipher Pol";
@@ -207,7 +212,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
             if(matchChoice.Success)
             {
                 var listAge = Regex.Matches(matchChoice.Groups[0].Value, @"(\d+\s)?\d+ (ans)?");
-                foreach (var age in listAge.Where(age => !string.IsNullOrEmpty(age.ToString())).Select(age => age.ToString().Replace(" ans", "").Replace(" ", "")))
+                foreach (var age in listAge.Where(age => !string.IsNullOrEmpty(age.ToString())).Select(age => age.ToString()
+                .Replace(" ans", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase)))
                 {
                     maxAge = Math.Max(maxAge, int.Parse(age));
                 }
@@ -235,7 +241,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 }
 
                 var typeCharacter = "Citizen";
-                foreach (var typeData in typeCharacters.Select(typeData => typeData.Replace("\\[.*?]\\s*$", ""))
+                foreach (var typeData in typeCharacters.Select(typeData => typeData.Replace("\\[.*?]\\s*$", "", StringComparison.OrdinalIgnoreCase))
                              .Where(typeData => !typeData.Contains("anciennement") && !typeData.Contains("temporairement")))
                 {
                     if (typeData.Contains("Dragons Celestes") || typeData.Contains("Dragons Célestes") 
@@ -287,7 +293,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             if (character.Contains("Don Quichotte"))
             {
-                return character.Replace("Don Quichotte", "Donquixote");
+                return character.Replace("Don Quichotte", "Donquixote", StringComparison.OrdinalIgnoreCase);
             }
 
             if(character.Contains("Alber"))

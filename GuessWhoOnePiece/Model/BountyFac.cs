@@ -34,14 +34,14 @@ namespace GuessWhoOnePiece.Model
                 .Replace("Mi", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase));
 
             if (bountyCharacter.Contains("Mi"))
-                bountyCharacterValue *= 1000000;
+                bountyCharacterValue *= 1_000_000;
             else if (bountyCharacter.Contains("Md"))
-                bountyCharacterValue *= 1000000000;
+                bountyCharacterValue *= 1_000_000_000;
 
             if (bountyCharacterSearched.Contains("Mi"))
-                bountyCharacterSearchedValue *= 1000000;
+                bountyCharacterSearchedValue *= 1_000_000;
             else if (bountyCharacterSearched.Contains("Md"))
-                bountyCharacterSearchedValue *= 1000000000;
+                bountyCharacterSearchedValue *= 1_000_000_000;
             
             var diff = bountyCharacterValue - bountyCharacterSearchedValue;
 

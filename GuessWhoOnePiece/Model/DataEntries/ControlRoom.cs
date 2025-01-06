@@ -132,7 +132,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var crew = crewElement == null ? "Citizen" : DataControl.ExtractPatternCrew(crewElement);
                 var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase);
                 var type = typeElement == null ? "Citizen" : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
-                var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "").Trim(), type);
+                var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "", StringComparison.OrdinalIgnoreCase).Trim(), type);
 
                 var chapterString = DataControl.ExtractPattern(characterData, "Chapitre (\\d+)");
                 var chapter = !string.IsNullOrEmpty(chapterString) ? int.Parse(chapterString) : throw new InvalidOperationException("Invalid Chapter");
@@ -167,7 +167,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The link of the character.</returns>
         private static string SetCharacterLink(string characterName)
         {
-            var urlCharacter = characterName.Replace(" ", "_").Trim();
+            var urlCharacter = characterName.Replace(" ", "_", StringComparison.OrdinalIgnoreCase).Trim();
             const string pattern = @"(.+)_\(.*\)";
             var matcher = Regex.Match(urlCharacter, pattern);
             if (matcher.Success)
@@ -182,7 +182,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Clean string from web and html format.</summary>
         /// <param name="webString">String to clean.</param>
         /// <returns>The string cleaned.</returns>
-        private static string CleanWebHtmlString(string? webString) => webString != null ? WebUtility.HtmlDecode(webString).Replace("\n", "").Replace("\t", "") : "";
+        private static string CleanWebHtmlString(string? webString) => webString != null ? WebUtility.HtmlDecode(webString).Replace("\n", "", StringComparison.OrdinalIgnoreCase)
+            .Replace("\t", "", StringComparison.OrdinalIgnoreCase) : "";
     
         /// <summary>Gets the link of the image for a character.</summary>
         /// <param name="listOfPictures">List of picture in the web page.</param>

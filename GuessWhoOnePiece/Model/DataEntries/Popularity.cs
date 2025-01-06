@@ -49,7 +49,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 string tempCharacterName = character;
                 if (tempCharacterName.Contains("alias"))
                 {
-                    tempCharacterName = character.Replace(@"\s*\(.*?\)", "");
+                    tempCharacterName = character.Replace(@"\s*\(.*?\)", "", StringComparison.OrdinalIgnoreCase);
                 }
 
                 var position = ListPopularity.IndexOf(tempCharacterName);
