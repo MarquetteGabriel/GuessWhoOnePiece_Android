@@ -3,9 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-using System.Diagnostics;
 using System.Globalization;
-using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
@@ -77,11 +75,12 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 type = "Navy";
             }
 
-            if(type.Equals("Navy") || type.Equals(ControlRoom.Citizen))
+            if(type.Equals("Navy", StringComparison.OrdinalIgnoreCase) || type.Equals(Resources.Strings.Citizen))
             {
                 return "0";
             }
-            else if(string.IsNullOrEmpty(bounty) || bounty.Equals("Inconnue") || bounty.Equals("Aucune"))
+            else if(string.IsNullOrEmpty(bounty) || bounty.Equals("Inconnue", StringComparison.OrdinalIgnoreCase) 
+                || bounty.Equals("Aucune", StringComparison.OrdinalIgnoreCase))
             {
                 return "Unknown";
             }
@@ -101,11 +100,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         internal static string FixType(string value, string crew)
         {
-            if(crew.Contains("Celestial Dragons"))
+            if(crew.Contains("Celestial Dragons", StringComparison.OrdinalIgnoreCase))
             {
                 return "Navy";
             }
-            else if (value.Contains("Dragon Celestes")) {
+            else if (value.Contains("Dragon Celestes", StringComparison.OrdinalIgnoreCase)) {
                 return value;
             }
             else
@@ -130,7 +129,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         internal static string FixCrew(string rawCrew, string type)
         {
             rawCrew = rawCrew.Replace("\\s+$", "", StringComparison.OrdinalIgnoreCase);
-            if(rawCrew.StartsWith("CP"))
+            if(rawCrew.StartsWith("CP", StringComparison.OrdinalIgnoreCase))
             {
                 return "Cipher Pol";
             }
@@ -138,9 +137,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 return type;
             }
-            else if (type.Equals(ControlRoom.Citizen))
+            else if (type.Equals(Resources.Strings.Citizen))
             {
-                return ControlRoom.Citizen;
+                return Resources.Strings.Citizen;
             }
             else
             {
@@ -162,7 +161,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     "L'Équipage du Firetank" => "L'Équipage du Fire Tank",
                     "Gecko Moria" or "Hogback" or "Dracule Mihawk" => "Thriller Bark",
                     "Alliance Baggy et Alvida" or "L'Équipage du Clown" => "Cross Guild",
-                    "L'Équipage du Capitaine Usopp" => ControlRoom.Citizen,
+                    "L'Équipage du Capitaine Usopp" => Resources.Strings.Citizen,
                     _ => rawCrew
                 };
             }
@@ -176,7 +175,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var affiliations = text.SelectNodes(".//*[contains(@class, 'pi-data-value')]/a");
 
                 if (affiliations == null)
-                    return ControlRoom.Citizen;
+                    return Resources.Strings.Citizen;
 
                 foreach (var affiliation in affiliations)
                 {
@@ -199,11 +198,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         return cleanedAffiliation;
                     }
                 }
-                return ControlRoom.Citizen;
+                return Resources.Strings.Citizen;
             }
             catch (Exception)
             {
-                return ControlRoom.Citizen;
+                return Resources.Strings.Citizen;
             }
         }
 
@@ -242,7 +241,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     typeCharacters.AddRange(cleanedType.Split(new[] { ";", "," }, StringSplitOptions.RemoveEmptyEntries));
                 }
 
-                var typeCharacter = ControlRoom.Citizen;
+                var typeCharacter = Resources.Strings.Citizen;
                 foreach (var typeData in typeCharacters.Select(typeData => typeData.Replace("\\[.*?]\\s*$", "", StringComparison.OrdinalIgnoreCase))
                              .Where(typeData => !typeData.Contains("anciennement", StringComparison.OrdinalIgnoreCase) 
                              && !typeData.Contains("temporairement", StringComparison.OrdinalIgnoreCase)))
@@ -267,14 +266,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                     if(string.IsNullOrEmpty(typeData))
                     {
-                        typeCharacter = ControlRoom.Citizen;
+                        typeCharacter = Resources.Strings.Citizen;
                     }
                 }
                 return typeCharacter;
             }
             catch
             {
-                return ControlRoom.Citizen;
+                return Resources.Strings.Citizen;
             }
         }
 
@@ -294,32 +293,32 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         internal static string ExtractExceptionsPopularity(string character)
         {
-            if (character.Contains("Don Quichotte"))
+            if (character.Contains("Don Quichotte", StringComparison.OrdinalIgnoreCase))
             {
                 return character.Replace("Don Quichotte", "Donquixote", StringComparison.OrdinalIgnoreCase);
             }
 
-            if(character.Contains("Alber"))
+            if(character.Contains("Alber", StringComparison.OrdinalIgnoreCase))
             {
                 return "King";
             }
 
-            if (character.Contains("Linlin"))
+            if (character.Contains("Linlin", StringComparison.OrdinalIgnoreCase))
             {
                 return "Big Mom";
             }
 
-            if(character.Contains("Galdino"))
+            if(character.Contains("Galdino", StringComparison.OrdinalIgnoreCase))
             {
                 return "Mr 3";
             }
 
-            if(character.Contains("Marshall D. Teach"))
+            if(character.Contains("Marshall D. Teach", StringComparison.OrdinalIgnoreCase))
             {
                 return "Barbe Noire";
             }
 
-            if(character.Contains("Edward Newgate"))
+            if(character.Contains("Edward Newgate", StringComparison.OrdinalIgnoreCase))
             {
                 return "Barbe Blanche";
             }

@@ -1,6 +1,10 @@
 ﻿@using GuessWhoOnePiece.Components.Elements.Answer
+
 <div class="answer">
     <div class="answer-list">
+        <div class="answers">
+            <Answer AnswerText="@Character?.Name" AnswerImage="@Character?.AnswerImageLink?.Name" AnswerState="@Character?.AnswerStateList?.Name"></Answer>
+        </div>
         <div class="answers">
             <Answer AnswerImage="@Character?.Picture" AnswerText="@Character?.Name" AnswerState="@Character?.AnswerStateList?.Name"></Answer>
         </div>
@@ -15,6 +19,9 @@
         </div>
         <div class="answers">
             <Answer AnswerText="@Character?.Alive.ToString()" AnswerImage="@Character?.AnswerImageLink?.Alive" AnswerState="@Character?.AnswerStateList?.Alive"></Answer>
+        </div>
+        <div class="answers">
+            <Answer AnswerText="@Character?.Type" AnswerImage="@Character?.AnswerImageLink?.Type" AnswerState="@Character?.AnswerStateList?.Type"></Answer>
         </div>
         <div class="answers">
             <Answer AnswerText="@Character?.FirstAppearance.ToString()" AnswerImage="@Character?.AnswerImageLink?.FirstAppearance" AnswerState="@Character?.AnswerStateList?.FirstAppearance"></Answer>

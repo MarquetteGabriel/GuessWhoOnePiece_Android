@@ -4,6 +4,8 @@
 // <author>Gabriel Marquette</author>
 
 using GuessWhoOnePiece.Model.Characters;
+using System.Globalization;
+using System.Text;
 
 namespace GuessWhoOnePiece.Model.CsvManager
 {
@@ -20,7 +22,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
         {
             Character? character = null;
             await using var stream = File.OpenRead(ManageCsv.CsvPath);
-            using var reader = new StreamReader(stream);
+            using var reader = new StreamReader(stream, Encoding.UTF8);
             while (await reader.ReadLineAsync() is { } line)
             {
                 var values = line.Split(ManageCsv.Separator);
@@ -40,7 +42,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
         {
             var characters = new List<Character>();
             await using var stream = File.OpenRead(ManageCsv.CsvPath);
-            using var reader = new StreamReader(stream);
+            using var reader = new StreamReader(stream, Encoding.UTF8);
             while (await reader.ReadLineAsync() is { } line)
             {
                 var values = line.Split(ManageCsv.Separator);
@@ -61,10 +63,10 @@ namespace GuessWhoOnePiece.Model.CsvManager
         {
             return new Character(
                         characterDatas[0], bool.Parse(characterDatas[1]),
-                        characterDatas[2], int.Parse(characterDatas[3]),
+                        characterDatas[2], int.Parse(characterDatas[3], CultureInfo.InvariantCulture),
                         characterDatas[4], bool.Parse(characterDatas[5]),
-                        int.Parse(characterDatas[6]), characterDatas[7], characterDatas[8],
-                        int.Parse(characterDatas[9]));
+                        int.Parse(characterDatas[6], CultureInfo.InvariantCulture), characterDatas[7], characterDatas[8],
+                        int.Parse(characterDatas[9], CultureInfo.InvariantCulture));
         }
     }
 }

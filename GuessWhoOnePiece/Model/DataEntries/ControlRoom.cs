@@ -26,9 +26,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Percentage of acceptance between picture link and character.</summary>
         private const double AcceptanceCritera = 0.11;
 
-        /// <summary>String of Citizen.</summary>
-        internal const string Citizen = "Citizen";
-
         /// <summary>Pattern to have only alphanumerical letters.</summary>
         private const string Pattern = @"^[a-zA-Z0-9\s]*$";
         
@@ -136,9 +133,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         crewElement = bountyTypeCrewElement;
                 }
 
-                var crew = crewElement == null ? Citizen : DataControl.ExtractPatternCrew(crewElement);
+                var crew = crewElement == null ? Resources.Strings.Citizen : DataControl.ExtractPatternCrew(crewElement);
                 var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase);
-                var type = typeElement == null ? Citizen : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
+                var type = typeElement == null ? Resources.Strings.Citizen : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
                 var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "", StringComparison.OrdinalIgnoreCase).Trim(), type);
 
                 var chapterString = DataControl.ExtractPattern(characterData, "Chapitre (\\d+)");

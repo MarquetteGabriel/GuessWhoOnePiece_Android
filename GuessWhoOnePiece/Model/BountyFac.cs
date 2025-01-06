@@ -10,9 +10,6 @@ namespace GuessWhoOnePiece.Model
     /// <summary>Represents the manage of bounties before being printed.</summary>
     public static class BountyFac
     {
-        /// <summary>The string to return when there is no bounty.</summary>
-        private const string NoBounty = "Unknown";
-
         /// <summary>Int to get millions real values.</summary>
         internal const int MillionsDollarsValue = 1_000_000;
 
@@ -28,10 +25,10 @@ namespace GuessWhoOnePiece.Model
             var bountyCharacter = characters.Bounty;
             var bountyCharacterSearched = characterSearched.Bounty;
 
-            if (bountyCharacterSearched.Contains(NoBounty))
-                return bountyCharacter.Contains(NoBounty) ? BountyType.Equal : BountyType.WrongUnknown;
+            if (bountyCharacterSearched.Contains(Resources.Strings.Unknown))
+                return bountyCharacter.Contains(Resources.Strings.Unknown) ? BountyType.Equal : BountyType.WrongUnknown;
 
-            if (bountyCharacter.Contains(NoBounty))
+            if (bountyCharacter.Contains(Resources.Strings.Unknown))
                 return BountyType.WrongUnknown;
 
             var bountyCharacterValue = float.Parse(bountyCharacter.Replace("Md", "", StringComparison.OrdinalIgnoreCase)
