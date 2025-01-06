@@ -15,6 +15,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         private static readonly List<string> ListPopularity = [];
 
+        private const double AcceptanceCritera = 0.7;
+
         private static int _countLevels;
 
         /// <summary>Set the popularity of characters.</summary>
@@ -75,7 +77,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     {
                         for (var i = ControlRoom.NumberOfLevels; i >= 1; i--)
                         {
-                            if (position <= 200 * i)
+                            if (position <= (ListPopularity.Count % ControlRoom.NumberOfLevels) * i)
                             {
                                 characters.Level = i - 1;
                             }
@@ -97,7 +99,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             foreach (var popularityCharacter in ListPopularity)
             {
                 character = DataControl.ExtractExceptionsPopularity(character);
-                if (CalculateMatchPercentage(popularityCharacter, character) > 0.7)
+                if (CalculateMatchPercentage(popularityCharacter, character) > AcceptanceCritera)
                     return popularityCharacter;
             }
 

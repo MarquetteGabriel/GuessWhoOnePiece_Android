@@ -13,6 +13,12 @@ namespace GuessWhoOnePiece.Model
         /// <summary>The string to return when there is no bounty.</summary>
         private const string NoBounty = "Unknown";
 
+        /// <summary>Int to get millions real values.</summary>
+        internal const int MillionsDollarsValue = 1_000_000;
+
+        /// <summary>Int to get billions real values.</summary>
+        internal const int BillionsDollarsValue = 1_000_000_000;
+
         /// <summary>Get the bounty and return how is the current bounty among the other one.</summary>
         /// <param name="characters">The character entered.</param>
         /// <param name="characterSearched">The character to find.</param>
@@ -34,14 +40,14 @@ namespace GuessWhoOnePiece.Model
                 .Replace("Mi", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase));
 
             if (bountyCharacter.Contains("Mi"))
-                bountyCharacterValue *= 1_000_000;
+                bountyCharacterValue *= MillionsDollarsValue;
             else if (bountyCharacter.Contains("Md"))
-                bountyCharacterValue *= 1_000_000_000;
+                bountyCharacterValue *= BillionsDollarsValue;
 
             if (bountyCharacterSearched.Contains("Mi"))
-                bountyCharacterSearchedValue *= 1_000_000;
+                bountyCharacterSearchedValue *= MillionsDollarsValue;
             else if (bountyCharacterSearched.Contains("Md"))
-                bountyCharacterSearchedValue *= 1_000_000_000;
+                bountyCharacterSearchedValue *= BillionsDollarsValue;
             
             var diff = bountyCharacterValue - bountyCharacterSearchedValue;
 

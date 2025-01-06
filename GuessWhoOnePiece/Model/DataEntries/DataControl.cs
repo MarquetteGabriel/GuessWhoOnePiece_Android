@@ -92,9 +92,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var numBounty = double.Parse(bounty, CultureInfo.InvariantCulture);
                 return numBounty switch
                 {
-                    >= 1_000_000_000 => string.Format(CultureInfo.CurrentCulture, "{0:0.###} Md", numBounty / 1_000_000_000)
+                    >= BountyFac.BillionsDollarsValue => string.Format(CultureInfo.CurrentCulture, "{0:0.###} Md", numBounty / BountyFac.BillionsDollarsValue)
                         .Replace("[,.]0+ Md", " Md", StringComparison.OrdinalIgnoreCase),
-                    >= 1_000_000 => string.Format(CultureInfo.CurrentCulture, "{0:0.###} Mi", numBounty / 1_000_000)
+                    >= BountyFac.MillionsDollarsValue => string.Format(CultureInfo.CurrentCulture, "{0:0.###} Mi", numBounty / BountyFac.MillionsDollarsValue)
                         .Replace("[,.]0+ Mi", " Mi", StringComparison.OrdinalIgnoreCase),
                     _ => bounty
                 };

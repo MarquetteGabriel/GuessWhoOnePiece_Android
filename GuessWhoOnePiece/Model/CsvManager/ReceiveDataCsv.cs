@@ -10,6 +10,9 @@ namespace GuessWhoOnePiece.Model.CsvManager
     /// <summary>Represents the get of the Csv.</summary>
     public static class ReceiveDataCsv
     {
+        /// <summary>Length of a data character in the csv file.</summary>
+        private const int DataCharacterLength = 11; 
+
         /// <summary>Receive the character from the character name.</summary>
         /// <param name="characterName">The character's name to get data.</param>
         /// <returns>The character to get.</returns>
@@ -22,7 +25,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
             {
                 var values = line.Split(ManageCsv.Separator);
 
-                if (values.Length == 11 && values[0].Equals(characterName))
+                if (values.Length == DataCharacterLength && values[0].Equals(characterName))
                 {
                     character = new Character(
                         values[0], bool.Parse(values[1]),
@@ -47,7 +50,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
             {
                 var values = line.Split(ManageCsv.Separator);
 
-                if (values.Length == 11)
+                if (values.Length == DataCharacterLength)
                 {
                     characters.Add(new Character(
                         values[0], bool.Parse(values[1]),

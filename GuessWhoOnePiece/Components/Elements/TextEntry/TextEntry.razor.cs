@@ -34,7 +34,8 @@ public partial class TextEntry : ComponentBase
     private async Task OnKeyDown(KeyboardEventArgs e)
     {
         await OnKeyPressed.InvokeAsync(e);
-        if (e.Key != "Enter") return;
+        if (e.Key != "Enter") 
+            return;
         
         foreach (var item in Items.Where(item => item == SearchText))
         {
@@ -54,7 +55,8 @@ public partial class TextEntry : ComponentBase
     private void FilterItems()
     {
         _filteredItems.Clear();
-        if (string.IsNullOrEmpty(SearchText)) return;
+        if (string.IsNullOrEmpty(SearchText)) 
+            return;
             
         foreach (var item in Items.Where(item => item.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)))
         {

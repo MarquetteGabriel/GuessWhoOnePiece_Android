@@ -33,7 +33,9 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <param name="filePath">The path where the csv has to be located. </param>
         private static void CreateCsvFile(string filePath)
         {
-            if (File.Exists(filePath)) return;
+            if (File.Exists(filePath)) 
+                return;
+
             using var sw = File.CreateText(filePath);
             sw.WriteLine("sep=" + Separator);
         }

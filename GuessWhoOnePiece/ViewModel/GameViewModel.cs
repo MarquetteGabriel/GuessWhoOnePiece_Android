@@ -47,7 +47,8 @@ namespace GuessWhoOnePiece.ViewModel
             var answerName = _judgementAnswer.IsSameName(character);
             var answerDevilFruit = _judgementAnswer.HasEatenDevilFruit(character);
 
-            if (character.AnswerStateList == null) return;
+            if (character.AnswerStateList == null) 
+                return;
             
             character.AnswerStateList.Alive = AnswerResult.SetAnswerStateBoolean(answerAlive);
             character.AnswerStateList.FirstAppearance = AnswerResult.SetAnswerStateChapterType(answerChapter);
@@ -58,7 +59,8 @@ namespace GuessWhoOnePiece.ViewModel
             character.AnswerStateList.Name = AnswerResult.SetAnswerStateBoolean(answerName);
             character.AnswerStateList.DevilFruit = AnswerResult.SetAnswerStateBoolean(answerDevilFruit);
             
-            if (character.AnswerImageLink == null) return;
+            if (character.AnswerImageLink == null) 
+                return;
             
             character.AnswerImageLink.Age = DefinePictures.SetAgePicture(answerAge);
             character.AnswerImageLink.DevilFruit = DefinePictures.SetDevilFruitPicture(answerDevilFruit);
