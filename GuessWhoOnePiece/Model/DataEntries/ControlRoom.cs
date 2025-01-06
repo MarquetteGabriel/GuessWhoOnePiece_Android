@@ -23,8 +23,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Number of levels.</summary>
         internal const int NumberOfLevels = 2;
 
+        /// <summary>Percentage of acceptance between picture link and character.</summary>
         private const double AcceptanceCritera = 0.11;
 
+        /// <summary>String of Citizen.</summary>
         internal const string Citizen = "Citizen";
 
         /// <summary>Pattern to have only alphanumerical letters.</summary>
@@ -95,7 +97,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="url">The url of the character.</param>
         /// <param name="characterName">The name of the character.</param>
         /// <returns>The character.</returns>
-        private async Task<Character?> DataForCharacter(string url, string characterName)
+        private async Task<Character?> DataForCharacter(System.Uri url, string characterName)
         {
             try
             {
@@ -103,7 +105,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 {
                     OverrideEncoding = System.Text.Encoding.UTF8
                 };
-                var doc = await web.LoadFromWebAsync(url);
+                var doc = await web.LoadFromWebAsync(url.ToString());
                 
                 const string classCharacterData = "pi-item pi-group pi-border-color";
 
@@ -170,7 +172,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Set the link to find a character on the fandom.</summary>
         /// <param name="characterName">The character to find.</param>
         /// <returns>The link of the character.</returns>
-        private static string SetCharacterLink(string characterName)
+        private static Uri SetCharacterLink(string characterName)
         {
             var urlCharacter = characterName.Replace(" ", "_", StringComparison.OrdinalIgnoreCase).Trim();
             const string pattern = @"(.+)_\(.*\)";
@@ -181,7 +183,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
 
             const string urlFandom = "https://onepiece.fandom.com/fr/wiki/";
-            return urlFandom + urlCharacter;
+            return new Uri(urlFandom + urlCharacter);
         }
 
         /// <summary>Clean string from web and html format.</summary>
