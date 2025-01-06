@@ -112,8 +112,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 const string classFruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
                 var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
 
-                var pictureElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, 'image')]//img");
-                var pictureElement = GetPictureLink(pictureElements, characterName);
+                var pictureElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, 'image')]//a");
+                string picturePath = string.Empty;
+                if (pictureElements != null)
+                {
+                    var pictureElement = GetPictureLink(pictureElements, characterName);
+                    pictureElement = CleanWebHtmlString(pictureElement);
+                    picturePath = await PictureManager.DownloadImage(pictureElement, characterName);
+                }
 
                 const string classType = "pi-item pi-data pi-item-spacing pi-border-color";
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
@@ -122,7 +128,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             
                 characterData = CleanWebHtmlString(characterData);
                 fruitElement = CleanWebHtmlString(fruitElement);
-                pictureElement = CleanWebHtmlString(pictureElement);
+
 
                 foreach (var bountyTypeCrewElement in bountyTypeCrewElements)
                 {
@@ -150,7 +156,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 crew = DataControl.FixCrew(crew, type);
                 type = DataControl.FixType(type, crew);
 
-                var characters = new Character(characterName, fruit, bounty, chapter, type, alived, age, crew, pictureElement, NumberOfLevels + 1);
+                var characters = new Character(characterName, fruit, bounty, chapter, type, alived, age, crew, picturePath, NumberOfLevels + 1);
                 _countPercentage++;
 
                 if(_countPercentage > _characterNameList.Count)
@@ -197,42 +203,55 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             string pictureElement = string.Empty;
 
-            foreach (var picture in listOfPictures.Select(picture => picture.GetAttributeValue("src", "").Split(";")[0]))
+            foreach (var picture in listOfPictures.Select(picture => picture.GetAttributeValue("href", "")))
             {
-                if (picture.Contains("data:image/gif", StringComparison.OrdinalIgnoreCase) || picture.Contains("Site-logo", StringComparison.OrdinalIgnoreCase))
+                var newPicture = picture.Replace("amp;", "", StringComparison.OrdinalIgnoreCase).Replace("&amp", "&", StringComparison.OrdinalIgnoreCase);
+                if (newPicture.Contains("data:image/gif", StringComparison.OrdinalIgnoreCase) || newPicture.Contains("Site-logo", StringComparison.OrdinalIgnoreCase))
                     continue;
-                if (picture.Contains("Manga_Post_Ellipse", StringComparison.OrdinalIgnoreCase) || picture.Contains("Manga_Pre_Ellipse", StringComparison.OrdinalIgnoreCase) ||
-                    picture.Contains("Anime_Post_Ellipse", StringComparison.OrdinalIgnoreCase) || picture.Contains("Anime_Pre_Ellipse", StringComparison.OrdinalIgnoreCase))
-                    return picture;
+                if (newPicture.Contains("Manga_Post_Ellipse", StringComparison.OrdinalIgnoreCase) || newPicture.Contains("Manga_Pre_Ellipse", StringComparison.OrdinalIgnoreCase) ||
+                    newPicture.Contains("Anime_Post_Ellipse", StringComparison.OrdinalIgnoreCase) || newPicture.Contains("Anime_Pre_Ellipse", StringComparison.OrdinalIgnoreCase))
+                    return newPicture;
 
-                if (picture.Contains(characterName))
+                if (newPicture.Contains(characterName))
                 {
-                    return picture;
+                    return newPicture;
                 }
                 else
                 {
                     foreach (var character in characterName.Split(" "))
                     {
-                        if (picture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase))
-                            return picture;
-                        else if (RemoveDiacritics(WebUtility.UrlDecode(picture)).Contains(RemoveDiacritics(character), StringComparison.OrdinalIgnoreCase))
-                            return picture;
+                        if (newPicture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase))
+                            return newPicture;
+                        else if (RemoveDiacritics(WebUtility.UrlDecode(newPicture)).Contains(RemoveDiacritics(character), StringComparison.OrdinalIgnoreCase))
+                            return newPicture;
                         else
                         {
                             // Empty on purpose.
                         }
                     }
 
-                    if (CalculateMatchPercentage(picture, characterName) > AcceptanceCritera)
-                        return picture;
+                    if (CalculateMatchPercentage(newPicture, characterName) > AcceptanceCritera)
+                        return newPicture;
                 }
 
                 if (characterName.Equals("And", StringComparison.OrdinalIgnoreCase) && picture.Contains("Baskerville", StringComparison.OrdinalIgnoreCase))
-                    return picture;
+                    return newPicture;
                 else if (characterName.Equals("Belmer", StringComparison.OrdinalIgnoreCase) && picture.Contains("Bell", StringComparison.OrdinalIgnoreCase))
-                    return picture;
+                    return newPicture;
                 else if (characterName.Equals("Rock", StringComparison.OrdinalIgnoreCase) && picture.Contains("Yeti", StringComparison.OrdinalIgnoreCase))
-                    return picture;
+                    return newPicture;
+                else if (characterName.Equals("Ener", StringComparison.OrdinalIgnoreCase) && picture.Contains("Enel", StringComparison.OrdinalIgnoreCase))
+                    return newPicture;
+                else if (characterName.Equals("Jinbei", StringComparison.OrdinalIgnoreCase) && picture.Contains("Jinbe", StringComparison.OrdinalIgnoreCase))
+                    return newPicture;
+                else if (characterName.Equals("Bakkin", StringComparison.OrdinalIgnoreCase) && picture.Contains("Buckingham", StringComparison.OrdinalIgnoreCase))
+                    return newPicture;
+                else if (characterName.Equals("Mansherry", StringComparison.OrdinalIgnoreCase) && picture.Contains("Manshelly", StringComparison.OrdinalIgnoreCase))
+                    return newPicture;
+                else if (characterName.Equals("Shishilian", StringComparison.OrdinalIgnoreCase) && picture.Contains("Sicilion", StringComparison.OrdinalIgnoreCase))
+                    return newPicture;
+                else if (characterName.Equals("Suleiman", StringComparison.OrdinalIgnoreCase) && picture.Contains("Suleyman", StringComparison.OrdinalIgnoreCase))
+                    return newPicture;
                 else
                 {
                     // Empty on purpose.
