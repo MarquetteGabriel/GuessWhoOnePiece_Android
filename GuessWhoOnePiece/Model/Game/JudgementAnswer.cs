@@ -1,4 +1,9 @@
-﻿using GuessWhoOnePiece.Model.Characters;
+﻿// <copyright file="JudgementAnswer.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using GuessWhoOnePiece.Model.Characters;
 
 namespace GuessWhoOnePiece.Model.Game
 {

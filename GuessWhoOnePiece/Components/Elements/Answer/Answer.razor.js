@@ -1,4 +1,9 @@
-﻿class Answer {
+﻿/* 
+   Copyright (c) 2025 All Rights Reserved. 
+   Author: Gabriel Marquette
+*/
+
+class Answer {
     static adjustFontSize() {
         const answerCircles = document.querySelectorAll(".answer-circle");
         

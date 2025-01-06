@@ -1,5 +1,5 @@
 ﻿// <copyright file="Enums.cs">
-// Copyright (c) 2024 All Rights Reserved
+// Copyright (c) 2025 All Rights Reserved. 
 // </copyright>
 // <author>Gabriel Marquette</author>
 

@@ -1,4 +1,9 @@
-﻿using GuessWhoOnePiece.Model.Characters;
+﻿// <copyright file="CarouselAnswer.razor.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using GuessWhoOnePiece.Model.Characters;
 using Microsoft.AspNetCore.Components;
 
 namespace GuessWhoOnePiece.Components.Elements.CarouselAnswer;

@@ -1,5 +1,5 @@
-﻿// <copyright file="ManageCsv.cs">
-// Copyright (c) 2024 All Rights Reserved
+﻿// <copyright file="ReceiveDataCsv.cs">
+// Copyright (c) 2025 All Rights Reserved. 
 // </copyright>
 // <author>Gabriel Marquette</author>
 

@@ -1,4 +1,9 @@
-﻿.game-page {
+﻿/* 
+   Copyright (c) 2025 All Rights Reserved. 
+   Author: Gabriel Marquette
+*/
+
+.game-page {
     display: flex;
     flex-direction: column;
     gap: 1rem;

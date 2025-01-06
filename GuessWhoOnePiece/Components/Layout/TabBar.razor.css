@@ -1,4 +1,9 @@
-﻿:root {
+﻿/* 
+   Copyright (c) 2025 All Rights Reserved. 
+   Author: Gabriel Marquette
+*/
+
+:root {
     --black-color: hsl(225, 12%, 12%);
     --first-color: hsl(225, 95%, 56%);
     --white-color: hsl(0, 0%, 100%);

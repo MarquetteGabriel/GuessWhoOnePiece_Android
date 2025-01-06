@@ -1,4 +1,8 @@
-﻿using GuessWhoOnePiece.Components.Elements.Answer;
+﻿// <copyright file="MauiProgram.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
 using GuessWhoOnePiece.ViewModel;
 using Microsoft.Extensions.Logging;
 

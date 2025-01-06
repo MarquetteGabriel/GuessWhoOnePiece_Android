@@ -1,4 +1,9 @@
-﻿using GuessWhoOnePiece.Model.CsvManager;
+﻿// <copyright file="Game.razor.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.ViewModel;
 using Microsoft.AspNetCore.Components;
 

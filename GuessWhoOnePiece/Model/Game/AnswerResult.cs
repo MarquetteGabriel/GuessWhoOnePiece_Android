@@ -1,4 +1,9 @@
-﻿namespace GuessWhoOnePiece.Model.Game;
+﻿// <copyright file="AnswerResult.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+namespace GuessWhoOnePiece.Model.Game;
 
 public static class AnswerResult
 {

@@ -1,5 +1,5 @@
-﻿// <copyright file="ControlRoom.cs">
-// Copyright (c) 2024 All Rights Reserved
+﻿// <copyright file="DataControl.cs">
+// Copyright (c) 2025 All Rights Reserved. 
 // </copyright>
 // <author>Gabriel Marquette</author>
 

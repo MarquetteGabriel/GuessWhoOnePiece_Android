@@ -1,7 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿// <copyright file="GameViewModel.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using GuessWhoOnePiece.Model;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.Game;
@@ -72,7 +76,7 @@ namespace GuessWhoOnePiece.ViewModel
             OnPropertyChanged();
         }
 
-        private async void SetCharacterNames()
+        private async Task SetCharacterNames()
         {
             var characterlist = await ReceiveDataCsv.ReceiveAllCharacters();
             foreach (var character in characterlist.Where(character => character != null))

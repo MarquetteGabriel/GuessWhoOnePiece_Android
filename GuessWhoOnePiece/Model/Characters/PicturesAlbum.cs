@@ -1,4 +1,9 @@
-﻿namespace GuessWhoOnePiece.Model.Characters;
+﻿// <copyright file="PicturesAlbum.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+namespace GuessWhoOnePiece.Model.Characters;
 
 public class PicturesAlbum
 {

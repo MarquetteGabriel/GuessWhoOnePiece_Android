@@ -1,4 +1,9 @@
-﻿using GuessWhoOnePiece.Model.Characters;
+﻿// <copyright file="Guesser.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 
 namespace GuessWhoOnePiece.Model.Game
