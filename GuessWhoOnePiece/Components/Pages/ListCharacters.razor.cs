@@ -5,7 +5,6 @@
 
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
-using GuessWhoOnePiece.ViewModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -13,11 +12,6 @@ namespace GuessWhoOnePiece.Components.Pages;
 
 public partial class ListCharacters : ComponentBase
 {
-   /* private readonly List<Character> _characters = new List<Character>
-    {
-        new Character("Katakuri", false, "",
-            0, "", false, 48, "", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMfXMi4Z4XqroQx_0UKomNs2Hx_aAz12KMhYZGLmdy6z9c7Iy_I8kycSL0nKaozBes0E&usqp=CAU", 0),
-*/
     private List<Character> _characters = [];
     
     private List<string> _characterNames;

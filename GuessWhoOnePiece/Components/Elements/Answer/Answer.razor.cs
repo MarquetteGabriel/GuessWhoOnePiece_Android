@@ -6,9 +6,6 @@
 
 using GuessWhoOnePiece.Model;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using System.Diagnostics;
-using System.Reflection;
 
 namespace GuessWhoOnePiece.Components.Elements.Answer
 {
