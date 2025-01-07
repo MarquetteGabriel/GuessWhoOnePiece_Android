@@ -18,6 +18,9 @@ namespace GuessWhoOnePiece.Components.Elements.Answer
 
         private string DefineColor()
         {
+            if (!string.IsNullOrEmpty(AnswerImage))
+                return "answer-no-answer";
+
             return AnswerState switch
             {
                 Model.AnswerState.Correct => "answer-correct",

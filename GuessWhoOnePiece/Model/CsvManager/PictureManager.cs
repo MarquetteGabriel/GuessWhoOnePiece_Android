@@ -1,39 +1,33 @@
-﻿using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.Maui.Storage;
-using System.Drawing;
-using System.IO;
+﻿using SkiaSharp;
 
 
 namespace GuessWhoOnePiece.Model.CsvManager
 {
     public class PictureManager
     {
-        internal static readonly string CsvPath = Path.Combine(FileSystem.Current.AppDataDirectory, "Images");
+        internal static readonly string PicturePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Images");
 
-        public static async Task<string> DownloadImage (string imageUrl, string fileName)
+        public static async Task<string> DownloadImageAsync (string imageUrl, string fileName)
         {
             fileName = fileName + ".jpeg";
             try
             {
-                if (!Directory.Exists(CsvPath))
-                    Directory.CreateDirectory(CsvPath);
-
+                if (!Directory.Exists(PicturePath))
+                    Directory.CreateDirectory(PicturePath);
 
                 var imageData = await new HttpClient().GetByteArrayAsync(imageUrl);
 
-                using (MemoryStream memoryStream = new MemoryStream(imageData))
-                {
-                    using System.Drawing.Image image = System.Drawing.Image.FromStream(memoryStream);
-                    var outputFilePath = Path.Combine(CsvPath, fileName);
-                    image.Save(outputFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                using MemoryStream memoryStream = new(imageData);
+                using var skBitmap = SKBitmap.Decode(memoryStream);
+                using var image = SKImage.FromBitmap(skBitmap);
+                using var data = image.Encode(SKEncodedImageFormat.Jpeg, 100);
 
-                    return outputFilePath;
-                }
+                var outputFilePath = Path.Combine(PicturePath, fileName);
+                await File.WriteAllBytesAsync(outputFilePath, data.ToArray());
 
+                return @"Images/" + fileName;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return imageUrl;
             }

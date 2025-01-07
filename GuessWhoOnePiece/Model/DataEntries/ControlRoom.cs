@@ -3,7 +3,6 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-using System.Collections.Concurrent;
 using System.Globalization;
 using System.Net;
 using System.Text;
@@ -41,7 +40,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             await ReceivedCharactersList();
 
-            var charactersList = new ConcurrentBag<Character>();
+            var charactersList = new System.Collections.Concurrent.ConcurrentBag<Character>();
             
             await Parallel.ForEachAsync(_characterNameList, async (characterName, _) =>
             {
@@ -118,7 +117,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 {
                     var pictureElement = GetPictureLink(pictureElements, characterName);
                     pictureElement = CleanWebHtmlString(pictureElement);
-                    picturePath = await PictureManager.DownloadImage(pictureElement, characterName);
+                    picturePath = await PictureManager.DownloadImageAsync(pictureElement, characterName);
                 }
 
                 const string classType = "pi-item pi-data pi-item-spacing pi-border-color";

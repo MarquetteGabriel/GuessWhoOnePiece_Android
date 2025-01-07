@@ -31,7 +31,7 @@ public partial class ListCharacters : ComponentBase
         var character = await ReceiveDataCsv.ReceiveCharacter(characterName);
     }
 
-    private async Task OnInputAsync(ChangeEventArgs args)
+    private async Task OnInput(ChangeEventArgs args)
     {
         SearchText = args.Value.ToString();
         await FilterItems();

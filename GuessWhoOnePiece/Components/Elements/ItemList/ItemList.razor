@@ -1,7 +1,9 @@
-﻿<NavLink class="nav-link" href="characters" Match="NavLinkMatch.All">
+﻿@using GuessWhoOnePiece.Components.Elements.Pictures
+
+<NavLink class="nav-link" href="characters" Match="NavLinkMatch.All">
     <div class="card-character">
         <div class="card-picture">
-            <img src="@Character.Picture" alt="@Character.Name">
+            <Pictures PicturePath="@Character.Picture"/>
         </div>
         <div class="card-details">
             <div class="card-name">

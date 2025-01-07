@@ -1,4 +1,14 @@
-﻿<div id="answerCard" class="answer-circle @DefineColor()" >
-    <img class="answer-picture" src="@AnswerImage" alt="" />
-    <label id="answerText" class="answer-text">@AnswerText</label>
+﻿@using GuessWhoOnePiece.Components.Elements.Pictures
+
+<div id="answerCard" class="answer-circle @DefineColor()" >
+    @if (!string.IsNullOrEmpty(AnswerImage))
+    {
+        <div class="answer-picture">
+            <Pictures PicturePath="@AnswerImage" />
+        </div>
+    }
+    else 
+    {
+        <label id="answerText" class="answer-text">@AnswerText</label>
+    }
 </div>

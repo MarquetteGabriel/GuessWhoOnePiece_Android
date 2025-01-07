@@ -3,7 +3,6 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using GuessWhoOnePiece.Model.Characters;
@@ -14,8 +13,8 @@ namespace GuessWhoOnePiece.ViewModel
 {
     public class GameViewModel : INotifyPropertyChanged
     {
-        public readonly ObservableCollection<Character> AnswersList = [];
-        
+        public readonly System.Collections.ObjectModel.ObservableCollection<Character> AnswersList = [];
+        public event PropertyChangedEventHandler? PropertyChanged;
         public List<string> CharacterNameList = [];
 
         private Character _characterToFind;
@@ -93,8 +92,6 @@ namespace GuessWhoOnePiece.ViewModel
             _judgementAnswer.SetCharacter(_characterToFind);
             AnswersList.Clear();
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
