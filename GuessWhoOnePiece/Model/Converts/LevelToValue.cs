@@ -13,17 +13,12 @@ namespace GuessWhoOnePiece.Model.Converts
         /// <returns>The level of difficulty.</returns>
         public static LevelDifficulty GetLevelDifficultyByValue(int value)
         {
-            /*
-            
-            foreach (LevelDifficulty levelDifficulty in values())
+            foreach (LevelDifficulty levelDiffculty in Enum.GetValues(typeof(LevelDifficulty)))
             {
-                if (levelDifficulty.ordinal() == value)
-                {
-                    return levelDifficulty;
-                }
+                if((int) levelDiffculty == value)
+                    return levelDiffculty;
             }
-            
-            */
+
             return LevelDifficulty.Error;
         }
     }

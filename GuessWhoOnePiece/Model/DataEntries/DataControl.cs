@@ -3,45 +3,55 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-using System.Diagnostics;
 using System.Globalization;
-using System.Text;
 using System.Text.RegularExpressions;
-using AngleSharp.Diffing.Extensions;
-using GuessWhoOnePiece.Model;
 using HtmlAgilityPack;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
+    /// <summary>Represents the management of data given by web scrap.</summary>
     public static partial class DataControl
     {
+        /// <summary>List of cases that are Pirates.</summary>
         private static readonly HashSet<string> PirateTypeList = new (StringComparer.OrdinalIgnoreCase)
         {
           "Pirate", "Pirates", "Bandit", "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria",
           "Équipage", "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land", "Spiders Café"
         };
+
+        /// <summary>List of cases that are Navy.</summary>
         private static readonly HashSet<string> NavyTypeList = new (StringComparer.OrdinalIgnoreCase)
         {
             "Marine", "Marines", " Marines", "Cipher Pol", "Souverain", "Conseil des 5 doyens", "CP-AIGIS0",
             "Gouvernement", "Impel", "Navy's Crew", "Juge"
         };
+
+        /// <summary>List of cases that are Revolutioanry.</summary>
         private static readonly HashSet<string> RevoTypeList = new (StringComparer.OrdinalIgnoreCase)
         {
             "Armée Révolutionnaire", "Révolutionnaires", "armée révolutionnaire", "Revolutionary's Crew",
             "Armée de la Liberté"
         };
+
+        /// <summary>List of cases that are Celestial dragons.</summary>
         private static readonly HashSet<string> dragonCelestesKeywords = new (StringComparer.OrdinalIgnoreCase)
         {
             "Dragons Celestes", "Dragons Célestes","Nobles Mondiaux"
         };
 
-
+        /// <summary>Extract data from specific pattern.</summary>
+        /// <param name="input">Text to extract.</param>
+        /// <param name="pattern">Pattern which select data.</param>
+        /// <returns>The text extraced.</returns>
         internal static string ExtractPattern(string input, string pattern) 
         {
             var match = Regex.Match(input, pattern);
             return match.Success ? match.Groups[1].Value : "";
         }
 
+        /// <summary>Extract bounty from text.</summary>
+        /// <param name="input">Text.</param>
+        /// <returns>Bounty of the character.</returns>
         internal static string ExtractPatternBounty(string input)
         {
             var match = Regexs.ExtractPatternBountyRegex().Match(input);
@@ -73,6 +83,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return maxBounty == 0 ? "" : maxBounty.ToString(CultureInfo.InvariantCulture);
         }
 
+        /// <summary>Fix bounty for specific types.</summary>
+        /// <param name="bounty">Bounty of the character.</param>
+        /// <param name="type">Type of the character.</param>
+        /// <returns>The new bounty.</returns>
         internal static string FixBounty(string bounty, string type)
         {
             var typeCharacterValue = NavyTypeList.FirstOrDefault(navyType => type.Contains(navyType));
@@ -102,6 +116,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
         }
 
+        /// <summary>Fix type for specific types.</summary>
+        /// <param name="value">Type of the character.</param>
+        /// <param name="crew">Crew of the character.</param>
+        /// <returns>The new type.</returns>
         internal static string FixType(string value, string crew)
         {
             if(crew.Contains("Celestial Dragons", StringComparison.OrdinalIgnoreCase))
@@ -131,6 +149,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return value;
         }
 
+        /// <summary>Fix crew for specific character.</summary>
+        /// <param name="rawCrew">Crew of the character.</param>
+        /// <param name="type">Type of the character.</param>
+        /// <returns>THe new crew.</returns>
         internal static string FixCrew(string rawCrew, string type)
         {
             rawCrew = rawCrew.Replace("\\s+$", "", StringComparison.OrdinalIgnoreCase);
@@ -172,6 +194,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
         }
 
+        /// <summary>Extract crew from text.</summary>
+        /// <param name="text">Text.</param>
+        /// <returns>The crew of the character.</returns>
         internal static string ExtractPatternCrew(HtmlNode text)
         {
             try
@@ -211,6 +236,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
         }
 
+        /// <summary>Extract age from text.</summary>
+        /// <param name="input">Text.</param>
+        /// <returns>The new age.</returns>
         internal static int ExtractPatternAge(string input)
         {
             var matchChoice = Regexs.ExtractPatternAgeRegex().Match(input);
@@ -227,6 +255,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return maxAge;
         }
 
+        /// <summary>Extract type from text.</summary>
+        /// <param name="text">Text.</param>
+        /// <returns>The new type.</returns>
         internal static string ExtractPatternType(HtmlNode text)
         {
             try
@@ -281,6 +312,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
         }
 
+        /// <summary>Change value for specific character.</summary>
+        /// <param name="character">The name of the character.</param>
+        /// <returns>The new character name.</returns>
         internal static string ExtractExceptions(string character)
         {
             return character switch
@@ -295,6 +329,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
             };
         }
 
+        /// <summary>Change value for specific character for popularity ranking.</summary>
+        /// <param name="character">The name of the character.</param>
+        /// <returns>The new character name.</returns>
         internal static string ExtractExceptionsPopularity(string character)
         {
             if (character.Contains("Don Quichotte", StringComparison.OrdinalIgnoreCase))
