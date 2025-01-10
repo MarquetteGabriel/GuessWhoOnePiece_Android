@@ -3,10 +3,16 @@
 
 namespace GuessWhoOnePiece.Model.CsvManager
 {
+    /// <summary>Represents the retrieval of pictures.</summary>
     public class PictureManager
     {
+        /// <summary>Path to the folder of pictures.</summary>
         internal static readonly string PicturePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Images");
 
+        /// <summary>Dowload picture to the folder.</summary>
+        /// <param name="imageUrl">Link of the picture.</param>
+        /// <param name="fileName">Name of the character which is used in the fileName.</param>
+        /// <returns>The fileName.</returns>
         public static async Task<string> DownloadImageAsync (string imageUrl, string fileName)
         {
             fileName = fileName + ".jpeg";
