@@ -3,10 +3,10 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using HtmlAgilityPack;
@@ -29,7 +29,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private const string Pattern = @"^[a-zA-Z0-9\s]*$";
         
         /// <summary>List of characters' name.</summary>
-        private readonly List<string> _characterNameList = [];
+        private readonly ConcurrentBag<string> _characterNameList = [];
 
         /// <summary>Percentage of advencement for loading characters.</summary>
         private int _countPercentage;
@@ -41,7 +41,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             await ReceivedCharactersList();
 
             var charactersList = new System.Collections.Concurrent.ConcurrentBag<Character>();
-            
+
             await Parallel.ForEachAsync(_characterNameList, async (characterName, _) =>
             {
                 var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
@@ -49,8 +49,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     charactersList.Add(character);
             });
 
-            Popularity.SetPopularity(_characterNameList, charactersList.ToList());
-
+            Popularity.SetPopularity(_characterNameList.ToList(), charactersList.ToList());
             ManageCsv.SaveCharactersToCsv(charactersList.ToList());
 
             return charactersList.ToList();
@@ -68,7 +67,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var doc = await web.LoadFromWebAsync(UrlFandomListCharacter);
                 var tables = doc.DocumentNode.SelectNodes("//div[contains(@class, 'tabber wds-tabber')]//table[contains(@class, 'wikitable')]");
 
-                foreach (var table in tables)
+                Parallel.ForEach(tables, table =>
                 {
                     var rows = table.SelectNodes("//tr");
                     foreach (var row in rows)
@@ -77,11 +76,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         if (link != null)
                         {
                             var character = DataControl.ExtractExceptions(link.InnerHtml.Trim());
-                            if(!_characterNameList.Contains(character))
+                            if (!_characterNameList.Contains(character))
                                 _characterNameList.Add(character);
                         }
                     }
-                }
+                });
             }
             catch (Exception)
             {
@@ -102,7 +101,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     OverrideEncoding = System.Text.Encoding.UTF8
                 };
                 var doc = await web.LoadFromWebAsync(url.ToString());
-                
+
                 const string classCharacterData = "pi-item pi-group pi-border-color";
 
                 var data = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classCharacterData}')]");
@@ -124,7 +123,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
                 HtmlNode typeElement = null!;
                 HtmlNode crewElement = null!;
-            
+
                 characterData = CleanWebHtmlString(characterData);
                 fruitElement = CleanWebHtmlString(fruitElement);
 
@@ -177,8 +176,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private static Uri SetCharacterLink(string characterName)
         {
             var urlCharacter = characterName.Replace(" ", "_", StringComparison.OrdinalIgnoreCase).Trim();
-            const string pattern = @"(.+)_\(.*\)";
-            var matcher = Regex.Match(urlCharacter, pattern);
+            var matcher = Regexs.CharacterLinkRegex().Match(urlCharacter);
             if (matcher.Success)
             {
                 urlCharacter = matcher.Groups[1].Value;

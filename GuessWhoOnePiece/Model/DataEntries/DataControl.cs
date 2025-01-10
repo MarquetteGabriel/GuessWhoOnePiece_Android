@@ -3,31 +3,37 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
+using AngleSharp.Diffing.Extensions;
+using GuessWhoOnePiece.Model;
 using HtmlAgilityPack;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
-    public static class DataControl
+    public static partial class DataControl
     {
-        private static readonly List<string> PirateTypeList =
-        [
-          "Pirate", "Pirates", "Bandit", "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria", 
+        private static readonly HashSet<string> PirateTypeList = new (StringComparer.OrdinalIgnoreCase)
+        {
+          "Pirate", "Pirates", "Bandit", "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria",
           "Équipage", "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land", "Spiders Café"
-        ];
-
-        private static readonly List<string> NavyTypeList = 
-        [
+        };
+        private static readonly HashSet<string> NavyTypeList = new (StringComparer.OrdinalIgnoreCase)
+        {
             "Marine", "Marines", " Marines", "Cipher Pol", "Souverain", "Conseil des 5 doyens", "CP-AIGIS0",
             "Gouvernement", "Impel", "Navy's Crew", "Juge"
-        ];
-
-        private static readonly List<string> RevoTypeList = 
-        [
-            "Armée Révolutionnaire", "Révolutionnaires", "armée révolutionnaire", "Revolutionary's Crew", 
+        };
+        private static readonly HashSet<string> RevoTypeList = new (StringComparer.OrdinalIgnoreCase)
+        {
+            "Armée Révolutionnaire", "Révolutionnaires", "armée révolutionnaire", "Revolutionary's Crew",
             "Armée de la Liberté"
-        ];
+        };
+        private static readonly HashSet<string> dragonCelestesKeywords = new (StringComparer.OrdinalIgnoreCase)
+        {
+            "Dragons Celestes", "Dragons Célestes","Nobles Mondiaux"
+        };
 
 
         internal static string ExtractPattern(string input, string pattern) 
@@ -38,8 +44,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         internal static string ExtractPatternBounty(string input)
         {
-            const string pattern = @"Prime\s:(.*?)(Statut|Anniversaire|Âge)";
-            var match = Regex.Match(input, pattern);
+            var match = Regexs.ExtractPatternBountyRegex().Match(input);
             long maxBounty = 0;
 
             if(match.Success  && !match.Groups[1].Value.Contains("Inconnue") && !match.Groups[1].Value.Contains("Aucune"))
@@ -54,9 +59,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var bountys = text.Split(@" ");
                 foreach (var bounty in bountys)
                 {
-                    foreach (var splitedBounty in Regex.Split(bounty, @"\[\d+\]"))
+                    foreach (var splitedBounty in Regexs.SquareBracketsBountyRegex().Split(bounty)) 
                     {
-                        var splitBounty = Regex.Match(splitedBounty.Replace(".", ""), @"\d+").Value;
+                        var splitBounty = Regexs.BountyValueRegex().Match(splitedBounty.Replace(".", "")).Value;
                         if (string.IsNullOrEmpty(splitBounty))
                             continue;
 
@@ -70,10 +75,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         internal static string FixBounty(string bounty, string type)
         {
-            foreach (var navyType in NavyTypeList.Where(navyType => type.Contains(navyType)))
-            {
+            var typeCharacterValue = NavyTypeList.FirstOrDefault(navyType => type.Contains(navyType));
+            if (!string.IsNullOrEmpty(typeCharacterValue))
                 type = "Navy";
-            }
 
             if(type.Equals("Navy", StringComparison.OrdinalIgnoreCase) || type.Equals(Resources.Strings.Citizen))
             {
@@ -112,16 +116,17 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 // Empty on purpose.
             }
 
-            foreach (var pirateType in PirateTypeList.Where(crew.Contains))
-            {
+            var typeCharacterValue = PirateTypeList.FirstOrDefault(crew.Contains);
+            if (!string.IsNullOrEmpty(typeCharacterValue))
                 value = "Pirate";
-            }
-            foreach (var navyType in NavyTypeList.Where(crew.Contains)) {
+
+            typeCharacterValue = NavyTypeList.FirstOrDefault(crew.Contains);
+            if (!string.IsNullOrEmpty(typeCharacterValue))
                 value = "Navy";
-            }
-            foreach (var revoType in RevoTypeList.Where(crew.Contains)) {
+
+            typeCharacterValue = RevoTypeList.FirstOrDefault(crew.Contains);
+            if (!string.IsNullOrEmpty(typeCharacterValue))
                 value = "Revolutionary";
-            }
 
             return value;
         }
@@ -192,7 +197,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             
                 foreach (var affiliation in affiliationCharacter)
                 {
-                    var cleanedAffiliation = Regex.Replace(affiliation, "\\[.*?]\\s*$", "");
+                    var cleanedAffiliation = Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliation, "");
                     if (!cleanedAffiliation.Contains("anciennement") && !cleanedAffiliation.Contains("temporairement") && !cleanedAffiliation.Contains("dissous"))
                     {
                         return cleanedAffiliation;
@@ -208,11 +213,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         internal static int ExtractPatternAge(string input)
         {
-            var matchChoice = Regex.Match(input, @"Âge(\s)?:(.*?)(Anniversaire|Taille|Voix)");
+            var matchChoice = Regexs.ExtractPatternAgeRegex().Match(input);
             var maxAge = 0;
             if(matchChoice.Success)
             {
-                var listAge = Regex.Matches(matchChoice.Groups[0].Value, @"(\d+\s)?\d+ (ans)?");
+                var listAge = Regexs.ExtractAgeRegex().Matches(matchChoice.Groups[0].Value);
                 foreach (var age in listAge.Where(age => !string.IsNullOrEmpty(age.ToString())).Select(age => age.ToString()
                 .Replace(" ans", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase)))
                 {
@@ -229,7 +234,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var typeCharacters = new List<string>();
                 var types = text.SelectNodes(".//*[contains(@class, 'pi-data-value')]")
                     .Select(node => node.InnerText)
-                    .SelectMany(html => Regex.Split(html, "<br>|<p>|<a>"))
+                    .SelectMany(html => Regexs.SplitPatternType().Split(html))
                     .ToArray();
 
                 foreach (var type in types)
@@ -237,37 +242,36 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     var docSmallDatas = new HtmlDocument();
                     docSmallDatas.LoadHtml(type);
                     var smallText = docSmallDatas.DocumentNode.SelectSingleNode("//small")?.InnerText ?? "";
-                    var cleanedType = Regex.Replace(type, "\\(.*?\\)", "").Trim() + smallText;
+                    var cleanedType = Regexs.ContentBetweenBracketsRegex().Replace(type, "").Trim() + smallText;
                     typeCharacters.AddRange(cleanedType.Split(new[] { ";", "," }, StringSplitOptions.RemoveEmptyEntries));
                 }
-
                 var typeCharacter = Resources.Strings.Citizen;
                 foreach (var typeData in typeCharacters.Select(typeData => typeData.Replace("\\[.*?]\\s*$", "", StringComparison.OrdinalIgnoreCase))
                              .Where(typeData => !typeData.Contains("anciennement", StringComparison.OrdinalIgnoreCase) 
                              && !typeData.Contains("temporairement", StringComparison.OrdinalIgnoreCase)))
                 {
-                    if (typeData.Contains("Dragons Celestes", StringComparison.OrdinalIgnoreCase) 
-                        || typeData.Contains("Dragons Célestes", StringComparison.OrdinalIgnoreCase) 
-                        || typeData.Contains("Nobles Mondiaux", StringComparison.OrdinalIgnoreCase))
+                    if (string.IsNullOrEmpty(typeData))
+                    {
+                        typeCharacter = Resources.Strings.Citizen;
+                        continue;
+                    }
+                    if (dragonCelestesKeywords.Any(keyword => typeData.Contains(keyword, StringComparison.OrdinalIgnoreCase)))
                     {
                         return "Dragon Celestes";
                     }
 
-                    foreach (var pirateType in PirateTypeList.Where(pirateType => typeData.Contains(pirateType))) {
-                        typeCharacter = "Pirate";
-                    }
-                    foreach (var navyType in NavyTypeList.Where(navyType => typeData.Contains(navyType) && 
-                                                                            !typeData.Contains("Prisonnier"))) {
-                        typeCharacter = "Navy";
-                    }
-                    foreach (var revoType in RevoTypeList.Where(revoType => typeData.Contains(revoType))) {
-                        typeCharacter = "Revolutionary";
-                    }
 
-                    if(string.IsNullOrEmpty(typeData))
-                    {
-                        typeCharacter = Resources.Strings.Citizen;
-                    }
+                    var typeCharacterValue = PirateTypeList.FirstOrDefault(typeData.Contains);
+                    if (!string.IsNullOrEmpty(typeCharacterValue))
+                        typeCharacter = "Pirate";
+
+                    typeCharacterValue = NavyTypeList.FirstOrDefault(navyType => typeData.Contains(navyType) && !typeData.Contains("Prisonnier"));
+                    if (!string.IsNullOrEmpty(typeCharacterValue))
+                        typeCharacter = "Navy";
+
+                    typeCharacterValue = RevoTypeList.FirstOrDefault(typeData.Contains);
+                    if (!string.IsNullOrEmpty(typeCharacterValue))
+                        typeCharacter = "Revolutionary";
                 }
                 return typeCharacter;
             }

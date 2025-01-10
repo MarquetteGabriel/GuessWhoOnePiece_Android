@@ -2,6 +2,7 @@
 @using GuessWhoOnePiece.Components.Elements.Loading
 @using GuessWhoOnePiece.Model.CsvManager
 @using GuessWhoOnePiece.Model.DataEntries
+@using System.Diagnostics
 
 <h1>Hello, world!</h1>
 
@@ -28,10 +29,20 @@ Welcome to your new app.
 
     private async void OnShowCharacter()
     {
-        var characters = await ReceiveDataCsv.ReceiveAllCharacters();
+        /*var characters = await ReceiveDataCsv.ReceiveAllCharacters();
         foreach (var character in characters)
-        {
+            {
             _value += character.Name + " ";
-        }
+        }*/
+
+        var stopwatch = new Stopwatch();
+
+        var character = "Monkey D. Luffy";
+
+        stopwatch.Start();
+        // var characters1 = await _controlRoom.DataForCharacter(ControlRoom.SetCharacterLink(character), character);
+        stopwatch.Stop();
+        Console.WriteLine($"Method Global: {stopwatch.ElapsedMilliseconds} ms");
+
     }
 }
