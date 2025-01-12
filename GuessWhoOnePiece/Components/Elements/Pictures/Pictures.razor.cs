@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿// <copyright file="Pictures.razor.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.Maui.Storage;
 using System;
 using System.IO;

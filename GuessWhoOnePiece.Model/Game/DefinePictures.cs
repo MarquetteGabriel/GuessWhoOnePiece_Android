@@ -14,7 +14,6 @@ public static class DefinePictures
         return value switch
         {
             AgeType.Younger => PicturesAlbum.ArrowUp,
-            AgeType.Equal => string.Empty,
             AgeType.Older => PicturesAlbum.ArrowDown,
             _ => string.Empty,
         };
@@ -26,7 +25,6 @@ public static class DefinePictures
         {
             ChapterType.PreviousChapter => PicturesAlbum.ArrowUp,
             ChapterType.NewerChapter => PicturesAlbum.ArrowDown,
-            ChapterType.SameChapter => string.Empty,
             _ => string.Empty,
         };
     }

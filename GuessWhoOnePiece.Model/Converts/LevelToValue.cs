@@ -8,12 +8,12 @@ using System;
 namespace GuessWhoOnePiece.Model.Converts
 {
     /// <summary>Represents the conversion from a Level difficulty to an int value.</summary>
-    public static class LevelToValue
+    internal static class LevelToValue
     {
         /// <summary>Represents the conversion from a Level difficulty to an int value.</summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The level of difficulty.</returns>
-        public static LevelDifficulty GetLevelDifficultyByValue(int value)
+        internal static LevelDifficulty GetLevelDifficultyByValue(int value)
         {
             foreach (LevelDifficulty levelDiffculty in Enum.GetValues(typeof(LevelDifficulty)))
             {

@@ -30,7 +30,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
             {
                 var values = line.Split(ManageCsv.Separator);
 
-                if (values.Length == DataCharacterLength && values[0].Equals(characterName))
+                if (values.Length == DataCharacterLength && values[0].Equals(characterName, System.StringComparison.OrdinalIgnoreCase))
                 {
                     character = CreateCharacterFromFile(values);
                 }

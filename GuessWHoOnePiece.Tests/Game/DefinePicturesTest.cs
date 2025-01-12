@@ -1,4 +1,4 @@
-﻿// <copyright file="DefinePictures.cs">
+﻿// <copyright file="DefinePicturesTest.cs">
 // Copyright (c) 2025 All Rights Reserved. 
 // </copyright>
 // <author>Gabriel Marquette</author>

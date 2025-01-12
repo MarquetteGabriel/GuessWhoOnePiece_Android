@@ -1,0 +1,2735 @@
+﻿using Xunit;
+using GuessWhoOnePiece.Model.DataEntries;
+using System.Threading.Tasks;
+
+namespace GuessWhoOnePiece.Tests.DataBase
+{
+    public class C_Database
+    {
+        private readonly ControlRoom controlRoom;
+        private const string Unknown = "Unknown";
+
+        public C_Database()
+        {
+            controlRoom = new ControlRoom();
+        }
+
+        [SkippableFact]
+        public async Task C_Cabaji()
+        {
+            var character = "Cabaji";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cabaji", result!.Name);
+            Assert.Equal(34, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(9, result.FirstAppearance);
+            Assert.Equal("Cross Guild", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Caimanlady()
+        {
+            var character = "Caimanlady";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Caimanlady", result!.Name);
+            Assert.Equal(40, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(456, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Camel()
+        {
+            var character = "Camel";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Camel", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(789, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Camie()
+        {
+            var character = "Camie";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Camie", result!.Name);
+            Assert.Equal(18, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(195, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cancer()
+        {
+            var character = "Cancer";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cancer", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Candre()
+        {
+            var character = "Candre";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Candre", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cands()
+        {
+            var character = "Cands";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cands", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Candy()
+        {
+            var character = "Candy";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Candy", result!.Name);
+            Assert.Equal(26, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Capone_Bege()
+        {
+            var character = "Capone Bege";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Capone Bege", result!.Name);
+            Assert.Equal(42, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(498, result.FirstAppearance);
+            Assert.Equal("L'Équipage du Fire Tank", result.Crew);
+            Assert.Equal("350 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Capone_Pets()
+        {
+            var character = "Capone Pets";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Capone Pets", result!.Name);
+            Assert.Equal(1, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(834, result.FirstAppearance);
+            Assert.Equal("L'Équipage du Fire Tank", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Caramel()
+        {
+            var character = "Caramel";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Caramel", result!.Name);
+            Assert.Equal(80, result.Age);
+            Assert.False(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(861, result.FirstAppearance);
+            Assert.Equal("Pègre", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Caribou()
+        {
+            var character = "Caribou";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Caribou", result!.Name);
+            Assert.Equal(32, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(600, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Caribou", result.Crew);
+            Assert.Equal("210 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Carne()
+        {
+            var character = "Carne";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Carne", result!.Name);
+            Assert.Equal(34, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(45, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Caroline()
+        {
+            var character = "Caroline";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Caroline", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Carotte()
+        {
+            var character = "Carotte";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Carotte", result!.Name);
+            Assert.Equal(11, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(23, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Carrot()
+        {
+            var character = "Carrot";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Carrot", result!.Name);
+            Assert.Equal(15, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(804, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Catacombo()
+        {
+            var character = "Catacombo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Catacombo", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Catarina_Devon()
+        {
+            var character = "Catarina Devon";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Catarina Devon", result!.Name);
+            Assert.Equal(36, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(575, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal("100 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cavendish()
+        {
+            var character = "Cavendish";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cavendish", result!.Name);
+            Assert.Equal(26, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(704, result.FirstAppearance);
+            Assert.Equal("Allié de L'Équipage du Chapeau de Paille", result.Crew);
+            Assert.Equal("330 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_CB_Galant()
+        {
+            var character = "CB Galant";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("CB Galant", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cerbère()
+        {
+            var character = "Cerbère";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cerbère", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cesar_Clown()
+        {
+            var character = "César Clown";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("César Clown", result!.Name);
+            Assert.Equal(55, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(658, result.FirstAppearance);
+            Assert.Equal("Néo Mads", result.Crew);
+            Assert.Equal("300 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cezar()
+        {
+            var character = "Cezar";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cezar", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chabo()
+        {
+            var character = "Chabo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chabo", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chaka()
+        {
+            var character = "Chaka";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chaka", result!.Name);
+            Assert.Equal(41, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(155, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chao()
+        {
+            var character = "Chao";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chao", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chap()
+        {
+            var character = "Chap";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chap", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chappe()
+        {
+            var character = "Chappe";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chappe", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlos()
+        {
+            var character = "Charlos";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlos", result!.Name);
+            Assert.Equal(24, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(499, result.FirstAppearance);
+            Assert.Equal("Dragons Célestes", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Navy", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Agar_agar()
+        {
+            var character = "Charlotte Agar-agar";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Agar-agar", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Amande()
+        {
+            var character = "Charlotte Amande";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Amande", result!.Name);
+            Assert.Equal(47, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(827, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Ananas()
+        {
+            var character = "Charlotte Ananas";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Ananas", result!.Name);
+            Assert.Equal(8, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Angel()
+        {
+            var character = "Charlotte Angel";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Angel", result!.Name);
+            Assert.Equal(45, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(860, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Bavarois()
+        {
+            var character = "Charlotte Bavarois";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Bavarois", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(888, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Basskarte()
+        {
+            var character = "Charlotte Basskarte";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Basskarte", result!.Name);
+            Assert.Equal(42, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(854, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Brownie()
+        {
+            var character = "Charlotte Brownie";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Brownie", result!.Name);
+            Assert.Equal(24, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(894, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Brûlée()
+        {
+            var character = "Charlotte Brûlée";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Brûlée", result!.Name);
+            Assert.Equal(43, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(832, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Cabaletta()
+        {
+            var character = "Charlotte Cabaletta";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Cabaletta", result!.Name);
+            Assert.Equal(46, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Cadenza()
+        {
+            var character = "Charlotte Cadenza";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Cadenza", result!.Name);
+            Assert.Equal(46, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Chiboust()
+        {
+            var character = "Charlotte Chiboust";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Chiboust", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(894, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Chiffon()
+        {
+            var character = "Charlotte Chiffon";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Chiffon", result!.Name);
+            Assert.Equal(26, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(825, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Cinnamon()
+        {
+            var character = "Charlotte Cinnamon";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Cinnamon", result!.Name);
+            Assert.Equal(35, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(860, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Citron()
+        {
+            var character = "Charlotte Citron";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Citron", result!.Name);
+            Assert.Equal(35, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(861, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Compo()
+        {
+            var character = "Charlotte Compo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Compo", result!.Name);
+            Assert.Equal(39, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(864, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Compote()
+        {
+            var character = "Charlotte Compote";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Compote", result!.Name);
+            Assert.Equal(49, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(860, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Corn_Starch()
+        {
+            var character = "Charlotte Corn Starch";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Corn Starch", result!.Name);
+            Assert.Equal(40, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(865, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Counter()
+        {
+            var character = "Charlotte Counter";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Counter", result!.Name);
+            Assert.Equal(46, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Cracker()
+        {
+            var character = "Charlotte Cracker";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Cracker", result!.Name);
+            Assert.Equal(45, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(835, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("860 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Dacquoise()
+        {
+            var character = "Charlotte Dacquoise";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Dacquoise", result!.Name);
+            Assert.Equal(32, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(854, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Daifuku()
+        {
+            var character = "Charlotte Daifuku";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Daifuku", result!.Name);
+            Assert.Equal(48, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(861, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("300 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Dechat()
+        {
+            var character = "Charlotte Dechat";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Dechat", result!.Name);
+            Assert.Equal(11, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Dolce()
+        {
+            var character = "Charlotte Dolce";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Dolce", result!.Name);
+            Assert.Equal(9, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Dosmarché()
+        {
+            var character = "Charlotte Dosmarché";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Dosmarché", result!.Name);
+            Assert.Equal(42, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(861, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Dragée()
+        {
+            var character = "Charlotte Dragée";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Dragée", result!.Name);
+            Assert.Equal(9, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Effilée()
+        {
+            var character = "Charlotte Effilée";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Effilée", result!.Name);
+            Assert.Equal(47, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(864, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Flampe()
+        {
+            var character = "Charlotte Flampe";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Flampe", result!.Name);
+            Assert.Equal(15, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(891, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Gala()
+        {
+            var character = "Charlotte Gala";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Gala", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Galette()
+        {
+            var character = "Charlotte Galette";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Galette", result!.Name);
+            Assert.Equal(31, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(829, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Gaufrette()
+        {
+            var character = "Charlotte Gaufrette";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Gaufrette", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Hachée()
+        {
+            var character = "Charlotte Hachée";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Hachée", result!.Name);
+            Assert.Equal(47, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(871, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_High_Fat()
+        {
+            var character = "Charlotte High Fat";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte High Fat", result!.Name);
+            Assert.Equal(36, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(862, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Joconde()
+        {
+            var character = "Charlotte Joconde";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Joconde", result!.Name);
+            Assert.Equal(23, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(894, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Joscarpone()
+        {
+            var character = "Charlotte Joscarpone";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Joscarpone", result!.Name);
+            Assert.Equal(20, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Katakuri()
+        {
+            var character = "Charlotte Katakuri";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Katakuri", result!.Name);
+            Assert.Equal(48, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(860, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("1.057 Md", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Laura()
+        {
+            var character = "Charlotte Laura";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Laura", result!.Name);
+            Assert.Equal(26, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(476, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Laurique()
+        {
+            var character = "Charlotte Laurique";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Laurique", result!.Name);
+            Assert.Equal(39, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(864, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Linlin()
+        {
+            var character = "Charlotte Linlin";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Linlin / Big Mom", result!.Name);
+            Assert.Equal(68, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(651, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("4.388 Md", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mapple()
+        {
+            var character = "Charlotte Mapple";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mapple", result!.Name);
+            Assert.Equal(25, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(897, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Marble()
+        {
+            var character = "Charlotte Marble";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Marble", result!.Name);
+            Assert.Equal(25, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(894, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Marnier()
+        {
+            var character = "Charlotte Marnier";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Marnier", result!.Name);
+            Assert.Equal(37, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(861, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mascarpone()
+        {
+            var character = "Charlotte Mascarpone";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mascarpone", result!.Name);
+            Assert.Equal(20, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mash()
+        {
+            var character = "Charlotte Mash";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mash", result!.Name);
+            Assert.Equal(40, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(865, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mélisée()
+        {
+            var character = "Charlotte Mélisée";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mélisée", result!.Name);
+            Assert.Equal(33, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(854, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mobile()
+        {
+            var character = "Charlotte Mobile";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mobile", result!.Name);
+            Assert.Equal(25, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(862, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mondée()
+        {
+            var character = "Charlotte Mondée";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mondée", result!.Name);
+            Assert.Equal(47, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(854, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mont_dOr()
+        {
+            var character = "Charlotte Mont d'Or";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mont d'Or", result!.Name);
+            Assert.Equal(38, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(829, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("120 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mont_blanc()
+        {
+            var character = "Charlotte Mont-blanc";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mont-blanc", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(897, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Moscato()
+        {
+            var character = "Charlotte Moscato";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Moscato", result!.Name);
+            Assert.Equal(40, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(829, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mozart()
+        {
+            var character = "Charlotte Mozart";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mozart", result!.Name);
+            Assert.Equal(37, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(862, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Mucre()
+        {
+            var character = "Charlotte Mucre";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Mucre", result!.Name);
+            Assert.Equal(25, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Muscade()
+        {
+            var character = "Charlotte Muscade";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Muscade", result!.Name);
+            Assert.Equal(18, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Muscadelle()
+        {
+            var character = "Charlotte Muscadelle";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Muscadelle", result!.Name);
+            Assert.Equal(18, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Muscadia()
+        {
+            var character = "Charlotte Muscadia";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Muscadia", result!.Name);
+            Assert.Equal(18, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Muscadine()
+        {
+            var character = "Charlotte Muscadine";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Muscadine", result!.Name);
+            Assert.Equal(18, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Noisette()
+        {
+            var character = "Charlotte Noisette";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Noisette", result!.Name);
+            Assert.Equal(41, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(862, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Normande()
+        {
+            var character = "Charlotte Normande";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Normande", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Nougat()
+        {
+            var character = "Charlotte Nougat";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Nougat", result!.Name);
+            Assert.Equal(17, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(894, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Nusstorte()
+        {
+            var character = "Charlotte Nusstorte";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Nusstorte", result!.Name);
+            Assert.Equal(42, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(854, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Nyûgo()
+        {
+            var character = "Charlotte Nyûgo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Nyûgo", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Nyûichi()
+        {
+            var character = "Charlotte Nyûichi";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Nyûichi", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Nyûji()
+        {
+            var character = "Charlotte Nyûji";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Nyûji", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Nyûsan()
+        {
+            var character = "Charlotte Nyûsan";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Nyûsan", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Nyûshi()
+        {
+            var character = "Charlotte Nyûshi";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Nyûshi", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Opéra()
+        {
+            var character = "Charlotte Opéra";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Opéra", result!.Name);
+            Assert.Equal(46, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(829, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Oven()
+        {
+            var character = "Charlotte Oven";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Oven", result!.Name);
+            Assert.Equal(48, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(861, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("300 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Panna()
+        {
+            var character = "Charlotte Panna";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Panna", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Perospero()
+        {
+            var character = "Charlotte Perospero";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Perospero", result!.Name);
+            Assert.Equal(50, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(834, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("700 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Poire()
+        {
+            var character = "Charlotte Poire";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Poire", result!.Name);
+            Assert.Equal(31, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(861, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Praline()
+        {
+            var character = "Charlotte Praline";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Praline", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(830, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Prim()
+        {
+            var character = "Charlotte Prim";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Prim", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(896, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Pudding()
+        {
+            var character = "Charlotte Pudding";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Pudding", result!.Name);
+            Assert.Equal(16, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(651, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Raisin()
+        {
+            var character = "Charlotte Raisin";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Raisin", result!.Name);
+            Assert.Equal(22, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Saint_Marc()
+        {
+            var character = "Charlotte Saint-Marc";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Saint-Marc", result!.Name);
+            Assert.Equal(34, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(862, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Smoothie()
+        {
+            var character = "Charlotte Smoothie";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Smoothie", result!.Name);
+            Assert.Equal(35, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(846, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("932 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Snack()
+        {
+            var character = "Charlotte Snack";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Snack", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(894, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal("600 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Sucrage()
+        {
+            var character = "Charlotte Sucrage";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Sucrage", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(854, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Tablette()
+        {
+            var character = "Charlotte Tablette";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Tablette", result!.Name);
+            Assert.Equal(36, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(862, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Uiro()
+        {
+            var character = "Charlotte Uiro";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Uiro", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Yu_Yuan()
+        {
+            var character = "Charlotte Yu Yuan";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Yu Yuan", result!.Name);
+            Assert.Equal(19, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(894, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Charlotte_Zuccotto()
+        {
+            var character = "Charlotte Zuccotto";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Zuccotto", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chat_Zombie()
+        {
+            var character = "Chat Zombie";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chat Zombie", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chef_des_Shandias()
+        {
+            var character = "Chef des Shandias";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chef des Shandias", result!.Name);
+            Assert.Equal(65, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(275, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chess()
+        {
+            var character = "Chess";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chess", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chesskippa()
+        {
+            var character = "Chesskippa";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chesskippa", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chessmarimo()
+        {
+            var character = "Chessmarimo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chessmarimo", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chichilisia()
+        {
+            var character = "Chichilisia";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chichilisia", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chicory()
+        {
+            var character = "Chicory";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chicory", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chiken()
+        {
+            var character = "Chiken";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chiken", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chimney()
+        {
+            var character = "Chimney";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chimney", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chinjao()
+        {
+            var character = "Chinjao";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chinjao", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chiya()
+        {
+            var character = "Chiya";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chiya", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cho()
+        {
+            var character = "Cho";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cho", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chocho()
+        {
+            var character = "Chocho";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chocho", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chocolat()
+        {
+            var character = "Chocolat";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chocolat", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Choï()
+        {
+            var character = "Choï";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Choï", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chome()
+        {
+            var character = "Chome";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chome", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chouchou()
+        {
+            var character = "Chouchou";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chouchou", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Chuji()
+        {
+            var character = "Chuji";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Chuji", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Clione()
+        {
+            var character = "Clione";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Clione", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Clover()
+        {
+            var character = "Clover";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Clover", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Coburn()
+        {
+            var character = "Coburn";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Coburn", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cocoa()
+        {
+            var character = "Cocoa";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cocoa", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cocofox()
+        {
+            var character = "Cocofox";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cocofox", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Colscon()
+        {
+            var character = "Colscon";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Colscon", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Compo()
+        {
+            var character = "Compo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Compo", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Concelot()
+        {
+            var character = "Concelot";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Concelot", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Conis()
+        {
+            var character = "Conis";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Conis", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Conney()
+        {
+            var character = "Conney";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Conney", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Corgi()
+        {
+            var character = "Corgi";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Corgi", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cornelia()
+        {
+            var character = "Cornelia";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cornelia", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cosette()
+        {
+            var character = "Cosette";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cosette", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cosmo()
+        {
+            var character = "Cosmo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cosmo", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cosmos()
+        {
+            var character = "Cosmos";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cosmos", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cotton()
+        {
+            var character = "Cotton";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cotton", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Couran()
+        {
+            var character = "Couran";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Couran", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Cowboy()
+        {
+            var character = "Cowboy";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Cowboy", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Crocky()
+        {
+            var character = "Crocky";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Crocky", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Crocodile()
+        {
+            var character = "Crocodile";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Crocodile", result!.Name);
+            Assert.Equal(44, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(101, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Crocodile", result.Crew);
+            Assert.Equal("85 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Crocus()
+        {
+            var character = "Crocus";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Crocus", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Curiel()
+        {
+            var character = "Curiel";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Curiel", result!.Name);
+            Assert.Equal(27, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task C_Curly_Dadan()
+        {
+            var character = "Curly Dadan";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Curly Dadan", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(567, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+    }
+}

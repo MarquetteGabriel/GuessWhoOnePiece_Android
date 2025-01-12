@@ -1,4 +1,4 @@
-﻿// <copyright file="JudgementAnswer.cs">
+﻿// <copyright file="JudgementAnswerTest.cs">
 // Copyright (c) 2025 All Rights Reserved. 
 // </copyright>
 // <author>Gabriel Marquette</author>
@@ -16,6 +16,8 @@ namespace GuessWhoOnePiece.Tests.Game
         private Character character3;
         private Character character4;
         private Character character5;
+        private Character character6;
+        private Character character7;
         private JudgementAnswer judgmentAnswer;
 
         public JudgementAnswerTest()
@@ -25,8 +27,12 @@ namespace GuessWhoOnePiece.Tests.Game
             character3 = new Character("Portgas D. Ace", false, "550 Mi", 1080, "Pirate", false, 20, "Spade Pirates", "", 0);
             character4 = new Character("Ener", true, "Unknown", 220, "Pirate", true, 40, "Ener Crew", "", 0);
             character5 = new Character("Kizaru", true, "0", 350, "Navy", true, 53, "Navy's Crew", "", 0);
+            character6 = new Character("Marsh@ll D. Teach", true, "13 ez", -1, "Touriste", false, -3, "Crew", "", 5);
+            character7 = new Character("Tony Tony Chopper", true, "5000", 141, "Pirate", true, 17, "Straw Hat Pirates", "", 0);
             judgmentAnswer = new JudgementAnswer(characterDefaut);
         }
+
+        #region IsAlive Tests
 
         [Fact]
         public void Test_IsAlive()
@@ -38,6 +44,10 @@ namespace GuessWhoOnePiece.Tests.Game
             Assert.True(result);    
         }
 
+        #endregion
+
+        #region HasEatenDevilFruit Tests
+
         [Fact]
         public void Test_HasEatenDevilFruit()
         {
@@ -47,6 +57,10 @@ namespace GuessWhoOnePiece.Tests.Game
             result = judgmentAnswer.HasEatenDevilFruit(character1);
             Assert.True(result);
         }
+
+        #endregion
+
+        #region WantedBounty Tests
 
         [Fact]
         public void Test_WantedBounty()
@@ -64,6 +78,51 @@ namespace GuessWhoOnePiece.Tests.Game
             Assert.Equal(BountyType.WrongUnknown, result);
         }
 
+        [Fact] 
+        public void Test_WantedBounty_CharacterSearchUnkown()
+        {
+            judgmentAnswer.SetCharacter(character4);
+            var result = judgmentAnswer.WantedBounty(characterDefaut);
+            Assert.Equal(BountyType.WrongUnknown, result);
+
+            result = judgmentAnswer.WantedBounty(character4);
+            Assert.Equal(BountyType.Equal, result);
+            judgmentAnswer.SetCharacter(characterDefaut);
+        }
+
+        [Fact]
+        public void Test_WantedBounty_CharacterUnkown()
+        {
+            var result = judgmentAnswer.WantedBounty(character6);
+            Assert.Equal(BountyType.WrongUnknown, result);
+        }
+
+        [Fact]
+        public void Test_WantedBounty_CharacterSearchUnkownAndCharacterUnkown()
+        {
+            judgmentAnswer.SetCharacter(character3);
+            var result = judgmentAnswer.WantedBounty(characterDefaut);
+            Assert.Equal(BountyType.Lower, result);
+            judgmentAnswer.SetCharacter(characterDefaut);
+        }
+
+        [Fact]
+        public void Test_WantedBounty_CharacterFullBounty()
+        {
+            var result = judgmentAnswer.WantedBounty(character7);
+            Assert.Equal(BountyType.Upper, result);
+
+            judgmentAnswer.SetCharacter(character7);
+            result = judgmentAnswer.WantedBounty(characterDefaut);
+            Assert.Equal(BountyType.Lower, result);
+
+            judgmentAnswer.SetCharacter(characterDefaut);
+        }
+
+        #endregion
+
+        #region IsSameName Tests
+
         [Fact]
         public void Test_IsSameName()
         {
@@ -73,6 +132,10 @@ namespace GuessWhoOnePiece.Tests.Game
             result = judgmentAnswer.IsSameName(characterDefaut);
             Assert.True(result);
         }
+
+        #endregion
+
+        #region WhatOccupation Tests
 
         [Fact]
         public void Test_WhatOccupation()
@@ -84,6 +147,10 @@ namespace GuessWhoOnePiece.Tests.Game
             Assert.False(result);
         }
 
+        #endregion
+
+        #region WhatCrew Tests
+
         [Fact]
         public void Test_WhatCrew()
         {
@@ -93,6 +160,10 @@ namespace GuessWhoOnePiece.Tests.Game
             result = judgmentAnswer.WhatCrew(character1);
             Assert.False(result);
         }
+
+        #endregion
+
+        #region IsNewer Tests
 
         [Fact]
         public void Test_IsNewer()
@@ -107,6 +178,10 @@ namespace GuessWhoOnePiece.Tests.Game
             Assert.Equal(ChapterType.SameChapter, result);
         }
 
+        #endregion
+
+        #region IsOlder Tests
+
         [Fact]
         public void Test_IsOlder()
         {
@@ -119,6 +194,8 @@ namespace GuessWhoOnePiece.Tests.Game
             result = judgmentAnswer.IsOlder(characterDefaut);
             Assert.Equal(AgeType.Equal, result);
         }
+
+        #endregion
     }
 }
 

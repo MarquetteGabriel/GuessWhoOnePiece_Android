@@ -12,7 +12,7 @@ using Microsoft.Maui.Storage;
 namespace GuessWhoOnePiece.Model.CsvManager
 {
     /// <summary>Represents the managing of the Csv.</summary>
-    public static class ManageCsv
+    internal static class ManageCsv
     {
         /// <summary>Path of the Csv.</summary>
         internal static readonly string CsvPath = Path.Combine(FileSystem.Current.AppDataDirectory,"Characters.csv");
@@ -22,7 +22,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
 
         /// <summary>Add a character to the Csv.</summary>
         /// <param name="characters">The list of characters to add.</param>
-        public static void SaveCharactersToCsv(List<Character> characters)
+        internal static void SaveCharactersToCsv(List<Character> characters)
         {
             CreateCsvFile(CsvPath);
 

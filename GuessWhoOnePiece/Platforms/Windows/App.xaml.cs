@@ -1,4 +1,9 @@
-﻿using Microsoft.Maui;
+﻿// <copyright file="App.xaml.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using Microsoft.UI.Xaml;
 

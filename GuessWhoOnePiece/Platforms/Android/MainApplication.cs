@@ -1,4 +1,9 @@
-﻿using Android.App;
+﻿// <copyright file="MainApplication.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using Android.App;
 using Android.Runtime;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;

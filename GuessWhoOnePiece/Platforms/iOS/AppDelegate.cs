@@ -1,4 +1,9 @@
-﻿using Foundation;
+﻿// <copyright file="AppDelegate.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using Foundation;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 

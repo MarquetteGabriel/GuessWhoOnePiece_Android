@@ -16,10 +16,8 @@ public static class AnswerResult
     {
         return value switch
         {
-            ChapterType.PreviousChapter => AnswerState.Wrong,
-            ChapterType.NewerChapter => AnswerState.Wrong,
             ChapterType.SameChapter => AnswerState.Correct,
-            _ => AnswerState.NotAnswered,
+            _ => AnswerState.Wrong,
         };
     }
 
@@ -27,11 +25,9 @@ public static class AnswerResult
     {
         return value switch
         {
-            BountyType.Lower => AnswerState.Wrong,
-            BountyType.Upper => AnswerState.Wrong,
             BountyType.Equal => AnswerState.Correct,
             BountyType.WrongUnknown => AnswerState.NotAnswered,
-            _ => AnswerState.NotAnswered,
+            _ => AnswerState.Wrong,
         };
     }
         
@@ -39,10 +35,8 @@ public static class AnswerResult
     {
         return value switch
         {
-            AgeType.Younger => AnswerState.Wrong,
             AgeType.Equal => AnswerState.Correct,
-            AgeType.Older => AnswerState.Wrong,
-            _ => AnswerState.NotAnswered,
+            _ => AnswerState.Wrong,
         };
     }
 }

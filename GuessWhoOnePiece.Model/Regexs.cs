@@ -1,4 +1,9 @@
-﻿using System.Text.RegularExpressions;
+﻿// <copyright file="Regexs.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using System.Text.RegularExpressions;
 
 namespace GuessWhoOnePiece.Model
 {

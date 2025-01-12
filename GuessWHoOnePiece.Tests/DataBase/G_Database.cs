@@ -1,0 +1,1082 @@
+﻿using GuessWhoOnePiece.Model.DataEntries;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GuessWhoOnePiece.Tests.DataBase
+{
+    public class G_Database
+    {
+        private ControlRoom controlRoom;
+        private const string Unknown = "Unknown";
+        public G_Database()
+        {
+            controlRoom = new ControlRoom();
+        }
+
+        [SkippableFact]
+        public async Task G_Gaburu()
+        {
+            var character = "Gaburu";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gaburu", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gaimon()
+        {
+            var character = "Gaimon";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gaimon", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Galaxy()
+        {
+            var character = "Galaxy";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Galaxy", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Galdino()
+        {
+            var character = "Galdino";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Galdino", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gally()
+        {
+            var character = "Gally";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gally", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gama_Pyonnosuke()
+        {
+            var character = "Gama Pyonnosuke";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gama Pyonnosuke", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gambia()
+        {
+            var character = "Gambia";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gambia", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gambo()
+        {
+            var character = "Gambo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gambo", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gan_Forr()
+        {
+            var character = "Gan Forr";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gan Forr", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gancho()
+        {
+            var character = "Gancho";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gancho", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Ganryu()
+        {
+            var character = "Ganryu";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Ganryu", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Garde_du_manoir()
+        {
+            var character = "Garde du manoir";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Garde du manoir", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gatherine()
+        {
+            var character = "Gatherine";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gatherine", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gatz()
+        {
+            var character = "Gatz";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gatz", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gazelleman()
+        {
+            var character = "Gazelleman";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gazelleman", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gecko_Moria()
+        {
+            var character = "Gecko Moria";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gecko Moria", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gedatsu()
+        {
+            var character = "Gedatsu";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gedatsu", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gem()
+        {
+            var character = "Gem";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gem", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Genbô()
+        {
+            var character = "Genbô";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Genbô", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Genrin()
+        {
+            var character = "Genrin";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Genrin", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Genzo()
+        {
+            var character = "Genzo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Genzo", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_George_Black()
+        {
+            var character = "George Black";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("George Black", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_George_Mach()
+        {
+            var character = "George Mach";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("George Mach", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gerd()
+        {
+            var character = "Gerd";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gerd", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Giberson()
+        {
+            var character = "Giberson";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Giberson", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gig()
+        {
+            var character = "Gig";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gig", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gimlett()
+        {
+            var character = "Gimlett";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gimlett", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gin()
+        {
+            var character = "Gin";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gin", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gin_Rummy()
+        {
+            var character = "Gin Rummy";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gin Rummy", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gina()
+        {
+            var character = "Gina";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gina", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Ginko()
+        {
+            var character = "Ginko";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Ginko", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Ginney()
+        {
+            var character = "Ginney";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Ginney", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Ginnosuke()
+        {
+            var character = "Ginnosuke";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Ginnosuke", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gion()
+        {
+            var character = "Gion";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gion", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Giovanni()
+        {
+            var character = "Giovanni";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Giovanni", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Giro_Chintaro()
+        {
+            var character = "Giro Chintaro";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Giro Chintaro", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gismonda()
+        {
+            var character = "Gismonda";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gismonda", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gladius()
+        {
+            var character = "Gladius";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gladius", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Glove()
+        {
+            var character = "Glove";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Glove", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gode()
+        {
+            var character = "Gode";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gode", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Goki()
+        {
+            var character = "Goki";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Goki", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gol_D_Roger()
+        {
+            var character = "Gol D. Roger";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gol D. Roger", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Goldberg()
+        {
+            var character = "Goldberg";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Goldberg", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gomorrhe()
+        {
+            var character = "Gomorrhe";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gomorrhe", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gonbe()
+        {
+            var character = "Gonbe";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gonbe", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Goo()
+        {
+            var character = "Goo";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Goo", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gorilla()
+        {
+            var character = "Gorilla";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gorilla", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gorishiro()
+        {
+            var character = "Gorishiro";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gorishiro", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Goro()
+        {
+            var character = "Goro";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Goro", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gorobe()
+        {
+            var character = "Gorobe";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gorobe", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gotti()
+        {
+            var character = "Gotti";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gotti", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Grabar()
+        {
+            var character = "Grabar";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Grabar", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gram()
+        {
+            var character = "Gram";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gram", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Great_Michael()
+        {
+            var character = "Great Michael";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Great Michael", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Guernika()
+        {
+            var character = "Guernika";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Guernika", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gyaro()
+        {
+            var character = "Gyaro";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gyaro", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gyoro()
+        {
+            var character = "Gyoro";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gyoro", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gyoru()
+        {
+            var character = "Gyoru";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gyoru", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task G_Gyro()
+        {
+            var character = "Gyro";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Gyro", result!.Name);
+            Assert.Equal(30, result.Age);
+            Assert.False(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
+        }
+
+    }
+}

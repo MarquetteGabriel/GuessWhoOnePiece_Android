@@ -1,4 +1,4 @@
-﻿// <copyright file="Guesser.cs">
+﻿// <copyright file="GuesserTest.cs">
 // Copyright (c) 2025 All Rights Reserved. 
 // </copyright>
 // <author>Gabriel Marquette</author>

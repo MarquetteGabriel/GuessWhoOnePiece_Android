@@ -6,6 +6,7 @@
 using GuessWhoOnePiece.Model.Characters;
 using HtmlAgilityPack;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +25,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         /// <summary>Set the popularity of characters.</summary>
         /// <param name="characterNameList">List of characters.</param>
-        internal static void SetPopularity(List<string> characterNameList, List<Character> characterList)
+        internal static ConcurrentBag<Character> SetPopularity(List<string> characterNameList, ConcurrentBag<Character> characterList)
         {
             var web = new HtmlWeb();
             var doc = web.Load(UrlLevels);
@@ -92,6 +93,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 _countLevels++;
             }
+
+            return characterList;
         }
 
         static string? GetSimilarCharacter(string character)

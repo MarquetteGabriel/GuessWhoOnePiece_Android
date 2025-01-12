@@ -1,4 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿// <copyright file="PictureManagerTest.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using System.Threading.Tasks;
 using GuessWhoOnePiece.Model.CsvManager;
 
 namespace GuessWhoOnePiece.Tests.CsvManager

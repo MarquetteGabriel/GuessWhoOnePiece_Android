@@ -5,81 +5,81 @@
 
 namespace GuessWhoOnePiece.Model.Characters;
 
-public static class PicturesAlbum
+internal static class PicturesAlbum
 {
     #region Arrows
 
-    public const string ArrowUp = ""; //"pictures/arrow_up.png";
-    public const string ArrowDown = "";//"pictures/arrow_down.png";
+    internal const string ArrowUp = ""; //"pictures/arrow_up.png";
+    internal const string ArrowDown = "";//"pictures/arrow_down.png";
 
     #endregion
 
     #region Devil Fruit
 
-    public const string DevilFruit = "";//"pictures/fruit.png";
-    public const string NoDevilFruit = "";//"pictures/no_fruit.png";
+    internal const string DevilFruit = "";//"pictures/fruit.png";
+    internal const string NoDevilFruit = "";//"pictures/no_fruit.png";
 
     #endregion
 
     #region Alive
 
-    public const string Alive = "";//"pictures/vie.png";
-    public const string NoAlive = "";//"pictures/mort.png";
+    internal const string Alive = "";//"pictures/vie.png";
+    internal const string NoAlive = "";//"pictures/mort.png";
     
     #endregion
     
     #region Type
 
-    public const string Pirates = "";
-    public const string Navy = "";
-    public const string Revolutionary = "";
-    public const string Citizen = "";
+    internal const string Pirates = "";
+    internal const string Navy = "";
+    internal const string Revolutionary = "";
+    internal const string Citizen = "";
 
     #endregion
 
     #region Crew
     
-    public const string CrewKaido = "";
-    public const string CrewMugiwara = "";
-    public const string CrewNewgate = "";
-    public const string CrewShanks = "";
-    public const string CrewTeach = "";
-    public const string CrossGuild = "";
-    public const string CrewBigmom = "";
-    public const string CrewEner = "";
-    public const string CrewNavy = "";
-    public const string CrewRevolutionaryArmy = "";
-    public const string CrewCitizen = "";
-    public const string CrewArlong = "";
-    public const string CrewBW = "";
-    public const string CrewCaribou = "";
-    public const string CrewCelestial = "";
-    public const string CrewDoffy = "";
-    public const string CrewGiants = "";
-    public const string CrewID = "";
-    public const string CrewKidd = "";
-    public const string CrewKrieg = "";
-    public const string CrewKuja = "";
-    public const string CrewLaw = "";
-    public const string CrewMoria = "";
-    public const string CrewNewfish = "";
-    public const string CrewRoger = "";
-    public const string CrewRumbar = "";
-    public const string CrewSunpirates = "";
-    public const string CrewApoo = "";
-    public const string CrewFoxy = "";
-    public const string CrewChatnoir = "";
-    public const string CrewWeeble = "";
-    public const string CrewHawkins = "";
-    public const string CrewIdeo = "";
-    public const string CrewPrimates = "";
-    public const string CrewUrouge = "";
-    public const string CrewShiki = "";
-    public const string CrewFiretank = "";
-    public const string CrewBonney = "";
-    public const string CrewXbarrels = "";
-    public const string CrewWorldGov = "";
-    public const string CrewDefault = "";
+    internal const string CrewKaido = "";
+    internal const string CrewMugiwara = "";
+    internal const string CrewNewgate = "";
+    internal const string CrewShanks = "";
+    internal const string CrewTeach = "";
+    internal const string CrossGuild = "";
+    internal const string CrewBigmom = "";
+    internal const string CrewEner = "";
+    internal const string CrewNavy = "";
+    internal const string CrewRevolutionaryArmy = "";
+    internal const string CrewCitizen = "";
+    internal const string CrewArlong = "";
+    internal const string CrewBW = "";
+    internal const string CrewCaribou = "";
+    internal const string CrewCelestial = "";
+    internal const string CrewDoffy = "";
+    internal const string CrewGiants = "";
+    internal const string CrewID = "";
+    internal const string CrewKidd = "";
+    internal const string CrewKrieg = "";
+    internal const string CrewKuja = "";
+    internal const string CrewLaw = "";
+    internal const string CrewMoria = "";
+    internal const string CrewNewfish = "";
+    internal const string CrewRoger = "";
+    internal const string CrewRumbar = "";
+    internal const string CrewSunpirates = "";
+    internal const string CrewApoo = "";
+    internal const string CrewFoxy = "";
+    internal const string CrewChatnoir = "";
+    internal const string CrewWeeble = "";
+    internal const string CrewHawkins = "";
+    internal const string CrewIdeo = "";
+    internal const string CrewPrimates = "";
+    internal const string CrewUrouge = "";
+    internal const string CrewShiki = "";
+    internal const string CrewFiretank = "";
+    internal const string CrewBonney = "";
+    internal const string CrewXbarrels = "";
+    internal const string CrewWorldGov = "";
+    internal const string CrewDefault = "";
 
     #endregion
 }

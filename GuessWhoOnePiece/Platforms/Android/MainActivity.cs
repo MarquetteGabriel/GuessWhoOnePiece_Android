@@ -1,4 +1,9 @@
-﻿using Android.App;
+﻿// <copyright file="MainActivity.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Microsoft.Maui;

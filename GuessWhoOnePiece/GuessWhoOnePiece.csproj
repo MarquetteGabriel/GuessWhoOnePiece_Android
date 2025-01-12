@@ -76,5 +76,5 @@
     <ItemGroup>
       <ProjectReference Include="..\GuessWhoOnePiece.Model\GuessWhoOnePiece.Model.csproj" />
     </ItemGroup>
-
+	
 </Project>

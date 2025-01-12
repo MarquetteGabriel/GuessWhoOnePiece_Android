@@ -1,4 +1,9 @@
-﻿using ObjCRuntime;
+﻿// <copyright file="Program.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using ObjCRuntime;
 using UIKit;
 
 namespace GuessWhoOnePiece

@@ -10,7 +10,7 @@ namespace GuessWhoOnePiece.Model
     {
         Younger = 0,
         Equal = 1,
-        Older = 2
+        Older = 2,
     }
     
     /// <summary>The chapter gap of a character and another.</summary>
@@ -18,7 +18,7 @@ namespace GuessWhoOnePiece.Model
     {
         PreviousChapter = 0,
         SameChapter = 1,
-        NewerChapter = 2
+        NewerChapter = 2,
     }
     
     /// <summary>The bounty gap of a character and another.</summary>
@@ -27,7 +27,8 @@ namespace GuessWhoOnePiece.Model
         Lower = 0,
         Upper = 1,
         Equal = 2,
-        WrongUnknown = 3
+        WrongUnknown = 3,
+        Error = 4
     }
 
     /// <summary>The level gap of a character and another.</summary>

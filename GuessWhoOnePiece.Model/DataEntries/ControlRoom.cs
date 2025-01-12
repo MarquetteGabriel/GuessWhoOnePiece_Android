@@ -33,7 +33,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private const string Pattern = @"^[a-zA-Z0-9\s]*$";
         
         /// <summary>List of characters' name.</summary>
-        private readonly ConcurrentBag<string> _characterNameList = [];
+        private ConcurrentBag<string> _characterNameList = [];
 
         /// <summary>Percentage of advencement for loading characters.</summary>
         private int _countPercentage;
@@ -53,7 +53,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     charactersList.Add(character);
             });
 
-            Popularity.SetPopularity(_characterNameList.ToList(), charactersList.ToList());
+            charactersList = Popularity.SetPopularity(_characterNameList.ToList(), charactersList);
             ManageCsv.SaveCharactersToCsv(charactersList.ToList());
 
             return charactersList.ToList();
@@ -85,6 +85,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         }
                     }
                 });
+                
+                _characterNameList = new ConcurrentBag<string>(_characterNameList.Distinct().ToList());
             }
             catch (Exception)
             {
@@ -96,7 +98,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="url">The url of the character.</param>
         /// <param name="characterName">The name of the character.</param>
         /// <returns>The character.</returns>
-        private async Task<Character?> DataForCharacter(System.Uri url, string characterName)
+        internal async Task<Character?> DataForCharacter(Uri url, string characterName)
         {
             try
             {
@@ -141,7 +143,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         crewElement = bountyTypeCrewElement;
                 }
 
-                var crew = crewElement == null ? Resources.Strings.Citizen : DataControl.ExtractPatternCrew(crewElement);
+                var crew = crewElement == null ? Resources.Strings.Citizen : DataControl.FixCrew(DataControl.ExtractPatternCrew(crewElement), "");
                 var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase);
                 var type = typeElement == null ? Resources.Strings.Citizen : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
                 var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "", StringComparison.OrdinalIgnoreCase).Trim(), type);
@@ -157,6 +159,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 crew = DataControl.FixCrew(crew, type);
                 type = DataControl.FixType(type, crew);
+
+                characterName = DataControl.ExceptionForCharacterName(characterName);
 
                 var characters = new Character(characterName, fruit, bounty, chapter, type, alived, age, crew, picturePath, NumberOfLevels + 1);
                 _countPercentage++;
@@ -177,7 +181,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Set the link to find a character on the fandom.</summary>
         /// <param name="characterName">The character to find.</param>
         /// <returns>The link of the character.</returns>
-        private static Uri SetCharacterLink(string characterName)
+        internal static Uri SetCharacterLink(string characterName)
         {
             var urlCharacter = characterName.Replace(" ", "_", StringComparison.OrdinalIgnoreCase).Trim();
             var matcher = Regexs.CharacterLinkRegex().Match(urlCharacter);
@@ -286,7 +290,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="picture">Url of the picture.</param>
         /// <param name="characterName">Name of the character.</param>
         /// <returns>The percentage.</returns>
-        static double CalculateMatchPercentage(string picture, string characterName)
+        internal static double CalculateMatchPercentage(string picture, string characterName)
         {
             int levenshteinDistance = LevenshteinDistance(picture, characterName);
             int maxLength = Math.Max(picture.Length, characterName.Length);

@@ -1,4 +1,9 @@
-﻿using Microsoft.Maui.Storage;
+﻿// <copyright file="PictureManager.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using Microsoft.Maui.Storage;
 using SkiaSharp;
 using System;
 using System.IO;
@@ -9,7 +14,7 @@ using System.Threading.Tasks;
 namespace GuessWhoOnePiece.Model.CsvManager
 {
     /// <summary>Represents the retrieval of pictures.</summary>
-    public static class PictureManager
+    internal static class PictureManager
     {
         /// <summary>Path to the folder of pictures.</summary>
         internal static readonly string PicturePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Images");
@@ -20,7 +25,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <param name="imageUrl">Link of the picture.</param>
         /// <param name="fileName">Name of the character which is used in the fileName.</param>
         /// <returns>The fileName.</returns>
-        public static async Task<string> DownloadImageAsync (string imageUrl, string fileName)
+        internal static async Task<string> DownloadImageAsync (string imageUrl, string fileName)
         {
             fileName = fileName + ".jpeg";
             try

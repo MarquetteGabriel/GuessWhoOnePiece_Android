@@ -32,11 +32,21 @@ namespace GuessWhoOnePiece.Model
             if (bountyCharacter.Contains(Resources.Strings.Unknown))
                 return BountyType.WrongUnknown;
 
-            var bountyCharacterValue = float.Parse(bountyCharacter.Replace("Md", "", StringComparison.OrdinalIgnoreCase)
-                .Replace("Mi", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase));
-            var bountyCharacterSearchedValue = float.Parse(bountyCharacterSearched.Replace("Md", "", StringComparison.OrdinalIgnoreCase)
-                .Replace("Mi", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase));
+            float bountyCharacterValue;
+            float bountyCharacterSearchedValue;
 
+            try
+            {
+                bountyCharacterValue = float.Parse(bountyCharacter.Replace("Md", "", StringComparison.OrdinalIgnoreCase)
+                               .Replace("Mi", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase));
+                bountyCharacterSearchedValue = float.Parse(bountyCharacterSearched.Replace("Md", "", StringComparison.OrdinalIgnoreCase)
+                    .Replace("Mi", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase));
+            }
+            catch (FormatException)
+            {
+                return BountyType.WrongUnknown;
+            }
+                
             if (bountyCharacter.Contains("Mi"))
                 bountyCharacterValue *= MillionsDollarsValue;
             else if (bountyCharacter.Contains("Md"))

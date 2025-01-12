@@ -3,7 +3,6 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-
 using GuessWhoOnePiece.Model;
 using Microsoft.AspNetCore.Components;
 
