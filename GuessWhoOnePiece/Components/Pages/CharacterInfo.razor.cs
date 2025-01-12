@@ -6,6 +6,7 @@
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Components.Pages;
 

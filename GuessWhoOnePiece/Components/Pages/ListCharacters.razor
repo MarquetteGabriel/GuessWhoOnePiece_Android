@@ -1,13 +1,13 @@
 ﻿@page "/characters"
-@using Bunit.Extensions
 @using GuessWhoOnePiece.Components.Elements.ItemList
 @using GuessWhoOnePiece.Components.Elements.Loading
 @using GuessWhoOnePiece.Components.Elements.TextEntry
+@using GuessWhoOnePiece.Model.Characters
 
 <TextEntry WithAutoComplete="false" Items="_characterNames" OnItemSelected="OnSelectedCharacter" OnKeyPressed="OnKeyPressed" OnInputKeys="OnInput"></TextEntry>
 
 <ul class="list-character">
-    @if (_characters.IsNullOrEmpty())
+    @if (_characters == null || _characters.Count == 0)
     {
         <Loading></Loading>
     }

@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Maui.Storage;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Components.Elements.Pictures
 {

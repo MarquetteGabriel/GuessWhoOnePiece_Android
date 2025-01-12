@@ -3,6 +3,8 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using Microsoft.Maui.Controls;
+
 namespace GuessWhoOnePiece
 {
     public partial class App : Application
