@@ -693,7 +693,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.True(result.DevilFruit);
             Assert.Equal(904, result.FirstAppearance);
-            Assert.Equal("Révolutionnaires", result.Crew);
+            Assert.Equal("Revolutionary's Crew", result.Crew);
             Assert.Equal("457 Mi", result.Bounty);
             Assert.Equal("Revolutionary", result.Type);
         }

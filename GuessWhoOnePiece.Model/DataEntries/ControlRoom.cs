@@ -143,7 +143,35 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         crewElement = bountyTypeCrewElement;
                 }
 
+                if(crewElement == null)
+                {
+                    foreach (var bountyTypeCrewElement in bountyTypeCrewElements)
+                    {
+                        var dataSource = bountyTypeCrewElement.InnerHtml;
+                        if (dataSource.Contains("occupation", StringComparison.OrdinalIgnoreCase))
+                            crewElement = bountyTypeCrewElement;
+                        if (dataSource.Contains("affiliation", StringComparison.OrdinalIgnoreCase))
+                            crewElement = bountyTypeCrewElement;
+                    }
+                }
+
+                if (typeElement == null)
+                {
+                    foreach (var bountyTypeCrewElement in bountyTypeCrewElements)
+                    {
+                        var dataSource = bountyTypeCrewElement.InnerHtml;
+                        if (dataSource.Contains("occupation", StringComparison.OrdinalIgnoreCase))
+                            typeElement = bountyTypeCrewElement;
+                        if (dataSource.Contains("affiliation", StringComparison.OrdinalIgnoreCase))
+                            typeElement = bountyTypeCrewElement;
+                    }
+                }
+
                 var crew = crewElement == null ? Resources.Strings.Citizen : DataControl.FixCrew(DataControl.ExtractPatternCrew(crewElement), "");
+
+                if (characterName.Contains("Weevil"))
+                    crew = "Edward Weeble";
+
                 var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase);
                 var type = typeElement == null ? Resources.Strings.Citizen : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
                 var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "", StringComparison.OrdinalIgnoreCase).Trim(), type);

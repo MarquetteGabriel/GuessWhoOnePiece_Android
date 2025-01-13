@@ -207,9 +207,9 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.False(result.Alive);
             Assert.True(result.DevilFruit);
             Assert.Equal(861, result.FirstAppearance);
-            Assert.Equal("Pègre", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -531,7 +531,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(499, result.FirstAppearance);
-            Assert.Equal("Dragons Célestes", result.Crew);
+            Assert.Equal("Celestial Dragons", result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Navy", result.Type);
         }
@@ -1162,7 +1162,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.DevilFruit);
             Assert.Equal(860, result.FirstAppearance);
             Assert.Equal("L'Équipage de Big Mom", result.Crew);
-            Assert.Equal("1.057 Md", result.Bounty);
+            Assert.Equal("1,057 Md", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 
@@ -1179,8 +1179,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(476, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Big Mom", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("L'Équipage du Rolling", result.Crew);
+            Assert.Equal("24 Mi", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 
@@ -1216,7 +1216,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.DevilFruit);
             Assert.Equal(651, result.FirstAppearance);
             Assert.Equal("L'Équipage de Big Mom", result.Crew);
-            Assert.Equal("4.388 Md", result.Bounty);
+            Assert.Equal("4,388 Md", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 
@@ -2039,11 +2039,11 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Chess", result!.Name);
-            Assert.Equal(27, result.Age);
+            Assert.Equal(32, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(131, result.FirstAppearance);
+            Assert.Equal("L’Équipage de Wapol", result.Crew);
             Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
@@ -2147,13 +2147,13 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Chimney", result!.Name);
-            Assert.Equal(29, result.Age);
+            Assert.Equal(10, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal(322, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -2165,12 +2165,12 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Chinjao", result!.Name);
-            Assert.Equal(30, result.Age);
+            Assert.Equal(78, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal(704, result.FirstAppearance);
+            Assert.Equal("Allié de L'Équipage du Chapeau de Paille", result.Crew);
+            Assert.Equal("542 Mi", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 
@@ -2237,11 +2237,11 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Chocolat", result!.Name);
-            Assert.Equal(30, result.Age);
+            Assert.Equal(26, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(598, result.FirstAppearance);
+            Assert.Equal("Faux Équipage du Chapeau de Paille", result.Crew);
             Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
@@ -2273,13 +2273,13 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Chome", result!.Name);
-            Assert.Equal(28, result.Age);
+            Assert.Equal(14, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal(931, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -2291,13 +2291,13 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Chouchou", result!.Name);
-            Assert.Equal(29, result.Age);
+            Assert.Equal(14, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal(12, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -2345,13 +2345,13 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Clover", result!.Name);
-            Assert.Equal(28, result.Age);
-            Assert.True(result.Alive);
+            Assert.Equal(85, result.Age);
+            Assert.False(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal(391, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -2381,11 +2381,11 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Cocoa", result!.Name);
-            Assert.Equal(30, result.Age);
+            Assert.Equal(27, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
+            Assert.Equal(598, result.FirstAppearance);
+            Assert.Equal("Faux Équipage du Chapeau de Paille", result.Crew);
             Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
@@ -2453,13 +2453,13 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Concelot", result!.Name);
-            Assert.Equal(30, result.Age);
+            Assert.Equal(29, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal(809, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -2471,13 +2471,13 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Conis", result!.Name);
-            Assert.Equal(27, result.Age);
+            Assert.Equal(21, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal(239, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -2489,13 +2489,13 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Conney", result!.Name);
-            Assert.Equal(28, result.Age);
+            Assert.Equal(76, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal(1099, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -2669,12 +2669,12 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Crocodile", result!.Name);
-            Assert.Equal(44, result.Age);
+            Assert.Equal(46, result.Age);
             Assert.True(result.Alive);
-            Assert.False(result.DevilFruit);
-            Assert.Equal(101, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Crocodile", result.Crew);
-            Assert.Equal("85 Mi", result.Bounty);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(126, result.FirstAppearance);
+            Assert.Equal("Cross Guild", result.Crew);
+            Assert.Equal("1,965 Md", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 
@@ -2687,13 +2687,13 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Crocus", result!.Name);
-            Assert.Equal(30, result.Age);
+            Assert.Equal(73, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal(102, result.FirstAppearance);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -2723,12 +2723,12 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Curly Dadan", result!.Name);
-            Assert.Equal(28, result.Age);
+            Assert.Equal(55, result.Age);
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(567, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal(568, result.FirstAppearance);
+            Assert.Equal("Bandits des montagnes", result.Crew);
+            Assert.Equal("7,8 Mi", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
     }

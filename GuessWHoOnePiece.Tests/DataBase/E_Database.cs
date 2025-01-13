@@ -48,7 +48,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.DevilFruit);
             Assert.Equal(234, result.FirstAppearance);
             Assert.Equal("L'Équipage de Barbe Blanche", result.Crew);
-            Assert.Equal("5,046", result.Bounty);
+            Assert.Equal("5,046 Md", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 
@@ -209,7 +209,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.True(result.DevilFruit);
             Assert.Equal(537, result.FirstAppearance);
-            Assert.Equal("Révolutionnaires", result.Crew);
+            Assert.Equal("Revolutionary's Crew", result.Crew);
             Assert.Equal("100 Mi", result.Bounty);
             Assert.Equal("Revolutionary", result.Type);
         }

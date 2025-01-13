@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
@@ -19,14 +20,15 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private static readonly HashSet<string> PirateTypeList = new(StringComparer.OrdinalIgnoreCase)
         {
           "Pirate", "Pirates", "Bandit", "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria",
-          "Équipage", "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land", "Spiders Café"
+          "Équipage", "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land", "Spiders Café", 
+          "Baroque Works", "Blue Jam", "Assassin"
         };
 
         /// <summary>List of cases that are Navy.</summary>
         private static readonly HashSet<string> NavyTypeList = new(StringComparer.OrdinalIgnoreCase)
         {
             "Marine", "Marines", " Marines", "Cipher Pol", "Souverain", "Conseil des 5 doyens", "CP-AIGIS0",
-            "Gouvernement", "Impel", "Navy's Crew", "Juge"
+            "Gouvernement", "Impel", "Navy's Crew", "Juge", "Dragon Celestes"
         };
 
         /// <summary>List of cases that are Revolutioanry.</summary>
@@ -62,22 +64,31 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
             if (match.Success && !match.Groups[1].Value.Contains("Inconnue") && !match.Groups[1].Value.Contains("Aucune"))
             {
-                var text = match.Groups[1].Value.Replace(@"(?<!\])\s", ".", StringComparison.OrdinalIgnoreCase)
-                    .Replace(";", " ", StringComparison.OrdinalIgnoreCase)
-                    .Replace("(", "", StringComparison.OrdinalIgnoreCase)
-                    .Replace(")", "", StringComparison.OrdinalIgnoreCase)
-                    .Replace(@"\[.*?\]", "", StringComparison.OrdinalIgnoreCase)
-                    .Replace(",", ".", StringComparison.OrdinalIgnoreCase)
-                    .Replace(@"\(.*?\)", "", StringComparison.OrdinalIgnoreCase);
-                var bountys = text.Split(@" ");
-                foreach (var bounty in bountys)
+                var text = Regex.Replace(match.Groups[1].Value, @"\(.*?\)", "", RegexOptions.CultureInvariant);
+                text = text.Replace(";", " ", StringComparison.OrdinalIgnoreCase)
+                        .Replace(",", ".", StringComparison.OrdinalIgnoreCase)
+                        .Replace("(", "", StringComparison.OrdinalIgnoreCase)
+                        .Replace(")", "", StringComparison.OrdinalIgnoreCase);
+
+                foreach (var bounty in Regexs.SquareBracketsBountyRegex().Split(text))
                 {
-                    foreach (var splitedBounty in Regexs.SquareBracketsBountyRegex().Split(bounty))
+                    if(bounty.Contains("."))
                     {
-                        var splitBounty = Regexs.BountyValueRegex().Match(splitedBounty.Replace(".", "")).Value;
+                        var bountys = bounty.Replace(".", "").Split(@" ");
+                        foreach (var splitedBounty in bountys)
+                        {
+                            var splitdBounty = Regexs.BountyValueRegex().Match(splitedBounty).Value;
+                            if (string.IsNullOrEmpty(splitdBounty))
+                                continue;
+                            maxBounty = Math.Max(maxBounty, long.Parse(splitdBounty));
+                        }
+                    }
+                    else
+                    {
+                        var splitBounty = bounty.Replace(" ", "");
+                        splitBounty = Regexs.BountyValueRegex().Match(splitBounty).Value;
                         if (string.IsNullOrEmpty(splitBounty))
                             continue;
-
                         maxBounty = Math.Max(maxBounty, long.Parse(splitBounty));
                     }
                 }
@@ -163,6 +174,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The new crew.</returns>
         internal static string FixCrew(string rawCrew, string type)
         {
+            if(type.Equals("Dragon Celestes"))
+                rawCrew = type;
+
             rawCrew = rawCrew.Replace("\\s+$", "", StringComparison.OrdinalIgnoreCase);
             if (rawCrew.StartsWith("CP", StringComparison.OrdinalIgnoreCase))
             {
@@ -184,23 +198,25 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 return rawCrew switch
                 {
-                    "Dragon Celestes" => "Celestial Dragons",
+                    "Dragon Celestes" or "Dragons Célestes" => "Celestial Dragons",
                     "Revolutionary" => "Revolutionary's Crew",
                     "Marine" or "Marines" or " Marines" => "Navy's Crew",
+                    "L'Équipage du Firetank" => "L'Équipage du Fire Tank",
                     "Subordonné de L'Équipage de Barbe Blanche" => "L'Équipage de Barbe Blanche",
                     "La Grande Flotte du Chapeau de Paille" or "Alliance de l'Équipage du Chapeau de Paille"
                         or "Flotte de Happou" or "L'Équipage d'Idéo" or "Erbaf" or "L'Équipage des Magnifiques Pirates"
-                        or "L'Équipage d'Ideo" => "Allié de L'Équipage du Chapeau de Paille",
+                        or "L'Équipage d'Ideo" or "Famille Chinjao" => "Allié de L'Équipage du Chapeau de Paille",
                     "Équipage de Big Mom" or "Famille Charlotte" => "L'Équipage de Big Mom",
                     "Spiders Café" or "Spider's Café" => "Baroque Works",
                     "Capitaine de l'Equipage de Caribou" => "L'Équipage de Caribou",
                     "L'Équipage de Barbe Brune(dissout)" or "César Clown" or "César Clown (espionnage)"
-                        or "L'Équipage du New Age" => "L'Équipage de Don Quichotte Doflamingo",
+                        or "L'Équipage du New Age" or "L'Équipage de Barbe Brune" => "L'Équipage de Don Quichotte Doflamingo",
                     "L'Équipage des Pirates Volants" => "L'Équipage des Nouveaux Hommes-Poissons",
-                    "L'Équipage du Firetank" => "L'Équipage du Fire Tank",
                     "Gecko Moria" or "Hogback" or "Dracule Mihawk" => "Thriller Bark",
                     "Alliance Baggy et Alvida" or "L'Équipage du Clown" => "Cross Guild",
-                    "L'Équipage du Capitaine Usopp" or "Voleurs d'Atamayama" => Resources.Strings.Citizen,
+                    "L'Équipage du Capitaine Usopp" or "Voleurs d'Atamayama" or "Zou" or "Pays de Wa" 
+                    or "Phare du Cap des Jumeaux" => Resources.Strings.Citizen,
+                    "Neutre" => "Pirate",
                     _ => rawCrew
                 };
             }
@@ -214,22 +230,25 @@ namespace GuessWhoOnePiece.Model.DataEntries
             try
             {
                 var affiliationCharacter = new List<string>();
-                var affiliations = text.SelectNodes(".//*[contains(@class, 'pi-data-value')]/a");
+                var affiliations = text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]/*[self::a or self::small]");
 
                 if (affiliations == null)
-                    return Resources.Strings.Citizen;
-
-                foreach (var affiliation in affiliations)
                 {
-                    var affiliationText = affiliation.InnerText;
-                    if (affiliation.NextSibling != null && (affiliation.NextSibling.InnerText.Contains("anciennement")
-                                                            || affiliation.NextSibling.InnerText.Contains("temporairement")
-                                                            || affiliation.NextSibling.InnerText.Contains("dissous")))
+                    affiliations = text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]");
+                    if(affiliations == null)
+                        return Resources.Strings.Citizen;
+                }
+                    
+
+                for (int i = 0; i < affiliations.Count; i++)
+                {
+                    var affiliation = affiliations[i].InnerText;
+                    if (i+1 < affiliations.Count && affiliations[i+1].InnerText.Contains("anciennement"))
                     {
-                        var smallText = affiliation.NextSibling.InnerText;
-                        affiliationText += smallText;
+                        affiliation += " " + affiliations[i + 1].InnerText;
+                        i++;
                     }
-                    affiliationCharacter.Add(affiliationText);
+                    affiliationCharacter.Add(affiliation);
                 }
 
                 foreach (var affiliation in affiliationCharacter)
@@ -240,6 +259,20 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         return cleanedAffiliation;
                     }
                 }
+
+                foreach (var affiliation in affiliationCharacter)
+                {
+                    var cleanedAffiliation = Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliation, "").Replace("(anciennement)", "").Trim();
+
+                    var typeCharacterValue = PirateTypeList.FirstOrDefault(cleanedAffiliation.Contains);
+                    if (!string.IsNullOrEmpty(typeCharacterValue))
+                        return cleanedAffiliation;
+
+                    typeCharacterValue = RevoTypeList.FirstOrDefault(cleanedAffiliation.Contains);
+                    if (!string.IsNullOrEmpty(typeCharacterValue))
+                        return cleanedAffiliation;
+                }
+
                 return Resources.Strings.Citizen;
             }
             catch (Exception)
@@ -261,6 +294,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 foreach (var age in listAge.Where(age => !string.IsNullOrEmpty(age.ToString())).Select(age => age.ToString()
                 .Replace(" ans", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase)))
                 {
+                    if (age.Contains("(espérancedevieeffectuée)"))
+                        continue;
                     maxAge = Math.Max(maxAge, int.Parse(age));
                 }
             }
@@ -393,6 +428,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 "Babe" => "Babe / Mr. 4",
                 "Edward Newgate" => "Edward Newgate / Barbe Blanche",
                 "Edward Weevil" => "Edward Weeble",
+                "Charlotte Linlin" => "Charlotte Linlin / Big Mom",
+                "Daz Bones" => "Daz Bones / Mr. 1",
+                "Drophy" => "Drophy / Miss Merry Christmas",
                 _ => characterName
             };
         }
