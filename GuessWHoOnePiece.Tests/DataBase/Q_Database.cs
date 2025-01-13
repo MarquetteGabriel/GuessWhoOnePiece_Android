@@ -30,7 +30,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.DevilFruit);
             Assert.Equal(920, result.FirstAppearance);
             Assert.Equal("L'Équipage aux Cent Bêtes", result.Crew);
-            Assert.Equal("1,320 Md", result.Bounty);
+            Assert.Equal("1,32 Md", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 

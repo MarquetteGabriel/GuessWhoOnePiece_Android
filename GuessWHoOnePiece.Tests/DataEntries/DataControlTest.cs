@@ -381,7 +381,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         [Fact(Skip = "Non Written")]
         public void Test_ExtractPatternAge()
         {
-            var result = DataControl.ExtractPatternAge("");
+            var result = DataControl.ExtractPatternAge("", "");
         }
 
         #endregion

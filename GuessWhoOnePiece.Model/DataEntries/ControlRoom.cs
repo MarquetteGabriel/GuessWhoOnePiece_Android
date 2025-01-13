@@ -181,7 +181,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 var alived = !DataControl.ExtractPattern(characterData, @"Statut\s:(Vivant|Décédé)").Equals("Décédé");
 
-                var age = DataControl.ExtractPatternAge(characterData);
+                var age = DataControl.ExtractPatternAge(characterData, characterName);
                 if(age == 0)
                     throw new InvalidOperationException("No age for the chracter");
 

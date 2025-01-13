@@ -85,7 +85,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     }
                     else
                     {
-                        var splitBounty = bounty.Replace(" ", "");
+                        var splitBounty = bounty.Replace('\u00A0', ' ').Replace(@" ", "");
                         splitBounty = Regexs.BountyValueRegex().Match(splitBounty).Value;
                         if (string.IsNullOrEmpty(splitBounty))
                             continue;
@@ -121,9 +121,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var numBounty = double.Parse(bounty, CultureInfo.InvariantCulture);
                 return numBounty switch
                 {
-                    >= BountyFac.BillionsDollarsValue => string.Format(CultureInfo.CurrentCulture, "{0:0.###} Md", numBounty / BountyFac.BillionsDollarsValue)
+                    >= BountyFac.BillionsDollarsValue => string.Format(CultureInfo.CurrentCulture, "{0:0.######} Md", numBounty / BountyFac.BillionsDollarsValue)
                         .Replace("[,.]0+ Md", " Md", StringComparison.OrdinalIgnoreCase),
-                    >= BountyFac.MillionsDollarsValue => string.Format(CultureInfo.CurrentCulture, "{0:0.###} Mi", numBounty / BountyFac.MillionsDollarsValue)
+                    >= BountyFac.MillionsDollarsValue => string.Format(CultureInfo.CurrentCulture, "{0:0.######} Mi", numBounty / BountyFac.MillionsDollarsValue)
                         .Replace("[,.]0+ Mi", " Mi", StringComparison.OrdinalIgnoreCase),
                     _ => bounty
                 };
@@ -190,6 +190,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 return "Revolutionary's Crew";
             }
+            else if(type.Equals("Pirate") && rawCrew.Equals("Famille Kozuki"))
+            {
+                return "L'Équipage de Barbe Blanche";
+            }
             else if (type.Equals(Resources.Strings.Citizen))
             {
                 return Resources.Strings.Citizen;
@@ -213,10 +217,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         or "L'Équipage du New Age" or "L'Équipage de Barbe Brune" => "L'Équipage de Don Quichotte Doflamingo",
                     "L'Équipage des Pirates Volants" => "L'Équipage des Nouveaux Hommes-Poissons",
                     "Gecko Moria" or "Hogback" or "Dracule Mihawk" => "Thriller Bark",
-                    "Alliance Baggy et Alvida" or "L'Équipage du Clown" => "Cross Guild",
-                    "L'Équipage du Capitaine Usopp" or "Voleurs d'Atamayama" or "Zou" or "Pays de Wa" 
-                    or "Phare du Cap des Jumeaux" => Resources.Strings.Citizen,
+                    "Alliance Baggy et Alvida" or "L'Équipage du Clown" or
+                    "Alliance Baggy et Alvida/Les Pirates d'Expédition" => "Cross Guild",
+                    "L'Équipage du Capitaine Usopp" or "Voleurs d'Atamayama" or "Zou" or "Pays de Wa" or 
+                    "Phare du Cap des Jumeaux" or "Clan des D." or "Principauté de Mokomo"  or 
+                    "Alabasta" => Resources.Strings.Citizen,
                     "Neutre" => "Pirate",
+                    "Punk Hazard" => "L'Équipage aux Cent Bêtes",
                     _ => rawCrew
                 };
             }
@@ -243,12 +250,30 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 for (int i = 0; i < affiliations.Count; i++)
                 {
                     var affiliation = affiliations[i].InnerText;
-                    if (i+1 < affiliations.Count && affiliations[i+1].InnerText.Contains("anciennement"))
+                    if (i+1 < affiliations.Count && affiliations[i+1].InnerText.Contains("anciennement", StringComparison.OrdinalIgnoreCase))
                     {
                         affiliation += " " + affiliations[i + 1].InnerText;
                         i++;
                     }
                     affiliationCharacter.Add(affiliation);
+                }
+
+                foreach (var affiliation in affiliationCharacter)
+                {
+                    if (affiliation.Contains("Impel Down") && !affiliation.Contains("anciennement"))
+                    {
+                        return Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliation, "");
+                    }
+                    else if (affiliation.Equals("(Anciennement)"))
+                    {
+                        return "Pirate";
+                    }
+                }
+
+                for (int i = 0; i < affiliationCharacter.Count - 1; i++)
+                {
+                    if (affiliationCharacter[i].Equals("L'Équipage du Chapeau de Paille") && affiliationCharacter[i + 1].Equals("Nain"))
+                        return "Allié de L'Équipage du Chapeau de Paille";
                 }
 
                 foreach (var affiliation in affiliationCharacter)
@@ -284,17 +309,44 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Extract age from text.</summary>
         /// <param name="input">Text.</param>
         /// <returns>The new age.</returns>
-        internal static int ExtractPatternAge(string input)
+        internal static int ExtractPatternAge(string input, string characterName)
         {
             var matchChoice = Regexs.ExtractPatternAgeRegex().Match(input);
             var maxAge = 0;
             if (matchChoice.Success)
             {
-                var listAge = Regexs.ExtractAgeRegex().Matches(matchChoice.Groups[0].Value);
+                var ageText = matchChoice.Groups[0].Value;
+                ageText = Regexs.SquareBracketsBountyRegex().Replace(ageText, " ");
+                ageText = Regex.Replace(ageText, @"(?<=\()[^)]*\d+[^)]*(?=\))", m =>
+                {
+                    return Regex.Replace(m.Value, @"\d+", "");
+                });
+
+                foreach (var splitAge in Regex.Split(ageText, @":"))
+                {
+                    if (splitAge.Contains("And") && characterName == "Bas")
+                    {
+                        ageText = splitAge;
+                    }
+                    else if (splitAge.Contains("Kerville") && characterName == "And")
+                    {
+                        ageText = splitAge;
+                    }
+                    else if (splitAge.Contains(@"Anniversaire") && characterName == "Kerville")
+                    {
+                        ageText = splitAge;
+                    }
+                    else
+                    {
+                        // Empty on purpose.
+                    }
+                }
+
+                var listAge = Regexs.ExtractAgeRegex().Matches(ageText);
                 foreach (var age in listAge.Where(age => !string.IsNullOrEmpty(age.ToString())).Select(age => age.ToString()
                 .Replace(" ans", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase)))
                 {
-                    if (age.Contains("(espérancedevieeffectuée)"))
+                    if (age.Contains("(espérancedevieeffectuée)") || age.Contains("s'ilétaitvivant") || age.Contains("(estimation"))
                         continue;
                     maxAge = Math.Max(maxAge, int.Parse(age));
                 }
@@ -431,6 +483,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 "Charlotte Linlin" => "Charlotte Linlin / Big Mom",
                 "Daz Bones" => "Daz Bones / Mr. 1",
                 "Drophy" => "Drophy / Miss Merry Christmas",
+                "Galdino" => "Galdino / Mr. 3",
+                "Kiku" => "Kiku / Kikunojo",
+                "Marianne" => "Marianne / Miss GoldenWeek",
+                "Marshall D. Teach" => "Marshall D. Teach / Barbe Noire",
+                "Mikita" => "Mikita / Miss Valentine",
                 _ => characterName
             };
         }

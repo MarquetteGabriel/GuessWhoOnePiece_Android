@@ -442,7 +442,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.False(result.DevilFruit);
             Assert.Equal(379, result.FirstAppearance);
             Assert.Equal("Gouvernement Mondial", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("0", result.Bounty);
             Assert.Equal("Navy", result.Type);
         }
 
