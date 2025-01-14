@@ -16,10 +16,14 @@ namespace GuessWhoOnePiece.Tests.DataEntries
     /// <summary>Test class "ManageCsv".</summary>
     public class ReceiveDataTest
     {
-        [Fact(Skip = "Non Written")]
-        public void Test_ReceiveCharacter()
+        [Fact]
+        public async void Test_ReceiveCharacter()
         {
+            ControlRoom controlRoom = new ControlRoom();
+            var result = await controlRoom.GenerateThreads();
 
+            Assert.NotNull(result);
+            Assert.Equal(485, result.Count);
         }
 
         #region LevenshteinDistance Tests

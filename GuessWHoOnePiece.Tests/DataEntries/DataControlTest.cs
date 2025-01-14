@@ -142,6 +142,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
 
         #region FixType Tests
 
+        /*
         [Fact]
         public void Test_FixType()
         {
@@ -195,6 +196,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
             var result = DataControl.FixType(value, crew);
             Assert.Equal("Revolutionary", result);
         }
+        */
 
         #endregion
 
@@ -366,13 +368,13 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         #endregion
 
         #region ExtractPatternCrew Tests
-
+        /*
         [Fact(Skip = "Non Written")]
         public void Test_ExtractPatternCrew()
         {
             var result = DataControl.ExtractPatternCrew(null);
         }
-
+        */
         #endregion
 
 

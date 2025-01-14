@@ -169,8 +169,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     }
                 }
 
-                var crew = crewElement == null? Resources.Strings.Citizen : DataControl.ExtractCrew(crewElement, characterName);
-                var type = typeElement == null ? Resources.Strings.Citizen : DataControl.ExtractPatternType(typeElement, crew);
+                var crew = crewElement == null? Resources.Strings.Citizen : DataControl.ExtractCrew(crewElement, characterName); // Done.
+                var type = typeElement == null ? Resources.Strings.Citizen : DataControl.ExtractPatternType(typeElement, crew); // Done.
 
                 if (type.Equals(Resources.Strings.CelestialDragons))
                 {
@@ -191,7 +191,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 if(age == 0)
                     throw new InvalidOperationException("No age for the chracter");
 
-                characterName = DataControl.ExceptionForCharacterName(characterName);
+                characterName = DataControl.ExceptionForCharacterName(characterName); // Done.
 
                 var characters = new Character(characterName, fruit, bounty, chapter, type, alived, age, crew, picturePath, NumberOfLevels + 1);
                 _countPercentage++;

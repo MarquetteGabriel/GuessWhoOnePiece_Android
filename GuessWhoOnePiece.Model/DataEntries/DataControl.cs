@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -21,7 +20,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
           "Pirate", "Pirates", "Bandit", "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria",
           "Équipage", "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land", "Spiders Café", 
-          "Baroque Works", "Blue Jam", "Assassin", "Zo", "Kujas", "Cross Guild", "Ligue des Primates"
+          "Baroque Works", "Blue Jam", "Assassin", "Zo", "Kujas", "Cross Guild", "Ligue des Primates", "Grand Corsaire"
         };
 
         /// <summary>List of cases that are Navy.</summary>
@@ -36,7 +35,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private static readonly HashSet<string> RevoTypeList = new(StringComparer.OrdinalIgnoreCase)
         {
             "Armée Révolutionnaire", "Révolutionnaires", "armée révolutionnaire", "Revolutionary's Crew",
-            "Armée de la Liberté"
+            "Armée de la Liberté","Revolutionary's Army"
         };
 
         /// <summary>List of cases that are Celestial dragons.</summary>
@@ -48,7 +47,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>List of months.</summary>
         private static readonly HashSet<string> MonthList = new(StringComparer.OrdinalIgnoreCase)
         {
-            "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+            "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", 
+            "Août", "Septembre", "Octobre", "Novembre", "Décembre"
         };
 
         private static readonly Dictionary<string, string> CrewMapping = new Dictionary<string, string>
@@ -58,7 +58,31 @@ namespace GuessWhoOnePiece.Model.DataEntries
             { "Capitaine de l'Equipage de Caribou", "L'Équipage de Caribou" },
             { "Punk Hazard", "L'Équipage aux Cent Bêtes" },
             { "Neutre", Resources.Strings.PirateType },
-            { "L'Équipage des Pirates Volants", "L'Équipage des Nouveaux Hommes-Poissons"}
+            { "L'Équipage des Pirates Volants", "L'Équipage des Nouveaux Hommes-Poissons"},
+            { "Grand Corsaire", "Edward Weeble"}
+        };
+
+        private static readonly Dictionary<string, string> CharacterNameMappings = new()
+        {
+            { "Aramaki", "Aramaki / Ryokugyû" },
+            { "Brannew", "Brand new" },
+            { "Borsalino", "Borsalino / Kizaru" },
+            { "Bentham", "Bentham / Mr. 2" },
+            { "Barbe Brune", "Barbe Brune / Chadros Higelyges" },
+            { "Bakkin", "Bakkin / Buckingham Stussy" },
+            { "Babe", "Babe / Mr. 4" },
+            { "Edward Newgate", "Edward Newgate / Barbe Blanche" },
+            { "Edward Weevil", "Edward Weeble" },
+            { "Charlotte Linlin", "Charlotte Linlin / Big Mom" },
+            { "Daz Bones", "Daz Bones / Mr. 1" },
+            { "Drophy", "Drophy / Miss Merry Christmas" },
+            { "Galdino", "Galdino / Mr. 3" },
+            { "Kiku", "Kiku / Kikunojo" },
+            { "Marianne", "Marianne / Miss GoldenWeek" },
+            { "Marshall D. Teach", "Marshall D. Teach / Barbe Noire" },
+            { "Mikita", "Mikita / Miss Valentine" },
+            { "Zala", "Zala / Miss Doublefinger" },
+            { "Sakazuki", "Sakazuki / Akainu" }
         };
 
         private static readonly HashSet<string> ThrillerBark = new(StringComparer.OrdinalIgnoreCase)
@@ -126,16 +150,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>Bounty of the character.</returns>
         internal static string ExtractPatternBounty(string input, string type, string characterName)
         {
-            var match = Regexs.ExtractPatternBountyRegex().Match(input);
+            if (type.Equals(Resources.Strings.NavyType, StringComparison.OrdinalIgnoreCase) ||
+                type.Equals(Resources.Strings.Citizen, StringComparison.OrdinalIgnoreCase))
+                return "0";
 
             if (characterName.Equals("Sabo"))
                 return "602 Mi";
 
-            if(type.Equals(Resources.Strings.NavyType, StringComparison.OrdinalIgnoreCase) ||
-                type.Equals(Resources.Strings.Citizen, StringComparison.OrdinalIgnoreCase) ||
-                    type.Equals("Dragon Celestes", StringComparison.OrdinalIgnoreCase))
-                return "0";
-
+            var match = Regexs.ExtractPatternBountyRegex().Match(input);
             if (!match.Success || match.Groups[1].Value.Contains("Inconnue") || match.Groups[1].Value.Contains("Aucune"))
                 return Resources.Strings.Unknown;
 
@@ -181,48 +203,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
             };
         }
 
-        /// <summary>Fix type for specific types.</summary>
-        /// <param name="value">Type of the character.</param>
-        /// <param name="crew">Crew of the character.</param>
-        /// <returns>The new type.</returns>
-        internal static string FixType(string value, string crew)
-        {
-            if (crew.Contains("Celestial Dragons", StringComparison.OrdinalIgnoreCase))
-            {
-                return Resources.Strings.NavyType;
-            }
-            else if (value.Contains("Dragon Celestes", StringComparison.OrdinalIgnoreCase))
-            {
-                return value;
-            }
-            else
-            {
-                // Empty on purpose.
-            }
-
-            var typeCharacterValue = PirateTypeList.FirstOrDefault(crew.Contains);
-            if (!string.IsNullOrEmpty(typeCharacterValue))
-                value = Resources.Strings.PirateType;
-
-            typeCharacterValue = NavyTypeList.FirstOrDefault(crew.Contains);
-            if (!string.IsNullOrEmpty(typeCharacterValue))
-                value = Resources.Strings.NavyType;
-
-            typeCharacterValue = RevoTypeList.FirstOrDefault(crew.Contains);
-            if (!string.IsNullOrEmpty(typeCharacterValue))
-                value = Resources.Strings.RevolutionaryType;
-
-            return value;
-        }
-
         internal static string ExtractCrew(HtmlNode text, string characterName)
         {
-            if (characterName.Contains("Weevil"))
-                return "Edward Weeble";
             if (characterName.Equals("Vergo") || characterName.Equals("Senor Pink"))
                 return "L'Équipage de Don Quichotte Doflamingo";
-            if (characterName.Equals("X Drake"))
-                return Resources.Strings.NavyCrew;
             if (characterName.Equals("Sanjuan Wolf"))
                 return "L'Équipage de Barbe Noire";
             if (characterName.Equals("Surume"))
@@ -248,106 +232,103 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Extract crew from text.</summary>
         /// <param name="text">Text.</param>
         /// <returns>The crew of the character.</returns>
-        internal static string ExtractPatternCrew(HtmlNode text)
+        private static string ExtractPatternCrew(HtmlNode text)
         {
-            try
+            var affiliations = text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]/*[self::a or self::small]")
+                                            ?? text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]");
+            var affiliationCharacter = new List<string>();
+
+            for (int i = 0; i < affiliations.Count; i++)
             {
-               var affiliations = text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]/*[self::a or self::small]")
-                                               ?? text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]");
-                var affiliationCharacter = new List<string>();
-
-                for (int i = 0; i < affiliations.Count; i++)
+                var affiliation = affiliations[i].InnerText;
+                if (i + 1 < affiliations.Count && affiliations[i + 1].InnerText.Contains("anciennement", StringComparison.OrdinalIgnoreCase))
                 {
-                    var affiliation = affiliations[i].InnerText;
-                    if (i + 1 < affiliations.Count && affiliations[i + 1].InnerText.Contains("anciennement", StringComparison.OrdinalIgnoreCase))
-                    {
-                        affiliation += " " + affiliations[i + 1].InnerText;
-                        i++;
-                    }
-                    affiliationCharacter.Add(affiliation);
+                    affiliation += " " + affiliations[i + 1].InnerText;
+                    i++;
                 }
-
-                if(affiliationCharacter.Count == 1)
-                {
-                    var affiliation = affiliationCharacter.First();
-                    if (affiliation.Equals("CP9 (anciennement)"))
-                        return "Cipher Pol";
-                    else if (affiliation.Equals("L'Équipage de Don Quichotte Doflamingo (anciennement)"))
-                        return Resources.Strings.Citizen;
-                }
-
-                for (int i = 0; i < affiliationCharacter.Count; i++)
-                {
-                    if(i+1 < affiliationCharacter.Count)
-                    {
-                        if (affiliationCharacter[i].Equals("L'Équipage du Chapeau de Paille") && affiliationCharacter[i + 1].Equals("Nain"))
-                            return "Allié de L'Équipage du Chapeau de Paille";
-
-                        if (affiliationCharacter[i].Equals("L'Équipage des Pirates du Soleil") && affiliationCharacter[i + 1].Equals("Révolutionnaires"))
-                            return "Revolutionary's Crew";
-                    }
-
-                    if (affiliationCharacter[i].Contains("Impel Down") && !affiliationCharacter[i].Contains("anciennement"))
-                    {
-                        return Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliationCharacter[i], "");
-                    }
-                    else if (affiliationCharacter[i].Equals("(Anciennement)"))
-                    {
-                        return Resources.Strings.PirateType;
-                    }
-                }
-
-                foreach (var affiliation in affiliationCharacter)
-                {
-                    var cleanedAffiliation = Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliation, "").Trim();
-                    if (!cleanedAffiliation.Contains("anciennement") && !cleanedAffiliation.Contains("temporairement") && !cleanedAffiliation.Contains("dissous"))
-                    {
-                        return cleanedAffiliation;
-                    }
-                }
-
-                foreach (var affiliation in affiliationCharacter)
-                {
-                    var cleanedAffiliation = Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliation, "").Replace("(anciennement)", "").Trim();
-
-                    var typeCharacterValue = PirateTypeList.FirstOrDefault(cleanedAffiliation.Contains);
-                    if (!string.IsNullOrEmpty(typeCharacterValue))
-                        return cleanedAffiliation;
-
-                    typeCharacterValue = RevoTypeList.FirstOrDefault(cleanedAffiliation.Contains);
-                    if (!string.IsNullOrEmpty(typeCharacterValue))
-                        return cleanedAffiliation;
-                }
-
-                return Resources.Strings.Citizen;
+                affiliationCharacter.Add(affiliation);
             }
-            catch (Exception)
+
+            if(affiliationCharacter.Count == 1)
             {
-                return Resources.Strings.Citizen;
+                var affiliation = affiliationCharacter.First();
+                if (affiliation.Equals("CP9 (anciennement)"))
+                    return "Cipher Pol";
+                else if (affiliation.Equals("L'Équipage de Don Quichotte Doflamingo (anciennement)"))
+                    return Resources.Strings.Citizen;
             }
+
+            if (affiliationCharacter.Any(affiliation => affiliation.Equals("SWORD")))
+                return Resources.Strings.NavyCrew;
+
+            for (int i = 0; i < affiliationCharacter.Count; i++)
+            {
+                if(i+1 < affiliationCharacter.Count)
+                {
+                    if (affiliationCharacter[i].Equals("L'Équipage du Chapeau de Paille") && affiliationCharacter[i + 1].Equals("Nain"))
+                        return Resources.Strings.AlliedMugiwaraCrew;
+
+                    if (affiliationCharacter[i].Equals("L'Équipage des Pirates du Soleil") && affiliationCharacter[i + 1].Equals("Révolutionnaires"))
+                        return Resources.Strings.RevolutionaryCrew;
+                }
+
+                if (affiliationCharacter[i].Contains("Impel Down") && !affiliationCharacter[i].Contains("anciennement"))
+                {
+                    return Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliationCharacter[i], "");
+                }
+                else if (affiliationCharacter[i].Equals("(Anciennement)"))
+                {
+                    return Resources.Strings.PirateType;
+                }
+            }
+
+            foreach (var affiliation in affiliationCharacter)
+            {
+                var cleanedAffiliation = Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliation, "").Trim();
+                if (!cleanedAffiliation.Contains("anciennement") && !cleanedAffiliation.Contains("temporairement") && !cleanedAffiliation.Contains("dissous"))
+                {
+                    return cleanedAffiliation;
+                }
+            }
+
+            foreach (var affiliation in affiliationCharacter)
+            {
+                var cleanedAffiliation = Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliation, "").Replace("(anciennement)", "").Trim();
+                if (PirateTypeList.Any(cleanedAffiliation.Contains))
+                    return cleanedAffiliation;
+                if (RevoTypeList.Any(cleanedAffiliation.Contains))
+                    return cleanedAffiliation;
+            }
+
+            return Resources.Strings.Citizen;
         }
 
-        internal static string GetCrewMapping(string rawCrew)
+        private static string GetCrewMapping(string rawCrew)
         {
             if (CrewMapping.TryGetValue(rawCrew, out var result))
                 return result;
 
-            if (CelestialDragons.Contains(rawCrew))
-                return Resources.Strings.CelestialDragons;
             if (NavyCrew.Contains(rawCrew))
                 return Resources.Strings.NavyCrew;
+
             if (BigMomCrew.Contains(rawCrew))
                 return Resources.Strings.BigMomCrew;
+            
             if (BaroqueWorks.Contains(rawCrew))
                 return Resources.Strings.BaroqueWorks;
+            
             if (CrossGuild.Contains(rawCrew))
                 return Resources.Strings.CrossGuild;
+            
             if (AlliedMugiwaraCrew.Contains(rawCrew))
                 return Resources.Strings.AlliedMugiwaraCrew;
+            
             if (CitizenCrew.Contains(rawCrew))
                 return Resources.Strings.Citizen;
+            
             if (ThrillerBark.Contains(rawCrew))
                 return Resources.Strings.ThrillerBark;
+            
             if (DonQuichotte.Contains(rawCrew))
                 return Resources.Strings.DoffyFamily;
 
@@ -393,8 +374,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
             foreach (Match match in listAge)
             {
                 string age = match.Value;
-                if (string.IsNullOrEmpty(age))
-                    continue;
 
                 age = age
                     .Replace(" ans", "", StringComparison.OrdinalIgnoreCase)
@@ -425,45 +404,35 @@ namespace GuessWhoOnePiece.Model.DataEntries
             if (PirateTypeList.Any(crew.Contains))
                 return Resources.Strings.PirateType;
 
-            try
+            var typeCharacters = new List<string>();
+            var types = text.SelectNodes(".//*[contains(@class, 'pi-data-value')]")
+                .Select(node => node.InnerText)
+                .SelectMany(html => Regexs.SplitPatternType().Split(html))
+                .ToArray();
+
+            foreach (var type in types)
             {
-                var typeCharacters = new List<string>();
-                var types = text.SelectNodes(".//*[contains(@class, 'pi-data-value')]")
-                    .Select(node => node.InnerText)
-                    .SelectMany(html => Regexs.SplitPatternType().Split(html))
-                    .ToArray();
+                var docSmallDatas = new HtmlDocument();
+                docSmallDatas.LoadHtml(type);
+                var smallText = docSmallDatas.DocumentNode.SelectSingleNode("//small")?.InnerText ?? "";
+                var cleanedType = Regexs.ContentBetweenBracketsRegex().Replace(type, "").Trim() + smallText;
+                typeCharacters.AddRange(cleanedType.Split(new[] { ";", "," }, StringSplitOptions.RemoveEmptyEntries));
+            }
 
-                foreach (var type in types)
+            var filteredTypeCharacters = typeCharacters
+                .Select(typeData => typeData.Replace("\\[.*?]\\s*$", "", StringComparison.OrdinalIgnoreCase))
+                .Where(typeData => !typeData.Contains("anciennement", StringComparison.OrdinalIgnoreCase) &&
+                                    !typeData.Contains("temporairement", StringComparison.OrdinalIgnoreCase));
+
+            foreach (var typeData in filteredTypeCharacters)
+            {
+                if (dragonCelestesKeywords.Any(keyword => typeData.Contains(keyword, StringComparison.OrdinalIgnoreCase)))
                 {
-                    var docSmallDatas = new HtmlDocument();
-                    docSmallDatas.LoadHtml(type);
-                    var smallText = docSmallDatas.DocumentNode.SelectSingleNode("//small")?.InnerText ?? "";
-                    var cleanedType = Regexs.ContentBetweenBracketsRegex().Replace(type, "").Trim() + smallText;
-                    typeCharacters.AddRange(cleanedType.Split(new[] { ";", "," }, StringSplitOptions.RemoveEmptyEntries));
+                    return Resources.Strings.CelestialDragons;
                 }
-
-                var filteredTypeCharacters = typeCharacters
-                    .Select(typeData => typeData.Replace("\\[.*?]\\s*$", "", StringComparison.OrdinalIgnoreCase))
-                    .Where(typeData => !typeData.Contains("anciennement", StringComparison.OrdinalIgnoreCase) &&
-                                        !typeData.Contains("temporairement", StringComparison.OrdinalIgnoreCase));
-
-                foreach (var typeData in filteredTypeCharacters)
-                {
-                    if (dragonCelestesKeywords.Any(keyword => typeData.Contains(keyword, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        return Resources.Strings.CelestialDragons;
-                    }
-                }
+            }
                 
-                if (NavyTypeList.Any(crew.Contains))
-                    return Resources.Strings.NavyType;
-
-                return Resources.Strings.Citizen;
-            }
-            catch
-            {
-                return Resources.Strings.Citizen;
-            }
+            return Resources.Strings.NavyType;
         }
 
         /// <summary>Change value for specific character.</summary>
@@ -489,34 +458,22 @@ namespace GuessWhoOnePiece.Model.DataEntries
         internal static string ExtractExceptionsPopularity(string character)
         {
             if (character.Contains("Don Quichotte", StringComparison.OrdinalIgnoreCase))
-            {
                 return character.Replace("Don Quichotte", "Donquixote", StringComparison.OrdinalIgnoreCase);
-            }
-
-            if (character.Contains("Alber", StringComparison.OrdinalIgnoreCase))
-            {
-                return "King";
-            }
+            
+            if (character.Contains("Alber", StringComparison.OrdinalIgnoreCase))           
+                return "King";            
 
             if (character.Contains("Linlin", StringComparison.OrdinalIgnoreCase))
-            {
                 return "Big Mom";
-            }
 
-            if (character.Contains("Galdino", StringComparison.OrdinalIgnoreCase))
-            {
+            if (character.Contains("Galdino", StringComparison.OrdinalIgnoreCase))            
                 return "Mr 3";
-            }
 
             if (character.Contains("Marshall D. Teach", StringComparison.OrdinalIgnoreCase))
-            {
                 return "Barbe Noire";
-            }
 
             if (character.Contains("Edward Newgate", StringComparison.OrdinalIgnoreCase))
-            {
                 return "Barbe Blanche";
-            }
 
             return character;
         }
@@ -524,29 +481,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Change charater name to accept more possibilites.</summary>
         internal static string ExceptionForCharacterName(string characterName)
         {
-            return characterName switch
-            {
-                "Aramaki" => "Aramaki / Ryokugyû",
-                "Brannew" => "Brand new",
-                "Borsalino" => "Borsalino / Kizaru",
-                "Bentham" => "Bentham / Mr. 2",
-                "Barbe Brune" => "Barbe Brune / Chadros Higelyges",
-                "Bakkin" => "Bakkin / Buckingham Stussy",
-                "Babe" => "Babe / Mr. 4",
-                "Edward Newgate" => "Edward Newgate / Barbe Blanche",
-                "Edward Weevil" => "Edward Weeble",
-                "Charlotte Linlin" => "Charlotte Linlin / Big Mom",
-                "Daz Bones" => "Daz Bones / Mr. 1",
-                "Drophy" => "Drophy / Miss Merry Christmas",
-                "Galdino" => "Galdino / Mr. 3",
-                "Kiku" => "Kiku / Kikunojo",
-                "Marianne" => "Marianne / Miss GoldenWeek",
-                "Marshall D. Teach" => "Marshall D. Teach / Barbe Noire",
-                "Mikita" => "Mikita / Miss Valentine",
-                "Zala" => "Zala / Miss Doublefinger",
-                "Sakazuki" => "Sakazuki / Akainu",
-                _ => characterName
-            };
+            return CharacterNameMappings.TryGetValue(characterName, out var mappedName)
+                ? mappedName
+                : characterName;
         }
     }
 }

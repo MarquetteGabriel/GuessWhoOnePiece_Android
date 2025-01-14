@@ -609,6 +609,24 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
+        public async Task Charlotte_Anglais()
+        {
+            var character = "Charlotte Anglais";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Anglais", result!.Name);
+            Assert.Equal(14, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
         public async Task Charlotte_Bavarois()
         {
             var character = "Charlotte Bavarois";
@@ -657,6 +675,24 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(894, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task Charlotte_Broyee()
+        {
+            var character = "Charlotte Broyée";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Broyée", result!.Name);
+            Assert.Equal(43, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(864, result.FirstAppearance);
             Assert.Equal("L'Équipage de Big Mom", result.Crew);
             Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Pirate", result.Type);
@@ -875,6 +911,24 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.Equal(835, result.FirstAppearance);
             Assert.Equal("L'Équipage de Big Mom", result.Crew);
             Assert.Equal("860 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task Charlotte_Custard()
+        {
+            var character = "Charlotte Custard";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Custard", result!.Name);
+            Assert.Equal(45, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(862, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 
@@ -1481,6 +1535,24 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Charlotte Muscadelle", result!.Name);
+            Assert.Equal(18, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(845, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Big Mom", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task Charlotte_Muscadette()
+        {
+            var character = "Charlotte Muscadette";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Charlotte Muscadette", result!.Name);
             Assert.Equal(18, result.Age);
             Assert.True(result.Alive);
             Assert.True(result.DevilFruit);
@@ -2513,6 +2585,24 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.Equal(567, result.FirstAppearance);
             Assert.Equal("L'Équipage de Barbe Noire", result.Crew);
             Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
+        }
+
+        [SkippableFact]
+        public async Task Coribou()
+        {
+            var character = "Coribou";
+            var characterLink = ControlRoom.SetCharacterLink(character);
+            var result = await controlRoom.DataForCharacter(characterLink, character);
+
+            Skip.If(result == null, "Character not found");
+            Assert.Equal("Coribou", result!.Name);
+            Assert.Equal(29, result.Age);
+            Assert.True(result.Alive);
+            Assert.False(result.DevilFruit);
+            Assert.Equal(600, result.FirstAppearance);
+            Assert.Equal("L'Équipage de Caribou", result.Crew);
+            Assert.Equal("190 Mi", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
 
