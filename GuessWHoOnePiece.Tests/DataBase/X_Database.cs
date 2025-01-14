@@ -17,7 +17,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task X_XDrake()
+        public async Task XDrake()
         {
             var character = "X Drake";
             var characterLink = ControlRoom.SetCharacterLink(character);

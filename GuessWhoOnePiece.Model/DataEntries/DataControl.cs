@@ -28,7 +28,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private static readonly HashSet<string> NavyTypeList = new(StringComparer.OrdinalIgnoreCase)
         {
             "Marine", "Marines", " Marines", "Cipher Pol", "Souverain", "Conseil des 5 doyens", "CP-AIGIS0",
-            "Gouvernement", "Impel", "Navy's Crew", "Juge", "Dragon Celestes"
+            "Gouvernement", "Impel", "Navy's Crew", "Juge", "Dragon Celestes", "CP9", "Seraphim"
         };
 
         /// <summary>List of cases that are Revolutioanry.</summary>
@@ -221,7 +221,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     "Alliance Baggy et Alvida/Les Pirates d'Expédition" => "Cross Guild",
                     "L'Équipage du Capitaine Usopp" or "Voleurs d'Atamayama" or "Zou" or "Pays de Wa" or 
                     "Phare du Cap des Jumeaux" or "Clan des D." or "Principauté de Mokomo"  or 
-                    "Alabasta" => Resources.Strings.Citizen,
+                    "Alabasta" or "Takoyaki 8" or "Royaume maléfique de Black Drum" or
+                    "Alliance des Ninjas-Pirates-Minks-Samouraïs" or "Baratie" or "Bar de l'Arnaque"  => Resources.Strings.Citizen,
                     "Neutre" => "Pirate",
                     "Punk Hazard" => "L'Équipage aux Cent Bêtes",
                     _ => rawCrew
@@ -268,12 +269,23 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     {
                         return "Pirate";
                     }
+                    else if (affiliationCharacter.Count == 1 && affiliation.Equals("CP9 (anciennement)"))
+                    {
+                        return "Cipher Pol";
+                    }
+                    else if (affiliationCharacter.Count == 1 && affiliation.Equals("L'Équipage de Don Quichotte Doflamingo (anciennement)"))
+                    {
+                        return Resources.Strings.Citizen;
+                    }
                 }
 
                 for (int i = 0; i < affiliationCharacter.Count - 1; i++)
                 {
                     if (affiliationCharacter[i].Equals("L'Équipage du Chapeau de Paille") && affiliationCharacter[i + 1].Equals("Nain"))
                         return "Allié de L'Équipage du Chapeau de Paille";
+
+                    if (affiliationCharacter[i].Equals("L'Équipage des Pirates du Soleil") && affiliationCharacter[i + 1].Equals("Révolutionnaires"))
+                        return "Revolutionary's Crew";
                 }
 
                 foreach (var affiliation in affiliationCharacter)
@@ -336,17 +348,29 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     {
                         ageText = splitAge;
                     }
+                    else if (splitAge.Contains(@"Mozu") && characterName == "Kiwi")
+                    {
+                        ageText = splitAge;
+                    }
+                    else if (splitAge.Contains(@"Anniversaire") && characterName == "Mozu")
+                    {
+                        ageText = splitAge;
+                    }
+                    else if (splitAge.Contains("Août"))
+                    {
+                        return 0;
+                    }
                     else
                     {
-                        // Empty on purpose.
+
                     }
                 }
 
                 var listAge = Regexs.ExtractAgeRegex().Matches(ageText);
                 foreach (var age in listAge.Where(age => !string.IsNullOrEmpty(age.ToString())).Select(age => age.ToString()
-                .Replace(" ans", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase)))
+                .Replace(" ans", "", StringComparison.OrdinalIgnoreCase).Replace(" ", "", StringComparison.OrdinalIgnoreCase).Replace("an", "")))
                 {
-                    if (age.Contains("(espérancedevieeffectuée)") || age.Contains("s'ilétaitvivant") || age.Contains("(estimation"))
+                    if (age.Contains("(espércedevie") || age.Contains("s'ilétaitvivt") || age.Contains("(estimation"))
                         continue;
                     maxAge = Math.Max(maxAge, int.Parse(age));
                 }
@@ -488,6 +512,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 "Marianne" => "Marianne / Miss GoldenWeek",
                 "Marshall D. Teach" => "Marshall D. Teach / Barbe Noire",
                 "Mikita" => "Mikita / Miss Valentine",
+                "Zala" => "Zala / Miss Doublefinger",
+                "Sakazuki" => "Sakazuki / Akainu",
                 _ => characterName
             };
         }

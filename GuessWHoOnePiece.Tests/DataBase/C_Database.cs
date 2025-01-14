@@ -15,7 +15,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cabaji()
+        public async Task Cabaji()
         {
             var character = "Cabaji";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -33,7 +33,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Caimanlady()
+        public async Task Caimanlady()
         {
             var character = "Caimanlady";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -51,7 +51,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Camel()
+        public async Task Camel()
         {
             var character = "Camel";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -69,7 +69,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Camie()
+        public async Task Camie()
         {
             var character = "Camie";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -87,7 +87,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cancer()
+        public async Task Cancer()
         {
             var character = "Cancer";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -105,7 +105,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Candre()
+        public async Task Candre()
         {
             var character = "Candre";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -123,7 +123,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cands()
+        public async Task Cands()
         {
             var character = "Cands";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -141,7 +141,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Candy()
+        public async Task Candy()
         {
             var character = "Candy";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -159,7 +159,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Capone_Bege()
+        public async Task Capone_Bege()
         {
             var character = "Capone Bege";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -177,7 +177,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Capone_Pets()
+        public async Task Capone_Pets()
         {
             var character = "Capone Pets";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -195,7 +195,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Caramel()
+        public async Task Caramel()
         {
             var character = "Caramel";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -213,7 +213,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Caribou()
+        public async Task Caribou()
         {
             var character = "Caribou";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -231,7 +231,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Carne()
+        public async Task Carne()
         {
             var character = "Carne";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -249,7 +249,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Caroline()
+        public async Task Caroline()
         {
             var character = "Caroline";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -267,7 +267,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Carotte()
+        public async Task Carotte()
         {
             var character = "Carotte";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -285,7 +285,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Carrot()
+        public async Task Carrot()
         {
             var character = "Carrot";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -303,7 +303,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Catacombo()
+        public async Task Catacombo()
         {
             var character = "Catacombo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -321,7 +321,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Catarina_Devon()
+        public async Task Catarina_Devon()
         {
             var character = "Catarina Devon";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -339,7 +339,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cavendish()
+        public async Task Cavendish()
         {
             var character = "Cavendish";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -357,7 +357,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_CB_Galant()
+        public async Task CB_Galant()
         {
             var character = "CB Galant";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -375,7 +375,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cerbère()
+        public async Task Cerbère()
         {
             var character = "Cerbère";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -393,7 +393,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cesar_Clown()
+        public async Task Cesar_Clown()
         {
             var character = "César Clown";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -411,7 +411,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cezar()
+        public async Task Cezar()
         {
             var character = "Cezar";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -429,7 +429,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chabo()
+        public async Task Chabo()
         {
             var character = "Chabo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -447,7 +447,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chaka()
+        public async Task Chaka()
         {
             var character = "Chaka";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -465,7 +465,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chao()
+        public async Task Chao()
         {
             var character = "Chao";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -483,7 +483,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chap()
+        public async Task Chap()
         {
             var character = "Chap";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -501,7 +501,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chappe()
+        public async Task Chappe()
         {
             var character = "Chappe";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -519,7 +519,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlos()
+        public async Task Charlos()
         {
             var character = "Charlos";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -537,7 +537,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Agar_agar()
+        public async Task Charlotte_Agar_agar()
         {
             var character = "Charlotte Agar-agar";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -555,7 +555,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Amande()
+        public async Task Charlotte_Amande()
         {
             var character = "Charlotte Amande";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -573,7 +573,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Ananas()
+        public async Task Charlotte_Ananas()
         {
             var character = "Charlotte Ananas";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -591,7 +591,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Angel()
+        public async Task Charlotte_Angel()
         {
             var character = "Charlotte Angel";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -609,7 +609,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Bavarois()
+        public async Task Charlotte_Bavarois()
         {
             var character = "Charlotte Bavarois";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -627,7 +627,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Basskarte()
+        public async Task Charlotte_Basskarte()
         {
             var character = "Charlotte Basskarte";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -645,7 +645,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Brownie()
+        public async Task Charlotte_Brownie()
         {
             var character = "Charlotte Brownie";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -663,7 +663,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Brûlée()
+        public async Task Charlotte_Brûlée()
         {
             var character = "Charlotte Brûlée";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -681,7 +681,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Cabaletta()
+        public async Task Charlotte_Cabaletta()
         {
             var character = "Charlotte Cabaletta";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -699,7 +699,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Cadenza()
+        public async Task Charlotte_Cadenza()
         {
             var character = "Charlotte Cadenza";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -717,7 +717,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Chiboust()
+        public async Task Charlotte_Chiboust()
         {
             var character = "Charlotte Chiboust";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -735,7 +735,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Chiffon()
+        public async Task Charlotte_Chiffon()
         {
             var character = "Charlotte Chiffon";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -753,7 +753,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Cinnamon()
+        public async Task Charlotte_Cinnamon()
         {
             var character = "Charlotte Cinnamon";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -771,7 +771,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Citron()
+        public async Task Charlotte_Citron()
         {
             var character = "Charlotte Citron";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -789,7 +789,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Compo()
+        public async Task Charlotte_Compo()
         {
             var character = "Charlotte Compo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -807,7 +807,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Compote()
+        public async Task Charlotte_Compote()
         {
             var character = "Charlotte Compote";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -825,7 +825,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Corn_Starch()
+        public async Task Charlotte_Corn_Starch()
         {
             var character = "Charlotte Corn Starch";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -843,7 +843,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Counter()
+        public async Task Charlotte_Counter()
         {
             var character = "Charlotte Counter";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -861,7 +861,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Cracker()
+        public async Task Charlotte_Cracker()
         {
             var character = "Charlotte Cracker";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -879,7 +879,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Dacquoise()
+        public async Task Charlotte_Dacquoise()
         {
             var character = "Charlotte Dacquoise";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -897,7 +897,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Daifuku()
+        public async Task Charlotte_Daifuku()
         {
             var character = "Charlotte Daifuku";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -915,7 +915,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Dechat()
+        public async Task Charlotte_Dechat()
         {
             var character = "Charlotte Dechat";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -933,7 +933,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Dolce()
+        public async Task Charlotte_Dolce()
         {
             var character = "Charlotte Dolce";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -951,7 +951,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Dosmarché()
+        public async Task Charlotte_Dosmarché()
         {
             var character = "Charlotte Dosmarché";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -969,7 +969,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Dragée()
+        public async Task Charlotte_Dragée()
         {
             var character = "Charlotte Dragée";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -987,7 +987,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Effilée()
+        public async Task Charlotte_Effilée()
         {
             var character = "Charlotte Effilée";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1005,7 +1005,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Flampe()
+        public async Task Charlotte_Flampe()
         {
             var character = "Charlotte Flampe";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1023,7 +1023,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Gala()
+        public async Task Charlotte_Gala()
         {
             var character = "Charlotte Gala";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1041,7 +1041,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Galette()
+        public async Task Charlotte_Galette()
         {
             var character = "Charlotte Galette";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1059,7 +1059,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Gaufrette()
+        public async Task Charlotte_Gaufrette()
         {
             var character = "Charlotte Gaufrette";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1077,7 +1077,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Hachée()
+        public async Task Charlotte_Hachée()
         {
             var character = "Charlotte Hachée";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1095,7 +1095,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_High_Fat()
+        public async Task Charlotte_High_Fat()
         {
             var character = "Charlotte High Fat";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1113,7 +1113,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Joconde()
+        public async Task Charlotte_Joconde()
         {
             var character = "Charlotte Joconde";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1131,7 +1131,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Joscarpone()
+        public async Task Charlotte_Joscarpone()
         {
             var character = "Charlotte Joscarpone";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1149,7 +1149,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Katakuri()
+        public async Task Charlotte_Katakuri()
         {
             var character = "Charlotte Katakuri";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1167,7 +1167,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Laura()
+        public async Task Charlotte_Laura()
         {
             var character = "Charlotte Laura";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1185,7 +1185,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Laurique()
+        public async Task Charlotte_Laurique()
         {
             var character = "Charlotte Laurique";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1203,7 +1203,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Linlin()
+        public async Task Charlotte_Linlin()
         {
             var character = "Charlotte Linlin";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1221,7 +1221,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mapple()
+        public async Task Charlotte_Mapple()
         {
             var character = "Charlotte Mapple";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1239,7 +1239,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Marble()
+        public async Task Charlotte_Marble()
         {
             var character = "Charlotte Marble";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1257,7 +1257,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Marnier()
+        public async Task Charlotte_Marnier()
         {
             var character = "Charlotte Marnier";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1275,7 +1275,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mascarpone()
+        public async Task Charlotte_Mascarpone()
         {
             var character = "Charlotte Mascarpone";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1293,7 +1293,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mash()
+        public async Task Charlotte_Mash()
         {
             var character = "Charlotte Mash";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1311,7 +1311,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mélisée()
+        public async Task Charlotte_Mélisée()
         {
             var character = "Charlotte Mélisée";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1329,7 +1329,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mobile()
+        public async Task Charlotte_Mobile()
         {
             var character = "Charlotte Mobile";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1347,7 +1347,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mondée()
+        public async Task Charlotte_Mondée()
         {
             var character = "Charlotte Mondée";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1365,7 +1365,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mont_dOr()
+        public async Task Charlotte_Mont_dOr()
         {
             var character = "Charlotte Mont d'Or";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1383,7 +1383,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mont_blanc()
+        public async Task Charlotte_Mont_blanc()
         {
             var character = "Charlotte Mont-blanc";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1401,7 +1401,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Moscato()
+        public async Task Charlotte_Moscato()
         {
             var character = "Charlotte Moscato";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1419,7 +1419,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mozart()
+        public async Task Charlotte_Mozart()
         {
             var character = "Charlotte Mozart";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1437,7 +1437,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Mucre()
+        public async Task Charlotte_Mucre()
         {
             var character = "Charlotte Mucre";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1455,7 +1455,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Muscade()
+        public async Task Charlotte_Muscade()
         {
             var character = "Charlotte Muscade";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1473,7 +1473,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Muscadelle()
+        public async Task Charlotte_Muscadelle()
         {
             var character = "Charlotte Muscadelle";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1491,7 +1491,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Muscadia()
+        public async Task Charlotte_Muscadia()
         {
             var character = "Charlotte Muscadia";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1509,7 +1509,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Muscadine()
+        public async Task Charlotte_Muscadine()
         {
             var character = "Charlotte Muscadine";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1527,7 +1527,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Noisette()
+        public async Task Charlotte_Noisette()
         {
             var character = "Charlotte Noisette";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1545,7 +1545,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Normande()
+        public async Task Charlotte_Normande()
         {
             var character = "Charlotte Normande";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1563,7 +1563,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Nougat()
+        public async Task Charlotte_Nougat()
         {
             var character = "Charlotte Nougat";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1581,7 +1581,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Nusstorte()
+        public async Task Charlotte_Nusstorte()
         {
             var character = "Charlotte Nusstorte";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1599,7 +1599,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Nyûgo()
+        public async Task Charlotte_Nyûgo()
         {
             var character = "Charlotte Nyûgo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1617,7 +1617,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Nyûichi()
+        public async Task Charlotte_Nyûichi()
         {
             var character = "Charlotte Nyûichi";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1635,7 +1635,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Nyûji()
+        public async Task Charlotte_Nyûji()
         {
             var character = "Charlotte Nyûji";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1653,7 +1653,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Nyûsan()
+        public async Task Charlotte_Nyûsan()
         {
             var character = "Charlotte Nyûsan";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1671,7 +1671,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Nyûshi()
+        public async Task Charlotte_Nyûshi()
         {
             var character = "Charlotte Nyûshi";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1689,7 +1689,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Opéra()
+        public async Task Charlotte_Opéra()
         {
             var character = "Charlotte Opéra";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1707,7 +1707,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Oven()
+        public async Task Charlotte_Oven()
         {
             var character = "Charlotte Oven";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1725,7 +1725,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Panna()
+        public async Task Charlotte_Panna()
         {
             var character = "Charlotte Panna";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1743,7 +1743,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Perospero()
+        public async Task Charlotte_Perospero()
         {
             var character = "Charlotte Perospero";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1761,7 +1761,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Poire()
+        public async Task Charlotte_Poire()
         {
             var character = "Charlotte Poire";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1779,7 +1779,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Praline()
+        public async Task Charlotte_Praline()
         {
             var character = "Charlotte Praline";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1797,7 +1797,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Prim()
+        public async Task Charlotte_Prim()
         {
             var character = "Charlotte Prim";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1815,7 +1815,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Pudding()
+        public async Task Charlotte_Pudding()
         {
             var character = "Charlotte Pudding";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1833,7 +1833,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Raisin()
+        public async Task Charlotte_Raisin()
         {
             var character = "Charlotte Raisin";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1851,7 +1851,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Saint_Marc()
+        public async Task Charlotte_Saint_Marc()
         {
             var character = "Charlotte Saint-Marc";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1869,7 +1869,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Smoothie()
+        public async Task Charlotte_Smoothie()
         {
             var character = "Charlotte Smoothie";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1887,7 +1887,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Snack()
+        public async Task Charlotte_Snack()
         {
             var character = "Charlotte Snack";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1905,7 +1905,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Sucrage()
+        public async Task Charlotte_Sucrage()
         {
             var character = "Charlotte Sucrage";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1923,7 +1923,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Tablette()
+        public async Task Charlotte_Tablette()
         {
             var character = "Charlotte Tablette";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1941,7 +1941,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Uiro()
+        public async Task Charlotte_Uiro()
         {
             var character = "Charlotte Uiro";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1959,7 +1959,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Yu_Yuan()
+        public async Task Charlotte_Yu_Yuan()
         {
             var character = "Charlotte Yu Yuan";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1977,7 +1977,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Charlotte_Zuccotto()
+        public async Task Charlotte_Zuccotto()
         {
             var character = "Charlotte Zuccotto";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -1995,7 +1995,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chat_Zombie()
+        public async Task Chat_Zombie()
         {
             var character = "Chat Zombie";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2013,7 +2013,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chef_des_Shandias()
+        public async Task Chef_des_Shandias()
         {
             var character = "Chef des Shandias";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2031,7 +2031,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chess()
+        public async Task Chess()
         {
             var character = "Chess";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2049,7 +2049,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chesskippa()
+        public async Task Chesskippa()
         {
             var character = "Chesskippa";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2067,7 +2067,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chessmarimo()
+        public async Task Chessmarimo()
         {
             var character = "Chessmarimo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2085,7 +2085,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chichilisia()
+        public async Task Chichilisia()
         {
             var character = "Chichilisia";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2103,7 +2103,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chicory()
+        public async Task Chicory()
         {
             var character = "Chicory";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2121,7 +2121,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chiken()
+        public async Task Chiken()
         {
             var character = "Chiken";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2139,7 +2139,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chimney()
+        public async Task Chimney()
         {
             var character = "Chimney";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2157,7 +2157,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chinjao()
+        public async Task Chinjao()
         {
             var character = "Chinjao";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2175,7 +2175,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chiya()
+        public async Task Chiya()
         {
             var character = "Chiya";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2193,7 +2193,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cho()
+        public async Task Cho()
         {
             var character = "Cho";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2211,7 +2211,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chocho()
+        public async Task Chocho()
         {
             var character = "Chocho";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2229,7 +2229,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chocolat()
+        public async Task Chocolat()
         {
             var character = "Chocolat";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2247,7 +2247,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Choï()
+        public async Task Choï()
         {
             var character = "Choï";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2265,7 +2265,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chome()
+        public async Task Chome()
         {
             var character = "Chome";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2283,7 +2283,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chouchou()
+        public async Task Chouchou()
         {
             var character = "Chouchou";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2301,7 +2301,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Chuji()
+        public async Task Chuji()
         {
             var character = "Chuji";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2319,7 +2319,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Clione()
+        public async Task Clione()
         {
             var character = "Clione";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2337,7 +2337,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Clover()
+        public async Task Clover()
         {
             var character = "Clover";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2355,7 +2355,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Coburn()
+        public async Task Coburn()
         {
             var character = "Coburn";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2373,7 +2373,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cocoa()
+        public async Task Cocoa()
         {
             var character = "Cocoa";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2391,7 +2391,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cocofox()
+        public async Task Cocofox()
         {
             var character = "Cocofox";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2409,7 +2409,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Colscon()
+        public async Task Colscon()
         {
             var character = "Colscon";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2427,7 +2427,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Compo()
+        public async Task Compo()
         {
             var character = "Compo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2445,7 +2445,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Concelot()
+        public async Task Concelot()
         {
             var character = "Concelot";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2463,7 +2463,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Conis()
+        public async Task Conis()
         {
             var character = "Conis";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2481,7 +2481,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Conney()
+        public async Task Conney()
         {
             var character = "Conney";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2499,7 +2499,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Corgi()
+        public async Task Corgi()
         {
             var character = "Corgi";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2517,7 +2517,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cornelia()
+        public async Task Cornelia()
         {
             var character = "Cornelia";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2535,7 +2535,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cosette()
+        public async Task Cosette()
         {
             var character = "Cosette";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2553,7 +2553,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cosmo()
+        public async Task Cosmo()
         {
             var character = "Cosmo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2571,7 +2571,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cosmos()
+        public async Task Cosmos()
         {
             var character = "Cosmos";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2589,7 +2589,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cotton()
+        public async Task Cotton()
         {
             var character = "Cotton";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2607,7 +2607,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Couran()
+        public async Task Couran()
         {
             var character = "Couran";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2625,7 +2625,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Cowboy()
+        public async Task Cowboy()
         {
             var character = "Cowboy";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2643,7 +2643,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Crocky()
+        public async Task Crocky()
         {
             var character = "Crocky";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2661,7 +2661,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Crocodile()
+        public async Task Crocodile()
         {
             var character = "Crocodile";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2679,7 +2679,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Crocus()
+        public async Task Crocus()
         {
             var character = "Crocus";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2697,7 +2697,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Curiel()
+        public async Task Curiel()
         {
             var character = "Curiel";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -2715,7 +2715,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task C_Curly_Dadan()
+        public async Task Curly_Dadan()
         {
             var character = "Curly Dadan";
             var characterLink = ControlRoom.SetCharacterLink(character);

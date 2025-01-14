@@ -17,7 +17,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task Q_Queen()
+        public async Task Queen()
         {
             var character = "Queen";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -35,7 +35,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task Q_Queen_Mama_Chanter()
+        public async Task Queen_Mama_Chanter()
         {
             var character = "Queen Mama Chanter";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -53,7 +53,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task Q_Quincy()
+        public async Task Quincy()
         {
             var character = "Quincy";
             var characterLink = ControlRoom.SetCharacterLink(character);

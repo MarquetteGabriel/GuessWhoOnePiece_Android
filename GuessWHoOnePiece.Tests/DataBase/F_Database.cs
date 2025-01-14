@@ -17,7 +17,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Farafra()
+        public async Task Farafra()
         {
             var character = "Farafra";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -35,7 +35,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Farul()
+        public async Task Farul()
         {
             var character = "Farul";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -53,7 +53,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Faust()
+        public async Task Faust()
         {
             var character = "Faust";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -71,7 +71,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fen_Bock()
+        public async Task Fen_Bock()
         {
             var character = "Fen Bock";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -89,7 +89,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Figarland_Garling()
+        public async Task Figarland_Garling()
         {
             var character = "Figarland Garling";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -107,7 +107,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fighting_Bull()
+        public async Task Fighting_Bull()
         {
             var character = "Fighting Bull";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -125,7 +125,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fillonce()
+        public async Task Fillonce()
         {
             var character = "Fillonce";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -143,7 +143,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fishbonen()
+        public async Task Fishbonen()
         {
             var character = "Fishbonen";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -161,7 +161,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fisher_Tiger()
+        public async Task Fisher_Tiger()
         {
             var character = "Fisher Tiger";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -179,7 +179,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Flapper()
+        public async Task Flapper()
         {
             var character = "Flapper";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -197,7 +197,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Forliewbs()
+        public async Task Forliewbs()
         {
             var character = "Forliewbs";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -215,7 +215,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fossa()
+        public async Task Fossa()
         {
             var character = "Fossa";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -233,7 +233,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Four_Tricks()
+        public async Task Four_Tricks()
         {
             var character = "Four Tricks";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -251,7 +251,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Foxy()
+        public async Task Foxy()
         {
             var character = "Foxy";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -269,7 +269,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_François()
+        public async Task François()
         {
             var character = "François";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -287,7 +287,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Franky()
+        public async Task Franky()
         {
             var character = "Franky";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -305,7 +305,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Freaky_Domingos()
+        public async Task Freaky_Domingos()
         {
             var character = "Freaky Domingos";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -323,7 +323,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Frères_Decalvan()
+        public async Task Frères_Decalvan()
         {
             var character = "Frères Decalvan";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -341,7 +341,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Frères_Risky()
+        public async Task Frères_Risky()
         {
             var character = "Frères Risky";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -359,7 +359,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Frères_Risky_zombies()
+        public async Task Frères_Risky_zombies()
         {
             var character = "Frères Risky (zombies)";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -377,7 +377,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fuga()
+        public async Task Fuga()
         {
             var character = "Fuga";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -395,7 +395,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fugah()
+        public async Task Fugah()
         {
             var character = "Fugah";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -413,7 +413,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fugetsu_Omusubi()
+        public async Task Fugetsu_Omusubi()
         {
             var character = "Fugetsu Omusubi";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -431,7 +431,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fujin()
+        public async Task Fujin()
         {
             var character = "Fujin";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -449,7 +449,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fukaboshi()
+        public async Task Fukaboshi()
         {
             var character = "Fukaboshi";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -467,7 +467,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fukumi()
+        public async Task Fukumi()
         {
             var character = "Fukumi";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -485,7 +485,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fukuro()
+        public async Task Fukuro()
         {
             var character = "Fukuro";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -503,7 +503,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fukurokuju()
+        public async Task Fukurokuju()
         {
             var character = "Fukurokuju";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -521,7 +521,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fullbody()
+        public async Task Fullbody()
         {
             var character = "Fullbody";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -539,7 +539,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Funambules_Brothers()
+        public async Task Funambules_Brothers()
         {
             var character = "Funambules Brothers";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -557,7 +557,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Funkfreed()
+        public async Task Funkfreed()
         {
             var character = "Funkfreed";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -575,7 +575,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Furrari()
+        public async Task Furrari()
         {
             var character = "Furrari";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -593,7 +593,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task F_Fuza()
+        public async Task Fuza()
         {
             var character = "Fuza";
             var characterLink = ControlRoom.SetCharacterLink(character);

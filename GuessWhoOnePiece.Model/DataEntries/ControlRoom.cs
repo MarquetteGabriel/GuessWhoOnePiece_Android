@@ -80,6 +80,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         if (link != null)
                         {
                             var character = DataControl.ExtractExceptions(link.InnerHtml.Trim());
+                            if (character == "Smoothie")
+                                continue;
                             if (!_characterNameList.Contains(character))
                                 _characterNameList.Add(character);
                         }
@@ -171,10 +173,22 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 if (characterName.Contains("Weevil"))
                     crew = "Edward Weeble";
+                if (characterName.Equals("Vergo") || characterName.Equals("Senor Pink"))
+                    crew = "L'Équipage de Don Quichotte Doflamingo";
+                if (characterName.Equals("X Drake"))
+                    crew = "Navy's Crew";
+                if (characterName.Equals("Sanjuan Wolf"))
+                    crew = "L'Équipage de Barbe Noire";
+                if (characterName.Equals("Surume"))
+                    crew = "Allié de " + crew;
+
 
                 var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase);
                 var type = typeElement == null ? Resources.Strings.Citizen : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
                 var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "", StringComparison.OrdinalIgnoreCase).Trim(), type);
+
+                if (characterName.Equals("Sabo"))
+                    bounty = "602 Mi";
 
                 var chapterString = DataControl.ExtractPattern(characterData, "Chapitre (\\d+)");
                 var chapter = !string.IsNullOrEmpty(chapterString) ? int.Parse(chapterString) : throw new InvalidOperationException("Invalid Chapter");
@@ -187,6 +201,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 crew = DataControl.FixCrew(crew, type);
                 type = DataControl.FixType(type, crew);
+
+                if (characterName.Equals("Magellan"))
+                    crew = "Impel Down";
 
                 characterName = DataControl.ExceptionForCharacterName(characterName);
 

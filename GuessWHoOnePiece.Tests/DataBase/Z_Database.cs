@@ -17,7 +17,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zabo()
+        public async Task Zabo()
         {
             var character = "Zabo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -26,7 +26,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zabo", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -35,7 +35,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zadie()
+        public async Task Zadie()
         {
             var character = "Zadie";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -44,7 +44,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zadie", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -53,25 +53,25 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zala()
+        public async Task Zala()
         {
             var character = "Zala";
             var characterLink = ControlRoom.SetCharacterLink(character);
             var result = await controlRoom.DataForCharacter(characterLink, character);
 
             Skip.If(result == null, "Character not found");
-            Assert.Equal("Zala", result!.Name);
-            Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
-            Assert.False(result.DevilFruit);
-            Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
-            Assert.Equal("0", result.Bounty);
-            Assert.Equal("Citizen", result.Type);
+            Assert.Equal("Zala / Miss Doublefinger", result!.Name);
+            Assert.Equal(28, result.Age);
+            Assert.True(result.Alive);
+            Assert.True(result.DevilFruit);
+            Assert.Equal(155, result.FirstAppearance);
+            Assert.Equal("Baroque Works", result.Crew);
+            Assert.Equal("35 Mi", result.Bounty);
+            Assert.Equal("Pirate", result.Type);
         }
 
         [SkippableFact]
-        public async Task B_Zambai()
+        public async Task Zambai()
         {
             var character = "Zambai";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -79,17 +79,17 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zambai", result!.Name);
-            Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.Equal(35, result.Age);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal(324, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
-        public async Task B_Zangirimaru()
+        public async Task Zangirimaru()
         {
             var character = "Zangirimaru";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -98,7 +98,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zangirimaru", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -107,7 +107,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zanki()
+        public async Task Zanki()
         {
             var character = "Zanki";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -116,7 +116,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zanki", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -125,7 +125,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zeff()
+        public async Task Zeff()
         {
             var character = "Zeff";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -133,17 +133,17 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zeff", result!.Name);
-            Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.Equal(67, result.Age);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal(43, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
-        public async Task B_Zeo()
+        public async Task Zeo()
         {
             var character = "Zeo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -152,16 +152,16 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zeo", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
-            Assert.Equal("0", result.Bounty);
-            Assert.Equal("Citizen", result.Type);
+            Assert.Equal(611, result.FirstAppearance);
+            Assert.Equal("L'Équipage des Nouveaux Hommes-Poissons", result.Crew);
+            Assert.Equal(Unknown, result.Bounty);
+            Assert.Equal("Pirate", result.Type);
         }
 
         [SkippableFact]
-        public async Task B_Zepo()
+        public async Task Zepo()
         {
             var character = "Zepo";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -170,7 +170,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zepo", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -179,7 +179,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zeus()
+        public async Task Zeus()
         {
             var character = "Zeus";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -188,7 +188,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zeus", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -197,7 +197,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zodia()
+        public async Task Zodia()
         {
             var character = "Zodia";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -206,7 +206,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zodia", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -215,7 +215,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zott()
+        public async Task Zott()
         {
             var character = "Zott";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -224,7 +224,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zott", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -233,7 +233,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zucca()
+        public async Task Zucca()
         {
             var character = "Zucca";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -242,7 +242,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zucca", result!.Name);
             Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
@@ -251,7 +251,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         }
 
         [SkippableFact]
-        public async Task B_Zunesh()
+        public async Task Zunesh()
         {
             var character = "Zunesh";
             var characterLink = ControlRoom.SetCharacterLink(character);
@@ -259,10 +259,10 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zunesh", result!.Name);
-            Assert.Equal(30, result.Age);
-            Assert.False(result.Alive);
+            Assert.Equal(1000, result.Age);
+            Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
-            Assert.Equal(77, result.FirstAppearance);
+            Assert.Equal(802, result.FirstAppearance);
             Assert.Equal("Citizen", result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
