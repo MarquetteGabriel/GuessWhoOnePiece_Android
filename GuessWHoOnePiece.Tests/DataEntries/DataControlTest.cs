@@ -40,14 +40,14 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractPatternBounty()
         {
             var input = "\"InformationsNom Japonais :ロブソンNom Romanisé :RobusonNom Français :RobsonPremière Apparition:Chapitre 135,Épisode 81[1]Affiliations :Royaume de Drum (anciennement), L’Équipage de Wapol (anciennement)[1]Occupations :Monture de Wapol[1]Voix Japonaise :Kenji NomuraVoix Française :Kyle Phillips\"";
-            var result = DataControl.ExtractPatternBounty(input);
+            var result = DataControl.ExtractPatternBounty(input, "Pirate", "Luffy");
             Assert.Equal("", result);
         }
 
         #endregion
 
         #region FixBounty Tests
-
+        /*
         [Fact]
         public void Test_FixBounty()
         {
@@ -137,7 +137,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
             var result = DataControl.FixBounty(bounty, type);
             Assert.Equal("0", result);
         }
-
+        */
         #endregion
 
         #region FixType Tests
@@ -370,7 +370,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         [Fact(Skip = "Non Written")]
         public void Test_ExtractPatternCrew()
         {
-            var result = DataControl.ExtractPatternCrew(null);
+            var result = DataControl.ExtractPatternCrew(null, "", "");
         }
 
         #endregion
@@ -378,8 +378,51 @@ namespace GuessWhoOnePiece.Tests.DataEntries
 
         #region ExtractPatternAge Tests
 
+        [Fact]
+        public void Test_ExtractPatternAge_Basic()
+        {
+            var result = DataControl.ExtractPatternAge("rebc Âge : 18 ans ; Taille : 1,72m", "Monkey D. Luffy");
+            Assert.Equal(18, result); 
+        }
+
         [Fact(Skip = "Non Written")]
         public void Test_ExtractPatternAge()
+        {
+            var result = DataControl.ExtractPatternAge("", "");
+        }
+
+        [Fact(Skip = "Non Written")]
+        public void Test_ExtractPatternAge_Error()
+        {
+            var result = DataControl.ExtractPatternAge("", "");
+        }
+
+        [Fact(Skip = "Non Written")]
+        public void Test_ExtractPatternAge_Mozu()
+        {
+            var result = DataControl.ExtractPatternAge("", "");
+        }
+
+        [Fact(Skip = "Non Written")]
+        public void Test_ExtractPatternAge_Kiwi()
+        {
+            var result = DataControl.ExtractPatternAge("", "");
+        }
+
+        [Fact(Skip = "Non Written")]
+        public void Test_ExtractPatternAge_Kerville()
+        {
+            var result = DataControl.ExtractPatternAge("", "");
+        }
+
+        [Fact(Skip = "Non Written")]
+        public void Test_ExtractPatternAge_Bas()
+        {
+            var result = DataControl.ExtractPatternAge("", "");
+        }
+
+        [Fact(Skip = "Non Written")]
+        public void Test_ExtractPatternAge_And()
         {
             var result = DataControl.ExtractPatternAge("", "");
         }

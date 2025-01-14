@@ -120,6 +120,21 @@
   <data name="Citizen" xml:space="preserve">
     <value>Citizen</value>
   </data>
+  <data name="NavyType" xml:space="preserve">
+    <value>Navy</value>
+  </data>
+  <data name="PirateType" xml:space="preserve">
+    <value>Pirate</value>
+  </data>
+  <data name="RevolutionaryCrew" xml:space="preserve">
+    <value>Revolutionary's Army</value>
+  </data>
+  <data name="RevolutionaryType" xml:space="preserve">
+    <value>Revolutionary</value>
+  </data>
+  <data name="TeachCrew" xml:space="preserve">
+    <value>L'équipage de Barbe Noire</value>
+  </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>
   </data>

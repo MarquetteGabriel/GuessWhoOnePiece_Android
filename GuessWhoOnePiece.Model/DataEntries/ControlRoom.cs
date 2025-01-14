@@ -169,33 +169,18 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     }
                 }
 
-                var crew = crewElement == null ? Resources.Strings.Citizen : DataControl.FixCrew(DataControl.ExtractPatternCrew(crewElement), "");
+                var crew = crewElement == null ? Resources.Strings.Citizen : DataControl.FixCrew(DataControl.ExtractPatternCrew(crewElement, "", characterName), "");
 
-                if (characterName.Contains("Weevil"))
-                    crew = "Edward Weeble";
-                if (characterName.Equals("Vergo") || characterName.Equals("Senor Pink"))
-                    crew = "L'Équipage de Don Quichotte Doflamingo";
-                if (characterName.Equals("X Drake"))
-                    crew = "Navy's Crew";
-                if (characterName.Equals("Sanjuan Wolf"))
-                    crew = "L'Équipage de Barbe Noire";
-                if (characterName.Equals("Surume"))
-                    crew = "Allié de " + crew;
-
-
-                var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase);
+                var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase); // Done.
                 var type = typeElement == null ? Resources.Strings.Citizen : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
-                var bounty = DataControl.FixBounty(DataControl.ExtractPatternBounty(characterData).Replace("[.,\\s]", "", StringComparison.OrdinalIgnoreCase).Trim(), type);
-
-                if (characterName.Equals("Sabo"))
-                    bounty = "602 Mi";
+                var bounty = DataControl.ExtractPatternBounty(characterData, type, characterName); // Done.
 
                 var chapterString = DataControl.ExtractPattern(characterData, "Chapitre (\\d+)");
                 var chapter = !string.IsNullOrEmpty(chapterString) ? int.Parse(chapterString) : throw new InvalidOperationException("Invalid Chapter");
 
-                var alived = !DataControl.ExtractPattern(characterData, @"Statut\s:(Vivant|Décédé)").Equals("Décédé");
+                var alived = !DataControl.ExtractPattern(characterData, @"Statut\s:(Vivant|Décédé)").Equals("Décédé"); // Done ?
 
-                var age = DataControl.ExtractPatternAge(characterData, characterName);
+                var age = DataControl.ExtractPatternAge(characterData, characterName); // Done.
                 if(age == 0)
                     throw new InvalidOperationException("No age for the chracter");
 

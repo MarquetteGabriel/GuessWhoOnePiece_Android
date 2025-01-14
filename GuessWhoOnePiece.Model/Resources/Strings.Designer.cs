@@ -70,6 +70,51 @@ namespace GuessWhoOnePiece.Model.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Navy.
+        /// </summary>
+        internal static string NavyType {
+            get {
+                return ResourceManager.GetString("NavyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pirate.
+        /// </summary>
+        internal static string PirateType {
+            get {
+                return ResourceManager.GetString("PirateType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Revolutionary&apos;s Army.
+        /// </summary>
+        internal static string RevolutionaryCrew {
+            get {
+                return ResourceManager.GetString("RevolutionaryCrew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Revolutionary.
+        /// </summary>
+        internal static string RevolutionaryType {
+            get {
+                return ResourceManager.GetString("RevolutionaryType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à L&apos;équipage de Barbe Noire.
+        /// </summary>
+        internal static string TeachCrew {
+            get {
+                return ResourceManager.GetString("TeachCrew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Unknown.
         /// </summary>
         internal static string Unknown {
