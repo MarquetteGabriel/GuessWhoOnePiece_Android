@@ -434,7 +434,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         [Fact(Skip = "Non Written")]
         public void Test_ExtractPatternType()
         {
-            var result = DataControl.ExtractPatternType(null);
+            var result = DataControl.ExtractPatternType(null, "");
         }
 
         #endregion

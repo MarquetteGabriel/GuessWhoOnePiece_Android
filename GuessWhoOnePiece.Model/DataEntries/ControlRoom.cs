@@ -170,13 +170,15 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 }
 
                 var crew = crewElement == null? Resources.Strings.Citizen : DataControl.ExtractCrew(crewElement, characterName);
+                var type = typeElement == null ? Resources.Strings.Citizen : DataControl.ExtractPatternType(typeElement, crew);
+
+                if (type.Equals(Resources.Strings.CelestialDragons))
+                {
+                    crew = Resources.Strings.CelestialDragons;
+                    type = Resources.Strings.NavyType;
+                }
 
                 var fruit = fruitElement.Contains("Fruit du Démon", StringComparison.OrdinalIgnoreCase); // Done.
-                
-                
-                var type = typeElement == null ? Resources.Strings.Citizen : DataControl.FixType(DataControl.ExtractPatternType(typeElement), crew);
-                //var type = typeElement == null ? Resources.Strings.Citizen : DataControl.ExtractPatternType(typeElement);
-
 
                 var bounty = DataControl.ExtractPatternBounty(characterData, type, characterName); // Done.
 
@@ -188,12 +190,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var age = DataControl.ExtractPatternAge(characterData, characterName); // Done.
                 if(age == 0)
                     throw new InvalidOperationException("No age for the chracter");
-
-                //crew = DataControl.FixCrew(crew, type);
-                if (type.Equals("Dragon Celestes"))
-                    crew = "Celestial Dragons";
-
-                type = DataControl.FixType(type, crew);
 
                 characterName = DataControl.ExceptionForCharacterName(characterName);
 
