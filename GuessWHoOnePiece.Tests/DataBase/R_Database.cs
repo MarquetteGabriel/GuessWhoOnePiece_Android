@@ -551,7 +551,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(866, result.FirstAppearance);
-            Assert.Equal("Grande Flotte du Chapeau de Paille", result.Crew);
+            Assert.Equal("Allié de L'Équipage du Chapeau de Paille", result.Crew);
             Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }

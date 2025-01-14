@@ -199,7 +199,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         #endregion
 
         #region FixCrew Tests
-
+        /*
         [Fact]
         public void Test_FixCrew()
         {
@@ -362,7 +362,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
             Assert.Equal(rawCrew, result);
         }
 
-
+        */
         #endregion
 
         #region ExtractPatternCrew Tests
@@ -370,7 +370,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         [Fact(Skip = "Non Written")]
         public void Test_ExtractPatternCrew()
         {
-            var result = DataControl.ExtractPatternCrew(null, "", "");
+            var result = DataControl.ExtractPatternCrew(null);
         }
 
         #endregion

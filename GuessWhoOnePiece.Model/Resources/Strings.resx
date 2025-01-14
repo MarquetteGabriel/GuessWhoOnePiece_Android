@@ -117,8 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlliedMugiwaraCrew" xml:space="preserve">
+    <value>Allié de L'Équipage du Chapeau de Paille</value>
+  </data>
+  <data name="BaroqueWorks" xml:space="preserve">
+    <value>Baroque Works</value>
+  </data>
+  <data name="BigMomCrew" xml:space="preserve">
+    <value>L'Équipage de Big Mom</value>
+  </data>
+  <data name="CelestialDragons" xml:space="preserve">
+    <value>Celestial Dragons</value>
+  </data>
   <data name="Citizen" xml:space="preserve">
     <value>Citizen</value>
+  </data>
+  <data name="CrossGuild" xml:space="preserve">
+    <value>Cross Guild</value>
+  </data>
+  <data name="DoffyFamily" xml:space="preserve">
+    <value>L'Équipage de Don Quichotte Doflamingo</value>
+  </data>
+  <data name="NavyCrew" xml:space="preserve">
+    <value>Navy's Crew</value>
   </data>
   <data name="NavyType" xml:space="preserve">
     <value>Navy</value>
@@ -134,6 +155,9 @@
   </data>
   <data name="TeachCrew" xml:space="preserve">
     <value>L'équipage de Barbe Noire</value>
+  </data>
+  <data name="ThrillerBark" xml:space="preserve">
+    <value>Thriller Bark</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>

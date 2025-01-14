@@ -587,7 +587,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.False(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(1095, result.FirstAppearance);
-            Assert.Equal("Revolutionary's Crew", result.Crew);
+            Assert.Equal("Revolutionary's Army", result.Crew);
             Assert.Equal("190 Mi", result.Bounty);
             Assert.Equal("Revolutionary", result.Type);
         }

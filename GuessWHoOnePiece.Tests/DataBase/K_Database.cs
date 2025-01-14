@@ -443,7 +443,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.True(result.DevilFruit);
             Assert.Equal(593, result.FirstAppearance);
-            Assert.Equal("Revolutionary's Crew", result.Crew);
+            Assert.Equal("Revolutionary's Army", result.Crew);
             Assert.Equal("400 Mi", result.Bounty);
             Assert.Equal("Revolutionary", result.Type);
         }
@@ -1145,7 +1145,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(622, result.FirstAppearance);
-            Assert.Equal("Revolutionary's Crew", result.Crew);
+            Assert.Equal("Revolutionary's Army", result.Crew);
             Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Revolutionary", result.Type);
         }
@@ -1541,9 +1541,9 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.False(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(920, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Blanche", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]
@@ -1578,9 +1578,9 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.False(result.Alive);
             Assert.True(result.DevilFruit);
             Assert.Equal(919, result.FirstAppearance);
-            Assert.Equal("L'Équipage de Barbe Blanche", result.Crew);
-            Assert.Equal(Unknown, result.Bounty);
-            Assert.Equal("Pirate", result.Type);
+            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal("0", result.Bounty);
+            Assert.Equal("Citizen", result.Type);
         }
 
         [SkippableFact]

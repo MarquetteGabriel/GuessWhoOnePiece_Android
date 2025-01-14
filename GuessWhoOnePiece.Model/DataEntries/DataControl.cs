@@ -21,14 +21,15 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
           "Pirate", "Pirates", "Bandit", "Bandits", "Charlotte", "Big Mom", "Flotte de Happou", "Clan", "Moria",
           "Équipage", "Edward", "César", "Equipage", "Mihawk", "Thriller", "Mads", "New Comer Land", "Spiders Café", 
-          "Baroque Works", "Blue Jam", "Assassin"
+          "Baroque Works", "Blue Jam", "Assassin", "Zo", "Kujas", "Cross Guild", "Ligue des Primates"
         };
 
         /// <summary>List of cases that are Navy.</summary>
         private static readonly HashSet<string> NavyTypeList = new(StringComparer.OrdinalIgnoreCase)
         {
             "Marine", "Marines", " Marines", "Cipher Pol", "Souverain", "Conseil des 5 doyens", "CP-AIGIS0",
-            "Gouvernement", "Impel", "Navy's Crew", "Juge", "Dragon Celestes", "CP9", "Seraphim"
+            "Gouvernement", "Impel", "Navy's Crew", "Juge", "Dragon Celestes", "CP9", "Seraphim", "CP6", "CP7", 
+            "Celestial Dragons", "Cinq Doyens"
         };
 
         /// <summary>List of cases that are Revolutioanry.</summary>
@@ -44,17 +45,77 @@ namespace GuessWhoOnePiece.Model.DataEntries
             "Dragons Celestes", "Dragons Célestes","Nobles Mondiaux"
         };
 
-        /// <summary>List of months</summary>
+        /// <summary>List of months.</summary>
         private static readonly HashSet<string> MonthList = new(StringComparer.OrdinalIgnoreCase)
         {
             "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
         };
 
-        /// <summary>Extract data from specific pattern.</summary>
-        /// <param name="input">Text to extract.</param>
-        /// <param name="pattern">Pattern which select data.</param>
-        /// <returns>The text extraced.</returns>
-        internal static string ExtractPattern(string input, string pattern)
+        private static readonly Dictionary<string, string> CrewMapping = new Dictionary<string, string>
+        {
+            { "L'Équipage du Firetank", "L'Équipage du Fire Tank" },
+            { "Subordonné de L'Équipage de Barbe Blanche", "L'Équipage de Barbe Blanche" },
+            { "Capitaine de l'Equipage de Caribou", "L'Équipage de Caribou" },
+            { "Punk Hazard", "L'Équipage aux Cent Bêtes" },
+            { "Neutre", Resources.Strings.PirateType },
+            { "L'Équipage des Pirates Volants", "L'Équipage des Nouveaux Hommes-Poissons"}
+        };
+
+        private static readonly HashSet<string> ThrillerBark = new(StringComparer.OrdinalIgnoreCase)
+        { 
+            "Gecko Moria", "Hogback", "Dracule Mihawk" 
+        };
+
+        private static readonly HashSet<string> CelestialDragons = new(StringComparer.OrdinalIgnoreCase)
+        { 
+            "Dragon Celestes", "Dragons Célestes" 
+        };
+
+        private static readonly HashSet<string> NavyCrew = new(StringComparer.OrdinalIgnoreCase)
+        { 
+            "Marine", "Marines", " Marines"
+        };
+        
+        private static readonly HashSet<string> BigMomCrew = new(StringComparer.OrdinalIgnoreCase)
+        { 
+            "Équipage de Big Mom", "Famille Charlotte"
+        };
+        
+        private static readonly HashSet<string> BaroqueWorks = new(StringComparer.OrdinalIgnoreCase)
+        { 
+            "Spiders Café", "Spider's Café" 
+        };
+        
+        private static readonly HashSet<string> CrossGuild = new(StringComparer.OrdinalIgnoreCase)
+        { 
+            "Alliance Baggy et Alvida", "L'Équipage du Clown", "Alliance Baggy et Alvida/Les Pirates d'Expédition" 
+        };
+
+        private static readonly HashSet<string> DonQuichotte = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "L'Équipage de Barbe Brune", "L'Équipage du New Age", "César Clown"
+        };
+        
+        private static readonly HashSet<string> AlliedMugiwaraCrew = new(StringComparer.OrdinalIgnoreCase)
+        { 
+            "La Grande Flotte du Chapeau de Paille", "Alliance de l'Équipage du Chapeau de Paille", "Flotte de Happou",
+            "L'Équipage d'Idéo", "Erbaf", "L'Équipage des Magnifiques Pirates", "L'Équipage d'Ideo", "Famille Chinjao" ,
+            "Grande Flotte du Chapeau de Paille"
+        };
+        
+        private static readonly HashSet<string> CitizenCrew = new(StringComparer.OrdinalIgnoreCase)
+        { 
+            "L'Équipage du Capitaine Usopp", "Voleurs d'Atamayama", "Zou", "Pays de Wa", "Phare du Cap des Jumeaux",
+            "Clan des D.", "Principauté de Mokomo", "Alabasta", "Takoyaki 8", "Royaume maléfique de Black Drum",
+            "Alliance des Ninjas-Pirates-Minks-Samouraïs", "Baratie", "Bar de l'Arnaque" 
+        };
+
+
+    /// <summary>Extract data from specific pattern.</summary>
+    /// <param name="input">Text to extract.</param>
+    /// <param name="pattern">Pattern which select data.</param>
+    /// <returns>The text extraced.</returns>
+    internal static string ExtractPattern(string input, string pattern)
         {
             var match = Regex.Match(input, pattern);
             return match.Success ? match.Groups[1].Value : "";
@@ -126,6 +187,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The new type.</returns>
         internal static string FixType(string value, string crew)
         {
+            if (crew.Equals(Resources.Strings.Citizen))
+                return Resources.Strings.Citizen;
+            if (crew.Equals(Resources.Strings.RevolutionaryCrew))
+                return Resources.Strings.RevolutionaryType;
+
             if (crew.Contains("Celestial Dragons", StringComparison.OrdinalIgnoreCase))
             {
                 return Resources.Strings.NavyType;
@@ -133,10 +199,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
             else if (value.Contains("Dragon Celestes", StringComparison.OrdinalIgnoreCase))
             {
                 return value;
-            }
-            else if (crew.Equals(Resources.Strings.Citizen, StringComparison.OrdinalIgnoreCase))
-            {
-                return crew;
             }
             else
             {
@@ -158,86 +220,44 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return value;
         }
 
-        /// <summary>Fix crew for specific character.</summary>
-        /// <param name="rawCrew">Crew of the character.</param>
-        /// <param name="type">Type of the character.</param>
-        /// <returns>The new crew.</returns>
-        internal static string FixCrew(string rawCrew, string type)
+        internal static string ExtractCrew(HtmlNode text, string characterName)
         {
-            if(type.Equals("Dragon Celestes"))
-                rawCrew = type;
+            if (characterName.Contains("Weevil"))
+                return "Edward Weeble";
+            if (characterName.Equals("Vergo") || characterName.Equals("Senor Pink"))
+                return "L'Équipage de Don Quichotte Doflamingo";
+            if (characterName.Equals("X Drake"))
+                return Resources.Strings.NavyCrew;
+            if (characterName.Equals("Sanjuan Wolf"))
+                return "L'Équipage de Barbe Noire";
+            if (characterName.Equals("Surume"))
+                return Resources.Strings.AlliedMugiwaraCrew;
+            if (characterName.Equals("Magellan"))
+                return "Impel Down";
 
-            rawCrew = rawCrew.Replace("\\s+$", "", StringComparison.OrdinalIgnoreCase);
-            if (rawCrew.StartsWith("CP", StringComparison.OrdinalIgnoreCase))
-            {
+            string crew = GetCrewMapping(ExtractPatternCrew(text));
+
+            if (crew.StartsWith("CP", StringComparison.OrdinalIgnoreCase))
                 return "Cipher Pol";
-            }
-            else if (string.IsNullOrEmpty(rawCrew))
-            {
-                return type;
-            }
-            else if (type.Equals(Resources.Strings.RevolutionaryType, StringComparison.OrdinalIgnoreCase))
-            {
-                return "Revolutionary's Crew";
-            }
-            else if(type.Equals(Resources.Strings.PirateType) && rawCrew.Equals("Famille Kozuki"))
-            {
-                return "L'Équipage de Barbe Blanche";
-            }
-            else if (type.Equals(Resources.Strings.Citizen))
-            {
-                return Resources.Strings.Citizen;
-            }
-            else
-            {
-                return rawCrew switch
-                {
-                    "Dragon Celestes" or "Dragons Célestes" => "Celestial Dragons",
-                    "Marine" or "Marines" or " Marines" => "Navy's Crew",
-                    "L'Équipage du Firetank" => "L'Équipage du Fire Tank",
-                    "Subordonné de L'Équipage de Barbe Blanche" => "L'Équipage de Barbe Blanche",
-                    "La Grande Flotte du Chapeau de Paille" or "Alliance de l'Équipage du Chapeau de Paille"
-                        or "Flotte de Happou" or "L'Équipage d'Idéo" or "Erbaf" or "L'Équipage des Magnifiques Pirates"
-                        or "L'Équipage d'Ideo" or "Famille Chinjao" => "Allié de L'Équipage du Chapeau de Paille",
-                    "Équipage de Big Mom" or "Famille Charlotte" => "L'Équipage de Big Mom",
-                    "Spiders Café" or "Spider's Café" => "Baroque Works",
-                    "Capitaine de l'Equipage de Caribou" => "L'Équipage de Caribou",
-                    "L'Équipage de Barbe Brune(dissout)" or "César Clown" or "César Clown (espionnage)"
-                        or "L'Équipage du New Age" or "L'Équipage de Barbe Brune" => "L'Équipage de Don Quichotte Doflamingo",
-                    "L'Équipage des Pirates Volants" => "L'Équipage des Nouveaux Hommes-Poissons",
-                    "Gecko Moria" or "Hogback" or "Dracule Mihawk" => "Thriller Bark",
-                    "Alliance Baggy et Alvida" or "L'Équipage du Clown" or
-                    "Alliance Baggy et Alvida/Les Pirates d'Expédition" => "Cross Guild",
-                    "L'Équipage du Capitaine Usopp" or "Voleurs d'Atamayama" or "Zou" or "Pays de Wa" or 
-                    "Phare du Cap des Jumeaux" or "Clan des D." or "Principauté de Mokomo"  or 
-                    "Alabasta" or "Takoyaki 8" or "Royaume maléfique de Black Drum" or
-                    "Alliance des Ninjas-Pirates-Minks-Samouraïs" or "Baratie" or "Bar de l'Arnaque"  => Resources.Strings.Citizen,
-                    "Neutre" => Resources.Strings.PirateType,
-                    "Punk Hazard" => "L'Équipage aux Cent Bêtes",
-                    _ => rawCrew
-                };
-            }
+
+            if (PirateTypeList.Any(crew.Contains))
+                return crew;
+            if (NavyTypeList.Any(crew.Contains))
+                return crew;
+            if (RevoTypeList.Any(crew.Contains))
+                return Resources.Strings.RevolutionaryCrew;
+
+            return Resources.Strings.Citizen;
         }
 
         /// <summary>Extract crew from text.</summary>
         /// <param name="text">Text.</param>
         /// <returns>The crew of the character.</returns>
-        internal static string ExtractPatternCrew(HtmlNode text, string type, string characterName)
+        internal static string ExtractPatternCrew(HtmlNode text)
         {
             try
             {
-                if (characterName.Contains("Weevil"))
-                    return "Edward Weeble";
-                if (characterName.Equals("Vergo") || characterName.Equals("Senor Pink"))
-                    return "L'Équipage de Don Quichotte Doflamingo";
-                if (characterName.Equals("X Drake"))
-                    return "Navy's Crew";
-                if (characterName.Equals("Sanjuan Wolf"))
-                    return "L'Équipage de Barbe Noire";
-                if (characterName.Equals("Surume"))
-                    return "Allié de L'Équipage du Chapeau de Paille";
-
-                var affiliations = text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]/*[self::a or self::small]")
+               var affiliations = text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]/*[self::a or self::small]")
                                                ?? text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]");
                 var affiliationCharacter = new List<string>();
 
@@ -310,6 +330,33 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 return Resources.Strings.Citizen;
             }
+        }
+
+        internal static string GetCrewMapping(string rawCrew)
+        {
+            if (CrewMapping.TryGetValue(rawCrew, out var result))
+                return result;
+
+            if (CelestialDragons.Contains(rawCrew))
+                return Resources.Strings.CelestialDragons;
+            if (NavyCrew.Contains(rawCrew))
+                return Resources.Strings.NavyCrew;
+            if (BigMomCrew.Contains(rawCrew))
+                return Resources.Strings.BigMomCrew;
+            if (BaroqueWorks.Contains(rawCrew))
+                return Resources.Strings.BaroqueWorks;
+            if (CrossGuild.Contains(rawCrew))
+                return Resources.Strings.CrossGuild;
+            if (AlliedMugiwaraCrew.Contains(rawCrew))
+                return Resources.Strings.AlliedMugiwaraCrew;
+            if (CitizenCrew.Contains(rawCrew))
+                return Resources.Strings.Citizen;
+            if (ThrillerBark.Contains(rawCrew))
+                return Resources.Strings.ThrillerBark;
+            if (DonQuichotte.Contains(rawCrew))
+                return Resources.Strings.DoffyFamily;
+
+            return rawCrew;
         }
 
         /// <summary>Extract age from text.</summary>
