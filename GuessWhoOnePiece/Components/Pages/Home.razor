@@ -41,6 +41,7 @@ Welcome to your new app.
 
         stopwatch.Start();
         // var characters1 = await _controlRoom.DataForCharacter(ControlRoom.SetCharacterLink(character), character);
+        await _controlRoom.ReceivedCharactersList();
         stopwatch.Stop();
         Console.WriteLine($"Method Global: {stopwatch.ElapsedMilliseconds} ms");
 

@@ -6,7 +6,9 @@
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries;
+using Moq;
 using Pose;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,7 +19,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
     public class ReceiveDataTest
     {
         [Fact]
-        public async void Test_ReceiveCharacter()
+        public async Task Test_ReceiveCharacter()
         {
             ControlRoom controlRoom = new ControlRoom();
             var result = await controlRoom.GenerateThreads();
