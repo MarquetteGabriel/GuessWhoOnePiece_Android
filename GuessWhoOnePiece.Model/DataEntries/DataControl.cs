@@ -135,11 +135,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
         };
 
 
-    /// <summary>Extract data from specific pattern.</summary>
-    /// <param name="input">Text to extract.</param>
-    /// <param name="pattern">Pattern which select data.</param>
-    /// <returns>The text extraced.</returns>
-    internal static string ExtractPattern(string input, string pattern)
+        /// <summary>Extract data from specific pattern.</summary>
+        /// <param name="input">Text to extract.</param>
+        /// <param name="pattern">Pattern which select data.</param>
+        /// <returns>The text extraced.</returns>
+        internal static string ExtractPattern(string input, string pattern)
         {
             var match = Regex.Match(input, pattern);
             return match.Success ? match.Groups[1].Value : "";
@@ -202,7 +202,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 _ => maxBounty.ToString(CultureInfo.InvariantCulture)
             };
         }
-
+        
         internal static string ExtractCrew(HtmlNode text, string characterName)
         {
             if (characterName.Equals("Vergo") || characterName.Equals("Senor Pink"))
@@ -433,23 +433,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
                 
             return Resources.Strings.NavyType;
-        }
-
-        /// <summary>Change value for specific character.</summary>
-        /// <param name="character">The name of the character.</param>
-        /// <returns>The new character name.</returns>
-        internal static string ExtractExceptions(string character)
-        {
-            return character switch
-            {
-                "Chadros Higelyges" => "Barbe Brune",
-                "Jabra" => "Jabura",
-                "Tama" => "Kurozumi Tama",
-                "Kaku (Wano)" => "Kaku",
-                "Enel" => "Ener",
-                "Buckingham Stussy" => "Bakkin",
-                _ => character
-            };
         }
 
         /// <summary>Change value for specific character for popularity ranking.</summary>

@@ -34,21 +34,23 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private const string Pattern = @"^[a-zA-Z0-9\s]*$";
         
         /// <summary>List of characters' name.</summary>
-        private ConcurrentBag<string> _characterNameList = [];
+        public IReadOnlyList<string> _characterNameList = new List<string>(2000);
 
         /// <summary>Percentage of advencement for loading characters.</summary>
         private int _countPercentage;
 
         private static readonly SemaphoreSlim ImageDownloadSemaphore = new SemaphoreSlim(1);
 
+        private static readonly HtmlWeb Web = new() { OverrideEncoding = Encoding.UTF8 };
+
         /// <summary>Generate threads to get data.</summary>
         /// <returns>The complete list of characters.</returns>
         public async Task<List<Character>> GenerateThreads()
         {
-            await ReceivedCharactersList();
+            _characterNameList = await CharacterNameListManager.ReceivedCharactersList();
 
-            var charactersList = new System.Collections.Concurrent.ConcurrentBag<Character>();
-
+            var charactersList = new ConcurrentBag<Character>();
+            
             await Parallel.ForEachAsync(_characterNameList, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 }, async (characterName, _) =>
             {
                 var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
@@ -56,50 +58,17 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     charactersList.Add(character);
             });
 
+            /*foreach (var characterName in _characterNameList)
+            {
+                var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
+                if (character != null)
+                  charactersList.Add(character);
+            }*/
+
             charactersList = Popularity.SetPopularity(_characterNameList.ToList(), charactersList);
             ManageCsv.SaveCharactersToCsv(charactersList.ToList());
 
             return charactersList.ToList();
-        }
-
-        /// <summary>Get the list of character from the fandom webpage and add each character into <see cref="_characterNameList"/>.</summary>
-        public async Task ReceivedCharactersList()
-        {
-            try
-            {
-                var web = new HtmlWeb
-                {
-                    OverrideEncoding = Encoding.UTF8
-                };
-                var doc = await web.LoadFromWebAsync(UrlFandomListCharacter);
-                var tables = doc.DocumentNode.SelectNodes("//div[contains(@class, 'tabber wds-tabber')]//table[contains(@class, 'wikitable')]");
-
-                var tasks = tables.Select(async table =>
-                {
-                    var rows = table.SelectNodes(".//tr");
-                    if (rows != null)
-                    {
-                        foreach (var row in rows)
-                        {
-                            var link = row.SelectSingleNode("td[2]/a");
-                            if (link != null)
-                            {
-                                var character = DataControl.ExtractExceptions(link.InnerHtml.Trim());
-                                if (character == "Smoothie") continue;
-
-                                lock (_characterNameList)
-                                {
-                                    _characterNameList.Add(character);
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-            catch (Exception)
-            {
-                // Empty on purpose.
-            }
         }
 
         /// <summary>Get data for a specific character from its fandom page.</summary>
@@ -110,11 +79,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             try
             {
-                var web = new HtmlWeb
-                {
-                    OverrideEncoding = System.Text.Encoding.UTF8
-                };
-                var doc = await web.LoadFromWebAsync(url.ToString());
+                var doc = await Web.LoadFromWebAsync(url.ToString());
 
                 const string classCharacterData = "pi-item pi-group pi-border-color";
 
@@ -123,7 +88,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 const string classFruit = "portable-infobox pi-background pi-border-color pi-theme-char pi-layout-default";
                 var fruitElement = string.Join(" ", doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classFruit}')]").Select(n => n.InnerText));
-
                 var pictureElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, 'image')]//a");
                 string picturePath = string.Empty;
                 Task<string>? pictureDownloadTask = null;
@@ -150,7 +114,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes($"//*[contains(@class, '{classType}')]");
                 HtmlNode typeElement = null!;
                 HtmlNode crewElement = null!;
-
+                doc = null;
                 characterData = CleanWebHtmlString(characterData);
                 fruitElement = CleanWebHtmlString(fruitElement);
 
@@ -206,11 +170,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 {
                     _countPercentage = _characterNameList.Count;
                 }
+
+                GC.Collect();
                 return characters;
             }
             catch (InvalidOperationException)
             {
                 _countPercentage++;
+                GC.Collect();
                 return null;
             }
         }
@@ -255,26 +222,24 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     return newPicture;
 
                 if (newPicture.Contains(characterName))
-                {
                     return newPicture;
-                }
-                else
-                {
-                    foreach (var character in characterName.Split(" "))
-                    {
-                        if (newPicture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase))
-                            return newPicture;
-                        else if (RemoveDiacritics(WebUtility.UrlDecode(newPicture)).Contains(RemoveDiacritics(character), StringComparison.OrdinalIgnoreCase))
-                            return newPicture;
-                        else
-                        {
-                            // Empty on purpose.
-                        }
-                    }
 
-                    if (CalculateMatchPercentage(newPicture, characterName) > AcceptanceCritera)
+
+                foreach (var character in characterName.Split(" "))
+                {
+                    if (newPicture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase))
                         return newPicture;
+                    else if (RemoveDiacritics(WebUtility.UrlDecode(newPicture)).Contains(RemoveDiacritics(character), StringComparison.OrdinalIgnoreCase))
+                        return newPicture;
+                    else
+                    {
+                        // Empty on purpose.
+                    }
                 }
+
+                if (CalculateMatchPercentage(newPicture, characterName) > AcceptanceCritera)
+                    return newPicture;
+                
 
                 if (characterName.Equals("And", StringComparison.OrdinalIgnoreCase) && picture.Contains("Baskerville", StringComparison.OrdinalIgnoreCase))
                     return newPicture;

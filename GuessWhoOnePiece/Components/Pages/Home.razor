@@ -27,7 +27,7 @@ Welcome to your new app.
         await _controlRoom.GenerateThreads();
     }
 
-    private async void OnShowCharacter()
+    public async Task OnShowCharacter()
     {
         /*var characters = await ReceiveDataCsv.ReceiveAllCharacters();
         foreach (var character in characters)
@@ -41,7 +41,9 @@ Welcome to your new app.
 
         stopwatch.Start();
         // var characters1 = await _controlRoom.DataForCharacter(ControlRoom.SetCharacterLink(character), character);
-        await _controlRoom.ReceivedCharactersList();
+        // await _controlRoom.GenerateThreads();
+        await CharacterNameListManager.ReceivedCharactersList();
+        var charc = _controlRoom._characterNameList;
         stopwatch.Stop();
         Console.WriteLine($"Method Global: {stopwatch.ElapsedMilliseconds} ms");
 
