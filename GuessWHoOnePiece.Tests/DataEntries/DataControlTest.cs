@@ -447,7 +447,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptions_Unchanged()
         {
             var character = "Monkey D. Luffy";
-            var result = DataControl.ExtractExceptions(character);
+            var result = CharacterNameListManager.ExtractExceptions(character);
             Assert.Equal("Monkey D. Luffy", result);
         }
 
@@ -455,7 +455,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptions_BBrune()
         {
             var character = "Chadros Higelyges";
-            var result = DataControl.ExtractExceptions(character);
+            var result = CharacterNameListManager.ExtractExceptions(character);
             Assert.Equal("Barbe Brune", result);
         }
 
@@ -463,7 +463,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptions_Jabura()
         {
             var character = "Jabra";
-            var result = DataControl.ExtractExceptions(character);
+            var result = CharacterNameListManager.ExtractExceptions(character);
             Assert.Equal("Jabura", result);
         }
 
@@ -471,7 +471,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptions_Tama()
         {
             var character = "Tama";
-            var result = DataControl.ExtractExceptions(character);
+            var result = CharacterNameListManager.ExtractExceptions(character);
             Assert.Equal("Kurozumi Tama", result);
         }
 
@@ -479,7 +479,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptions_Kaku()
         {
             var character = "Kaku (Wano)";
-            var result = DataControl.ExtractExceptions(character);
+            var result = CharacterNameListManager.ExtractExceptions(character);
             Assert.Equal("Kaku", result);
         }
 
@@ -487,7 +487,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptions_Ener()
         {
             var character = "Enel";
-            var result = DataControl.ExtractExceptions(character);
+            var result = CharacterNameListManager.ExtractExceptions(character);
             Assert.Equal("Ener", result);
         }
 
@@ -495,7 +495,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptions_Bakkin()
         {
             var character = "Buckingham Stussy";
-            var result = DataControl.ExtractExceptions(character);
+            var result = CharacterNameListManager.ExtractExceptions(character);
             Assert.Equal("Bakkin", result);
         }
 

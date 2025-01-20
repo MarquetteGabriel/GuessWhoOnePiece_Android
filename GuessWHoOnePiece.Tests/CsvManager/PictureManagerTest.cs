@@ -4,7 +4,7 @@
 // <author>Gabriel Marquette</author>
 
 using System.Threading.Tasks;
-using GuessWhoOnePiece.Model.CsvManager;
+using GuessWhoOnePiece.Model.DataEntries.Picture;
 
 namespace GuessWhoOnePiece.Tests.CsvManager
 {

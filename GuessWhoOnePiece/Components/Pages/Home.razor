@@ -25,6 +25,10 @@ Welcome to your new app.
     private async void OnClickChargement()
     {
         await _controlRoom.GenerateThreads();
+        foreach (var character in _controlRoom._characterNameList)
+            {
+            _value += character + " ";
+        }
     }
 
     public async Task OnShowCharacter()
@@ -40,10 +44,10 @@ Welcome to your new app.
         var character = "Monkey D. Luffy";
 
         stopwatch.Start();
-        // var characters1 = await _controlRoom.DataForCharacter(ControlRoom.SetCharacterLink(character), character);
+        var characters1 = await _controlRoom.DataForCharacter(ControlRoom.SetCharacterLink(character), character);
         // await _controlRoom.GenerateThreads();
-        await CharacterNameListManager.ReceivedCharactersList();
-        var charc = _controlRoom._characterNameList;
+        // await CharacterNameListManager.ReceivedCharactersList();
+        // var charc = _controlRoom._characterNameList;
         stopwatch.Stop();
         Console.WriteLine($"Method Global: {stopwatch.ElapsedMilliseconds} ms");
 

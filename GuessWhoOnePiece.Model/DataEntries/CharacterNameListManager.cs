@@ -1,4 +1,9 @@
-﻿using HtmlAgilityPack;
+﻿// <copyright file="CharacterNameListManager.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -73,7 +78,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Change value for specific character.</summary>
         /// <param name="character">The name of the character.</param>
         /// <returns>The new character name.</returns>
-        private static string ExtractExceptions(string character)
+        internal static string ExtractExceptions(string character)
         {
             return CharacterNameMapping.TryGetValue(character, out var result) ? result : character;
         }

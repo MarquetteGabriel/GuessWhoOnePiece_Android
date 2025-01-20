@@ -11,7 +11,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 
-namespace GuessWhoOnePiece.Model.CsvManager
+namespace GuessWhoOnePiece.Model.DataEntries.Picture
 {
     /// <summary>Represents the retrieval of pictures.</summary>
     internal static class PictureManager
@@ -25,7 +25,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <param name="imageUrl">Link of the picture.</param>
         /// <param name="fileName">Name of the character which is used in the fileName.</param>
         /// <returns>The fileName.</returns>
-        internal static async Task<string> DownloadImageAsync (string imageUrl, string fileName)
+        internal static async Task<string> DownloadImageAsync(string imageUrl, string fileName)
         {
             fileName = fileName + ".jpeg";
             try
