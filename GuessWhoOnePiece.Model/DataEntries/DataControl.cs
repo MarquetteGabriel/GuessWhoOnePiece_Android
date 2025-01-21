@@ -141,32 +141,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return match.Success ? match.Groups[1].Value : "";
         }        
 
-        /// <summary>Change value for specific character for popularity ranking.</summary>
-        /// <param name="character">The name of the character.</param>
-        /// <returns>The new character name.</returns>
-        internal static string ExtractExceptionsPopularity(string character)
-        {
-            if (character.Contains("Don Quichotte", StringComparison.OrdinalIgnoreCase))
-                return character.Replace("Don Quichotte", "Donquixote", StringComparison.OrdinalIgnoreCase);
-            
-            if (character.Contains("Alber", StringComparison.OrdinalIgnoreCase))           
-                return "King";            
-
-            if (character.Contains("Linlin", StringComparison.OrdinalIgnoreCase))
-                return "Big Mom";
-
-            if (character.Contains("Galdino", StringComparison.OrdinalIgnoreCase))            
-                return "Mr 3";
-
-            if (character.Contains("Marshall D. Teach", StringComparison.OrdinalIgnoreCase))
-                return "Barbe Noire";
-
-            if (character.Contains("Edward Newgate", StringComparison.OrdinalIgnoreCase))
-                return "Barbe Blanche";
-
-            return character;
-        }
-
         /// <summary>Change charater name to accept more possibilites.</summary>
         internal static string ExceptionForCharacterName(string characterName)
         {

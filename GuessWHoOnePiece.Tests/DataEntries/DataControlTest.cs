@@ -507,7 +507,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptionsPopularity_Unchanged()
         {
             var character = "Monkey D. Luffy";
-            var result = DataControl.ExtractExceptionsPopularity(character);
+            var result = Popularity.ExtractExceptionsPopularity(character);
             Assert.Equal("Monkey D. Luffy", result);
         }
 
@@ -515,7 +515,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptionsPopularity_DonQuichotte()
         {
             var character = "Don Quichotte Dofflamingo";
-            var result = DataControl.ExtractExceptionsPopularity(character);
+            var result = Popularity.ExtractExceptionsPopularity(character);
             Assert.Equal("Donquixote Dofflamingo", result);
         }
 
@@ -523,7 +523,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptionsPopularity_King()
         {
             var character = "Alber";
-            var result = DataControl.ExtractExceptionsPopularity(character);
+            var result = Popularity.ExtractExceptionsPopularity(character);
             Assert.Equal("King", result);
         }
 
@@ -531,7 +531,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptionsPopularity_Linlin()
         {
             var character = "Charlotte Linlin";
-            var result = DataControl.ExtractExceptionsPopularity(character);
+            var result = Popularity.ExtractExceptionsPopularity(character);
             Assert.Equal("Big Mom", result);
         }
 
@@ -539,7 +539,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptionsPopularity_Galdino()
         {
             var character = "Galdino";
-            var result = DataControl.ExtractExceptionsPopularity(character);
+            var result = Popularity.ExtractExceptionsPopularity(character);
             Assert.Equal("Mr 3", result);
         }
 
@@ -547,7 +547,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptionsPopularity_Teach()
         {
             var character = "Marshall D. Teach";
-            var result = DataControl.ExtractExceptionsPopularity(character);
+            var result = Popularity.ExtractExceptionsPopularity(character);
             Assert.Equal("Barbe Noire", result);
         }
 
@@ -555,7 +555,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public void Test_ExtractExceptionsPopularity_Newgate()
         {
             var character = "Edward Newgate";
-            var result = DataControl.ExtractExceptionsPopularity(character);
+            var result = Popularity.ExtractExceptionsPopularity(character);
             Assert.Equal("Barbe Blanche", result);
         }
 

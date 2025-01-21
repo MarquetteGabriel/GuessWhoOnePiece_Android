@@ -6,115 +6,148 @@
 using GuessWhoOnePiece.Model.Characters;
 using HtmlAgilityPack;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
     /// <summary>Represent the definition of the popularity for each character.</summary>
     internal static class Popularity
     {
-        private const string UrlLevels = "http://www.volonte-d.com/details/popularite.php";
-
-        private static readonly List<string> ListPopularity = [];
+        private static readonly Uri UrlLevels = new("http://www.volonte-d.com/details/popularite.php");
 
         private const double AcceptanceCritera = 0.7;
 
         private static int _countLevels;
 
+        private const string FilterTd = "td";
+        private const string FilterTr = "tr";
+        private const string FilterTable = "table";
+        private const string FilterAlias = "alias";
+
+        private const string ReplaceCharacter = @"\s*\(.*?\)";
+
+        private const string FilterPopularity = "//*[contains(@class, 'gallery') and contains(@class, 'clearfix')]";
+
+        private const string Alber = "Alber";
+        private const string Linlin = "Linlin";
+        private const string Galdino = "Galdino";
+        private const string MarshallDTeach = "Marshall D. Teach";
+        private const string EdwardNewgate = "Edward Newgate";
+        private const string DonQuichotte = "Don Quichotte";
+
+        private const string Donquixote = "Donquixote";
+        private const string King = "King";
+        private const string BigMom = "Big Mom";
+        private const string Mr3 = "Mr 3";
+        private const string BarbeNoire = "Barbe Noire";
+        private const string BarbeBlanche = "Barbe Blanche";
+
         /// <summary>Set the popularity of characters.</summary>
         /// <param name="characterNameList">List of characters.</param>
-        internal static ConcurrentBag<Character> SetPopularity(List<string> characterNameList, ConcurrentBag<Character> characterList)
+        internal static async Task<IReadOnlyList<Character>> SetPopularity(IReadOnlyList<string> characterNameList, IReadOnlyList<Character> characterList)
         {
             var web = new HtmlWeb();
-            var doc = web.Load(UrlLevels);
-            var elements =
-                doc.DocumentNode.SelectNodes("//*[contains(@class, 'gallery') and contains(@class, 'clearfix')]");
-            if (elements.LastOrDefault() != null)
-            {
-                var tables = elements.Last().SelectNodes("table");
-                if (tables.Count > 0)
-                {
-                    var table = tables.Last();
-                    if (table != null)
-                    {
-                        var rows = table.SelectNodes("tr");
-                        for (var i = 1; i < rows.Count; i++)
-                        {
-                            var row = rows[i];
-                            var cols = row.SelectNodes("td");
-                            ListPopularity.Add(cols[1].InnerText.Trim());
-                        }
-                    }
-                }
-            }
+            var doc = await web.LoadFromWebAsync(UrlLevels.ToString());
+            var elements = doc.DocumentNode.SelectNodes(FilterPopularity);
+            doc = null;
 
+            if(elements.LastOrDefault() == null)
+                return characterList.ToList();
+
+            var table = elements.Last().SelectNodes(FilterTable).LastOrDefault();
+            elements = null;
+            if(table == null)
+                return characterList.ToList();
+
+            List<string> ListPopularity = new(characterList.Count);
+
+            var rows = table.SelectNodes(FilterTr);
+            for (var index = 1; index < rows.Count; index++)
+            {
+                var cols = rows[index].SelectNodes(FilterTd);
+                ListPopularity.Add(cols[1].InnerText.Trim());
+            }
+            rows.Clear();
+
+            var levelLimit = ListPopularity.Count % ControlRoom.NumberOfLevels;
             foreach (var character in characterNameList)
             {
-                string tempCharacterName = character;
-                if (tempCharacterName.Contains("alias"))
+                string tempCharacterName = character.Contains(FilterAlias) ? character.Replace(ReplaceCharacter, string.Empty, StringComparison.OrdinalIgnoreCase) : character;
+                int position = SetPosition(tempCharacterName, ListPopularity);
+
+                foreach (var characters in characterList)
                 {
-                    tempCharacterName = character.Replace(@"\s*\(.*?\)", "", StringComparison.OrdinalIgnoreCase);
-                }
+                    if (!characters.Name.Equals(tempCharacterName))
+                        continue;
 
-                var position = ListPopularity.IndexOf(tempCharacterName);
-
-                if (position == -1)
-                {
-                    var newCharacter = GetSimilarCharacter(tempCharacterName);
-
-                    if (newCharacter == null)
-                        position = ListPopularity.Count;
-                    else 
-                        position = ListPopularity.IndexOf(newCharacter);
-
-                    if (position == -1)
-                    {
-                        position = ListPopularity.Count;
-                    }
-                }
-
-                foreach (var characters in characterList.Where(character => character.Name.Equals(tempCharacterName)))
-                {
                     for (var i = ControlRoom.NumberOfLevels; i >= 1; i--)
                     {
-                        if (position <= (ListPopularity.Count % ControlRoom.NumberOfLevels) * i)
-                        {
-                            characters.Level = i - 1;
-                        }
+                        if (position > levelLimit * i)
+                            continue;
+
+                        characters.Level = i - 1;
+                        break;
                     }
 
-                    if (characters.Level == ControlRoom.NumberOfLevels + 1)
-                    {
-                        characters.Level = (ControlRoom.NumberOfLevels - 1);
-                    }
+                    characters.Level = Math.Clamp(characters.Level, 0, ControlRoom.NumberOfLevels - 1);
                 }
 
-                _countLevels++;
+                _countLevels++;   
             }
 
             return characterList;
         }
 
-        static string? GetSimilarCharacter(string character)
+        static int SetPosition(string characterName, List<string> listCharacter)
+        {
+            var position = listCharacter.IndexOf(characterName);
+
+            if(position != -1)
+                return position;
+
+            var newCharacter = GetSimilarCharacter(characterName, listCharacter);
+
+            return newCharacter == null ? listCharacter.Count : listCharacter.IndexOf(newCharacter);
+        }
+
+        static string? GetSimilarCharacter(string character, IReadOnlyList<string> ListPopularity)
         {
             foreach (var popularityCharacter in ListPopularity)
             {
-                character = DataControl.ExtractExceptionsPopularity(character);
-                if (CalculateMatchPercentage(popularityCharacter, character) > AcceptanceCritera)
+                character = ExtractExceptionsPopularity(character);
+                if (ControlRoom.CalculateMatchPercentage(popularityCharacter, character) > AcceptanceCritera)
                     return popularityCharacter;
             }
 
             return null;
         }
 
-        static double CalculateMatchPercentage(string characterSearched, string characterName)
+        /// <summary>Change value for specific character for popularity ranking.</summary>
+        /// <param name="character">The name of the character.</param>
+        /// <returns>The new character name.</returns>
+        internal static string ExtractExceptionsPopularity(string character)
         {
-            int levenshteinDistance = ControlRoom.LevenshteinDistance(characterSearched, characterName);
-            int maxLength = Math.Max(characterSearched.Length, characterName.Length);
+            if (character.Contains(DonQuichotte, StringComparison.OrdinalIgnoreCase))
+                return character.Replace(DonQuichotte, Donquixote, StringComparison.OrdinalIgnoreCase);
 
-            return maxLength == 0 ? 1.0 : 1.0 - (double)levenshteinDistance / maxLength;
+            if (character.Contains(Alber, StringComparison.OrdinalIgnoreCase))
+                return King;
+
+            if (character.Contains(Linlin, StringComparison.OrdinalIgnoreCase))
+                return BigMom;
+
+            if (character.Contains(Galdino, StringComparison.OrdinalIgnoreCase))
+                return Mr3;
+
+            if (character.Contains(MarshallDTeach, StringComparison.OrdinalIgnoreCase))
+                return BarbeNoire;
+
+            if (character.Contains(EdwardNewgate, StringComparison.OrdinalIgnoreCase))
+                return BarbeBlanche;
+
+            return character;
         }
     }
 }

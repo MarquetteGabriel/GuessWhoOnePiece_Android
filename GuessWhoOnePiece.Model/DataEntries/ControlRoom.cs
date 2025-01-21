@@ -24,7 +24,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         public IReadOnlyList<string> _characterNameList = new List<string>();
         /// <summary>Generate threads to get data.</summary>
         /// <returns>The complete list of characters.</returns>
-        public async Task<List<Character>> GenerateThreads()
+        public async Task<IReadOnlyList<Character>> GenerateThreads()
         {
             _characterNameList = await CharacterNameListManager.ReceivedCharactersList();
 
@@ -37,10 +37,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     charactersList.Add(character);
             });
 
-            charactersList = Popularity.SetPopularity(_characterNameList.ToList(), charactersList);
-            ManageCsv.SaveCharactersToCsv(charactersList.ToList());
+            IReadOnlyList<Character> characterList = new List<Character>(charactersList.ToList());
+            charactersList.Clear();
 
-            return charactersList.ToList();
+            characterList = await Popularity.SetPopularity(_characterNameList, characterList);
+            ManageCsv.SaveCharactersToCsv(characterList);
+
+            return characterList;
         }
 
         /// <summary>Set the link to find a character on the fandom.</summary>

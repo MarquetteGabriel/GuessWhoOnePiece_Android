@@ -72,18 +72,17 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 var doc = await Web.LoadFromWebAsync(url.ToString());
 
-                var characterData = doc.DocumentNode.SelectSingleNode(FilterCharacterData).InnerText;
-                characterData = CleanWebHtmlString(characterData);
-                if (characterData == null)
-                    throw new InvalidOperationException(ExceptionMessage);
+                var characterData = CleanWebHtmlString(doc.DocumentNode.SelectSingleNode(FilterCharacterData)?.InnerText)
+                     ?? throw new InvalidOperationException(ExceptionMessage);
 
                 var pictureElements = doc.DocumentNode.SelectNodes(FilterPicture);
-                var fruitElement = string.Join(Space, doc.DocumentNode.SelectSingleNode(FilterDevilFruit).InnerText);
-                var bountyTypeCrewElements = doc.DocumentNode.SelectNodes(FilterBounty);
+
+                var fruitElement = CleanWebHtmlString(doc.DocumentNode.SelectSingleNode(FilterDevilFruit)?.InnerText)
+                    ?? throw new InvalidOperationException(ExceptionMessage);
+                var bountyTypeCrewElements = doc.DocumentNode.SelectNodes(FilterBounty) ?? throw new InvalidOperationException(ExceptionMessage);
                 doc = null;
 
                 // Get the fruit devil.
-                fruitElement = CleanWebHtmlString(fruitElement);
                 var fruit = fruitElement.Contains(FruitDuDemon, StringComparison.OrdinalIgnoreCase);
                 fruitElement = null;
 
@@ -183,8 +182,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 _countPercentage++;
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                _countPercentage++;
                 return null;
             }
         }

@@ -3,6 +3,7 @@
 @using GuessWhoOnePiece.Model.CsvManager
 @using GuessWhoOnePiece.Model.DataEntries
 @using System.Diagnostics
+@using System.Threading
 
 <h1>Hello, world!</h1>
 
@@ -22,11 +23,21 @@ Welcome to your new app.
     readonly ControlRoom _controlRoom = new ControlRoom();
     private string _value = string.Empty;
 
-    private async void OnClickChargement()
+    private void OnClickChargement()
     {
-        await _controlRoom.GenerateThreads();
+        var thread = new Thread(async () =>
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            await _controlRoom.GenerateThreads();
+            stopwatch.Stop();
+        });
+
+        thread.Start();
+
+
         foreach (var character in _controlRoom._characterNameList)
-            {
+        {
             _value += character + " ";
         }
     }
