@@ -14,12 +14,16 @@ Welcome to your new app.
 <div>
     <button @onclick="@OnShowCharacter">Show Character</button>
     <label>@_value</label>
+    @if(isLoading)
+    {
+        <Loading></Loading>
+    }
 </div>
 
 
 @code
 {
-
+    private bool isLoading = false;
     readonly ControlRoom _controlRoom = new ControlRoom();
     private string _value = string.Empty;
 
@@ -27,10 +31,14 @@ Welcome to your new app.
     {
         var thread = new Thread(async () =>
         {
+            isLoading = true;
+            await InvokeAsync(StateHasChanged);
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             await _controlRoom.GenerateThreads();
             stopwatch.Stop();
+            await InvokeAsync(StateHasChanged);
+            isLoading = false;
         });
 
         thread.Start();

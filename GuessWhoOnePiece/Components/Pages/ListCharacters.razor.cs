@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Components.Pages;
@@ -20,14 +21,25 @@ public partial class ListCharacters : ComponentBase
     
     private List<string> _characterNames;
 
+    private bool isLoading = false;
     private string SearchText { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        _characterNames ??= [];
-        _characters = await ReceiveDataCsv.ReceiveAllCharacters();
-        foreach (var character in _characters)
-            _characterNames.Add(character.Name);
+        var thread = new Thread(async () =>
+        {
+            isLoading = true;
+            await InvokeAsync(StateHasChanged);
+            _characterNames ??= [];
+            _characters = await ReceiveDataCsv.ReceiveAllCharacters();
+            foreach (var character in _characters)
+                _characterNames.Add(character.Name);
+
+            isLoading = false;
+            await InvokeAsync(StateHasChanged);
+        });
+
+        thread.Start();
     }
 
     private async void OnSelectedCharacter(string characterName)
