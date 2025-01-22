@@ -29,10 +29,6 @@ public static class AnswerResult
         
     public static AnswerState SetAnswerStateAgeType(AgeType value)
     {
-        return value switch
-        {
-            AgeType.Equal => AnswerState.Correct,
-            _ => AnswerState.Wrong,
-        };
+        return AgeType.Equal == value ? AnswerState.Correct : AnswerState.Wrong;
     }
 }

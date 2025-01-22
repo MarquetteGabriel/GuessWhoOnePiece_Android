@@ -5,7 +5,7 @@
 
 namespace GuessWhoOnePiece.Model.AnswerModel
 {
-    public class AnswerStateList()
+    public class AnswerStateList
     {
         public AnswerState Name { get; set; }
         public AnswerState DevilFruit { get; set; }

@@ -19,7 +19,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private IReadOnlyList<string> _characterNameList = new List<string>();
         /// <summary>Generate threads to get data.</summary>
         /// <returns>The complete list of characters.</returns>
-        public async Task<IReadOnlyList<Character>> GenerateThreads()
+        public async Task<IReadOnlyCollection<Character>> GenerateThreads()
         {
             _characterNameList = await CharacterNameListManager.ReceivedCharactersList();
 
@@ -32,7 +32,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     charactersList.Add(character);
             });
 
-            IReadOnlyList<Character> characterList = new List<Character>(charactersList.ToList());
+            IReadOnlyCollection<Character> characterList = new List<Character>(charactersList.ToList());
             charactersList.Clear();
 
             characterList = await Popularity.SetPopularity(_characterNameList, characterList);

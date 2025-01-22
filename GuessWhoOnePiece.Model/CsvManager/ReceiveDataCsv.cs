@@ -4,11 +4,13 @@
 // <author>Gabriel Marquette</author>
 
 using GuessWhoOnePiece.Model.Characters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace GuessWhoOnePiece.Model.CsvManager
 {
@@ -35,25 +37,13 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <returns>The character to get.</returns>
         public static async Task<Character> ReceiveCharacter(string characterName)
         {
-            Character? character = null;
-            await using var stream = File.OpenRead(ManageCsv.CsvPath);
-            using var reader = new StreamReader(stream, Encoding.UTF8);
-            while (await reader.ReadLineAsync() is { } line)
-            {
-                var values = line.Split(ManageCsv.Separator);
-
-                if (values.Length == DataCharacterLength && values[0].Equals(characterName, System.StringComparison.OrdinalIgnoreCase))
-                {
-                    character = CreateCharacterFromFile(values);
-                }
-            }
-
-            return character!;
+            var characters = await ReceiveAllCharacters(values => values[0].Equals(characterName, StringComparison.OrdinalIgnoreCase));
+            return characters.FirstOrDefault() ?? throw new Exception("Character not found");
         }
 
         /// <summary>Receive all characters.</summary>
         /// <returns>List of all characters.</returns>
-        public static async Task<List<Character>> ReceiveAllCharacters()
+        public static async Task<List<Character>> ReceiveAllCharacters(Func<string[], bool>? filter = null)
         {
             var characters = new List<Character>();
             await using var stream = File.OpenRead(ManageCsv.CsvPath);
@@ -61,8 +51,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
             while (await reader.ReadLineAsync() is { } line)
             {
                 var values = line.Split(ManageCsv.Separator);
-
-                if (values.Length == DataCharacterLength)
+                if (values.Length == DataCharacterLength && (filter == null || filter(values)))
                 {
                     characters.Add(CreateCharacterFromFile(values));
                 }

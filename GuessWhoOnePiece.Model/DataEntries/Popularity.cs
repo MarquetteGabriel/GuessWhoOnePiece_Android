@@ -19,8 +19,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         private const double AcceptanceCritera = 0.7;
 
-        private static int _countLevels;
-
         private const string FilterTd = "td";
         private const string FilterTr = "tr";
         private const string FilterTable = "table";
@@ -46,7 +44,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         /// <summary>Set the popularity of characters.</summary>
         /// <param name="characterNameList">List of characters.</param>
-        internal static async Task<IReadOnlyCollection<Character>> SetPopularity(IReadOnlyList<string> characterNameList, IReadOnlyList<Character> characterList)
+        internal static async Task<IReadOnlyCollection<Character>> SetPopularity(IReadOnlyList<string> characterNameList, IReadOnlyCollection<Character> characterList)
         {
             var table = await SetTablePopularity();
             if (table == null)
@@ -76,8 +74,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                     characters.Level = Math.Clamp(SetLevel(position, levelLimit), 0, ControlRoom.NumberOfLevels - 1);
                 }
-
-                _countLevels++;   
+                
+                // Count level increase here.
             }
 
             return characterList;

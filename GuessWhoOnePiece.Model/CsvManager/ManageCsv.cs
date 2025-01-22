@@ -22,7 +22,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
 
         /// <summary>Add a character to the Csv.</summary>
         /// <param name="characters">The list of characters to add.</param>
-        internal static void SaveCharactersToCsv(IReadOnlyList<Character> characters)
+        internal static void SaveCharactersToCsv(IReadOnlyCollection<Character> characters)
         {
             CreateCsvFile(CsvPath);
 
