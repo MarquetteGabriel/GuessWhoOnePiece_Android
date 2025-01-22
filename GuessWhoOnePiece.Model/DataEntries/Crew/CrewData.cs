@@ -10,17 +10,21 @@ using System.Linq;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
-    internal partial class DataControl
+    internal static partial class DataControl
     {
+        /// <summary>Return the crew for text.</summary>
+        /// <param name="text">Text.</param>
+        /// <param name="characterName">Name of the character.</param>
+        /// <returns>The extracted crew.</returns>
         internal static string ExtractCrew(HtmlNode text, string characterName)
         {
-            if (characterName.Equals("Vergo") || characterName.Equals("Senor Pink"))
+            if (characterName.Equals("Vergo", StringComparison.Ordinal) || characterName.Equals("Senor Pink", StringComparison.Ordinal))
                 return "L'Équipage de Don Quichotte Doflamingo";
-            if (characterName.Equals("Sanjuan Wolf"))
+            if (characterName.Equals("Sanjuan Wolf", StringComparison.Ordinal))
                 return "L'Équipage de Barbe Noire";
-            if (characterName.Equals("Surume"))
+            if (characterName.Equals("Surume", StringComparison.Ordinal))
                 return Resources.Strings.AlliedMugiwaraCrew;
-            if (characterName.Equals("Magellan"))
+            if (characterName.Equals("Magellan", StringComparison.Ordinal))
                 return "Impel Down";
 
             string crew = GetCrewMapping(ExtractPatternCrew(text));
@@ -43,53 +47,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The crew of the character.</returns>
         private static string ExtractPatternCrew(HtmlNode text)
         {
-            var affiliations = text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]/*[self::a or self::small]")
-                                            ?? text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]");
-            var affiliationCharacter = new List<string>();
+            var affiliationCharacter = SetAffiliationCharacter(text);
 
-            for (int i = 0; i < affiliations.Count; i++)
-            {
-                var affiliation = affiliations[i].InnerText;
-                if (i + 1 < affiliations.Count && affiliations[i + 1].InnerText.Contains("anciennement", StringComparison.OrdinalIgnoreCase))
-                {
-                    affiliation += " " + affiliations[i + 1].InnerText;
-                    i++;
-                }
-                affiliationCharacter.Add(affiliation);
-            }
-
-            if (affiliationCharacter.Count == 1)
-            {
-                var affiliation = affiliationCharacter.First();
-                if (affiliation.Equals("CP9 (anciennement)"))
-                    return "Cipher Pol";
-                else if (affiliation.Equals("L'Équipage de Don Quichotte Doflamingo (anciennement)"))
-                    return Resources.Strings.Citizen;
-            }
-
-            if (affiliationCharacter.Any(affiliation => affiliation.Equals("SWORD")))
-                return Resources.Strings.NavyCrew;
-
-            for (int i = 0; i < affiliationCharacter.Count; i++)
-            {
-                if (i + 1 < affiliationCharacter.Count)
-                {
-                    if (affiliationCharacter[i].Equals("L'Équipage du Chapeau de Paille") && affiliationCharacter[i + 1].Equals("Nain"))
-                        return Resources.Strings.AlliedMugiwaraCrew;
-
-                    if (affiliationCharacter[i].Equals("L'Équipage des Pirates du Soleil") && affiliationCharacter[i + 1].Equals("Révolutionnaires"))
-                        return Resources.Strings.RevolutionaryCrew;
-                }
-
-                if (affiliationCharacter[i].Contains("Impel Down") && !affiliationCharacter[i].Contains("anciennement"))
-                {
-                    return Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliationCharacter[i], "");
-                }
-                else if (affiliationCharacter[i].Equals("(Anciennement)"))
-                {
-                    return Resources.Strings.PirateType;
-                }
-            }
+            var specificCrew = ExtractSpecificCrew(affiliationCharacter);
+            if (specificCrew != null)
+                return specificCrew;
 
             foreach (var affiliation in affiliationCharacter)
             {
@@ -112,6 +74,107 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return Resources.Strings.Citizen;
         }
 
+        /// <summary>Set affialition possible for the character.</summary>
+        /// <param name="text">Text.</param>
+        /// <returns>List of affiliation possible.</returns>
+        private static List<string> SetAffiliationCharacter(HtmlNode text)
+        {
+            var affiliations = text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]/*[self::a or self::small]")
+                                ?? text.SelectNodes(@"./*[contains(@class, 'pi-data-value')]");
+            var affiliationCharacter = new List<string>();
+
+            for (int index = 0; index < affiliations.Count; index++)
+            {
+                var affiliation = affiliations[index].InnerText;
+                if (index + 1 < affiliations.Count && affiliations[index + 1].InnerText.Contains("anciennement", StringComparison.OrdinalIgnoreCase))
+                {
+                    affiliation += " " + affiliations[index + 1].InnerText;
+                    index++;
+                }
+                affiliationCharacter.Add(affiliation);
+            }
+
+            return affiliationCharacter;
+        }
+
+        /// <summary>Extract affiliation for specific character.</summary>
+        /// <param name="affiliationCharacter">List of affiliation possible.</param>
+        /// <returns>Affiliation for the character.</returns>
+        private static string? ExtractSpecificCrew(List<string> affiliationCharacter)
+        {
+            var singleCrew = ExtractSingleCrew(affiliationCharacter);    
+            if(singleCrew != null)
+                return singleCrew;
+
+
+            if (affiliationCharacter.Any(affiliation => affiliation.Equals("SWORD")))
+                return Resources.Strings.NavyCrew;
+
+            for (int index = 0; index < affiliationCharacter.Count; index++)
+            {
+                var errorDataCrew = ExtractErrorDataCrew(affiliationCharacter, index);
+                if(errorDataCrew != null)
+                    return errorDataCrew;
+            }
+
+            return null;
+        }
+
+        /// <summary>Extract affiliation for character which are not implemented correctly in the webstite.</summary>
+        /// <param name="affiliationCharacter">List of affiliation character.</param>
+        /// <param name="index">Index of the list.</param>
+        /// <returns>Affiliation for the character.</returns>
+        private static string? ExtractErrorDataCrew(List<string> affiliationCharacter, int index)
+        {
+            if (index + 1 > affiliationCharacter.Count)
+            {
+                if (affiliationCharacter[index].Equals("L'Équipage du Chapeau de Paille", StringComparison.Ordinal) 
+                    && affiliationCharacter[index + 1].Equals("Nain", StringComparison.Ordinal))
+                { 
+                    return Resources.Strings.AlliedMugiwaraCrew; 
+                }
+
+                if (affiliationCharacter[index].Equals("L'Équipage des Pirates du Soleil")
+                    && affiliationCharacter[index + 1].Equals("Révolutionnaires", StringComparison.Ordinal))
+                {
+                    return Resources.Strings.RevolutionaryCrew;
+                }
+            }
+
+            if (affiliationCharacter[index].Contains("Impel Down", StringComparison.Ordinal)
+                && !affiliationCharacter[index].Contains("anciennement", StringComparison.Ordinal))
+            {
+                return Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliationCharacter[index], "");
+            }
+
+            if (affiliationCharacter[index].Equals("(Anciennement)"))
+                return Resources.Strings.PirateType;
+
+            return null;
+        }
+
+        /// <summary>Extract affiliation when the list contains only one element.</summary>
+        /// <param name="affiliationCharacter">List of affiliation character.</param>
+        /// <returns>Affiliation for the character.</returns>
+        private static string? ExtractSingleCrew(List<string> affiliationCharacter)
+        {
+            if (affiliationCharacter.Count != 1)
+                return null;
+
+            var affiliation = affiliationCharacter.First();
+
+            if (affiliation.Equals("CP9 (anciennement)"))
+                return "Cipher Pol";
+
+            if (affiliation.Equals("L'Équipage de Don Quichotte Doflamingo (anciennement)"))
+                return Resources.Strings.Citizen;
+
+            return null;
+        }
+
+        /// <summary>Fix crew for some characters</summary>
+        /// <param name="rawCrew">Raw crew from the extrated text.</param>
+        /// <returns>The new crew.</returns>
         private static string GetCrewMapping(string rawCrew)
         {
             if (CrewMapping.TryGetValue(rawCrew, out var result))
