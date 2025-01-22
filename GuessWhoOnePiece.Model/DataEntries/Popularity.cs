@@ -46,19 +46,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         /// <summary>Set the popularity of characters.</summary>
         /// <param name="characterNameList">List of characters.</param>
-        internal static async Task<IReadOnlyList<Character>> SetPopularity(IReadOnlyList<string> characterNameList, IReadOnlyList<Character> characterList)
+        internal static async Task<IReadOnlyCollection<Character>> SetPopularity(IReadOnlyList<string> characterNameList, IReadOnlyList<Character> characterList)
         {
-            var web = new HtmlWeb();
-            var doc = await web.LoadFromWebAsync(UrlLevels.ToString());
-            var elements = doc.DocumentNode.SelectNodes(FilterPopularity);
-            doc = null;
-
-            if(elements.LastOrDefault() == null)
-                return characterList.ToList();
-
-            var table = elements.Last().SelectNodes(FilterTable).LastOrDefault();
-            elements = null;
-            if(table == null)
+            var table = await SetTablePopularity();
+            if (table == null)
                 return characterList.ToList();
 
             List<string> ListPopularity = new(characterList.Count);
@@ -83,22 +74,38 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     if (!characters.Name.Equals(tempCharacterName, StringComparison.Ordinal))
                         continue;
 
-                    for (var i = ControlRoom.NumberOfLevels; i >= 1; i--)
-                    {
-                        if (position > levelLimit * i)
-                            continue;
-
-                        characters.Level = i - 1;
-                        break;
-                    }
-
-                    characters.Level = Math.Clamp(characters.Level, 0, ControlRoom.NumberOfLevels - 1);
+                    characters.Level = Math.Clamp(SetLevel(position, levelLimit), 0, ControlRoom.NumberOfLevels - 1);
                 }
 
                 _countLevels++;   
             }
 
             return characterList;
+        }
+
+        private static async Task<HtmlNode?> SetTablePopularity()
+        {
+            var web = new HtmlWeb();
+            var doc = await web.LoadFromWebAsync(UrlLevels.ToString());
+            var elements = doc.DocumentNode.SelectNodes(FilterPopularity);
+
+            if (elements.LastOrDefault() == null)
+                return null;
+
+            return elements.Last().SelectNodes(FilterTable).LastOrDefault();
+        }
+
+        private static int SetLevel(int position, int levelLimit)
+        {
+            for (var i = ControlRoom.NumberOfLevels; i >= 1; i--)
+            {
+                if (position > levelLimit * i)
+                    continue;
+
+                return i - 1;          
+            }
+
+            return levelLimit;
         }
 
         static int SetPosition(string characterName, List<string> listCharacter)
