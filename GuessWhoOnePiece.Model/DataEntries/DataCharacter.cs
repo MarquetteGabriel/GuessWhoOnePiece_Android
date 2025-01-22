@@ -75,14 +75,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 var pictureElements = doc.DocumentNode.SelectNodes(FilterPicture);
 
-                var fruitElement = CleanWebHtmlString(doc.DocumentNode.SelectSingleNode(FilterDevilFruit)?.InnerText)
-                    ?? throw new InvalidOperationException(ExceptionMessage);
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes(FilterBounty) ?? throw new InvalidOperationException(ExceptionMessage);
-                doc = null;
 
                 // Get the fruit devil.
-                var fruit = fruitElement.Contains(FruitDuDemon, StringComparison.OrdinalIgnoreCase);
-                fruitElement = null;
+                bool fruit = GetDevilFruitValue(doc);
+                doc = null;
 
                 // Get the picture.
                 Task<string>? pictureDownloadTask = null;
@@ -108,37 +105,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 }
 
                 // Crew part.
-                HtmlNode typeElement = null!;
-                HtmlNode crewElement = null!;
-
-                foreach (var bountyTypeCrewElement in bountyTypeCrewElements)
-                {
-                    var dataSource = bountyTypeCrewElement.GetAttributeValue(DataSource, string.Empty);
-
-                    if (dataSource == OccupationValue)
-                        typeElement = bountyTypeCrewElement;
-
-                    if (dataSource == AffiliationValue)
-                        crewElement = bountyTypeCrewElement;
-
-                    if (typeElement != null && crewElement != null)
-                        break;
-                }
-
-                crewElement ??= bountyTypeCrewElements.FirstOrDefault(element => element.InnerHtml.Contains(OccupationValue, StringComparison.OrdinalIgnoreCase));
-                typeElement ??= bountyTypeCrewElements.FirstOrDefault(element => element.InnerHtml.Contains(AffiliationValue, StringComparison.OrdinalIgnoreCase));
-                bountyTypeCrewElements.Clear();
-
-                var crew = crewElement == null ? Citizen : DataControl.ExtractCrew(crewElement, characterName);
-                var type = typeElement == null ? Citizen : DataControl.ExtractPatternType(typeElement, crew);
-                crewElement = null;
-                typeElement = null;
-
-                if (type.Equals(CelestialDragons))
-                {
-                    crew = CelestialDragons;
-                    type = Navy;
-                }
+                (var crew, var type) = GetCrewType(bountyTypeCrewElements, characterName);
 
                 // Age part.
                 var age = DataControl.ExtractPatternAge(characterData, characterName);
@@ -180,6 +147,55 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 _countPercentage++;
                 return null;
             }
+        }
+
+        private static bool GetDevilFruitValue(HtmlDocument doc)
+        {
+            var fruitElement = CleanWebHtmlString(doc.DocumentNode.SelectSingleNode(FilterDevilFruit)?.InnerText)
+                    ?? throw new InvalidOperationException(ExceptionMessage);
+            return fruitElement.Contains(FruitDuDemon, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static (string, string) GetCrewType(HtmlNodeCollection bountyTypeCrewElements, string characterName)
+        {
+            var (crewElement, typeElement) = GetCrewTypeElement(bountyTypeCrewElements);
+            crewElement ??= bountyTypeCrewElements.FirstOrDefault(element => element.InnerHtml.Contains(OccupationValue, StringComparison.OrdinalIgnoreCase));
+            typeElement ??= bountyTypeCrewElements.FirstOrDefault(element => element.InnerHtml.Contains(AffiliationValue, StringComparison.OrdinalIgnoreCase));
+            bountyTypeCrewElements.Clear();
+
+            var crew = crewElement == null ? Citizen : DataControl.ExtractCrew(crewElement, characterName);
+            var type = typeElement == null ? Citizen : DataControl.ExtractPatternType(typeElement, crew);
+
+            if (type.Equals(CelestialDragons))
+            {
+                crew = CelestialDragons;
+                type = Navy;
+            }
+
+            return (crew, type);
+        }
+
+        private static (HtmlNode?, HtmlNode?) GetCrewTypeElement(HtmlNodeCollection bountyTypeCrewElements)
+        {
+            HtmlNode? typeElement = null;
+            HtmlNode? crewElement = null;
+
+            foreach (var bountyTypeCrewElement in bountyTypeCrewElements)
+            {
+                var dataSource = bountyTypeCrewElement.GetAttributeValue(DataSource, string.Empty);
+
+                if (dataSource == OccupationValue)
+                    typeElement = bountyTypeCrewElement;
+
+                if (dataSource == AffiliationValue)
+                    crewElement = bountyTypeCrewElement;
+
+                if (typeElement != null && crewElement != null)
+                    return (crewElement, typeElement);
+            }
+
+            return (crewElement, typeElement);
+        
         }
 
         /// <summary>Clean string from web and html format.</summary>
