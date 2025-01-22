@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
-    internal partial class DataControl
+    internal static partial class DataControl
     {
         /// <summary>Extract age from text.</summary>
         /// <param name="input">Text.</param>
@@ -28,20 +28,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 return Regex.Replace(m.Value, @"\d+", "").Trim();
             });
 
-            foreach (var splitAge in Regex.Split(ageText, @":"))
+            var specificAge = ExtractSpecificAge(ageText, characterName);
+            
+            if (specificAge != null)
             {
-                if ((splitAge.Contains("And") && characterName == "Bas") ||
-                    (splitAge.Contains("Kerville") && characterName == "And") ||
-                    (splitAge.Contains(@"Anniversaire") && characterName == "Kerville") ||
-                    (splitAge.Contains(@"Mozu") && characterName == "Kiwi") ||
-                    (splitAge.Contains(@"Anniversaire") && characterName == "Mozu"))
-                {
-                    ageText = splitAge;
-                    break;
-                }
-
-                if (MonthList.Any(splitAge.Contains))
+                if (specificAge == "0")
                     return 0;
+                else
+                    ageText = specificAge;
             }
 
             var listAge = Regexs.ExtractAgeRegex().Matches(ageText);
@@ -56,16 +50,54 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     .Replace(" ", "", StringComparison.OrdinalIgnoreCase)
                     .Replace("an", "", StringComparison.OrdinalIgnoreCase);
 
-                if (age.Contains("(espércedevie") ||
-                    age.Contains("s'ilétaitvivt") ||
-                    age.Contains("(estimation"))
-                    continue;
+                if(AvoidErrors(age))
+                    continue;   
 
                 if (int.TryParse(age, out int ageValue))
                     maxAge = Math.Max(maxAge, ageValue);
             }
 
             return maxAge;
+        }
+
+        /// <summary>Check if there is text that indicate to not count this number.</summary>
+        /// <param name="age">String that contains an age.</param>
+        /// <returns>True if this text has not to count.</returns>
+        private static bool AvoidErrors(string age)
+        {
+            return (age.Contains("(espércedevie", StringComparison.Ordinal) || 
+                age.Contains("s'ilétaitvivt", StringComparison.Ordinal) || 
+                age.Contains("(estimation", StringComparison.Ordinal));
+        }
+
+        /// <summary>Extract text age for specific characters.</summary>
+        /// <param name="ageText">Text age.</param>
+        /// <param name="characterName">Name of the character.</param>
+        /// <returns>The nex text.</returns>
+        private static string? ExtractSpecificAge(string ageText, string characterName)
+        {
+            foreach (var splitAge in Regex.Split(ageText, @":"))
+            {
+                if (splitAge.Contains("And", StringComparison.Ordinal) && characterName.Equals("Bas", StringComparison.Ordinal))
+                    return splitAge;
+
+                if (splitAge.Contains("Kerville", StringComparison.Ordinal) && characterName.Equals("And", StringComparison.Ordinal))
+                    return splitAge;
+
+                if (splitAge.Contains(@"Anniversaire", StringComparison.Ordinal) && characterName.Equals("Kerville", StringComparison.Ordinal))
+                    return splitAge;
+
+                if (splitAge.Contains("Mozu", StringComparison.Ordinal) && characterName.Equals("Kiwi", StringComparison.Ordinal))
+                    return splitAge;
+
+                if (splitAge.Contains("Anniversaire", StringComparison.Ordinal) && characterName.Equals("Mozu", StringComparison.Ordinal))
+                    return splitAge;
+
+                if (MonthList.Any(splitAge.Contains))
+                    return "0";
+            }
+
+            return null;
         }
     }
 }

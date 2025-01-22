@@ -124,9 +124,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="affiliationCharacter">List of affiliation character.</param>
         /// <param name="index">Index of the list.</param>
         /// <returns>Affiliation for the character.</returns>
-        private static string? ExtractErrorDataCrew(List<string> affiliationCharacter, int index)
+        private static string? ExtractErrorDataCrew(IList<string> affiliationCharacter, int index)
         {
-            if (index + 1 > affiliationCharacter.Count)
+            if (index + 1 < affiliationCharacter.Count)
             {
                 if (affiliationCharacter[index].Equals("L'Équipage du Chapeau de Paille", StringComparison.Ordinal) 
                     && affiliationCharacter[index + 1].Equals("Nain", StringComparison.Ordinal))
@@ -134,7 +134,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     return Resources.Strings.AlliedMugiwaraCrew; 
                 }
 
-                if (affiliationCharacter[index].Equals("L'Équipage des Pirates du Soleil")
+                if (affiliationCharacter[index].Equals("L'Équipage des Pirates du Soleil", StringComparison.Ordinal)
                     && affiliationCharacter[index + 1].Equals("Révolutionnaires", StringComparison.Ordinal))
                 {
                     return Resources.Strings.RevolutionaryCrew;
@@ -147,7 +147,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 return Regexs.ExtractRedirectLinkFromBracketsRegex().Replace(affiliationCharacter[index], "");
             }
 
-            if (affiliationCharacter[index].Equals("(Anciennement)"))
+            if (affiliationCharacter[index].Equals("(Anciennement)", StringComparison.Ordinal))
                 return Resources.Strings.PirateType;
 
             return null;
@@ -156,7 +156,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Extract affiliation when the list contains only one element.</summary>
         /// <param name="affiliationCharacter">List of affiliation character.</param>
         /// <returns>Affiliation for the character.</returns>
-        private static string? ExtractSingleCrew(List<string> affiliationCharacter)
+        private static string? ExtractSingleCrew(IList<string> affiliationCharacter)
         {
             if (affiliationCharacter.Count != 1)
                 return null;
