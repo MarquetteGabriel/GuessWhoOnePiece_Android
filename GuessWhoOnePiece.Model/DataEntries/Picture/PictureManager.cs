@@ -25,7 +25,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
         /// <param name="imageUrl">Link of the picture.</param>
         /// <param name="fileName">Name of the character which is used in the fileName.</param>
         /// <returns>The fileName.</returns>
-        internal static async Task<string> DownloadImageAsync(string imageUrl, string fileName)
+        internal static async Task<string> DownloadImageAsync(Uri imageUrl, string fileName)
         {
             fileName = fileName + ".jpeg";
             try
@@ -50,7 +50,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
             }
             catch (Exception)
             {
-                return imageUrl;
+                return imageUrl.ToString();
             }
         }
 

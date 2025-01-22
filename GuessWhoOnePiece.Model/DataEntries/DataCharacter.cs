@@ -93,7 +93,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         await ImageDownloadSemaphore.WaitAsync();
                         try
                         {
-                            return await PictureManager.DownloadImageAsync(pictureElement, characterName);
+                            return await PictureManager.DownloadImageAsync(new Uri(pictureElement), characterName);
                         }
                         finally
                         {

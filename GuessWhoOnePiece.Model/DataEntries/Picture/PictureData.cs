@@ -5,6 +5,8 @@
 
 using HtmlAgilityPack;
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -27,25 +29,18 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private const string AmpAnd = "&amp";
         private const string Esperluette = "&";
 
-        private const string AndCharacter = "And";
-        private const string BelmerCharacter = "Belmer";
-        private const string RockCharacter = "Rock";
-        private const string EnerCharacter = "Ener";
-        private const string JinbeiCharacter = "Jinbei";
-        private const string BakkinCharacter = "Bakkin";
-        private const string MansherryCharacter = "Mansherry";
-        private const string ShishilianCharacter = "Shishilian";
-        private const string SuleimanCharacter = "Suleiman";
-
-        private const string AndCharacterPicture = "Baskerville";
-        private const string BelmerCharacterPicture = "Bell";
-        private const string RockCharacterPicture = "Yeti";
-        private const string EnerCharacterPicture = "Enel";
-        private const string JinbeiCharacterPicture = "Jinbe";
-        private const string BakkinCharacterPicture = "Buckingham";
-        private const string MansherryCharacterPicture = "Manshelly";
-        private const string ShishilianCharacterPicture = "Sicilion";
-        private const string SuleimanCharacterPicture = "Suleyman";
+        private static readonly IImmutableDictionary<string, string> SpecificCharacterPictures = new Dictionary<string, string>
+        {
+            { "And", "Baskerville" },
+            { "Belmer", "Bell" },
+            { "Rock", "Yeti" },
+            { "Ener", "Enel" },
+            { "Jinbei", "Jinbe" },
+            { "Bakkin", "Buckingham" },
+            { "Mansherry", "Manshelly" },
+            { "Shishilian", "Sicilion" },
+            {"Suleiman", "Suleyman"},
+        }.ToImmutableDictionary();
 
         /// <summary>Gets the link of the image for a character.</summary>
         /// <param name="listOfPictures">List of picture in the web page.</param>
@@ -56,10 +51,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
             foreach (var picture in listOfPictures.Select(picture => picture.GetAttributeValue(Href, string.Empty)))
             {
                 var newPicture = picture.Replace(Amp, string.Empty, StringComparison.OrdinalIgnoreCase).Replace(AmpAnd, Esperluette, StringComparison.OrdinalIgnoreCase);
-                if (newPicture.Contains(ImageGift, StringComparison.OrdinalIgnoreCase) || newPicture.Contains(SiteLogo, StringComparison.OrdinalIgnoreCase))
+                if (IsIgnoredPicture(newPicture))
                     continue;
-                if (newPicture.Contains(MangaPostEllipse, StringComparison.OrdinalIgnoreCase) || newPicture.Contains(MangaPreEllipse, StringComparison.OrdinalIgnoreCase) ||
-                    newPicture.Contains(AnimePostEllipse, StringComparison.OrdinalIgnoreCase) || newPicture.Contains(AnimePreEllipse, StringComparison.OrdinalIgnoreCase))
+
+                if (IsSpecialPicture(newPicture))
                     return newPicture;
 
                 if (ExtractSpecificPicture(characterName, newPicture) != null)
@@ -78,6 +73,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return string.Empty;
         }
 
+        private static bool IsIgnoredPicture(string picture) =>
+            picture.Contains(ImageGift, StringComparison.OrdinalIgnoreCase) || picture.Contains(SiteLogo, StringComparison.OrdinalIgnoreCase);
+
+        private static bool IsSpecialPicture(string picture) =>
+            picture.Contains(MangaPostEllipse, StringComparison.OrdinalIgnoreCase) || picture.Contains(MangaPreEllipse, StringComparison.OrdinalIgnoreCase) ||
+            picture.Contains(AnimePostEllipse, StringComparison.OrdinalIgnoreCase) || picture.Contains(AnimePreEllipse, StringComparison.OrdinalIgnoreCase);
+
         private static string? ExtractPictureHtmlWebDecode(string characterName, string picture)
         {
             foreach (var character in characterName.Split(" "))
@@ -94,26 +96,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         private static string? ExtractSpecificPicture(string characterName, string picture)
         {
-            if (characterName.Equals(AndCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(AndCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (characterName.Equals(BelmerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(BelmerCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (characterName.Equals(RockCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(RockCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (characterName.Equals(EnerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(EnerCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (characterName.Equals(JinbeiCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(JinbeiCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (characterName.Equals(BakkinCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(BakkinCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (characterName.Equals(MansherryCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(MansherryCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (characterName.Equals(ShishilianCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(ShishilianCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (characterName.Equals(SuleimanCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(SuleimanCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else
-                return null;
+            return SpecificCharacterPictures.TryGetValue(characterName, out var expectedPicture) &&
+                    picture.Contains(expectedPicture, StringComparison.OrdinalIgnoreCase) ? picture : null;
         }
 
         /// <summary>Removes diacritics from a string.</summary>
@@ -156,7 +140,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             int n = s.Length;
             int m = t.Length;
-            int[,] d = new int[n + 1, m + 1];
+            int[][] d = new int[n + 1][];
+
+            // Initialisation des lignes du tableau jagged.
+            for (int i = 0; i <= n; i++)
+            {
+                d[i] = new int[m + 1];
+            }
 
             if (n == 0)
                 return m;
@@ -164,14 +154,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
             if (m == 0)
                 return n;
 
-            for (int i = 0; i <= n; d[i, 0] = i++)
+            for (int i = 0; i <= n; i++)
             {
-                // Empty on purpose.
+                d[i][0] = i;
             }
 
-            for (int j = 0; j <= m; d[0, j] = j++)
+            for (int j = 0; j <= m; j++)
             {
-                // Empty on purpose.
+                d[0][j] = j;
             }
 
             for (int j = 1; j <= m; j++)
@@ -179,13 +169,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 for (int i = 1; i <= n; i++)
                 {
                     int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
-                    d[i, j] = Math.Min(
-                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
-                        d[i - 1, j - 1] + cost);
+                    d[i][j] = Math.Min(
+                        Math.Min(d[i - 1][j] + 1, d[i][j - 1] + 1),
+                        d[i - 1][j - 1] + cost);
                 }
             }
 
-            return d[n, m];
+            return d[n][m];
         }
+
     }
 }

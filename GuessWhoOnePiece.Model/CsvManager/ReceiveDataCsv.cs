@@ -32,18 +32,27 @@ namespace GuessWhoOnePiece.Model.CsvManager
         private const int PictureColumn = 8;
         private const int LevelColumn = 9;
 
+        private const string InvalidExceptionMessage = "Character not found";
+
         /// <summary>Receive the character from the character name.</summary>
         /// <param name="characterName">The character's name to get data.</param>
         /// <returns>The character to get.</returns>
         public static async Task<Character> ReceiveCharacter(string characterName)
         {
             var characters = await ReceiveAllCharacters(values => values[0].Equals(characterName, StringComparison.OrdinalIgnoreCase));
-            return characters.FirstOrDefault() ?? throw new Exception("Character not found");
+            return characters.FirstOrDefault() ?? throw new InvalidDataException(InvalidExceptionMessage);
         }
 
         /// <summary>Receive all characters.</summary>
         /// <returns>List of all characters.</returns>
-        public static async Task<List<Character>> ReceiveAllCharacters(Func<string[], bool>? filter = null)
+        public static async Task<List<Character>> ReceiveAllCharacters()
+        {
+            return await ReceiveAllCharacters(values => true);
+        }
+
+        /// <summary>Receive all characters.</summary>
+        /// <returns>List of all characters.</returns>
+        public static async Task<List<Character>> ReceiveAllCharacters(Func<string[], bool> filter)
         {
             var characters = new List<Character>();
             await using var stream = File.OpenRead(ManageCsv.CsvPath);
@@ -51,7 +60,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
             while (await reader.ReadLineAsync() is { } line)
             {
                 var values = line.Split(ManageCsv.Separator);
-                if (values.Length == DataCharacterLength && (filter == null || filter(values)))
+                if (values.Length == DataCharacterLength && filter(values))
                 {
                     characters.Add(CreateCharacterFromFile(values));
                 }
