@@ -21,12 +21,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>Bounty of the character.</returns>
         internal static string ExtractPatternBounty(string input, string type, string characterName)
         {
-            if (type.Equals(Resources.Strings.NavyType, StringComparison.OrdinalIgnoreCase) ||
-                type.Equals(Resources.Strings.Citizen, StringComparison.OrdinalIgnoreCase))
-                return "0";
-
-            if (characterName.Equals("Sabo", StringComparison.Ordinal))
-                return "602 Mi";
+            var fastBounty = ExtactFastBounty(type, characterName);
+            if (fastBounty != null)
+                return fastBounty;
 
             var match = Regexs.ExtractPatternBountyRegex().Match(input);
             if (!match.Success || match.Groups[1].Value.Contains(InconnueValue) || match.Groups[1].Value.Contains(AucuneValue))
@@ -42,9 +39,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
             foreach (var bountyPart in Regexs.SquareBracketsBountyRegex().Split(text))
             {
-                if (string.IsNullOrEmpty(bountyPart))
-                    continue;
-
                 maxBounty = ComputeBounty(maxBounty, bountyPart);
             }
 
@@ -56,15 +50,30 @@ namespace GuessWhoOnePiece.Model.DataEntries
             };
         }
 
+        private static string? ExtactFastBounty(string type, string characterName)
+        {
+            if (type.Equals(Resources.Strings.NavyType, StringComparison.OrdinalIgnoreCase) ||
+                type.Equals(Resources.Strings.Citizen, StringComparison.OrdinalIgnoreCase))
+                return "0";
+
+            if (characterName.Equals("Sabo", StringComparison.Ordinal))
+                return "602 Mi";
+
+            return null;
+        }
+
         /// <summary>Compute bounty for a character</summary>
         /// <param name="maxBounty">Actual maximum bounty for the character.</param>
         /// <param name="bountyPart">String that contains the bounty.</param>
         /// <returns>New bounty.</returns>
         private static float ComputeBounty(float maxBounty, string bountyPart)
         {
+            if (string.IsNullOrEmpty(bountyPart))
+                return maxBounty;
+
             if (bountyPart.Contains('.'))
             {
-                var bountyValue = bountyPart.Replace(".", string.Empty);
+                var bountyValue = bountyPart.Replace(".", string.Empty, StringComparison.Ordinal);
                 foreach (var splitBounty in bountyValue.Split(@" "))
                 {
                     maxBounty = ComputeMaxBounty(maxBounty, splitBounty);
@@ -72,7 +81,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
             else
             {
-                var splitBounty = bountyPart.Replace(@" ", string.Empty);
+                var splitBounty = bountyPart.Replace(@" ", string.Empty, StringComparison.Ordinal);
                 maxBounty = ComputeMaxBounty(maxBounty, splitBounty);
             }
 

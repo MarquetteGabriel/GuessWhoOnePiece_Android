@@ -6,22 +6,17 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
-using HtmlAgilityPack;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
     /// <summary>Represents the control of threads for web call.</summary>
     public partial class ControlRoom
     {
-        public IReadOnlyList<string> _characterNameList = new List<string>();
+        private IReadOnlyList<string> _characterNameList = new List<string>();
         /// <summary>Generate threads to get data.</summary>
         /// <returns>The complete list of characters.</returns>
         public async Task<IReadOnlyList<Character>> GenerateThreads()

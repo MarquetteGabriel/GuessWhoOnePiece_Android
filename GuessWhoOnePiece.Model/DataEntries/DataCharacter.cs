@@ -7,11 +7,9 @@ using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.DataEntries.Picture;
 using HtmlAgilityPack;
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -178,11 +176,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 return characters;
             }
             catch (InvalidOperationException)
-            {
-                _countPercentage++;
-                return null;
-            }
-            catch (Exception)
             {
                 _countPercentage++;
                 return null;

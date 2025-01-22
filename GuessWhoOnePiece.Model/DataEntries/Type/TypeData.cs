@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
-    internal partial class DataControl
+    internal static partial class DataControl
     {
         /// <summary>Extract type from text.</summary>
         /// <param name="text">Text.</param>
@@ -44,13 +44,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 .Where(typeData => !typeData.Contains("anciennement", StringComparison.OrdinalIgnoreCase) &&
                                     !typeData.Contains("temporairement", StringComparison.OrdinalIgnoreCase));
 
-            foreach (var typeData in filteredTypeCharacters)
+            foreach (var typeData in filteredTypeCharacters.Where(typeData => dragonCelestesKeywords
+                        .Any(keyword => typeData.Contains(keyword, StringComparison.OrdinalIgnoreCase))))
             {
-                if (dragonCelestesKeywords.Any(keyword => typeData.Contains(keyword, StringComparison.OrdinalIgnoreCase)))
-                {
-                    return Resources.Strings.CelestialDragons;
-                }
-            }
+                return Resources.Strings.CelestialDragons;
+            }                        
 
             return Resources.Strings.NavyType;
         }

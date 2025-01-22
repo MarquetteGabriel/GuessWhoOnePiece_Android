@@ -86,12 +86,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         { 
             "Gecko Moria", "Hogback", "Dracule Mihawk" 
         };
-        /*
-        private static readonly HashSet<string> CelestialDragons = new(StringComparer.OrdinalIgnoreCase)
-        { 
-            "Dragon Celestes", "Dragons Célestes" 
-        };
-        */
+
         private static readonly HashSet<string> NavyCrew = new(StringComparer.OrdinalIgnoreCase)
         { 
             "Marine", "Marines", " Marines"

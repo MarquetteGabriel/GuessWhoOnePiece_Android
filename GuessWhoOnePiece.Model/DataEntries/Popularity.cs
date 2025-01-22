@@ -74,12 +74,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
             var levelLimit = ListPopularity.Count % ControlRoom.NumberOfLevels;
             foreach (var character in characterNameList)
             {
-                string tempCharacterName = character.Contains(FilterAlias) ? character.Replace(ReplaceCharacter, string.Empty, StringComparison.OrdinalIgnoreCase) : character;
+                string tempCharacterName = character.Contains(FilterAlias, StringComparison.Ordinal) 
+                    ? character.Replace(ReplaceCharacter, string.Empty, StringComparison.OrdinalIgnoreCase) : character;
                 int position = SetPosition(tempCharacterName, ListPopularity);
 
                 foreach (var characters in characterList)
                 {
-                    if (!characters.Name.Equals(tempCharacterName))
+                    if (!characters.Name.Equals(tempCharacterName, StringComparison.Ordinal))
                         continue;
 
                     for (var i = ControlRoom.NumberOfLevels; i >= 1; i--)

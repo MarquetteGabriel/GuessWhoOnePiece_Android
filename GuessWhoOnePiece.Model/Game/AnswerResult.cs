@@ -14,11 +14,7 @@ public static class AnswerResult
 
     public static AnswerState SetAnswerStateChapterType(ChapterType value)
     {
-        return value switch
-        {
-            ChapterType.SameChapter => AnswerState.Correct,
-            _ => AnswerState.Wrong,
-        };
+        return ChapterType.SameChapter == value ? AnswerState.Correct : AnswerState.Wrong;
     }
 
     public static AnswerState SetAnswerStateBountyType(BountyType value)

@@ -79,21 +79,47 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             foreach (var splitAge in Regex.Split(ageText, @":"))
             {
-                if (splitAge.Contains("And", StringComparison.Ordinal) && characterName.Equals("Bas", StringComparison.Ordinal))
+                if (ExtractBaskervillAge(splitAge, characterName) != null)
                     return splitAge;
-                else if (splitAge.Contains("Kerville", StringComparison.Ordinal) && characterName.Equals("And", StringComparison.Ordinal))
+
+                if (ExtractMozuKiwi(splitAge, characterName) != null)
                     return splitAge;
-                else if (splitAge.Contains(@"Anniversaire", StringComparison.Ordinal) && characterName.Equals("Kerville", StringComparison.Ordinal))
-                    return splitAge;
-                else if (splitAge.Contains("Mozu", StringComparison.Ordinal) && characterName.Equals("Kiwi", StringComparison.Ordinal))
-                    return splitAge;
-                else if (splitAge.Contains("Anniversaire", StringComparison.Ordinal) && characterName.Equals("Mozu", StringComparison.Ordinal))
-                    return splitAge;
-                else if (MonthList.Any(splitAge.Contains))
+
+                if (MonthList.Any(splitAge.Contains))
                     return "0";
             }
 
             return null;
+        }
+
+        /// <summary>Extract text age for Baskerville (Bas, And, Kerville).</summary>
+        /// <param name="splitAge">Text age.</param>
+        /// <param name="characterName">Name of the character.</param>
+        /// <returns>The nex text.</returns>
+        private static string? ExtractBaskervillAge(string splitAge, string characterName)
+        {
+            if (splitAge.Contains("And", StringComparison.Ordinal) && characterName.Equals("Bas", StringComparison.Ordinal))
+                return splitAge;
+            else if (splitAge.Contains("Kerville", StringComparison.Ordinal) && characterName.Equals("And", StringComparison.Ordinal))
+                return splitAge;
+            else if (splitAge.Contains(@"Anniversaire", StringComparison.Ordinal) && characterName.Equals("Kerville", StringComparison.Ordinal))
+                return splitAge;
+            else
+                return null;
+        }
+
+        /// <summary>Extract text age for Mozu and Kiwi (Mozu, Kiwi).</summary>
+        /// <param name="splitAge">Text age.</param>
+        /// <param name="characterName">Name of the character.</param>
+        /// <returns>The nex text.</returns>
+        private static string? ExtractMozuKiwi(string splitAge, string characterName)
+        {
+            if (splitAge.Contains("Mozu", StringComparison.Ordinal) && characterName.Equals("Kiwi", StringComparison.Ordinal))
+                return splitAge;
+            else if (splitAge.Contains("Anniversaire", StringComparison.Ordinal) && characterName.Equals("Mozu", StringComparison.Ordinal))
+                return splitAge;
+            else
+                return null;
         }
     }
 }

@@ -56,8 +56,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The link of the image for the character.</returns>
         private static string GetPictureLink(HtmlNodeCollection listOfPictures, string characterName)
         {
-            string pictureElement = string.Empty;
-
             foreach (var picture in listOfPictures.Select(picture => picture.GetAttributeValue(Href, string.Empty)))
             {
                 var newPicture = picture.Replace(Amp, string.Empty, StringComparison.OrdinalIgnoreCase).Replace(AmpAnd, Esperluette, StringComparison.OrdinalIgnoreCase);

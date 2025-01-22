@@ -6,6 +6,7 @@
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using System;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Model.Game
@@ -21,8 +22,7 @@ namespace GuessWhoOnePiece.Model.Game
 
         private static int RandomizeNumber(int maxNumber)
         {
-            var random = new Random();
-            return random.Next(maxNumber);
+            return RandomNumberGenerator.GetInt32(maxNumber);
         }
     }
 }
