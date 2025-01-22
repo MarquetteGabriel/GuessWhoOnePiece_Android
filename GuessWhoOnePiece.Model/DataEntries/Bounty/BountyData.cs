@@ -9,9 +9,9 @@ using System.Text.RegularExpressions;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
-    internal partial class DataControl
+    internal static partial class DataControl
     {
-
+        // String Values.
         private const string InconnueValue = "Inconnue";
         private const string AucuneValue = "Aucune";
         private const string TextRegex = @"\(.*?\)";
@@ -25,7 +25,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 type.Equals(Resources.Strings.Citizen, StringComparison.OrdinalIgnoreCase))
                 return "0";
 
-            if (characterName.Equals("Sabo"))
+            if (characterName.Equals("Sabo", StringComparison.Ordinal))
                 return "602 Mi";
 
             var match = Regexs.ExtractPatternBountyRegex().Match(input);
@@ -45,25 +45,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 if (string.IsNullOrEmpty(bountyPart))
                     continue;
 
-                if (bountyPart.Contains('.'))
-                {
-                    var bountyValue = bountyPart.Replace(".", string.Empty);
-                    foreach (var splitBounty in bountyValue.Split(@" "))
-                    {
-                        var splitdBounty = Regexs.BountyValueRegex().Match(splitBounty).Value;
-                        if (string.IsNullOrEmpty(splitdBounty))
-                            continue;
-                        maxBounty = Math.Max(maxBounty, float.Parse(splitdBounty));
-                    }
-                }
-                else
-                {
-                    var splitBounty = bountyPart.Replace(@" ", string.Empty);
-                    splitBounty = Regexs.BountyValueRegex().Match(splitBounty).Value;
-                    if (string.IsNullOrEmpty(splitBounty))
-                        continue;
-                    maxBounty = Math.Max(maxBounty, float.Parse(splitBounty));
-                }
+                maxBounty = ComputeBounty(maxBounty, bountyPart);
             }
 
             return maxBounty switch
@@ -72,6 +54,41 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 >= BountyFac.MillionsDollarsValue => string.Format(CultureInfo.CurrentCulture, "{0:0.######} Mi", maxBounty / BountyFac.MillionsDollarsValue),
                 _ => maxBounty.ToString(CultureInfo.InvariantCulture)
             };
+        }
+
+        /// <summary>Compute bounty for a character</summary>
+        /// <param name="maxBounty">Actual maximum bounty for the character.</param>
+        /// <param name="bountyPart">String that contains the bounty.</param>
+        /// <returns>New bounty.</returns>
+        private static float ComputeBounty(float maxBounty, string bountyPart)
+        {
+            if (bountyPart.Contains('.'))
+            {
+                var bountyValue = bountyPart.Replace(".", string.Empty);
+                foreach (var splitBounty in bountyValue.Split(@" "))
+                {
+                    maxBounty = ComputeMaxBounty(maxBounty, splitBounty);
+                }
+            }
+            else
+            {
+                var splitBounty = bountyPart.Replace(@" ", string.Empty);
+                maxBounty = ComputeMaxBounty(maxBounty, splitBounty);
+            }
+
+            return maxBounty;
+        }
+
+        /// <summary>Compute bounty for a character</summary>
+        /// <param name="maxBounty">Actual maximum bounty for the character.</param>
+        /// <param name="bountyString">String that contains the bounty.</param>
+        /// <returns>New bounty.</returns>
+        private static float ComputeMaxBounty(float maxBounty, string bountyString)
+        {
+            var bountyValue = Regexs.BountyValueRegex().Match(bountyString).Value;
+            if (string.IsNullOrEmpty(bountyValue))
+                return maxBounty;
+            return Math.Max(maxBounty, float.Parse(bountyValue));
         }
     }
 }

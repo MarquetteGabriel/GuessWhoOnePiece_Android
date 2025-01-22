@@ -100,12 +100,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Extract affiliation for specific character.</summary>
         /// <param name="affiliationCharacter">List of affiliation possible.</param>
         /// <returns>Affiliation for the character.</returns>
-        private static string? ExtractSpecificCrew(List<string> affiliationCharacter)
+        private static string? ExtractSpecificCrew(IList<string> affiliationCharacter)
         {
             var singleCrew = ExtractSingleCrew(affiliationCharacter);    
             if(singleCrew != null)
                 return singleCrew;
-
 
             if (affiliationCharacter.Any(affiliation => affiliation.Equals("SWORD")))
                 return Resources.Strings.NavyCrew;
@@ -156,7 +155,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <summary>Extract affiliation when the list contains only one element.</summary>
         /// <param name="affiliationCharacter">List of affiliation character.</param>
         /// <returns>Affiliation for the character.</returns>
-        private static string? ExtractSingleCrew(IList<string> affiliationCharacter)
+        private static string? ExtractSingleCrew(ICollection<string> affiliationCharacter)
         {
             if (affiliationCharacter.Count != 1)
                 return null;

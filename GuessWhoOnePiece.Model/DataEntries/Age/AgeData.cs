@@ -28,7 +28,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 return Regex.Replace(m.Value, @"\d+", "").Trim();
             });
 
-            var specificAge = ExtractSpecificAge(ageText, characterName);
+            string? specificAge = null;          
+            specificAge = ExtractSpecificAge(ageText, characterName);
             
             if (specificAge != null)
             {
@@ -80,20 +81,15 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 if (splitAge.Contains("And", StringComparison.Ordinal) && characterName.Equals("Bas", StringComparison.Ordinal))
                     return splitAge;
-
-                if (splitAge.Contains("Kerville", StringComparison.Ordinal) && characterName.Equals("And", StringComparison.Ordinal))
+                else if (splitAge.Contains("Kerville", StringComparison.Ordinal) && characterName.Equals("And", StringComparison.Ordinal))
                     return splitAge;
-
-                if (splitAge.Contains(@"Anniversaire", StringComparison.Ordinal) && characterName.Equals("Kerville", StringComparison.Ordinal))
+                else if (splitAge.Contains(@"Anniversaire", StringComparison.Ordinal) && characterName.Equals("Kerville", StringComparison.Ordinal))
                     return splitAge;
-
-                if (splitAge.Contains("Mozu", StringComparison.Ordinal) && characterName.Equals("Kiwi", StringComparison.Ordinal))
+                else if (splitAge.Contains("Mozu", StringComparison.Ordinal) && characterName.Equals("Kiwi", StringComparison.Ordinal))
                     return splitAge;
-
-                if (splitAge.Contains("Anniversaire", StringComparison.Ordinal) && characterName.Equals("Mozu", StringComparison.Ordinal))
+                else if (splitAge.Contains("Anniversaire", StringComparison.Ordinal) && characterName.Equals("Mozu", StringComparison.Ordinal))
                     return splitAge;
-
-                if (MonthList.Any(splitAge.Contains))
+                else if (MonthList.Any(splitAge.Contains))
                     return "0";
             }
 
