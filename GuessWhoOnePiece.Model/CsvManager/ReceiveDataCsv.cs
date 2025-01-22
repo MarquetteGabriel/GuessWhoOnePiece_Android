@@ -18,6 +18,18 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <summary>Length of a data character in the csv file.</summary>
         private const int DataCharacterLength = 11; 
 
+        // Column of characters
+        private const int NameColumn = 0;
+        private const int DevilFruitColumn = 1;
+        private const int BountyColumn = 2;
+        private const int FirstAppearanceColumn = 3;
+        private const int TypeColumn = 4;
+        private const int AliveColumn = 5;
+        private const int AgeColumn = 6;
+        private const int CrewColumn = 7;
+        private const int PictureColumn = 8;
+        private const int LevelColumn = 9;
+
         /// <summary>Receive the character from the character name.</summary>
         /// <param name="characterName">The character's name to get data.</param>
         /// <returns>The character to get.</returns>
@@ -65,11 +77,11 @@ namespace GuessWhoOnePiece.Model.CsvManager
         private static Character CreateCharacterFromFile(string[] characterDatas)
         {
             return new Character(
-                        characterDatas[0], bool.Parse(characterDatas[1]),
-                        characterDatas[2], int.Parse(characterDatas[3], CultureInfo.InvariantCulture),
-                        characterDatas[4], bool.Parse(characterDatas[5]),
-                        int.Parse(characterDatas[6], CultureInfo.InvariantCulture), characterDatas[7], characterDatas[8],
-                        int.Parse(characterDatas[9], CultureInfo.InvariantCulture));
+                        characterDatas[NameColumn], bool.Parse(characterDatas[DevilFruitColumn]),
+                        characterDatas[BountyColumn], int.Parse(characterDatas[FirstAppearanceColumn], CultureInfo.InvariantCulture),
+                        characterDatas[TypeColumn], bool.Parse(characterDatas[AliveColumn]),
+                        int.Parse(characterDatas[AgeColumn], CultureInfo.InvariantCulture), characterDatas[CrewColumn], characterDatas[PictureColumn],
+                        int.Parse(characterDatas[LevelColumn], CultureInfo.InvariantCulture));
         }
     }
 }

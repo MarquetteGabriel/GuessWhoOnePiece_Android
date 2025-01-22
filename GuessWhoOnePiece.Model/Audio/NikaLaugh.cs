@@ -9,7 +9,7 @@ namespace GuessWhoOnePiece.Model.Audio
     {
         public void PlayLaugh()
         {
-            
+            // Not implemented yet.
         }
     }
 }

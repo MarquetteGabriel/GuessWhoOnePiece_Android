@@ -9,22 +9,22 @@ internal static class PicturesAlbum
 {
     #region Arrows
 
-    internal const string ArrowUp = ""; //"pictures/arrow_up.png";
-    internal const string ArrowDown = "";//"pictures/arrow_down.png";
+    internal const string ArrowUp = "";
+    internal const string ArrowDown = "";
 
     #endregion
 
     #region Devil Fruit
 
-    internal const string DevilFruit = "";//"pictures/fruit.png";
-    internal const string NoDevilFruit = "";//"pictures/no_fruit.png";
+    internal const string DevilFruit = "";
+    internal const string NoDevilFruit = "";
 
     #endregion
 
     #region Alive
 
-    internal const string Alive = "";//"pictures/vie.png";
-    internal const string NoAlive = "";//"pictures/mort.png";
+    internal const string Alive = "";
+    internal const string NoAlive = "";
     
     #endregion
     

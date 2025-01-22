@@ -44,13 +44,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 .Where(typeData => !typeData.Contains("anciennement", StringComparison.OrdinalIgnoreCase) &&
                                     !typeData.Contains("temporairement", StringComparison.OrdinalIgnoreCase));
 
-            foreach (var typeData in filteredTypeCharacters.Where(typeData => dragonCelestesKeywords
-                        .Any(keyword => typeData.Contains(keyword, StringComparison.OrdinalIgnoreCase))))
-            {
+            var celestialDragons = filteredTypeCharacters.FirstOrDefault(typeData => dragonCelestesKeywords.Any(keyword => typeData.Contains(keyword, StringComparison.OrdinalIgnoreCase)));
+            if(celestialDragons != null)
                 return Resources.Strings.CelestialDragons;
-            }                        
-
-            return Resources.Strings.NavyType;
+            else
+                return Resources.Strings.NavyType;
         }
     }
 }
