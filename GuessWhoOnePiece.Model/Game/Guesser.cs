@@ -5,7 +5,6 @@
 
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
-using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 

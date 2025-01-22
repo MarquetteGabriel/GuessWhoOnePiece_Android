@@ -47,9 +47,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private const string ShishilianCharacterPicture = "Sicilion";
         private const string SuleimanCharacterPicture = "Suleyman";
 
-
-
-
         /// <summary>Gets the link of the image for a character.</summary>
         /// <param name="listOfPictures">List of picture in the web page.</param>
         /// <param name="characterName">Name of the character.</param>
@@ -65,51 +62,58 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     newPicture.Contains(AnimePostEllipse, StringComparison.OrdinalIgnoreCase) || newPicture.Contains(AnimePreEllipse, StringComparison.OrdinalIgnoreCase))
                     return newPicture;
 
+                if (ExtractSpecificPicture(characterName, newPicture) != null)
+                    return newPicture;
+
                 if (newPicture.Contains(characterName))
                     return newPicture;
 
-
-                foreach (var character in characterName.Split(" "))
-                {
-                    if (newPicture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase))
-                        return newPicture;
-                    else if (RemoveDiacritics(WebUtility.UrlDecode(newPicture)).Contains(RemoveDiacritics(character), StringComparison.OrdinalIgnoreCase))
-                        return newPicture;
-                    else
-                    {
-                        // Empty on purpose.
-                    }
-                }
+                if (ExtractPictureHtmlWebDecode(characterName, newPicture) != null)
+                    return newPicture;
 
                 if (CalculateMatchPercentage(newPicture, characterName) > AcceptanceCritera)
                     return newPicture;
-
-
-                if (characterName.Equals(AndCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(AndCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else if (characterName.Equals(BelmerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(BelmerCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else if (characterName.Equals(RockCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(RockCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else if (characterName.Equals(EnerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(EnerCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else if (characterName.Equals(JinbeiCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(JinbeiCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else if (characterName.Equals(BakkinCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(BakkinCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else if (characterName.Equals(MansherryCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(MansherryCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else if (characterName.Equals(ShishilianCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(ShishilianCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else if (characterName.Equals(SuleimanCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(SuleimanCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                    return newPicture;
-                else
-                {
-                    // Empty on purpose.
-                }
             }
 
             return string.Empty;
+        }
+
+        private static string? ExtractPictureHtmlWebDecode(string characterName, string picture)
+        {
+            foreach (var character in characterName.Split(" "))
+            {
+                if (picture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase))
+                    return picture;
+                else if (RemoveDiacritics(WebUtility.UrlDecode(picture)).Contains(RemoveDiacritics(character), StringComparison.OrdinalIgnoreCase))
+                    return picture;
+                else
+                    return null;
+            }
+            return null;
+        }
+
+        private static string? ExtractSpecificPicture(string characterName, string picture)
+        {
+            if (characterName.Equals(AndCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(AndCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(BelmerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(BelmerCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(RockCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(RockCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(EnerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(EnerCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(JinbeiCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(JinbeiCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(BakkinCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(BakkinCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(MansherryCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(MansherryCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(ShishilianCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(ShishilianCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(SuleimanCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(SuleimanCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else
+                return null;
         }
 
         /// <summary>Removes diacritics from a string.</summary>
