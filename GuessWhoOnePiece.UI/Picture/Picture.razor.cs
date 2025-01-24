@@ -9,9 +9,9 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace GuessWhoOnePiece.Components.Elements.Pictures
+namespace GuessWhoOnePiece.UI.Picture
 {
-    public partial class Pictures
+    public partial class Picture : ComponentBase
     {
         [Parameter] public required string PicturePath { get; set; }
 

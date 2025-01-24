@@ -47,11 +47,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Components\Elements\Answer\Answer.razor.js" />
-      <None Remove="Components\Pages\CharacterInfo.razor.cs~RF242c82fa.TMP" />
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="HtmlAgilityPack" Version="1.11.72" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
@@ -70,11 +65,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Components\Elements\Answer\Answer.razor.js" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\GuessWhoOnePiece.Model\GuessWhoOnePiece.Model.csproj" />
+      <ProjectReference Include="..\GuessWhoOnePiece.UI\GuessWhoOnePiece.UI.csproj" />
     </ItemGroup>
 	
 </Project>

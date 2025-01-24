@@ -1,10 +1,11 @@
-﻿@using GuessWhoOnePiece.Components.Elements.Pictures
+﻿@using GuessWhoOnePiece.UI.Picture
+@inject IJSRuntime JS
 
-<div id="answerCard" class="answer-circle @DefineColor()" >
+<div id="answerCard" class="answer-circle @DefineColor()">
     @if (!string.IsNullOrEmpty(AnswerImage))
     {
         <div class="answer-picture">
-            <Pictures PicturePath="@AnswerImage" />
+            <Picture PicturePath="@AnswerImage" />
         </div>
     }
     else 

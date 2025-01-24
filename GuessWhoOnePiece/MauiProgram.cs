@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
-using System;
 
 namespace GuessWhoOnePiece
 {
@@ -31,12 +30,6 @@ namespace GuessWhoOnePiece
             builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
-
-            AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
-            {
-                Console.WriteLine($"Unhandled exception: {eventArgs.ExceptionObject}");
-            };
-
             return builder.Build();
         }
     }

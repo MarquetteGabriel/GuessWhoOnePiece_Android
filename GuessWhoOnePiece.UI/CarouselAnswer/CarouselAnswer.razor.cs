@@ -6,7 +6,7 @@
 using GuessWhoOnePiece.Model.Characters;
 using Microsoft.AspNetCore.Components;
 
-namespace GuessWhoOnePiece.Components.Elements.CarouselAnswer;
+namespace GuessWhoOnePiece.UI.CarouselAnswer;
 
 public partial class CarouselAnswer : ComponentBase
 {

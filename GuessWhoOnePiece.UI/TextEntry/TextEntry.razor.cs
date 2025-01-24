@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GuessWhoOnePiece.Components.Elements.TextEntry;
+namespace GuessWhoOnePiece.UI.TextEntry;
 
 public partial class TextEntry : ComponentBase
 {

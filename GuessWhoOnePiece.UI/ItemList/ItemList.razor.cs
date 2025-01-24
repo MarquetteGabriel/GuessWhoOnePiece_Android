@@ -6,7 +6,7 @@
 using GuessWhoOnePiece.Model.Characters;
 using Microsoft.AspNetCore.Components;
 
-namespace GuessWhoOnePiece.Components.Elements.ItemList;
+namespace GuessWhoOnePiece.UI.ItemList;
 
 public partial class ItemList : ComponentBase
 {
