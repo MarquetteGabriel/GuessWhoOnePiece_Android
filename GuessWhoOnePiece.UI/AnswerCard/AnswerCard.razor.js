@@ -6,7 +6,7 @@
 export function adjustFontSize() {
     const answerCircles = document.querySelectorAll(".answer-circle");
 
-    answerCircles.forEach((circle, index) => {
+    answerCircles.forEach((circle) => {
         const text = circle.querySelector(".answer-text");
         if (text) {
             let fontSize = 40;

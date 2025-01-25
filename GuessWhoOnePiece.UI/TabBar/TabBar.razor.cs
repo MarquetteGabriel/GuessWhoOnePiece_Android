@@ -5,7 +5,7 @@
 
 using Microsoft.AspNetCore.Components;
 
-namespace GuessWhoOnePiece.Components.Layout;
+namespace GuessWhoOnePiece.UI.TabBar;
 
 public partial class TabBar : ComponentBase
 {
