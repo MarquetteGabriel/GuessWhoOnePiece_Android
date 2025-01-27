@@ -3,9 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-using GuessWhoOnePiece.Model.DataEntries;
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.UI.LoadingBar
 {

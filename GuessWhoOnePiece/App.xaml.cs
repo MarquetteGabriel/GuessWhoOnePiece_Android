@@ -23,7 +23,14 @@ namespace GuessWhoOnePiece
         {
             if(!Preferences.Get("Updated", false))
             {
-                Task.Run(() => ControlRoomService.GetCharactersData());
+                Task.Run(() => Progress.GetCharactersData());
+                Task.Run(() =>
+                {
+                    while (ControlRoomService.CountPercentage < 100)
+                    {
+                        Progress.GetProgress();
+                    }      
+                });
             }
 
             base.OnStart();

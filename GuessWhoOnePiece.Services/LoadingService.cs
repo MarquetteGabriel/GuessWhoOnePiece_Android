@@ -9,7 +9,7 @@ namespace GuessWhoOnePiece.Services
 {
     public class LoadingService
     {
-        public event Action? OnChange;
+        public event EventHandler? OnChange;
         private bool _loading;
 
         public bool Loading
@@ -25,6 +25,6 @@ namespace GuessWhoOnePiece.Services
             }
         }
 
-        private void NotifyStateChanged() => OnChange?.Invoke();
+        private void NotifyStateChanged() => OnChange?.Invoke(this, EventArgs.Empty);
     }
 }

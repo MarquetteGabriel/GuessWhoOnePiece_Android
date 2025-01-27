@@ -54,11 +54,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private const string Space = " ";
         private const string DataSource = "data-source";
 
-        /// <summary>Percentage of acceptance between picture link and character.</summary>
-        private const double AcceptanceCritera = 0.11;
-
         /// <summary>Percentage of advencement for loading characters.</summary>
         private int _countPercentage;
+
+        public int CountPercentage
+        {
+            get => _countPercentage;
+        }
 
         /// <summary>Get data for a specific character from its fandom page.</summary>
         /// <param name="url">The url of the character.</param>
@@ -85,7 +87,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 Task<string>? pictureDownloadTask = null;
                 if (pictureElements != null)
                 {
-                    var pictureElement = GetPictureLink(pictureElements, characterName);
+                    var pictureElement = PictureManager.GetPictureLink(pictureElements, characterName);
                     pictureElement = CleanWebHtmlString(pictureElement);
 
                     pictureDownloadTask = Task.Run(async () =>
@@ -203,7 +205,5 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The string cleaned.</returns>
         private static string CleanWebHtmlString(string? webString) => webString != null ? WebUtility.HtmlDecode(webString).Replace("\n", string.Empty, StringComparison.OrdinalIgnoreCase)
             .Replace("\t", string.Empty, StringComparison.OrdinalIgnoreCase) : string.Empty;
-
-        public int GetCountPercentage() => _countPercentage;
     }
 }

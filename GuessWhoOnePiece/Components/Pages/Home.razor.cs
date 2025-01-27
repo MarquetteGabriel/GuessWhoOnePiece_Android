@@ -15,7 +15,7 @@ namespace GuessWhoOnePiece.Components.Pages
 {
     public partial class Home
     {
-        private bool isLoading = false;
+        private bool isLoading;
         readonly ControlRoom _controlRoom = new ControlRoom();
         private string _value = string.Empty;
 

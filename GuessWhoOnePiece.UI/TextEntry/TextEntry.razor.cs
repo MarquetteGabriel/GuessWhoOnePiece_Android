@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace GuessWhoOnePiece.UI.TextEntry;
 
 public partial class TextEntry : ComponentBase
 {
-    [Parameter] public List<string> Items { get; set; } = []; 
+    [Parameter] public Collection<string> Items { get; set; } = []; 
     
     [Parameter] public bool WithAutoComplete { get; set; }
     [Parameter] public EventCallback<string> OnItemSelected { get; set; } // Event when an item is selected

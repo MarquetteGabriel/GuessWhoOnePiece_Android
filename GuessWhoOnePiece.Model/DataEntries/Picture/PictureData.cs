@@ -12,9 +12,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace GuessWhoOnePiece.Model.DataEntries
+namespace GuessWhoOnePiece.Model.DataEntries.Picture
 {
-    public partial class ControlRoom
+    public static partial class PictureManager
     {
         private const string MangaPostEllipse = "Manga_Post_Ellipse";
         private const string MangaPreEllipse = "Manga_Pre_Ellipse";
@@ -28,6 +28,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private const string Href = "href";
         private const string AmpAnd = "&amp";
         private const string Esperluette = "&";
+
+        /// <summary>Percentage of acceptance between picture link and character.</summary>
+        private const double AcceptanceCritera = 0.11;
 
         private static readonly IImmutableDictionary<string, string> SpecificCharacterPictures = new Dictionary<string, string>
         {
@@ -46,7 +49,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="listOfPictures">List of picture in the web page.</param>
         /// <param name="characterName">Name of the character.</param>
         /// <returns>The link of the image for the character.</returns>
-        private static string GetPictureLink(HtmlNodeCollection listOfPictures, string characterName)
+        internal static string GetPictureLink(HtmlNodeCollection listOfPictures, string characterName)
         {
             foreach (var picture in listOfPictures.Select(picture => picture.GetAttributeValue(Href, string.Empty)))
             {

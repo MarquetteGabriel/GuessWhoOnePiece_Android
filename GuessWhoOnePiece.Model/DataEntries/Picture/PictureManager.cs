@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace GuessWhoOnePiece.Model.DataEntries.Picture
 {
     /// <summary>Represents the retrieval of pictures.</summary>
-    internal static class PictureManager
+    public static partial class PictureManager
     {
         /// <summary>Path to the folder of pictures.</summary>
         internal static readonly string PicturePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Images");
@@ -50,7 +50,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
             }
             catch (Exception)
             {
-                return imageUrl.ToString();
+                return imageUrl;
             }
         }
 

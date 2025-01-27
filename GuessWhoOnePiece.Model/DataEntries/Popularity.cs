@@ -44,6 +44,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         private static int _countPopularity;
 
+        public static int CountPopularity
+        {
+            get => _countPopularity;
+        }
+
         /// <summary>Set the popularity of characters.</summary>
         /// <param name="characterNameList">List of characters.</param>
         internal static async Task<IReadOnlyCollection<Character>> SetPopularity(IReadOnlyList<string> characterNameList, IReadOnlyCollection<Character> characterList)
@@ -156,11 +161,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 return BarbeBlanche;
 
             return character;
-        }
-
-        public static int GetCountPopularity()
-        {
-            return _countPopularity;
         }
     }
 }

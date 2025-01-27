@@ -27,8 +27,11 @@ namespace GuessWhoOnePiece
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddSingleton<GameViewModel>();
 
-            // Loading Services
+            // Loading Services.
             builder.Services.AddSingleton<LoadingService>();
+
+            // Get Percentage of character Data get.
+            builder.Services.AddSingleton<ControlRoomService>();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

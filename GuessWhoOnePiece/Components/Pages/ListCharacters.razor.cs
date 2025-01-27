@@ -21,7 +21,7 @@ public partial class ListCharacters : ComponentBase
     
     private List<string> _characterNames;
 
-    private bool isLoading = false;
+    private bool isLoading;
     private string SearchText { get; set; }
 
     protected override async Task OnInitializedAsync()

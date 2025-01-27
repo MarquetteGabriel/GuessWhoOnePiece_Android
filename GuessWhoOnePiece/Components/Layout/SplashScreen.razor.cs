@@ -13,7 +13,8 @@ namespace GuessWhoOnePiece.Components.Layout
     {
         internal bool Loading;
         private int ProgressValue;
-        private bool HasStarted = false;
+        private bool HasStarted;
+        private const int MAX_PROGRESS = 100;
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (!firstRender || HasStarted)
@@ -40,11 +41,11 @@ namespace GuessWhoOnePiece.Components.Layout
         {
             ProgressValue = 0;
 
-            while (ProgressValue < 100)
+            while (ProgressValue < MAX_PROGRESS)
             {
-                ProgressValue = ControlRoomService.GetProgress();
-                if (ProgressValue >= 100)
-                    ProgressValue = 100;
+                ProgressValue = ControlRoomService.CountPercentage;
+                if (ProgressValue >= MAX_PROGRESS)
+                    ProgressValue = MAX_PROGRESS;
 
                 StateHasChanged();
             }

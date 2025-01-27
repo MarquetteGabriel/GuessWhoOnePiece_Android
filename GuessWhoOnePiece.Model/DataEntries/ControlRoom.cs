@@ -17,6 +17,13 @@ namespace GuessWhoOnePiece.Model.DataEntries
     public partial class ControlRoom
     {
         private IReadOnlyList<string> _characterNameList = new List<string>();
+
+        public int CharacterCount
+        {
+            get => _characterNameList.Count;
+        }
+
+
         /// <summary>Generate threads to get data.</summary>
         /// <returns>The complete list of characters.</returns>
         public async Task<IReadOnlyCollection<Character>> GenerateThreads()
@@ -55,11 +62,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
             const string urlFandom = "https://onepiece.fandom.com/fr/wiki/";
             return new Uri(urlFandom + urlCharacter);
-        }
-
-        public int GetCharacterCount()
-        {
-            return _characterNameList.Count;
         }
     }
 }
