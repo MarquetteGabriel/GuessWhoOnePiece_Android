@@ -12,6 +12,8 @@ namespace GuessWhoOnePiece
 {
     public partial class App : Application
     {
+        private const int MAX_PROGRESS = 100;
+
         public App()
         {
             InitializeComponent();
@@ -26,7 +28,7 @@ namespace GuessWhoOnePiece
                 Task.Run(() => Progress.GetCharactersData());
                 Task.Run(() =>
                 {
-                    while (ControlRoomService.CountPercentage < 100)
+                    while (ControlRoomService.CountPercentage < MAX_PROGRESS)
                     {
                         Progress.GetProgress();
                     }      

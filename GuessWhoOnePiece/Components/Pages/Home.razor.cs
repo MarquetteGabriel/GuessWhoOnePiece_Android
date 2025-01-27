@@ -5,7 +5,6 @@
 
 using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries;
-using Microsoft.JSInterop;
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -15,7 +14,6 @@ namespace GuessWhoOnePiece.Components.Pages
 {
     public partial class Home
     {
-        private bool isLoading;
         readonly ControlRoom _controlRoom = new ControlRoom();
         private string _value = string.Empty;
 
@@ -23,14 +21,12 @@ namespace GuessWhoOnePiece.Components.Pages
         {
             var thread = new Thread(async () =>
             {
-                isLoading = true;
                 await InvokeAsync(StateHasChanged);
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
                 await _controlRoom.GenerateThreads();
                 stopwatch.Stop();
                 await InvokeAsync(StateHasChanged);
-                isLoading = false;
             });
 
             thread.Start();

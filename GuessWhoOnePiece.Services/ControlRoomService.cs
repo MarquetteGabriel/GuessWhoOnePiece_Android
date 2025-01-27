@@ -2,9 +2,9 @@
 
 namespace GuessWhoOnePiece.Services
 {
-    public class ControlRoomService
+    public static class ControlRoomService
     {
-        public static event Action? OnChange;
+        public static event EventHandler? OnChange;
         private static int _countPercentage;
 
         public static int CountPercentage
@@ -20,6 +20,6 @@ namespace GuessWhoOnePiece.Services
             }
         }
 
-        private static void NotifyStateChanged() => OnChange?.Invoke();
+        private static void NotifyStateChanged() => OnChange?.Invoke(null, EventArgs.Empty);
     }
 }

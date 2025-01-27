@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Services
 {
-    public class Progress
+    public static class Progress
     {
         private const int MAX_PROGRESS_DATA = 70;
         private const int MAX_PROGRESS_POPULARITY = 30;
