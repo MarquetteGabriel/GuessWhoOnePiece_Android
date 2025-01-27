@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace GuessWhoOnePiece.Model.DataEntries
 {
     /// <summary>Represent the definition of the popularity for each character.</summary>
-    internal static class Popularity
+    public static class Popularity
     {
         private static readonly Uri UrlLevels = new("http://www.volonte-d.com/details/popularite.php");
 
@@ -42,6 +42,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
         private const string BarbeNoire = "Barbe Noire";
         private const string BarbeBlanche = "Barbe Blanche";
 
+        private static int _countPopularity;
+
         /// <summary>Set the popularity of characters.</summary>
         /// <param name="characterNameList">List of characters.</param>
         internal static async Task<IReadOnlyCollection<Character>> SetPopularity(IReadOnlyList<string> characterNameList, IReadOnlyCollection<Character> characterList)
@@ -63,7 +65,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             var levelLimit = ListPopularity.Count % ControlRoom.NumberOfLevels;
             foreach (var character in characterNameList)
             {
-                string tempCharacterName = character.Contains(FilterAlias, StringComparison.Ordinal) 
+                string tempCharacterName = character.Contains(FilterAlias, StringComparison.Ordinal)
                     ? character.Replace(ReplaceCharacter, string.Empty, StringComparison.OrdinalIgnoreCase) : character;
                 int position = SetPosition(tempCharacterName, ListPopularity);
 
@@ -74,8 +76,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                     characters.Level = Math.Clamp(SetLevel(position, levelLimit), 0, ControlRoom.NumberOfLevels - 1);
                 }
-                
-                // Count level increase here.
+
+                _countPopularity++;
             }
 
             return characterList;
@@ -100,7 +102,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 if (position > levelLimit * i)
                     continue;
 
-                return i - 1;          
+                return i - 1;
             }
 
             return levelLimit;
@@ -110,7 +112,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             var position = listCharacter.IndexOf(characterName);
 
-            if(position != -1)
+            if (position != -1)
                 return position;
 
             var newCharacter = GetSimilarCharacter(characterName, listCharacter);
@@ -154,6 +156,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 return BarbeBlanche;
 
             return character;
+        }
+
+        public static int GetCountPopularity()
+        {
+            return _countPopularity;
         }
     }
 }

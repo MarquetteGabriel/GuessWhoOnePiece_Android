@@ -93,7 +93,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         await ImageDownloadSemaphore.WaitAsync();
                         try
                         {
-                            return await PictureManager.DownloadImageAsync(new Uri(pictureElement), characterName);
+                            return await PictureManager.DownloadImageAsync(pictureElement, characterName);
                         }
                         finally
                         {
@@ -203,5 +203,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The string cleaned.</returns>
         private static string CleanWebHtmlString(string? webString) => webString != null ? WebUtility.HtmlDecode(webString).Replace("\n", string.Empty, StringComparison.OrdinalIgnoreCase)
             .Replace("\t", string.Empty, StringComparison.OrdinalIgnoreCase) : string.Empty;
+
+        public int GetCountPercentage() => _countPercentage;
     }
 }

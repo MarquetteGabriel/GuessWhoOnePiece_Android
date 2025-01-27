@@ -3,6 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Services;
 using GuessWhoOnePiece.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,6 +26,9 @@ namespace GuessWhoOnePiece
 
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddSingleton<GameViewModel>();
+
+            // Loading Services
+            builder.Services.AddSingleton<LoadingService>();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

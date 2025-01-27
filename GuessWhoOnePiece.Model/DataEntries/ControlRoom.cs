@@ -25,7 +25,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
             var charactersList = new ConcurrentBag<Character>();
             
-            await Parallel.ForEachAsync(_characterNameList, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 }, async (characterName, _) =>
+            await Parallel.ForEachAsync(_characterNameList, async (characterName, _) =>
             {
                 var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
                 if (character != null)
@@ -55,6 +55,11 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
             const string urlFandom = "https://onepiece.fandom.com/fr/wiki/";
             return new Uri(urlFandom + urlCharacter);
+        }
+
+        public int GetCharacterCount()
+        {
+            return _characterNameList.Count;
         }
     }
 }

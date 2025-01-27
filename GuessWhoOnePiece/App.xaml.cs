@@ -3,7 +3,10 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Services;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
+using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece
 {
@@ -14,6 +17,16 @@ namespace GuessWhoOnePiece
             InitializeComponent();
 
             MainPage = new MainPage();
+        }
+
+        protected override void OnStart()   
+        {
+            if(!Preferences.Get("Updated", false))
+            {
+                Task.Run(() => ControlRoomService.GetCharactersData());
+            }
+
+            base.OnStart();
         }
     }
 }
