@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\GuessWhoOnePiece\GuessWhoOnePiece.licenseheader" Link="GuessWhoOnePiece.licenseheader" />
+  </ItemGroup>
+
+  <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 

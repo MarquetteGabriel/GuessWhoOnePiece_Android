@@ -1,4 +1,4 @@
-﻿// <copyright file="Pictures.razor.cs">
+﻿// <copyright file="Picture.razor.cs">
 // Copyright (c) 2025 All Rights Reserved. 
 // </copyright>
 // <author>Gabriel Marquette</author>

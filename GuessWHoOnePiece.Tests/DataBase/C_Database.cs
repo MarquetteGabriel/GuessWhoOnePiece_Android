@@ -1,4 +1,9 @@
-﻿using Xunit;
+﻿// <copyright file="C_Database.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using Xunit;
 using GuessWhoOnePiece.Model.DataEntries;
 using System.Threading.Tasks;
 

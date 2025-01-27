@@ -1,4 +1,9 @@
-﻿.loading-bar {
+﻿/* 
+   Copyright (c) 2025 All Rights Reserved. 
+   Author: Gabriel Marquette
+*/
+
+.loading-bar {
     width: 100%;
     max-width: 600px;
     background-color: #e0e0e0;

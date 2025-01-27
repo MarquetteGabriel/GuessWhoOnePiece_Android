@@ -1,4 +1,9 @@
-﻿using GuessWhoOnePiece.Model.DataEntries;
+﻿// <copyright file="Y_Database.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using GuessWhoOnePiece.Model.DataEntries;
 using System;
 using System.Collections.Generic;
 using System.Linq;

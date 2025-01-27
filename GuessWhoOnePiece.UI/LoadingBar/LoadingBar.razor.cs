@@ -1,4 +1,4 @@
-// <copyright file="BackButton.razor.cs">
+// <copyright file="LoadingBar.razor.cs">
 // Copyright (c) 2025 All Rights Reserved. 
 // </copyright>
 // <author>Gabriel Marquette</author>

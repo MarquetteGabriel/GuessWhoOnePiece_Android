@@ -1,3 +1,8 @@
+// <copyright file="SplashScreen.razor.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
 using System.Threading.Tasks;
 using GuessWhoOnePiece.Services;
 using Microsoft.Maui.Storage;

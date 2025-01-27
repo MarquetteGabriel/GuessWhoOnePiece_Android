@@ -1,4 +1,9 @@
-﻿using GuessWhoOnePiece.Model.DataEntries;
+﻿// <copyright file="ControlRoomService.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using GuessWhoOnePiece.Model.DataEntries;
 using Microsoft.Maui.Storage;
 using System.Threading.Tasks;
 

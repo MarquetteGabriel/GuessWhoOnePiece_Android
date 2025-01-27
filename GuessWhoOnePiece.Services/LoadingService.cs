@@ -1,4 +1,9 @@
-﻿using System;
+﻿// <copyright file="LoadingService.cs">
+// Copyright (c) 2025 All Rights Reserved. 
+// </copyright>
+// <author>Gabriel Marquette</author>
+
+using System;
 
 namespace GuessWhoOnePiece.Services
 {
