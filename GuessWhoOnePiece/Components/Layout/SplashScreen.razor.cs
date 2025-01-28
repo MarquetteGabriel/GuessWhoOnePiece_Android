@@ -4,6 +4,7 @@
 // <author>Gabriel Marquette</author>
 
 using System.Threading.Tasks;
+using GuessWhoOnePiece.Model.DataEntries;
 using GuessWhoOnePiece.Services;
 using Microsoft.Maui.Storage;
 
@@ -11,23 +12,23 @@ namespace GuessWhoOnePiece.Components.Layout
 {
     public partial class SplashScreen
     {
-        internal bool Loading;
         private int ProgressValue;
-        private bool HasStarted;
         private const int MAX_PROGRESS = 100;
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (!firstRender || HasStarted)
+            if (!firstRender)
                 return;
 
-            HasStarted = true;
             StartLoadingBar();
         }
 
         protected override Task OnInitializedAsync()
         {
-            if (!Preferences.Get("Updated", false))
+            if(!Preferences.Get("Updated", false))
+            {
                 LoadingService.Loading = true;
+            }
             else
             {
                 LoadingService.Loading = false;
@@ -36,20 +37,35 @@ namespace GuessWhoOnePiece.Components.Layout
 
             return base.OnInitializedAsync();
         }
-
-        private async void StartLoadingBar()
+        
+        private void StartLoadingBar()
         {
-            ProgressValue = 0;
-
-            while (ProgressValue < MAX_PROGRESS)
+            if (!Preferences.Get("Updated", false))
             {
-                ProgressValue = ControlRoomService.CountPercentage;
-                if (ProgressValue >= MAX_PROGRESS)
-                    ProgressValue = MAX_PROGRESS;
+                ProgressValue = 0;
+                var controlRoom = new ControlRoom();
 
-                StateHasChanged();
+                Task.Run(async () =>
+                {
+                    var threadsTask = controlRoom.GenerateThreads();
+                    while (ProgressValue < MAX_PROGRESS)
+                    {
+                        ProgressValue = controlRoom.GetPercentage(); ;
+                        if (ProgressValue > MAX_PROGRESS)
+                            ProgressValue = MAX_PROGRESS;
 
-                await Task.Delay(100);
+                        await InvokeAsync(() => StateHasChanged());
+
+                        if (threadsTask.IsCompleted)
+                        {
+                            ProgressValue = MAX_PROGRESS;
+                        }   
+                    }                 
+                    Preferences.Set("Updated", true);
+                    LoadingService.Loading = false;
+                    controlRoom = null;
+                    Navigation.NavigateTo("/home");
+                });
             }
         }
     }

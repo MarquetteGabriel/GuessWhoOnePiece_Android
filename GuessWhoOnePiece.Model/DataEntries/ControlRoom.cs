@@ -19,15 +19,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
     {
         private IReadOnlyList<string> _characterNameList = new List<string>();
 
-        private readonly ControlRoomService ControlRoomService;
-
         private const int MAX_PROGRESS_DATA = 70;
         private const int MAX_PROGRESS_POPULARITY = 30;
-
-        public ControlRoom(ControlRoomService controlRoomService)
-        {
-            ControlRoomService = controlRoomService;
-        }
 
         public int CharacterCount
         {
@@ -75,22 +68,20 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return new Uri(urlFandom + urlCharacter);
         }
 
-        public void GetPercentage()
+        public int GetPercentage()
         {
             if (CharacterCount == 0)
             {
-                ControlRoomService.CountPercentage = CharacterCount;
-                return;
+                return CharacterCount;
             }
             
             int percentage = (int)((double)CountPercentage / CharacterCount * MAX_PROGRESS_DATA);
             if (CountPercentage < CharacterCount)
             {
-                ControlRoomService.CountPercentage = percentage;
-                return;
+                return percentage;
             }
 
-            ControlRoomService.CountPercentage = Popularity.CountPopularity % CountPercentage * MAX_PROGRESS_POPULARITY + MAX_PROGRESS_DATA;
+            return Popularity.CountPopularity % CountPercentage * MAX_PROGRESS_POPULARITY + MAX_PROGRESS_DATA;
         }
     }
 }

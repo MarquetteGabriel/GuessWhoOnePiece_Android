@@ -1,10 +1,11 @@
-﻿@page "/loading"
+﻿@page "/"
+@page "/loading"
 @using GuessWhoOnePiece.UI.LoadingBar
 @inject GuessWhoOnePiece.Services.LoadingService LoadingService
 @inject GuessWhoOnePiece.Services.ControlRoomService ControlRoomService
 @inject NavigationManager Navigation
 
-<LoadingBar ProgressPercentage="@ProgressValue"/>
-<h3>SplashScreen</h3>
-
-<button>Button</button>
+<div class="loading-bar">
+    <div class="progress" id="progressBar" style="width:@ProgressValue%"></div>
+    <span class="progress-text" id="progressText">@ProgressValue%</span>
+</div>

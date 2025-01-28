@@ -15,26 +15,11 @@ namespace GuessWhoOnePiece
 {
     public partial class App : Application
     {
-        private ControlRoomService _controlRoomServices;
-
-        public App(IServiceProvider serviceProvider)
+        public App()
         {
-            _controlRoomServices = serviceProvider.GetRequiredService<ControlRoomService>();
             InitializeComponent();
 
             MainPage = new MainPage();
-        }
-
-        protected override void OnStart()   
-        {
-            if(!Preferences.Get("Updated", false))
-            {
-                ControlRoom controlRoom = new(_controlRoomServices);
-                Task.Run( async () => await controlRoom.GenerateThreads());
-                Task.Run(() => controlRoom.GetPercentage());
-            }
-
-            base.OnStart();
         }
     }
 }

@@ -75,6 +75,15 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 var characterData = CleanWebHtmlString(doc.DocumentNode.SelectSingleNode(FilterCharacterData)?.InnerText)
                      ?? throw new InvalidOperationException(ExceptionMessage);
 
+                // Age part.
+                var age = DataControl.ExtractPatternAge(characterData, characterName);
+                if (age == 0)
+                    throw new InvalidOperationException(ExceptionMessageAge);
+
+                // Chapter Part.
+                var chapterString = DataControl.ExtractPattern(characterData, FilterChapter);
+                var chapter = !string.IsNullOrEmpty(chapterString) ? int.Parse(chapterString) : throw new InvalidOperationException(ExceptionMessageChapter);
+
                 var pictureElements = doc.DocumentNode.SelectNodes(FilterPicture);
 
                 var bountyTypeCrewElements = doc.DocumentNode.SelectNodes(FilterBounty) ?? throw new InvalidOperationException(ExceptionMessage);
@@ -108,15 +117,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
                 // Crew part.
                 (var crew, var type) = GetCrewType(bountyTypeCrewElements, characterName);
-
-                // Age part.
-                var age = DataControl.ExtractPatternAge(characterData, characterName);
-                if (age == 0)
-                    throw new InvalidOperationException(ExceptionMessageAge);
-
-                // Chapter Part.
-                var chapterString = DataControl.ExtractPattern(characterData, FilterChapter);
-                var chapter = !string.IsNullOrEmpty(chapterString) ? int.Parse(chapterString) : throw new InvalidOperationException(ExceptionMessageChapter);
 
                 // Alived part.
                 var alived = !DataControl.ExtractPattern(characterData, FilterAlived).Equals(Dead);

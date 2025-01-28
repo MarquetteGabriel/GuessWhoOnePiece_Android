@@ -14,7 +14,7 @@ namespace GuessWhoOnePiece.Components.Pages
 {
     public partial class Home
     {
-        readonly ControlRoom _controlRoom = new ControlRoom(null);
+        readonly ControlRoom _controlRoom = new ControlRoom();
         private string _value = string.Empty;
 
         private void OnClickChargement()
