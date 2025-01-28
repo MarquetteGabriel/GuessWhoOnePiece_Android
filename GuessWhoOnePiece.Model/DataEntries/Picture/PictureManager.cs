@@ -48,7 +48,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
 
                 return @"Images/" + fileName;
             }
-            catch (Exception ex) when (ex is IOException || ex is InvalidOperationException)
+            catch (Exception)
             {
                 return imageUrl;
             }

@@ -3,13 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-using GuessWhoOnePiece.Model.DataEntries;
-using GuessWhoOnePiece.Services;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
-using System;
-using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece
 {

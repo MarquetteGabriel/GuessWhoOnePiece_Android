@@ -50,7 +50,7 @@ namespace GuessWhoOnePiece.Components.Layout
                     var threadsTask = controlRoom.GenerateThreads();
                     while (ProgressValue < MAX_PROGRESS)
                     {
-                        ProgressValue = controlRoom.GetPercentage(); ;
+                        ProgressValue = controlRoom.GetPercentage();
                         if (ProgressValue > MAX_PROGRESS)
                             ProgressValue = MAX_PROGRESS;
 

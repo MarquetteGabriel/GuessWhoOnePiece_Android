@@ -5,6 +5,7 @@
 
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
@@ -12,9 +13,8 @@ namespace GuessWhoOnePiece.Model.Game
 {
     public static class Guesser
     {
-        public static async Task<Character> SetCharacterToFind()
+        public static async Task<Character> SetCharacterToFind(List<Character> listCharacters)
         {
-            var listCharacters = await ReceiveDataCsv.ReceiveAllCharacters();
             var index = RandomizeNumber(listCharacters.Count);
             return listCharacters[index];
         }

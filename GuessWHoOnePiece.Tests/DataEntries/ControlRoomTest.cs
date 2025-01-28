@@ -23,7 +23,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         [Fact (Skip = "Manage.Csv not mocked")]
         public async Task Test_ReceiveCharacter()
         {
-            ControlRoom controlRoom = new ControlRoom(null);
+            ControlRoom controlRoom = new ControlRoom();
             var result = await controlRoom.GenerateThreads();
 
             Assert.NotNull(result);
@@ -97,8 +97,12 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         [Fact]
         public async Task Test_GenerateThreads()
         {
-            var controlRoom = new ControlRoom(null);
-            var _characterNameList = await CharacterNameListManager.ReceivedCharactersList();
+            var controlRoom = new ControlRoom();
+            var _characterNameList = new List<string>()
+            {
+                "Monkey D. Luffy", "Roronoa Zoro", "Nami", "Portgas D. Ace"
+            };
+
             var charactersList = new ConcurrentBag<Character>();
             await Parallel.ForEachAsync(_characterNameList, async (characterName, _) =>
             {

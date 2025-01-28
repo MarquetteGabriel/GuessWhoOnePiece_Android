@@ -108,15 +108,31 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
         {
             if (SpecificB(characterName, picture) != null)
                 return picture;
-            else if (characterName.Equals(RockCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(RockCharacterPicture, StringComparison.OrdinalIgnoreCase))
+            else if(SpecificEnnemies(characterName, picture) != null)
+                return picture;
+            else if(SpecificAllies(characterName, picture) != null)
+                return picture;
+            else if (SpecificS(characterName, picture) != null)
+                return picture;
+            else
+                return null;
+        }
+
+        private static string? SpecificEnnemies(string characterName, string picture)
+        {
+            if (characterName.Equals(RockCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(RockCharacterPicture, StringComparison.OrdinalIgnoreCase))
                 return picture;
             else if (characterName.Equals(EnerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(EnerCharacterPicture, StringComparison.OrdinalIgnoreCase))
                 return picture;
-            else if (characterName.Equals(JinbeiCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(JinbeiCharacterPicture, StringComparison.OrdinalIgnoreCase))
+            else
+                return null;
+        }
+
+        private static string? SpecificAllies(string characterName, string picture)
+        {
+            if (characterName.Equals(JinbeiCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(JinbeiCharacterPicture, StringComparison.OrdinalIgnoreCase))
                 return picture;
             else if (characterName.Equals(MansherryCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(MansherryCharacterPicture, StringComparison.OrdinalIgnoreCase))
-                return picture;
-            else if (SpecificS(characterName, picture) != null)
                 return picture;
             else
                 return null;

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using GuessWhoOnePiece.Components.Pages;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.Game;
@@ -32,7 +33,8 @@ namespace GuessWhoOnePiece.ViewModel
 
         private async Task DefineCharacter()
         {
-            _characterToFind = await Guesser.SetCharacterToFind();
+            var listCharacters = await ReceiveDataCsv.ReceiveAllCharacters();
+            _characterToFind = await Guesser.SetCharacterToFind(listCharacters);
         }
 
 

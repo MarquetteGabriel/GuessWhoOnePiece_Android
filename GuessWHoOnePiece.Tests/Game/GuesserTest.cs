@@ -21,10 +21,17 @@ namespace GuessWhoOnePiece.Tests.Game
         [Fact]
         public async void Test_SetCharacterToFind()
         {
-            var result = await Guesser.SetCharacterToFind();
+            var listCharacters = new List<Character>()
+            {
+                new ("Monkey D. Luffy", true, "3 Md", 1, "Pirate", true, 19, "Mugiwara's Crew", "", 0),
+                new ("Roronoa Zoro", false, "2 Md", 2, "Pirate", true, 21, "Mugiwara's Crew", "", 0),
+                new ("Nami", false, "330 Mi", 3, "Pirate", true, 20, "Mugiwara's Crew", "", 0),
+                new ("Usopp", false, "500 Mi", 4, "Pirate", true, 19, "Mugiwara's Crew", "", 0),
+            };
+            var result = await Guesser.SetCharacterToFind(listCharacters);
 
             Assert.NotNull(result);
-            Assert.IsType<int>(result);
+            Assert.IsType<Character>(result);
         }
 
         #endregion
