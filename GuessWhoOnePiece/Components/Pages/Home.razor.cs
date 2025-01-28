@@ -4,10 +4,6 @@
 // <author>Gabriel Marquette</author>
 
 using GuessWhoOnePiece.Model.CsvManager;
-using GuessWhoOnePiece.Model.DataEntries;
-using System;
-using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Components.Pages
@@ -18,7 +14,7 @@ namespace GuessWhoOnePiece.Components.Pages
 
         private void OnClickChargement()
         {
-
+            // Not used now.
         }
 
         public async Task OnShowCharacter()

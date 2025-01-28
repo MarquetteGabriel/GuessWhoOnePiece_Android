@@ -19,7 +19,7 @@ namespace GuessWhoOnePiece.Tests.Game
         #region SetCharacterToFind Tests
         
         [Fact]
-        public async void Test_SetCharacterToFind()
+        public void Test_SetCharacterToFind()
         {
             var listCharacters = new List<Character>()
             {
@@ -28,7 +28,7 @@ namespace GuessWhoOnePiece.Tests.Game
                 new ("Nami", false, "330 Mi", 3, "Pirate", true, 20, "Mugiwara's Crew", "", 0),
                 new ("Usopp", false, "500 Mi", 4, "Pirate", true, 19, "Mugiwara's Crew", "", 0),
             };
-            var result = await Guesser.SetCharacterToFind(listCharacters);
+            var result = Guesser.SetCharacterToFind(listCharacters);
 
             Assert.NotNull(result);
             Assert.IsType<Character>(result);

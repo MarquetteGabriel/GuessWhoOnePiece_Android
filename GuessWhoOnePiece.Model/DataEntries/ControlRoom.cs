@@ -68,20 +68,16 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return new Uri(urlFandom + urlCharacter);
         }
 
-        public int GetPercentage()
+        public int Percentage
         {
-            if (CharacterCount == 0)
+            get
             {
-                return CharacterCount;
-            }
-            
-            int percentage = (int)((double)CountPercentage / CharacterCount * MAX_PROGRESS_DATA);
-            if (CountPercentage < CharacterCount)
-            {
-                return percentage;
-            }
+                if (CharacterCount == 0)
+                    return CharacterCount;
 
-            return Popularity.CountPopularity % CountPercentage * MAX_PROGRESS_POPULARITY + MAX_PROGRESS_DATA;
+                int percentage = (int)((double)CountPercentage / CharacterCount * MAX_PROGRESS_DATA);
+                return (CountPercentage < CharacterCount) ? percentage : Popularity.CountPopularity % CountPercentage * MAX_PROGRESS_POPULARITY + MAX_PROGRESS_DATA;
+            }
         }
     }
 }
