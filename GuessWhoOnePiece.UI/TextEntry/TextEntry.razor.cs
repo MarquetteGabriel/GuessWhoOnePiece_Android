@@ -15,7 +15,7 @@ namespace GuessWhoOnePiece.UI.TextEntry;
 
 public partial class TextEntry : ComponentBase
 {
-    [Parameter] public Collection<string> Items { get; set; } = []; 
+    [Parameter] public List<string> Items { get; set; } = []; 
     
     [Parameter] public bool WithAutoComplete { get; set; }
     [Parameter] public EventCallback<string> OnItemSelected { get; set; } // Event when an item is selected

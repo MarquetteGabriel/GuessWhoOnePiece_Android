@@ -4,6 +4,7 @@
 // <author>Gabriel Marquette</author>
 
 using GuessWhoOnePiece.Model.Characters;
+using GuessWhoOnePiece.Model.DataEntries.Picture;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -130,7 +131,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             foreach (var popularityCharacter in ListPopularity)
             {
                 character = ExtractExceptionsPopularity(character);
-                if (ControlRoom.CalculateMatchPercentage(popularityCharacter, character) > AcceptanceCritera)
+                if (PictureManager.CalculateMatchPercentage(popularityCharacter, character) > AcceptanceCritera)
                     return popularityCharacter;
             }
 

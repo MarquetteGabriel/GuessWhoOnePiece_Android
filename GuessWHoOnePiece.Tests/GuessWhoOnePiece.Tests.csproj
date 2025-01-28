@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GuessWhoOnePiece.Model\GuessWhoOnePiece.Model.csproj" />
+    <ProjectReference Include="..\GuessWhoOnePiece.Services\GuessWhoOnePiece.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

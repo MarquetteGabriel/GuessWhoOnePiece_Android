@@ -4,10 +4,6 @@
 // <author>Gabriel Marquette</author>
 
 using GuessWhoOnePiece.Model.DataEntries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Tests.DataBase
@@ -18,7 +14,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         private const string Unknown = "Unknown";
         public V_Database()
         {
-            controlRoom = new ControlRoom();
+            controlRoom = new ControlRoom(null);
         }
 
         [SkippableFact]

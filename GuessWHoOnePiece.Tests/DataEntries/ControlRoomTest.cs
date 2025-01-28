@@ -6,11 +6,13 @@
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries;
+using GuessWhoOnePiece.Model.DataEntries.Picture;
 using Moq;
 using Pose;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Tests.DataEntries
@@ -21,7 +23,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         [Fact (Skip = "Manage.Csv not mocked")]
         public async Task Test_ReceiveCharacter()
         {
-            ControlRoom controlRoom = new ControlRoom();
+            ControlRoom controlRoom = new ControlRoom(null);
             var result = await controlRoom.GenerateThreads();
 
             Assert.NotNull(result);
@@ -35,7 +37,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         {
             string str1 = "Monkey D. Luffy";
             string str2 = "Monkey D. Luffy";
-            int result = ControlRoom.LevenshteinDistance(str1, str2);
+            int result = PictureManager.LevenshteinDistance(str1, str2);
             Assert.Equal(0, result);
         }
 
@@ -44,7 +46,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         {
             string str1 = string.Empty;
             string str2 = "Monkey D. Luffy";
-            int result = ControlRoom.LevenshteinDistance(str1, str2);
+            int result = PictureManager.LevenshteinDistance(str1, str2);
             Assert.Equal(str2.Length, result);
         }
 
@@ -53,7 +55,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         {
             string str1 = "Monkey D. Luffy";
             string str2 = string.Empty;
-            int result = ControlRoom.LevenshteinDistance(str1, str2);
+            int result = PictureManager.LevenshteinDistance(str1, str2);
             Assert.Equal(str1.Length, result);
         }
 
@@ -66,7 +68,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         {
             string str1 = "Monkey D. Luffy";
             string str2 = "Monkey D. Luffy";
-            double result = ControlRoom.CalculateMatchPercentage(str1, str2);
+            double result = PictureManager.CalculateMatchPercentage(str1, str2);
             Assert.Equal(1, result);
         }
 
@@ -75,7 +77,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         {
             string str1 = "Monkey D. Luffy";
             string str2 = "Monkey D. Fluffy";
-            double result = ControlRoom.CalculateMatchPercentage(str1, str2);
+            double result = PictureManager.CalculateMatchPercentage(str1, str2);
             Assert.Equal(0.875, result);
         }
 
@@ -84,7 +86,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         {
             string str1 = string.Empty;
             string str2 = string.Empty;
-            double result = ControlRoom.CalculateMatchPercentage(str1, str2);
+            double result = PictureManager.CalculateMatchPercentage(str1, str2);
             Assert.Equal(1.0, result);
         }
 
@@ -92,10 +94,24 @@ namespace GuessWhoOnePiece.Tests.DataEntries
 
         #region GenerateThreads Tests
 
-        [Fact(Skip = "Non Written")]
-        public void Test_GenerateThreads()
+        [Fact]
+        public async Task Test_GenerateThreads()
         {
-            
+            var controlRoom = new ControlRoom(null);
+            var _characterNameList = await CharacterNameListManager.ReceivedCharactersList();
+            var charactersList = new ConcurrentBag<Character>();
+            await Parallel.ForEachAsync(_characterNameList, async (characterName, _) =>
+            {
+                var character = await controlRoom.DataForCharacter(ControlRoom.SetCharacterLink(characterName), characterName);
+                if (character != null)
+                    charactersList.Add(character);
+            });
+            IReadOnlyCollection<Character> characterList = new List<Character>(charactersList.ToList());
+            charactersList.Clear();
+            characterList = await Popularity.SetPopularity(_characterNameList, characterList);
+
+            Assert.NotNull(characterList);
+            Assert.Equal(controlRoom.CharacterCount, controlRoom.CountPercentage);
         }
 
         #endregion

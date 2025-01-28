@@ -3,19 +3,23 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.DataEntries;
 using GuessWhoOnePiece.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
+using System;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece
 {
     public partial class App : Application
     {
-        private const int MAX_PROGRESS = 100;
+        private ControlRoomService _controlRoomServices;
 
-        public App()
+        public App(IServiceProvider serviceProvider)
         {
+            _controlRoomServices = serviceProvider.GetRequiredService<ControlRoomService>();
             InitializeComponent();
 
             MainPage = new MainPage();
@@ -25,14 +29,9 @@ namespace GuessWhoOnePiece
         {
             if(!Preferences.Get("Updated", false))
             {
-                Task.Run(() => Progress.GetCharactersData());
-                Task.Run(() =>
-                {
-                    while (ControlRoomService.CountPercentage < MAX_PROGRESS)
-                    {
-                        Progress.GetProgress();
-                    }      
-                });
+                ControlRoom controlRoom = new(_controlRoomServices);
+                Task.Run( async () => await controlRoom.GenerateThreads());
+                Task.Run(() => controlRoom.GetPercentage());
             }
 
             base.OnStart();

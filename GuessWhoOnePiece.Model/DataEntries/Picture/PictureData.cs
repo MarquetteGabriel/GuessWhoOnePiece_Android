@@ -29,21 +29,28 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
         private const string AmpAnd = "&amp";
         private const string Esperluette = "&";
 
+        private const string AndCharacterPicture = "Baskerville";
+        private const string BelmerCharacterPicture = "Bell";
+        private const string RockCharacterPicture = "Yeti";
+        private const string EnerCharacterPicture = "Enel";
+        private const string JinbeiCharacterPicture = "Jinbe";
+        private const string BakkinCharacterPicture = "Buckingham";
+        private const string MansherryCharacterPicture = "Manshelly";
+        private const string ShishilianCharacterPicture = "Sicilion";
+        private const string SuleimanCharacterPicture = "Suleyman";
+
+        private const string AndCharacter = "And";
+        private const string BelmerCharacter = "Belmer";
+        private const string RockCharacter = "Rock";
+        private const string EnerCharacter = "Ener";
+        private const string JinbeiCharacter = "Jinbei";
+        private const string BakkinCharacter = "Bakkin";
+        private const string MansherryCharacter = "Mansherry";
+        private const string ShishilianCharacter = "Shishilian";
+        private const string SuleimanCharacter = "Suleiman";
+
         /// <summary>Percentage of acceptance between picture link and character.</summary>
         private const double AcceptanceCritera = 0.11;
-
-        private static readonly IImmutableDictionary<string, string> SpecificCharacterPictures = new Dictionary<string, string>
-        {
-            { "And", "Baskerville" },
-            { "Belmer", "Bell" },
-            { "Rock", "Yeti" },
-            { "Ener", "Enel" },
-            { "Jinbei", "Jinbe" },
-            { "Bakkin", "Buckingham" },
-            { "Mansherry", "Manshelly" },
-            { "Shishilian", "Sicilion" },
-            {"Suleiman", "Suleyman"},
-        }.ToImmutableDictionary();
 
         /// <summary>Gets the link of the image for a character.</summary>
         /// <param name="listOfPictures">List of picture in the web page.</param>
@@ -99,8 +106,42 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
 
         private static string? ExtractSpecificPicture(string characterName, string picture)
         {
-            return SpecificCharacterPictures.TryGetValue(characterName, out var expectedPicture) &&
-                    picture.Contains(expectedPicture, StringComparison.OrdinalIgnoreCase) ? picture : null;
+            if (SpecificB(characterName, picture) != null)
+                return picture;
+            else if (characterName.Equals(RockCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(RockCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(EnerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(EnerCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(JinbeiCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(JinbeiCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(MansherryCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(MansherryCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (SpecificS(characterName, picture) != null)
+                return picture;
+            else
+                return null;
+        }
+
+        private static string? SpecificB(string characterName, string picture)
+        {
+            if (characterName.Equals(AndCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(AndCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(BelmerCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(BelmerCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(BakkinCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(BakkinCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else
+                return null;
+        }
+
+        private static string? SpecificS(string characterName, string picture)
+        {
+            if (characterName.Equals(ShishilianCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(ShishilianCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else if (characterName.Equals(SuleimanCharacter, StringComparison.OrdinalIgnoreCase) && picture.Contains(SuleimanCharacterPicture, StringComparison.OrdinalIgnoreCase))
+                return picture;
+            else
+                return null;
         }
 
         /// <summary>Removes diacritics from a string.</summary>

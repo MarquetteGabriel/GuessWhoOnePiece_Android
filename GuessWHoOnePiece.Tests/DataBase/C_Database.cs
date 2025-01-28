@@ -16,7 +16,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
 
         public C_Database()
         {
-            controlRoom = new ControlRoom();
+            controlRoom = new ControlRoom(null);
         }
 
         [SkippableFact]

@@ -10,8 +10,4 @@
     <None Include="..\GuessWhoOnePiece\GuessWhoOnePiece.licenseheader" Link="GuessWhoOnePiece.licenseheader" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GuessWhoOnePiece.Model\GuessWhoOnePiece.Model.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
+using GuessWhoOnePiece.Services;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {
@@ -17,6 +18,16 @@ namespace GuessWhoOnePiece.Model.DataEntries
     public partial class ControlRoom
     {
         private IReadOnlyList<string> _characterNameList = new List<string>();
+
+        private readonly ControlRoomService ControlRoomService;
+
+        private const int MAX_PROGRESS_DATA = 70;
+        private const int MAX_PROGRESS_POPULARITY = 30;
+
+        public ControlRoom(ControlRoomService controlRoomService)
+        {
+            ControlRoomService = controlRoomService;
+        }
 
         public int CharacterCount
         {
@@ -62,6 +73,24 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
             const string urlFandom = "https://onepiece.fandom.com/fr/wiki/";
             return new Uri(urlFandom + urlCharacter);
+        }
+
+        public void GetPercentage()
+        {
+            if (CharacterCount == 0)
+            {
+                ControlRoomService.CountPercentage = CharacterCount;
+                return;
+            }
+            
+            int percentage = (int)((double)CountPercentage / CharacterCount * MAX_PROGRESS_DATA);
+            if (CountPercentage < CharacterCount)
+            {
+                ControlRoomService.CountPercentage = percentage;
+                return;
+            }
+
+            ControlRoomService.CountPercentage = Popularity.CountPopularity % CountPercentage * MAX_PROGRESS_POPULARITY + MAX_PROGRESS_DATA;
         }
     }
 }

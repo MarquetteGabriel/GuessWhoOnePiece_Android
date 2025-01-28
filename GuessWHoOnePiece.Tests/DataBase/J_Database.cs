@@ -18,7 +18,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
         private const string Unknown = "Unknown";
         public J_Database()
         {
-            controlRoom = new ControlRoom();
+            controlRoom = new ControlRoom(null);
         }
 
         [SkippableFact]

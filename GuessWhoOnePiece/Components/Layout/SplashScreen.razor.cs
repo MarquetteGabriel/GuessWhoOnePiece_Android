@@ -37,7 +37,7 @@ namespace GuessWhoOnePiece.Components.Layout
             return base.OnInitializedAsync();
         }
 
-        private void StartLoadingBar()
+        private async void StartLoadingBar()
         {
             ProgressValue = 0;
 
@@ -48,6 +48,8 @@ namespace GuessWhoOnePiece.Components.Layout
                     ProgressValue = MAX_PROGRESS;
 
                 StateHasChanged();
+
+                await Task.Delay(100);
             }
         }
     }

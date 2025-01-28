@@ -18,25 +18,13 @@ namespace GuessWhoOnePiece.Tests.Game
     {
         #region SetCharacterToFind Tests
         
-        [Fact (Skip = "Error Code Pose")]
-        public void Test_SetCharacterToFind()
+        [Fact]
+        public async void Test_SetCharacterToFind()
         {
-            var listCharacters = new List<Character>
-            {
-                new ("Monkey D. Luffy", true, "3 Md", 1, "Pirate", true, 19, "L'Equipage du chapeau de paille", "", 0),
-                new ("Roronoa Zoro", false, "1,1 Md", 1, "Pirate", true, 19, "L'Equipage du chapeau de paille", "", 0),
-                new ("Nami", false, "330 Mi", 1, "Pirate", true, 19, "L'Equipage du chapeau de paille", "", 0)
-            };
-            /*
-            Shim shimReceiveCsv = Shim.Replace(() => ReceiveDataCsv.ReceiveAllCharacters()).With(() => Task.FromResult(listCharacters));
+            var result = await Guesser.SetCharacterToFind();
 
-            PoseContext.Isolate(async () =>
-            {
-                var result = await Guesser.SetCharacterToFind();
-                Assert.NotNull(result);
-                Assert.Contains(result, listCharacters);
-            }, shimReceiveCsv); 
-            */
+            Assert.NotNull(result);
+            Assert.IsType<int>(result);
         }
 
         #endregion
