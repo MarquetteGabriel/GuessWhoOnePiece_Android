@@ -365,4 +365,4 @@ FodyWeavers.xsd
 
 # Codacy Coverage Files
 .get.sh
-/.codacy-coverage
+/.codacy-coverage/
