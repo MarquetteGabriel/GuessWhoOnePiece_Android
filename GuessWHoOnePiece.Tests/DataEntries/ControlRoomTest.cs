@@ -97,8 +97,10 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public async Task Test_GenerateThreads()
         {
             var controlRoom = new ControlRoom();
-            var characterList = await controlRoom.GenerateThreads();
+            Assert.Equal(0, controlRoom.Percentage);
 
+            var characterList = await controlRoom.GenerateThreads();
+            
             Assert.NotNull(characterList);
             Assert.Equal(controlRoom.CharacterCount, controlRoom.CountPercentage);
             Assert.Equal(100, controlRoom.Percentage);

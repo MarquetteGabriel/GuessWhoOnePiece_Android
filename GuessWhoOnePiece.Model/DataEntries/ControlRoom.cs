@@ -73,7 +73,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     return CharacterCount;
 
                 int percentage = (int)((double)CountPercentage / CharacterCount * MAX_PROGRESS_DATA);
-                return (CountPercentage < CharacterCount) ? percentage : Popularity.CountPopularity % CountPercentage * MAX_PROGRESS_POPULARITY + MAX_PROGRESS_DATA;
+                return (CountPercentage < CharacterCount) ? percentage : Popularity.CountPopularity / CountPercentage * MAX_PROGRESS_POPULARITY + MAX_PROGRESS_DATA;
             }
         }
     }
