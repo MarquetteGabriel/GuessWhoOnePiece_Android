@@ -14,20 +14,26 @@
 .top-bar-menu {
     display: flex;
     flex-direction: row;
-    z-index: 999;
     height: 50px;
     position: fixed;
     top: 10px;
-    width: 100%;
+    z-index: 900;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    background-color: hsl(225, 12%, 12%);
+    width: 88%;
+    margin-inline: auto;
+    box-shadow: 0 2px 16px hsla(228, 95%, 4%, .1);
+    border-radius: 4rem;
+    place-content: center;
 }
 
 .list-answer {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    gap: 5px;
-    place-content: center;
-    z-index: 500;
-    margin-top: 70px;
+    overflow-y: auto;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    justify-items: center;
 }
 
