@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuessWhoOnePiece.Model.Characters;
-using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Services;
 
 namespace GuessWhoOnePiece.Model.DataEntries
@@ -47,8 +46,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
             charactersList.Clear();
 
             characterList = await Popularity.SetPopularity(_characterNameList, characterList);
-            ManageCsv.SaveCharactersToCsv(characterList);
-
             return characterList;
         }
 

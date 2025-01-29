@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GuessWhoOnePiece.Model.DataEntries;
 using GuessWhoOnePiece.Services;
 using Microsoft.Maui.Storage;
+using GuessWhoOnePiece.Model.CsvManager;
 
 namespace GuessWhoOnePiece.Components.Layout
 {
@@ -60,7 +61,9 @@ namespace GuessWhoOnePiece.Components.Layout
                         {
                             ProgressValue = MAX_PROGRESS;
                         }   
-                    }                 
+                    }
+                    var characterList = threadsTask.Result;
+                    ManageCsv.SaveCharactersToCsv(characterList);
                     Preferences.Set("Updated", true);
                     LoadingService.Loading = false;
                     controlRoom = null;

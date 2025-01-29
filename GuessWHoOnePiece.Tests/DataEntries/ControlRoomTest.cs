@@ -20,14 +20,13 @@ namespace GuessWhoOnePiece.Tests.DataEntries
     /// <summary>Test class "ManageCsv".</summary>
     public class ReceiveDataTest
     {
-        [Fact (Skip = "Manage.Csv not mocked")]
+        [Fact]
         public async Task Test_ReceiveCharacter()
         {
-            ControlRoom controlRoom = new ControlRoom();
-            var result = await controlRoom.GenerateThreads();
+            var result = await CharacterNameListManager.ReceivedCharactersList();
 
             Assert.NotNull(result);
-            Assert.Equal(485, result.Count);
+            Assert.Equal(1386, result.Count);
         }
 
         #region LevenshteinDistance Tests
@@ -98,24 +97,11 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         public async Task Test_GenerateThreads()
         {
             var controlRoom = new ControlRoom();
-            var _characterNameList = new List<string>()
-            {
-                "Monkey D. Luffy", "Roronoa Zoro", "Nami", "Portgas D. Ace"
-            };
-
-            var charactersList = new ConcurrentBag<Character>();
-            await Parallel.ForEachAsync(_characterNameList, async (characterName, _) =>
-            {
-                var character = await controlRoom.DataForCharacter(ControlRoom.SetCharacterLink(characterName), characterName);
-                if (character != null)
-                    charactersList.Add(character);
-            });
-            IReadOnlyCollection<Character> characterList = new List<Character>(charactersList.ToList());
-            charactersList.Clear();
-            characterList = await Popularity.SetPopularity(_characterNameList, characterList);
+            var characterList = await controlRoom.GenerateThreads();
 
             Assert.NotNull(characterList);
             Assert.Equal(controlRoom.CharacterCount, controlRoom.CountPercentage);
+            Assert.Equal(100, controlRoom.Percentage);
         }
 
         #endregion
