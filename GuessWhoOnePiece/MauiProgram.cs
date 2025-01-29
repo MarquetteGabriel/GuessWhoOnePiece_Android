@@ -30,9 +30,6 @@ namespace GuessWhoOnePiece
             // Loading Services.
             builder.Services.AddSingleton<LoadingService>();
 
-            // Get Percentage of character Data get.
-            builder.Services.AddSingleton<ControlRoomService>();
-
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
