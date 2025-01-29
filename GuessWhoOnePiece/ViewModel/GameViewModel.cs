@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using GuessWhoOnePiece.Model;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
@@ -19,7 +20,7 @@ namespace GuessWhoOnePiece.ViewModel
     public class GameViewModel : INotifyPropertyChanged
     {
         /// <summary>List of answers.</summary>
-        public readonly ObservableCollection<Character> AnswersList = new();
+        internal readonly ObservableCollection<Character> AnswersList = new();
 
         /// <summary>Event for property changed.</summary>
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -27,26 +28,21 @@ namespace GuessWhoOnePiece.ViewModel
         /// <summary>List of character names.</summary>
         internal List<string> CharacterNameList;
 
-        /// <summary>Character to find.</summary>
-        private Character? _characterToFind;
-
         /// <summary>Instance of SelectAnswer.</summary>
         private SelectAnswer? selectAnswer;
 
         /// <summary>Constructor.</summary>
-        /// <param name="characterList">List of characters.</param>
         public GameViewModel()
         {
             CharacterNameList = new();
-            NewGame();
+            _ = NewGame();
         }
 
         /// <summary>Set a new game.</summary>
-        /// <param name="characters">List of characters in the database.</param>
-        private async void NewGame()
+        private async Task NewGame()
         {
             var characters = await ReceiveDataCsv.ReceiveAllCharacters();
-            _characterToFind = Guesser.SetCharacterToFind(characters);
+            var _characterToFind = Guesser.SetCharacterToFind(characters);
             CharacterNameList.AddRange(characters.Select(character => character.Name));
             selectAnswer ??= new SelectAnswer(_characterToFind);
             AnswersList.Clear();
