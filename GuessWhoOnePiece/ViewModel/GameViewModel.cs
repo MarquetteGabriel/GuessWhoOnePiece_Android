@@ -4,99 +4,73 @@
 // <author>Gabriel Marquette</author>
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+using GuessWhoOnePiece.Model;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.Game;
 
 namespace GuessWhoOnePiece.ViewModel
 {
+    /// <summary>View model for the game.</summary>
     public class GameViewModel : INotifyPropertyChanged
     {
-        public readonly System.Collections.ObjectModel.ObservableCollection<Character> AnswersList = [];
+        /// <summary>List of answers.</summary>
+        public readonly ObservableCollection<Character> AnswersList = new();
+
+        /// <summary>Event for property changed.</summary>
         public event PropertyChangedEventHandler? PropertyChanged;
-        public List<string> CharacterNameList = [];
 
-        private Character _characterToFind;
-        private JudgementAnswer _judgementAnswer;
+        /// <summary>List of character names.</summary>
+        internal List<string> CharacterNameList;
 
+        /// <summary>Character to find.</summary>
+        private Character? _characterToFind;
+
+        /// <summary>Instance of SelectAnswer.</summary>
+        private SelectAnswer? selectAnswer;
+
+        /// <summary>Constructor.</summary>
+        /// <param name="characterList">List of characters.</param>
         public GameViewModel()
         {
-            _ = DefineCharacter();
-            SetCharacterNames();
-            _judgementAnswer = new JudgementAnswer(_characterToFind);
+            CharacterNameList = new();
+            NewGame();
         }
 
-        private async Task DefineCharacter()
+        /// <summary>Set a new game.</summary>
+        /// <param name="characters">List of characters in the database.</param>
+        private async void NewGame()
         {
-            var listCharacters = await ReceiveDataCsv.ReceiveAllCharacters();
-            _characterToFind = Guesser.SetCharacterToFind(listCharacters);
+            var characters = await ReceiveDataCsv.ReceiveAllCharacters();
+            _characterToFind = Guesser.SetCharacterToFind(characters);
+            CharacterNameList.AddRange(characters.Select(character => character.Name));
+            selectAnswer ??= new SelectAnswer(_characterToFind);
+            AnswersList.Clear();
         }
 
-
-        public void GetJudgmentDay(Character character)
+        /// <summary>Check if the answer is correct or not.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        public bool GetJudgmentDay(Character character)
         {
-            _judgementAnswer.SetCharacter(_characterToFind);
-            
-            var answerAlive = _judgementAnswer.IsAlive(character);
-            var answerChapter = _judgementAnswer.IsNewer(character);
-            var answerAge = _judgementAnswer.IsOlder(character);
-            var answerType = _judgementAnswer.WhatOccupation(character);
-            var answerBounty = _judgementAnswer.WantedBounty(character);
-            var answerCrew = _judgementAnswer.WhatCrew(character);
-            var answerName = _judgementAnswer.IsSameName(character);
-            var answerDevilFruit = _judgementAnswer.HasEatenDevilFruit(character);
-
-            if (character.AnswerStateList == null) 
-                return;
-            
-            character.AnswerStateList.Alive = AnswerResult.SetAnswerStateBoolean(answerAlive);
-            character.AnswerStateList.FirstAppearance = AnswerResult.SetAnswerStateChapterType(answerChapter);
-            character.AnswerStateList.Age = AnswerResult.SetAnswerStateAgeType(answerAge);
-            character.AnswerStateList.Type = AnswerResult.SetAnswerStateBoolean(answerType);
-            character.AnswerStateList.Bounty = AnswerResult.SetAnswerStateBountyType(answerBounty);
-            character.AnswerStateList.Crew = AnswerResult.SetAnswerStateBoolean(answerCrew);
-            character.AnswerStateList.Name = AnswerResult.SetAnswerStateBoolean(answerName);
-            character.AnswerStateList.DevilFruit = AnswerResult.SetAnswerStateBoolean(answerDevilFruit);
-            
-            if (character.AnswerImageLink == null) 
-                return;
-            
-            character.AnswerImageLink.Age = DefinePictures.SetAgePicture(answerAge);
-            character.AnswerImageLink.DevilFruit = DefinePictures.SetDevilFruitPicture(answerDevilFruit);
-            character.AnswerImageLink.FirstAppearance = DefinePictures.SetChapterPicture(answerChapter);
-            character.AnswerImageLink.Alive = DefinePictures.SetAlivePicture(answerAlive);
-            character.AnswerImageLink.Type = DefinePictures.SetTypePicture(character.Type);
-            character.AnswerImageLink.Bounty = DefinePictures.SetBountyPicture(answerBounty);
-            character.AnswerImageLink.Name = string.Empty;
-            character.AnswerImageLink.Crew = DefinePictures.SetCrewPictures(character.Crew);
+            character = selectAnswer!.SelectAnswerCharacter(character);
+            AddAnswer(character);
+            return character.AnswerStateList!.Name == AnswerState.Correct;
         }
-        
+
+        /// <summary>Add the character to the list.</summary>
+        /// <param name="character">Character enter by the user.</param>
         public void AddAnswer(Character character)
         {
             AnswersList.Add(character);
             OnPropertyChanged();
         }
 
-        private async Task SetCharacterNames()
-        {
-            var characterlist = await ReceiveDataCsv.ReceiveAllCharacters();
-            foreach (var character in characterlist.Where(character => character != null))
-            {
-                CharacterNameList.Add(character.Name);
-            }
-        }
-
-        private void PlayAgain()
-        {
-            _ = DefineCharacter();
-            _judgementAnswer.SetCharacter(_characterToFind);
-            AnswersList.Clear();
-        }
-
+        /// <summary>Notify the change of the property.</summary>
+        /// <param name="propertyName">Property changed.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

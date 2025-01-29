@@ -2,11 +2,17 @@
 
 namespace GuessWhoOnePiece.Model.Game
 {
+    /// <summary>Represents the select of answers.</summary>
+    /// <param name="charcaterSearched">Character searched by the user.</param>
     public class SelectAnswer(Character charcaterSearched)
     {
+        /// <summary>Instance of JudgementAnswer.</summary>
         private readonly JudgementAnswer _judgementAnswer = new(charcaterSearched);
 
-        internal Character SelectAnswerCharacter(Character character)
+        /// <summary>Select Answer for the character.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <returns>The character updated.</returns>
+        public Character SelectAnswerCharacter(Character character)
         {
             character = SelectAnswerAlive(character);
             character = SelectAnswerAge(character);
@@ -19,6 +25,9 @@ namespace GuessWhoOnePiece.Model.Game
             return character;
         }
 
+        /// <summary>Select the answer for the Alive state.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <returns>The character updated.</returns>
         private Character SelectAnswerAlive(Character character)
         {
             var answerAlive = _judgementAnswer.IsAlive(character);
@@ -27,6 +36,9 @@ namespace GuessWhoOnePiece.Model.Game
             return character;
         }
 
+        /// <summary>Select the answer for the Age state.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <return>The character updated.</returns>
         private Character SelectAnswerAge(Character character)
         {
             var answerAge = _judgementAnswer.IsOlder(character);
@@ -35,6 +47,9 @@ namespace GuessWhoOnePiece.Model.Game
             return character;
         }
 
+        /// <summary>Select the answer for the Type state.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <returns>The character updated.</returns>
         private Character SelectAnswerType(Character character)
         {
             var answerType = _judgementAnswer.WhatOccupation(character);
@@ -43,6 +58,9 @@ namespace GuessWhoOnePiece.Model.Game
             return character;
         }
 
+        /// <summary>Select the answer for the Chapter state.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <returns>The character updated.</returns>
         private Character SelectAnswerChapter(Character character)
         {
             var answerChapter = _judgementAnswer.IsNewer(character);
@@ -51,6 +69,9 @@ namespace GuessWhoOnePiece.Model.Game
             return character;
         }
 
+        /// <summary>Select the answer for the Bounty state.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <returns>The character updated.</returns>
         private Character SelectAnswerBounty(Character character)
         {
             var answerBounty = _judgementAnswer.WantedBounty(character);
@@ -59,6 +80,9 @@ namespace GuessWhoOnePiece.Model.Game
             return character;
         }
 
+        /// <summary>Select the answer for the Crew state.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <returns>The character updated.</returns>
         private Character SelectAnswerCrew(Character character)
         {
             var answerCrew = _judgementAnswer.WhatCrew(character);
@@ -67,6 +91,9 @@ namespace GuessWhoOnePiece.Model.Game
             return character;
         }
 
+        /// <summary>Select the answer for the Name state.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <returns>The character updated.</returns>
         private Character SelectAnswerName(Character character)
         {
             var answerName = _judgementAnswer.IsSameName(character);
@@ -75,12 +102,22 @@ namespace GuessWhoOnePiece.Model.Game
             return character;
         }
 
+        /// <summary>Select the answer for the DevilFruit state.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        /// <returns>The character updated.</returns>
         private Character SelectAnswerDevilFruit(Character character)
         {
             var answerDevilFruit = _judgementAnswer.HasEatenDevilFruit(character);
             character.AnswerStateList!.DevilFruit = AnswerResult.SetAnswerStateBoolean(answerDevilFruit);
             character.AnswerImageLink!.DevilFruit = DefinePictures.SetDevilFruitPicture(answerDevilFruit);
             return character;
+        }
+
+        /// <summary>Set the character to find.</summary>
+        /// <param name="character">Character enter by the user.</param>
+        internal void SetCharacter(Character character)
+        {
+            _judgementAnswer.SetCharacter(character);
         }
     }
 }

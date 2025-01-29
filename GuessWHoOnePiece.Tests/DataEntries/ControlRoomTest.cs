@@ -3,16 +3,8 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-using GuessWhoOnePiece.Model.Characters;
-using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries;
 using GuessWhoOnePiece.Model.DataEntries.Picture;
-using Moq;
-using Pose;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Tests.DataEntries
