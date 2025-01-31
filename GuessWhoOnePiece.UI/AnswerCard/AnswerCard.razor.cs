@@ -37,7 +37,7 @@ public partial class AnswerCard : ComponentBase
 
     private string DefineColor()
     {
-        if (!string.IsNullOrEmpty(AnswerImage))
+        if (!string.IsNullOrEmpty(AnswerImage) && string.IsNullOrEmpty(AnswerText))
             return "answer-no-answer";
 
         return AnswerState switch

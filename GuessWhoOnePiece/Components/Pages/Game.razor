@@ -3,8 +3,9 @@
 
 <div class="game-page">
     <div class="top-bar-menu">
-        <BackButton/>
-        <TextEntry WithAutoComplete="true" Items="_gameViewModel.CharacterNameList" OnItemSelected="OnCharacterClicked"/>
+        <div class="text-entry">
+            <TextEntry WithAutoComplete="true" Items="_gameViewModel.CharacterNameList" OnItemSelected="OnCharacterClicked"/>
+        </div>
     </div>
 
     <div class="list-answer">

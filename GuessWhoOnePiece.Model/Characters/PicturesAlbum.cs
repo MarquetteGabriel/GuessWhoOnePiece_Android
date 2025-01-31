@@ -9,8 +9,8 @@ internal static class PicturesAlbum
 {
     #region Arrows
 
-    internal const string ArrowUp = "";
-    internal const string ArrowDown = "";
+    internal const string ArrowUp = "arrow_up.png";
+    internal const string ArrowDown = "arrow_down.png";
 
     #endregion
 

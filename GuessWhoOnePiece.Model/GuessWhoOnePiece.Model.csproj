@@ -36,4 +36,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Images\dotnet_bot.svg">
+      <BaseSize>168,208</BaseSize>
+    </None>
+  </ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Images\*"/>
+	</ItemGroup>
 </Project>

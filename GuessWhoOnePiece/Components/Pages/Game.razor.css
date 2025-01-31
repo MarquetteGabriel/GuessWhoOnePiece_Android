@@ -14,7 +14,7 @@
 .top-bar-menu {
     display: flex;
     flex-direction: row;
-    height: 50px;
+    height: 65px;
     position: fixed;
     top: 10px;
     z-index: 900;
@@ -27,6 +27,12 @@
     box-shadow: 0 2px 16px hsla(228, 95%, 4%, .1);
     border-radius: 4rem;
     place-content: center;
+}
+
+.text-entry {
+    width: 88%;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .list-answer {

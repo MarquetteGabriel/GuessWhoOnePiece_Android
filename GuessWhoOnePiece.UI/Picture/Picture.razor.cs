@@ -3,6 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.Converts;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Maui.Storage;
 using System;
@@ -22,10 +23,35 @@ namespace GuessWhoOnePiece.UI.Picture
             if (string.IsNullOrEmpty(PicturePath))
                 return;
 
-            var filePath = Path.Combine(FileSystem.Current.AppDataDirectory, PicturePath);
-            var fileBytes = await File.ReadAllBytesAsync(filePath);
-            var base64string = Convert.ToBase64String(fileBytes);
+            string base64string = string.Empty;
+
+            try
+            {
+                if (!PicturePath.Contains("jpeg"))
+                {
+                    base64string = ConvertPictureToString(PicturePath);
+                }
+                else
+                {
+                    var filePath = Path.Combine(FileSystem.Current.AppDataDirectory, PicturePath);
+                    var fileBytes = await File.ReadAllBytesAsync(filePath);
+                    base64string = Convert.ToBase64String(fileBytes);
+                }             
+            }
+            catch (Exception)
+            {
+                base64string = ConvertPictureToString("error.png");            
+            }
+
             PathPicture = $"data:image/png;base64, {base64string}";
+        }
+
+        private static string ConvertPictureToString(string picturePath)
+        {
+            var imageStream = PictureStream.GetImageStream(picturePath);
+            using var memoryStream = new MemoryStream();
+            imageStream!.CopyTo(memoryStream);
+            return Convert.ToBase64String(memoryStream.ToArray());
         }
     }
 }
