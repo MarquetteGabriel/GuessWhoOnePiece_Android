@@ -27,7 +27,7 @@ namespace GuessWhoOnePiece.UI.Picture
 
             try
             {
-                if (!PicturePath.Contains("jpeg"))
+                if (!PicturePath.Contains("jpeg", StringComparison.Ordinal))
                 {
                     base64string = ConvertPictureToString(PicturePath);
                 }

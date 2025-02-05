@@ -55,7 +55,7 @@ public partial class ListCharacters : ComponentBase
 
     private async Task OnKeyPressed(KeyboardEventArgs args)
     {
-        
+        // Empty on purpose.
     }
     
     private async Task FilterItems()

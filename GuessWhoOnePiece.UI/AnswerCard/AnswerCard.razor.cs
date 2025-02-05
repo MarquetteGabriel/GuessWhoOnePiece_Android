@@ -5,8 +5,6 @@
 
 using GuessWhoOnePiece.Model;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.UI.AnswerCard;
 
@@ -16,25 +14,6 @@ public partial class AnswerCard : ComponentBase
     [Parameter] public string? AnswerImage { get; set; }
     [Parameter] public AnswerState? AnswerState { get; set; }
     
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        // Switch to invoke JS. 
-        if (firstRender)
-            return;
-        try
-        {
-            var module = await JS.InvokeAsync<IJSObjectReference>("import", "../GuessWhoOnePiece.UI/AnswerCard/AnswerCard.razor.js");
-            await module.InvokeVoidAsync("adjustFontSize");
-        }
-        catch (JSException ex)
-        {
-            var result = ex.Message;
-            return;
-        }
-
-    }
-
-
     private string DefineColor()
     {
         if (!string.IsNullOrEmpty(AnswerImage) && string.IsNullOrEmpty(AnswerText))

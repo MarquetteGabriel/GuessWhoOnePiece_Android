@@ -23,7 +23,7 @@ public partial class TextEntry : ComponentBase
     
     [Parameter] public EventCallback<ChangeEventArgs> OnInputKeys { get; set; }
 
-    private List<string> _filteredItems = [];
+    private readonly List<string> _filteredItems = [];
     private string SearchText { get; set; }
 
     // Méthode appelée lors de la modification de l'entrée de texte
