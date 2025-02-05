@@ -1,5 +1,6 @@
 ﻿using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries.Picture;
+using HtmlAgilityPack;
 using Moq;
 using System.IO;
 using System.Threading.Tasks;
@@ -39,6 +40,16 @@ namespace GuessWhoOnePiece.Tests.CsvManager
             result = await PictureManager.DownloadImageAsync("", "Yosaku", mockFileService.Object);
             Assert.NotNull(result);
             Assert.Equal("Images/Yosaku.jpeg", result);            
+        }
+
+        [Fact]
+        public void Test_PictureData()
+        {
+            HtmlNodeCollection htmlNodes = new HtmlNodeCollection(new HtmlNode(HtmlNodeType.Text, new HtmlDocument(), 0));
+            var result = PictureManager.GetPictureLink(htmlNodes, "");
+
+            Assert.NotNull(result);
+            Assert.Equal(string.Empty, result);
         }
     }
 }
