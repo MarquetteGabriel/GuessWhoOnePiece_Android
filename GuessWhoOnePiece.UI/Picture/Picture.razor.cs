@@ -40,7 +40,7 @@ namespace GuessWhoOnePiece.UI.Picture
             }
             catch (Exception)
             {
-                base64string = ConvertPictureToString("error.png");            
+                base64string = ConvertPictureToString("error.jpg");            
             }
 
             PathPicture = $"data:image/png;base64, {base64string}";

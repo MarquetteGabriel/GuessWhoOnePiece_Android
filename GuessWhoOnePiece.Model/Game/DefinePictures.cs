@@ -78,8 +78,8 @@ public static class DefinePictures
     {
         return value switch
         {
-            ChapterType.PreviousChapter => PicturesAlbum.ArrowUp,
-            ChapterType.NewerChapter => PicturesAlbum.ArrowDown,
+            ChapterType.PreviousChapter => PicturesAlbum.ArrowDown,
+            ChapterType.NewerChapter => PicturesAlbum.ArrowUp,
             _ => string.Empty,
         };
     }

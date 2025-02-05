@@ -10,13 +10,13 @@
     }
     else if (!string.IsNullOrEmpty(AnswerImage))
     {
-        <div class="answer-picture">
+        <div class="answer-picture-shared">
             <Picture PicturePath="@AnswerImage" />
         </div>
-        <label id="answerText" class="answer-text">@AnswerText</label>
+        <label class="answer-text">@AnswerText</label>
     }
     else 
     {
-        <label id="answerText" class="answer-text">@AnswerText</label>
+        <label class="answer-text">@AnswerText</label>
     }
 </div>
