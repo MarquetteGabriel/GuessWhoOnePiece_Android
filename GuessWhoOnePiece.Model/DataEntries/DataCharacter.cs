@@ -93,6 +93,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 bool fruit = GetDevilFruitValue(doc);
                 doc = null;
 
+                // Change Name.
+                characterName = DataControl.ExceptionForCharacterName(characterName);
+
                 // Get the picture.
                 Task<string>? pictureDownloadTask = null;
                 if (pictureElements != null)
@@ -125,9 +128,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 // Bounty part.
                 var bounty = DataControl.ExtractPatternBounty(characterData, type, characterName);
                 characterData = null;
-
-                // Change Name.
-                characterName = DataControl.ExceptionForCharacterName(characterName);
 
                 // Get picture path.
                 string picturePath = string.Empty;

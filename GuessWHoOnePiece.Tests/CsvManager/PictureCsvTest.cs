@@ -29,16 +29,16 @@ namespace GuessWhoOnePiece.Tests.CsvManager
             mockFileService.Setup(pp => pp.GetPicturePath)
                            .Returns(LocalPath + "Images");
 
-            var result = await PictureManager.DownloadImageAsync("", "Yosaku", mockFileService.Object);
-            Assert.NotNull(result);
-            Assert.Equal("Images/Yosaku.jpeg", result);
-
-            if(File.Exists(LocalPath + "Images/Yosaku.jpeg"))
+            if (File.Exists(LocalPath + "Images/Yosaku.jpeg"))
                 File.Delete(LocalPath + "Images/Yosaku.jpeg");
 
-            result = await PictureManager.DownloadImageAsync("https://static.wikia.nocookie.net/onepiece/images/1/1e/Yosaku_Manga_Post_Ellipse_Infobox.png/revision/latest?cb=20150809210655&path-prefix=fr", "Yosaku", mockFileService.Object);
+            var result = await PictureManager.DownloadImageAsync("https://static.wikia.nocookie.net/onepiece/images/1/1e/Yosaku_Manga_Post_Ellipse_Infobox.png/revision/latest?cb=20150809210655&path-prefix=fr", "Yosaku", mockFileService.Object);
             Assert.NotNull(result);
             Assert.Equal("Images/Yosaku.jpeg", result);
+
+            result = await PictureManager.DownloadImageAsync("", "Yosaku", mockFileService.Object);
+            Assert.NotNull(result);
+            Assert.Equal("Images/Yosaku.jpeg", result);            
         }
     }
 }

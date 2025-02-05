@@ -18,6 +18,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
         private const string MangaPreEllipse = "Manga_Pre_Ellipse";
         private const string AnimePostEllipse = "Anime_Post_Ellipse";
         private const string AnimePreEllipse = "Anime_Pre_Ellipse";
+        private const string AnimeInfobox = "Anime_Infobox";
 
         private const string SiteLogo = "Site-logo";
         private const string ImageGift = "data:image/gif";
@@ -86,10 +87,12 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
 
         private static bool IsSpecialPicture(string picture) =>
             picture.Contains(MangaPostEllipse, StringComparison.OrdinalIgnoreCase) || picture.Contains(MangaPreEllipse, StringComparison.OrdinalIgnoreCase) ||
-            picture.Contains(AnimePostEllipse, StringComparison.OrdinalIgnoreCase) || picture.Contains(AnimePreEllipse, StringComparison.OrdinalIgnoreCase);
+            picture.Contains(AnimePostEllipse, StringComparison.OrdinalIgnoreCase) || picture.Contains(AnimePreEllipse, StringComparison.OrdinalIgnoreCase) ||
+            picture.Contains(AnimeInfobox, StringComparison.OrdinalIgnoreCase);
 
         private static string? ExtractPictureHtmlWebDecode(string characterName, string picture)
         {
+            characterName = characterName.Replace("/", "", StringComparison.OrdinalIgnoreCase);
             foreach (var character in characterName.Split(" "))
             {
                 if (picture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase))

@@ -841,7 +841,10 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Kiku()
         {
             var character = "Kiku";
-            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath).Returns(LocalPath + "Characters.csv"); 
+            var characterLink = ControlRoom.SetCharacterLink(character); 
+            var mockFileService = new Mock<IFileServiceReader>(); 
+            mockFileService.Setup(pp => pp.GetCsvPath).Returns(LocalPath + "Characters.csv");
+            mockFileService.Setup(pp => pp.GetPicturePath).Returns(LocalPath + "Images");
             var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");

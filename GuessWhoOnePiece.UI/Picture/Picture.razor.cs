@@ -33,7 +33,8 @@ namespace GuessWhoOnePiece.UI.Picture
                 }
                 else
                 {
-                    var filePath = Path.Combine(FileSystem.Current.AppDataDirectory, PicturePath);
+                    var picturePath = PicturePath.Replace(" / ", " _ ", StringComparison.OrdinalIgnoreCase);
+                    var filePath = Path.Combine(FileSystem.Current.AppDataDirectory, picturePath);
                     var fileBytes = await File.ReadAllBytesAsync(filePath);
                     base64string = Convert.ToBase64String(fileBytes);
                 }             

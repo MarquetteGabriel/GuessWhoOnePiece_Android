@@ -4,7 +4,6 @@
 // <author>Gabriel Marquette</author>
 
 using GuessWhoOnePiece.Model.CsvManager;
-using Microsoft.Maui.Storage;
 using SkiaSharp;
 using System;
 using System.IO;
@@ -25,7 +24,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
         /// <returns>The fileName.</returns>
         internal static async Task<string> DownloadImageAsync(string imageUrl, string fileName, IFileServiceReader fileServiceReader)
         {
-            fileName = fileName + ".jpeg";
+            fileName = fileName.Replace("/", "_", StringComparison.OrdinalIgnoreCase) + ".jpeg";
             string picturePath = fileServiceReader.GetPicturePath;
             try
             {
