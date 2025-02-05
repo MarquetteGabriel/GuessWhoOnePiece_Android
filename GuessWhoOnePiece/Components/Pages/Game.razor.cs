@@ -16,8 +16,7 @@ public partial class Game : ComponentBase
 
     public Game()
     {
-        if (FileServiceReader == null)
-            FileServiceReader = new FileServiceReader();
+        FileServiceReader ??= new FileServiceReader();
         _gameViewModel = new GameViewModel(FileServiceReader);
     }
 

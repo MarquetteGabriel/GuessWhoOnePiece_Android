@@ -95,7 +95,7 @@ namespace GuessWhoOnePiece.Tests.DataEntries
             var controlRoom = new ControlRoom();
             Assert.Equal(0, controlRoom.Percentage);
             var mockFileService = new Mock<IFileServiceReader>();
-            mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv");
+            mockFileService.Setup(pp => pp.GetCsvPath).Returns(LocalPath + "Characters.csv");
 
             var characterList = await controlRoom.GenerateThreads(mockFileService.Object);
             

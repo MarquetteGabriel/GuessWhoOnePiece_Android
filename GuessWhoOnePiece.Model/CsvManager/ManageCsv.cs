@@ -20,7 +20,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <param name="characters">The list of characters to add.</param>
         public static void SaveCharactersToCsv(IReadOnlyCollection<Character> characters, IFileServiceReader fileServiceReader)
         {
-            string csvPath = fileServiceReader.GetCsvPath();
+            string csvPath = fileServiceReader.GetCsvPath;
             CreateCsvFile(csvPath);
 
             using var sw = new StreamWriter(csvPath, false, Encoding.UTF8);

@@ -55,7 +55,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
         public static async Task<List<Character>> ReceiveAllCharacters(Func<string[], bool> filter, IFileServiceReader fileServiceReader)
         {
             var characters = new List<Character>();
-            string csvPath = fileServiceReader.GetCsvPath();
+            string csvPath = fileServiceReader.GetCsvPath;
             await using var stream = File.OpenRead(csvPath);
             using var reader = new StreamReader(stream, Encoding.UTF8);
             while (await reader.ReadLineAsync() is { } line)

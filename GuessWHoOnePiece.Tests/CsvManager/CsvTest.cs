@@ -18,7 +18,7 @@ namespace GuessWhoOnePiece.Tests.CsvManager
         public async Task Test_ReadCsvSpecific()
         {
             var mockFileService = new Mock<IFileServiceReader>();
-            mockFileService.Setup(pp => pp.GetCsvPath())
+            mockFileService.Setup(pp => pp.GetCsvPath)
                              .Returns(LocalPath + "Characters.csv");
 
             // Act
@@ -33,7 +33,7 @@ namespace GuessWhoOnePiece.Tests.CsvManager
         public async Task Test_ReadAllCsv()
         {
             var mockFileService = new Mock<IFileServiceReader>();
-            mockFileService.Setup(pp => pp.GetCsvPath())
+            mockFileService.Setup(pp => pp.GetCsvPath)
                              .Returns(LocalPath + "Characters.csv");
 
             // Act
@@ -48,7 +48,7 @@ namespace GuessWhoOnePiece.Tests.CsvManager
         public async Task Test_ManageCsv()
         {
             var mockFileService = new Mock<IFileServiceReader>();
-            mockFileService.Setup(pp => pp.GetCsvPath())
+            mockFileService.Setup(pp => pp.GetCsvPath)
                              .Returns(LocalPath + "Characters.csv");
 
             var saveData = await ReceiveDataCsv.ReceiveAllCharacters(mockFileService.Object);

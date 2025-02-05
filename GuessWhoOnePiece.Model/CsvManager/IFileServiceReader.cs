@@ -7,8 +7,8 @@ namespace GuessWhoOnePiece.Model.CsvManager
     {
         Task<Stream> ReadAllLinesAsync(string path);
 
-        string GetCsvPath();
+        string GetCsvPath { get; }
 
-        string GetPicturePath();
+        string GetPicturePath { get; }
     }
 }

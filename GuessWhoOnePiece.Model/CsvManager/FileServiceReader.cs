@@ -11,14 +11,8 @@ namespace GuessWhoOnePiece.Model.CsvManager
             return File.OpenRead(path);
         }
 
-        public string GetCsvPath()
-        {
-            return Path.Combine(FileSystem.Current.AppDataDirectory, "Characters.csv");
-        }
+        public string GetCsvPath { get; } = Path.Combine(FileSystem.Current.AppDataDirectory, "Characters.csv");
 
-        public string GetPicturePath()
-        {
-            return Path.Combine(FileSystem.Current.AppDataDirectory, "Images");
-        }
+        public string GetPicturePath { get; } = Path.Combine(FileSystem.Current.AppDataDirectory, "Images");
     }
 }

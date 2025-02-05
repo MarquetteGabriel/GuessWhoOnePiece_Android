@@ -26,7 +26,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
         internal static async Task<string> DownloadImageAsync(string imageUrl, string fileName, IFileServiceReader fileServiceReader)
         {
             fileName = fileName + ".jpeg";
-            string picturePath = fileServiceReader.GetPicturePath();
+            string picturePath = fileServiceReader.GetPicturePath;
             try
             {
                 if (!Directory.Exists(picturePath))
