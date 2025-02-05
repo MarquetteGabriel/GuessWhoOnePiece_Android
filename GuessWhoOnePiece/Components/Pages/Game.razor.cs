@@ -11,12 +11,19 @@ namespace GuessWhoOnePiece.Components.Pages;
 
 public partial class Game : ComponentBase
 {
-    private GameViewModel? _gameViewModel = new();
+    private GameViewModel? _gameViewModel;
     private bool isVictory;
+
+    public Game()
+    {
+        if (FileServiceReader == null)
+            FileServiceReader = new FileServiceReader();
+        _gameViewModel = new GameViewModel(FileServiceReader);
+    }
 
     private async void OnCharacterClicked(string characterName)
     {
-        var character = await ReceiveDataCsv.ReceiveCharacter(characterName);
+        var character = await ReceiveDataCsv.ReceiveCharacter(characterName, FileServiceReader);
         isVictory = _gameViewModel!.GetJudgmentDay(character);
         StateHasChanged();
 

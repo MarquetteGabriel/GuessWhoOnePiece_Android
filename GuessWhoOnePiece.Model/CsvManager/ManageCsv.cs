@@ -7,26 +7,23 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using GuessWhoOnePiece.Model.Characters;
-using Microsoft.Maui.Storage;
 
 namespace GuessWhoOnePiece.Model.CsvManager
 {
     /// <summary>Represents the managing of the Csv.</summary>
     public static class ManageCsv
     {
-        /// <summary>Path of the Csv.</summary>
-        internal static readonly string CsvPath = Path.Combine(FileSystem.Current.AppDataDirectory,"Characters.csv");
-
         /// <summary>Separator of the Csv.</summary>
         internal const string Separator = ";";
 
         /// <summary>Add a character to the Csv.</summary>
         /// <param name="characters">The list of characters to add.</param>
-        public static void SaveCharactersToCsv(IReadOnlyCollection<Character> characters)
+        public static void SaveCharactersToCsv(IReadOnlyCollection<Character> characters, IFileServiceReader fileServiceReader)
         {
-            CreateCsvFile(CsvPath);
+            string csvPath = fileServiceReader.GetCsvPath();
+            CreateCsvFile(csvPath);
 
-            using var sw = new StreamWriter(CsvPath, false, Encoding.UTF8);
+            using var sw = new StreamWriter(csvPath, false, Encoding.UTF8);
             foreach (var character in characters)
                 sw.WriteLine(SetCharacterToCsv(character));
         }
@@ -44,7 +41,7 @@ namespace GuessWhoOnePiece.Model.CsvManager
 
         /// <summary>Delete a CSV file.</summary>
         /// <param name="filePath">The path where the csv has to be located. </param>
-        private static void DeleteCsvFile(string filePath)
+        internal static void DeleteCsvFile(string filePath)
         {
             if(File.Exists(filePath))
                 File.Delete(filePath);

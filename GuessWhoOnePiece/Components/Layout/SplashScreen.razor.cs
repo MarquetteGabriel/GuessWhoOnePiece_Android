@@ -48,7 +48,7 @@ namespace GuessWhoOnePiece.Components.Layout
 
                 Task.Run(async () =>
                 {
-                    var threadsTask = controlRoom.GenerateThreads();
+                    var threadsTask = controlRoom.GenerateThreads(FileServiceReader);
                     while (ProgressValue < MAX_PROGRESS)
                     {
                         ProgressValue = controlRoom.Percentage;
@@ -63,7 +63,7 @@ namespace GuessWhoOnePiece.Components.Layout
                         }   
                     }
                     var characterList = threadsTask.Result;
-                    ManageCsv.SaveCharactersToCsv(characterList);
+                    ManageCsv.SaveCharactersToCsv(characterList, FileServiceReader);
                     Preferences.Set("Updated", true);
                     LoadingService.Loading = false;
                     controlRoom = null;

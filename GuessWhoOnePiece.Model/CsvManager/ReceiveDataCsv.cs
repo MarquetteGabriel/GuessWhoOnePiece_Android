@@ -37,25 +37,26 @@ namespace GuessWhoOnePiece.Model.CsvManager
         /// <summary>Receive the character from the character name.</summary>
         /// <param name="characterName">The character's name to get data.</param>
         /// <returns>The character to get.</returns>
-        public static async Task<Character> ReceiveCharacter(string characterName)
+        public static async Task<Character> ReceiveCharacter(string characterName, IFileServiceReader fileServiceReader)
         {
-            var characters = await ReceiveAllCharacters(values => values[0].Equals(characterName, StringComparison.OrdinalIgnoreCase));
+            var characters = await ReceiveAllCharacters(values => values[0].Equals(characterName, StringComparison.OrdinalIgnoreCase), fileServiceReader);
             return characters.FirstOrDefault() ?? throw new InvalidDataException(InvalidExceptionMessage);
         }
 
         /// <summary>Receive all characters.</summary>
         /// <returns>List of all characters.</returns>
-        public static async Task<List<Character>> ReceiveAllCharacters()
+        public static async Task<List<Character>> ReceiveAllCharacters(IFileServiceReader fileServiceReader)
         {
-            return await ReceiveAllCharacters(values => true);
+            return await ReceiveAllCharacters(values => true, fileServiceReader);
         }
 
         /// <summary>Receive all characters.</summary>
         /// <returns>List of all characters.</returns>
-        public static async Task<List<Character>> ReceiveAllCharacters(Func<string[], bool> filter)
+        public static async Task<List<Character>> ReceiveAllCharacters(Func<string[], bool> filter, IFileServiceReader fileServiceReader)
         {
             var characters = new List<Character>();
-            await using var stream = File.OpenRead(ManageCsv.CsvPath);
+            string csvPath = fileServiceReader.GetCsvPath();
+            await using var stream = File.OpenRead(csvPath);
             using var reader = new StreamReader(stream, Encoding.UTF8);
             while (await reader.ReadLineAsync() is { } line)
             {

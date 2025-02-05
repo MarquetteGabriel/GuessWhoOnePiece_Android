@@ -3,7 +3,9 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
     {
         private ControlRoom controlRoom;
         private const string Unknown = "Unknown";
+        private const string LocalPath = "C:\\Users\\Gabriel Marquette\\AppData\\Local\\Packages\\com.companyname.guesswhoonepiece_9zz4h110yvjzm\\LocalState\\";
+        Mock mockFileService = new Mock<IFileServiceReader>();
         public Z_Database()
         {
             controlRoom = new ControlRoom();
@@ -25,8 +29,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zabo()
         {
             var character = "Zabo";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zabo", result!.Name);
@@ -43,8 +47,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zadie()
         {
             var character = "Zadie";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zadie", result!.Name);
@@ -61,8 +65,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zala()
         {
             var character = "Zala";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zala / Miss Doublefinger", result!.Name);
@@ -79,8 +83,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zambai()
         {
             var character = "Zambai";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zambai", result!.Name);
@@ -97,8 +101,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zangirimaru()
         {
             var character = "Zangirimaru";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zangirimaru", result!.Name);
@@ -115,8 +119,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zanki()
         {
             var character = "Zanki";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zanki", result!.Name);
@@ -133,8 +137,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zeff()
         {
             var character = "Zeff";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zeff", result!.Name);
@@ -151,8 +155,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zeo()
         {
             var character = "Zeo";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zeo", result!.Name);
@@ -169,8 +173,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zepo()
         {
             var character = "Zepo";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zepo", result!.Name);
@@ -187,8 +191,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zeus()
         {
             var character = "Zeus";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zeus", result!.Name);
@@ -205,8 +209,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zodia()
         {
             var character = "Zodia";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zodia", result!.Name);
@@ -223,8 +227,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zott()
         {
             var character = "Zott";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zott", result!.Name);
@@ -241,8 +245,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zucca()
         {
             var character = "Zucca";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zucca", result!.Name);
@@ -259,8 +263,8 @@ namespace GuessWhoOnePiece.Tests.DataBase
         public async Task Zunesh()
         {
             var character = "Zunesh";
-            var characterLink = ControlRoom.SetCharacterLink(character);
-            var result = await controlRoom.DataForCharacter(characterLink, character);
+            var characterLink = ControlRoom.SetCharacterLink(character); var mockFileService = new Mock<IFileServiceReader>(); mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv"); 
+            var result = await controlRoom.DataForCharacter(characterLink, character, mockFileService.Object);
 
             Skip.If(result == null, "Character not found");
             Assert.Equal("Zunesh", result!.Name);

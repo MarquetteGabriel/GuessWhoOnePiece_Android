@@ -4,6 +4,7 @@
 // <author>Gabriel Marquette</author>
 
 using GuessWhoOnePiece.Model.Characters;
+using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries.Picture;
 using HtmlAgilityPack;
 using System;
@@ -66,7 +67,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <param name="url">The url of the character.</param>
         /// <param name="characterName">The name of the character.</param>
         /// <returns>The character.</returns>
-        public async Task<Character?> DataForCharacter(Uri url, string characterName)
+        public async Task<Character?> DataForCharacter(Uri url, string characterName, IFileServiceReader fileServiceReader)
         {
             try
             {
@@ -104,7 +105,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                         await ImageDownloadSemaphore.WaitAsync();
                         try
                         {
-                            return await PictureManager.DownloadImageAsync(pictureElement, characterName);
+                            return await PictureManager.DownloadImageAsync(pictureElement, characterName, fileServiceReader);
                         }
                         finally
                         {

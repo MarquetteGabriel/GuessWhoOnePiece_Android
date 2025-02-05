@@ -31,7 +31,7 @@ public partial class ListCharacters : ComponentBase
             isLoading = true;
             await InvokeAsync(StateHasChanged);
             _characterNames ??= [];
-            _characters = await ReceiveDataCsv.ReceiveAllCharacters();
+            _characters = await ReceiveDataCsv.ReceiveAllCharacters(FileServiceReader);
             foreach (var character in _characters)
                 _characterNames.Add(character.Name);
 
@@ -44,7 +44,7 @@ public partial class ListCharacters : ComponentBase
 
     private async void OnSelectedCharacter(string characterName)
     {
-        var character = await ReceiveDataCsv.ReceiveCharacter(characterName);
+        var character = await ReceiveDataCsv.ReceiveCharacter(characterName, FileServiceReader);
     }
 
     private async Task OnInput(ChangeEventArgs args)
@@ -63,13 +63,13 @@ public partial class ListCharacters : ComponentBase
         _characters.Clear();
         if (string.IsNullOrEmpty(SearchText))
         {
-            _characters = await ReceiveDataCsv.ReceiveAllCharacters();
+            _characters = await ReceiveDataCsv.ReceiveAllCharacters(FileServiceReader);
         }
         else
         {
             foreach (var character in _characterNames.Where(character => character.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)).ToList())
             {
-                _characters.Add(await ReceiveDataCsv.ReceiveCharacter(character));
+                _characters.Add(await ReceiveDataCsv.ReceiveCharacter(character, FileServiceReader));
             }
         }
     }

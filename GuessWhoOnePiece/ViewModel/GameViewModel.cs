@@ -32,16 +32,16 @@ namespace GuessWhoOnePiece.ViewModel
         private SelectAnswer? selectAnswer;
 
         /// <summary>Constructor.</summary>
-        public GameViewModel()
+        public GameViewModel(IFileServiceReader fileServiceReader)
         {
             CharacterNameList = new();
-            _ = NewGame();
+            _ = NewGame(fileServiceReader);
         }
 
         /// <summary>Set a new game.</summary>
-        private async Task NewGame()
+        private async Task NewGame(IFileServiceReader fileServiceReader)
         {
-            var characters = await ReceiveDataCsv.ReceiveAllCharacters();
+            var characters = await ReceiveDataCsv.ReceiveAllCharacters(fileServiceReader);
             var _characterToFind = Guesser.SetCharacterToFind(characters);
             CharacterNameList.AddRange(characters.Select(character => character.Name));
             selectAnswer ??= new SelectAnswer(_characterToFind);

@@ -19,7 +19,7 @@ namespace GuessWhoOnePiece.Components.Pages
 
         public async Task OnShowCharacter()
         {
-            var characters = await ReceiveDataCsv.ReceiveAllCharacters();
+            var characters = await ReceiveDataCsv.ReceiveAllCharacters(FileServiceReader);
             foreach (var character in characters)
                 {
                 _value += character.Name + " ";

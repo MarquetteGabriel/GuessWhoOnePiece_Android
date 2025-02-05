@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuessWhoOnePiece.Model.Characters;
+using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Services;
 
 namespace GuessWhoOnePiece.Model.DataEntries
@@ -29,7 +30,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         /// <summary>Generate threads to get data.</summary>
         /// <returns>The complete list of characters.</returns>
-        public async Task<IReadOnlyCollection<Character>> GenerateThreads()
+        public async Task<IReadOnlyCollection<Character>> GenerateThreads(IFileServiceReader fileServiceReader)
         {
             _characterNameList = await CharacterNameListManager.ReceivedCharactersList();
 
@@ -37,7 +38,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             
             await Parallel.ForEachAsync(_characterNameList, async (characterName, _) =>
             {
-                var character = await DataForCharacter(SetCharacterLink(characterName), characterName);
+                var character = await DataForCharacter(SetCharacterLink(characterName), characterName, fileServiceReader);
                 if (character != null)
                     charactersList.Add(character);
             });

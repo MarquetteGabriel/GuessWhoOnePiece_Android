@@ -1,5 +1,6 @@
 ﻿@page "/characters"
 @using GuessWhoOnePiece.Model.Characters
+@inject GuessWhoOnePiece.Model.CsvManager.IFileServiceReader FileServiceReader
 
 <TextEntry WithAutoComplete="false" Items="_characterNames" OnItemSelected="OnSelectedCharacter" OnKeyPressed="OnKeyPressed" OnInputKeys="OnInput"></TextEntry>
 

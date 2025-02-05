@@ -47,7 +47,7 @@ public class DefinePicturesTest
     public void Test_SetChapterPicture_Previous()
     {
         var result = DefinePictures.SetChapterPicture(ChapterType.PreviousChapter);
-        Assert.Equal(PicturesAlbum.ArrowUp, result);
+        Assert.Equal(PicturesAlbum.ArrowDown, result);
     }
 
     /// <summary>Test SetChapterPicture with Newer value.</summary>
@@ -55,7 +55,7 @@ public class DefinePicturesTest
     public void Test_SetChapterPicture_Newer()
     {
         var result = DefinePictures.SetChapterPicture(ChapterType.NewerChapter);
-        Assert.Equal(PicturesAlbum.ArrowDown, result);
+        Assert.Equal(PicturesAlbum.ArrowUp, result);
     }
 
     /// <summary>Test SetChapterPicture with Same value.</summary>

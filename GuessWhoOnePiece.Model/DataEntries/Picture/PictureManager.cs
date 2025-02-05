@@ -3,6 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.CsvManager;
 using Microsoft.Maui.Storage;
 using SkiaSharp;
 using System;
@@ -16,24 +17,22 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
     /// <summary>Represents the retrieval of pictures.</summary>
     public static partial class PictureManager
     {
-        /// <summary>Path to the folder of pictures.</summary>
-        internal static readonly string PicturePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Images");
-
         private static readonly HttpClient _httpClient = new();
 
         /// <summary>Dowload picture to the folder.</summary>
         /// <param name="imageUrl">Link of the picture.</param>
         /// <param name="fileName">Name of the character which is used in the fileName.</param>
         /// <returns>The fileName.</returns>
-        internal static async Task<string> DownloadImageAsync(string imageUrl, string fileName)
+        internal static async Task<string> DownloadImageAsync(string imageUrl, string fileName, IFileServiceReader fileServiceReader)
         {
             fileName = fileName + ".jpeg";
+            string picturePath = fileServiceReader.GetPicturePath();
             try
             {
-                if (!Directory.Exists(PicturePath))
-                    Directory.CreateDirectory(PicturePath);
+                if (!Directory.Exists(picturePath))
+                    Directory.CreateDirectory(picturePath);
 
-                var outputFilePath = Path.Combine(PicturePath, fileName);
+                var outputFilePath = Path.Combine(picturePath, fileName);
                 if (File.Exists(outputFilePath))
                     return @"Images/" + fileName;
 

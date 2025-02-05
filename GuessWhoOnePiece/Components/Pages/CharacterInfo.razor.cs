@@ -17,7 +17,7 @@ public partial class CharacterInfo : ComponentBase
 
     protected override async Task OnParametersSetAsync()
     {
-         Character = await ReceiveDataCsv.ReceiveCharacter(CharacterName);
+         Character = await ReceiveDataCsv.ReceiveCharacter(CharacterName, FileServiceReader);
          CharacterName = Character.Name;
     }
 }

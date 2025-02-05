@@ -3,8 +3,10 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries;
 using GuessWhoOnePiece.Model.DataEntries.Picture;
+using Moq;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Tests.DataEntries
@@ -12,6 +14,8 @@ namespace GuessWhoOnePiece.Tests.DataEntries
     /// <summary>Test class "ManageCsv".</summary>
     public class ReceiveDataTest
     {
+        private const string LocalPath = "C:\\Users\\Gabriel Marquette\\AppData\\Local\\Packages\\com.companyname.guesswhoonepiece_9zz4h110yvjzm\\LocalState\\";
+
         [Fact]
         public async Task Test_ReceiveCharacter()
         {
@@ -90,8 +94,10 @@ namespace GuessWhoOnePiece.Tests.DataEntries
         {
             var controlRoom = new ControlRoom();
             Assert.Equal(0, controlRoom.Percentage);
+            var mockFileService = new Mock<IFileServiceReader>();
+            mockFileService.Setup(pp => pp.GetCsvPath()).Returns(LocalPath + "Characters.csv");
 
-            var characterList = await controlRoom.GenerateThreads();
+            var characterList = await controlRoom.GenerateThreads(mockFileService.Object);
             
             Assert.NotNull(characterList);
             Assert.Equal(controlRoom.CharacterCount, controlRoom.CountPercentage);

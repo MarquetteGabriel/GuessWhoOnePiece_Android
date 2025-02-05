@@ -3,6 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Services;
 using GuessWhoOnePiece.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +30,8 @@ namespace GuessWhoOnePiece
 
             // Loading Services.
             builder.Services.AddSingleton<LoadingService>();
-
+            builder.Services.AddSingleton<IFileServiceReader, FileServiceReader>();
+            
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
