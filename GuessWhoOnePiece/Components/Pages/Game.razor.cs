@@ -27,6 +27,9 @@ public partial class Game : ComponentBase
         StateHasChanged();
 
         if (isVictory)
+        {
+            CurrentCharacterService.CurrentCharacter = character;
             Navigation.NavigateTo("/victory");
+        }
     }
 }

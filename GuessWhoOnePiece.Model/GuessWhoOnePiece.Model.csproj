@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GuessWhoOnePiece.Services\GuessWhoOnePiece.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Resources\Strings.Designer.cs">
       <DependentUpon>Strings.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -44,6 +40,6 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Resources\Images\*"/>
+		<EmbeddedResource Include="Resources\Images\*" />
 	</ItemGroup>
 </Project>

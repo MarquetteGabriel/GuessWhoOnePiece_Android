@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
-using GuessWhoOnePiece.Services;
 
 namespace GuessWhoOnePiece.Model.DataEntries
 {

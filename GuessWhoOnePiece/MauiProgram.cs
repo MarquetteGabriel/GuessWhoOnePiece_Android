@@ -30,6 +30,7 @@ namespace GuessWhoOnePiece
 
             // Loading Services.
             builder.Services.AddSingleton<LoadingService>();
+            builder.Services.AddSingleton<CurrentCharacterService>();
             builder.Services.AddSingleton<IFileServiceReader, FileServiceReader>();
             
 #if DEBUG

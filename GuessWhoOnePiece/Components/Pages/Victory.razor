@@ -1,6 +1,4 @@
 ﻿@page "/victory"
+@inject GuessWhoOnePiece.Services.CurrentCharacterService CurrentCharacterService
 
-<h3>Victory</h3>
-
-
-<button>Play Again</button>
+<h3>@Character?.Name</h3>
