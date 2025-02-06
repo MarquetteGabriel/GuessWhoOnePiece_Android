@@ -57,6 +57,7 @@ namespace GuessWhoOnePiece.Tests.CsvManager
             ManageCsv.DeleteCsvFile(LocalPath + "Characters.csv");
             Assert.False(File.Exists(LocalPath + "Characters.csv"));
             ManageCsv.SaveCharactersToCsv(saveData, mockFileService.Object);
+            ManageCsv.SaveCharactersToCsv(saveData, mockFileService.Object);
             Assert.True(File.Exists(LocalPath + "Characters.csv"));
         }
 

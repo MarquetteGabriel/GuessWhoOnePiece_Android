@@ -6,18 +6,11 @@
 using HtmlAgilityPack;
 using System;
 using System.Linq;
-using System.Net;
 
 namespace GuessWhoOnePiece.Model.DataEntries.Picture
 {
     public static partial class PictureManager
     {
-        private const string MangaPostEllipse = "Manga_Post_Ellipse";
-        private const string MangaPreEllipse = "Manga_Pre_Ellipse";
-        private const string AnimePostEllipse = "Anime_Post_Ellipse";
-        private const string AnimePreEllipse = "Anime_Pre_Ellipse";
-        private const string AnimeInfobox = "Anime_Infobox";
-
         private const string Amp = "amp;";
         private const string Href = "href";
         private const string AmpAnd = "&amp";
@@ -25,36 +18,15 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
 
         /// <summary>Gets the link of the image for a character.</summary>
         /// <param name="listOfPictures">List of picture in the web page.</param>
-        /// <param name="characterName">Name of the character.</param>
         /// <returns>The link of the image for the character.</returns>
-        internal static string GetPictureLink(HtmlNodeCollection listOfPictures, string characterName)
+        internal static string GetPictureLink(HtmlNodeCollection listOfPictures)
         {
-            foreach (var picture in listOfPictures.Select(picture => picture.GetAttributeValue(Href, string.Empty)))
-            {
-                var newPicture = picture.Replace(Amp, string.Empty, StringComparison.OrdinalIgnoreCase).Replace(AmpAnd, Esperluette, StringComparison.OrdinalIgnoreCase);
-                if (IsSpecialPicture(newPicture))
-                    return newPicture;
+            var result = listOfPictures.Select(picture => picture.GetAttributeValue(Href, string.Empty)).FirstOrDefault();
 
-                if (newPicture.Contains(characterName))
-                    return newPicture;
-
-                if (ExtractPictureHtmlWebDecode(characterName, newPicture) != null)
-                    return newPicture;
-            }
-
-            return string.Empty;
-        }
-
-        private static bool IsSpecialPicture(string picture) =>
-            picture.Contains(MangaPostEllipse, StringComparison.OrdinalIgnoreCase) || picture.Contains(MangaPreEllipse, StringComparison.OrdinalIgnoreCase) ||
-            picture.Contains(AnimePostEllipse, StringComparison.OrdinalIgnoreCase) || picture.Contains(AnimePreEllipse, StringComparison.OrdinalIgnoreCase) ||
-            picture.Contains(AnimeInfobox, StringComparison.OrdinalIgnoreCase);
-
-        private static string? ExtractPictureHtmlWebDecode(string characterName, string picture)
-        {
-            characterName = characterName.Replace("/", "", StringComparison.OrdinalIgnoreCase);
-            var pictureName = characterName.Split(" ").FirstOrDefault(character => picture.Contains(WebUtility.UrlEncode(character), StringComparison.OrdinalIgnoreCase));
-            return pictureName != null ? picture : null;
+            if (result == null)
+                return string.Empty;
+            else
+                return result.Replace(Amp, string.Empty, StringComparison.OrdinalIgnoreCase).Replace(AmpAnd, Esperluette, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>Calculate the percentage of match between two strings.</summary>

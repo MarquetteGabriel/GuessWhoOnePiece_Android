@@ -46,7 +46,7 @@ namespace GuessWhoOnePiece.Tests.CsvManager
         public void Test_PictureData()
         {
             HtmlNodeCollection htmlNodes = new HtmlNodeCollection(new HtmlNode(HtmlNodeType.Text, new HtmlDocument(), 0));
-            var result = PictureManager.GetPictureLink(htmlNodes, "");
+            var result = PictureManager.GetPictureLink(htmlNodes);
 
             Assert.NotNull(result);
             Assert.Equal(string.Empty, result);
