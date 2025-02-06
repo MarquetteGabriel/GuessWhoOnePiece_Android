@@ -1,4 +1,38 @@
 ﻿@page "/victory"
 @inject GuessWhoOnePiece.Services.CurrentCharacterService CurrentCharacterService
+@inject NavigationManager Navigation
 
-<h3>@Character?.Name</h3>
+<div class="victory-page">
+    <div class="background-img">
+        <Picture PicturePath="background_victory.jpg" />
+    </div>
+    
+    <div class="victory-title">
+        <h1>Victory !</h1>
+    </div>
+
+    <div class="character-name-title">
+        <h3>Monkey D. Luffy</h3>
+    </div>
+
+    <div class="character-details">
+        <div class="picture-character">
+            <Picture PicturePath="@Character?.Picture" />
+        </div>
+
+        <div>
+            <h4><span class="label">Première apparition :</span> 22</h4>
+            <h4><span class="label">Bounty :</span> 3 Md</h4>
+            <h4><span class="label">Particularité 1 :</span> true</h4>
+            <h4><span class="label">Particularité 2 :</span> true</h4>
+            <h4><span class="label">Équipage :</span> Mugiwara's Crew</h4>
+        </div>
+    </div>
+
+    <div class="buttons-navigation">
+        <button @onclick="OnPlayAgain">Play Again</button>
+        <button @onclick="OnHome">Home</button>
+    </div>
+</div>
+
+

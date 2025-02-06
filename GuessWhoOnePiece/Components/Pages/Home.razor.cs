@@ -14,7 +14,8 @@ namespace GuessWhoOnePiece.Components.Pages
 
         private void OnClickChargement()
         {
-            // Not used now.
+            CurrentCharacterService.CurrentCharacter = new Model.Characters.Character("Monkey D. Luffy", true, "3 Md", 1, "Pirate", true, 22, "Mugiwaras", "Images/Monkey D. Luffy.jpeg", 0);
+            Navigation.NavigateTo("/victory");
         }
 
         public async Task OnShowCharacter()

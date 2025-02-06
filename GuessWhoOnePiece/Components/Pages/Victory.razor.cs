@@ -14,5 +14,15 @@ namespace GuessWhoOnePiece.Components.Pages
             Character = CurrentCharacterService.CurrentCharacter;
             StateHasChanged();
         }
+
+        private void OnHome()
+        {
+            Navigation.NavigateTo("/home");
+        }
+
+        private void OnPlayAgain()
+        {
+            Navigation.NavigateTo($"/game");
+        }
     }
 }
