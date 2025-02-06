@@ -1,9 +1,4 @@
 ﻿using GuessWhoOnePiece.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Tests.Services
 {
@@ -17,6 +12,12 @@ namespace GuessWhoOnePiece.Tests.Services
 
             LS.Loading = true;
             Assert.True(LS.Loading);
+
+            LS.Loading = true;
+            Assert.True(LS.Loading);
+
+            LS.Loading = false;
+            Assert.False(LS.Loading);
         }
     }
 }

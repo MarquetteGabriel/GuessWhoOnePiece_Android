@@ -55,9 +55,6 @@ namespace GuessWhoOnePiece.Model.DataEntries
         internal static async Task<IReadOnlyCollection<Character>> SetPopularity(IReadOnlyList<string> characterNameList, IReadOnlyCollection<Character> characterList)
         {
             var table = await SetTablePopularity();
-            if (table == null)
-                return characterList.ToList();
-
             List<string> ListPopularity = new(characterList.Count);
 
             var rows = table.SelectNodes(FilterTr);
@@ -89,16 +86,12 @@ namespace GuessWhoOnePiece.Model.DataEntries
             return characterList;
         }
 
-        private static async Task<HtmlNode?> SetTablePopularity()
+        private static async Task<HtmlNode> SetTablePopularity()
         {
             var web = new HtmlWeb();
             var doc = await web.LoadFromWebAsync(UrlLevels.ToString());
             var elements = doc.DocumentNode.SelectNodes(FilterPopularity);
-
-            if (elements.LastOrDefault() == null)
-                return null;
-
-            return elements.Last().SelectNodes(FilterTable).LastOrDefault();
+            return elements.Last().SelectNodes(FilterTable).LastOrDefault()!;
         }
 
         private static int SetLevel(int position, int levelLimit)

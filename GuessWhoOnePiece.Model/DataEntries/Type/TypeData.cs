@@ -34,7 +34,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             {
                 var docSmallDatas = new HtmlDocument();
                 docSmallDatas.LoadHtml(type);
-                var smallText = docSmallDatas.DocumentNode.SelectSingleNode("//small")?.InnerText ?? "";
+                var smallText = docSmallDatas.DocumentNode.SelectSingleNode("//small")!.InnerText;
                 var cleanedType = Regexs.ContentBetweenBracketsRegex().Replace(type, "").Trim() + smallText;
                 typeCharacters.AddRange(cleanedType.Split(new[] { ";", "," }, StringSplitOptions.RemoveEmptyEntries));
             }

@@ -40,20 +40,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>A list with all of characters.</returns>
         public static async Task<IReadOnlyList<string>> ReceivedCharactersList()
         {
-            var doc = await Web.LoadFromWebAsync(UrlFandomListCharacter).ConfigureAwait(false);
-            if (doc == null)
-                return Array.Empty<string>();
-
-            var table = doc.DocumentNode.SelectSingleNode(TableFilter);
-            if (table == null)
-                return Array.Empty<string>();
-            
-            doc = null;
-
-            HtmlNodeCollection rows = table.SelectNodes(RowFilter);
-            if (rows == null)
-                return Array.Empty<string>();
-
+            var rows = await SelectRows();
             var CharacterNameList = new List<string>(rows.Count);
 
             foreach (HtmlNode row in rows)
@@ -73,6 +60,15 @@ namespace GuessWhoOnePiece.Model.DataEntries
             rows.Clear();
 
             return CharacterNameList;
+        }
+
+        /// <summary>Select rows from file.</summary>
+        /// <returns>The collection of rows.</returns>
+        private static async Task<HtmlNodeCollection> SelectRows()
+        {
+            var doc = await Web.LoadFromWebAsync(UrlFandomListCharacter).ConfigureAwait(false);
+            var table = doc.DocumentNode.SelectSingleNode(TableFilter);
+            return table.SelectNodes(RowFilter);
         }
 
         /// <summary>Change value for specific character.</summary>
