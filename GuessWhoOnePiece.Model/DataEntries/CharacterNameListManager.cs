@@ -4,7 +4,6 @@
 // <author>Gabriel Marquette</author>
 
 using HtmlAgilityPack;
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
