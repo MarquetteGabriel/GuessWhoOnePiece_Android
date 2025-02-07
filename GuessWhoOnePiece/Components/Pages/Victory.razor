@@ -3,16 +3,14 @@
 @inject NavigationManager Navigation
 
 <div class="victory-page">
+
     <div class="background-img">
         <Picture PicturePath="background_victory.jpg" />
     </div>
     
-    <div class="victory-title">
-        <h1>Victory !</h1>
-    </div>
-
-    <div class="character-name-title">
-        <h3>Monkey D. Luffy</h3>
+    <div class="page-title">
+        <h1 class="victory-title">Victory !</h1>
+        <h3 class="character-name-title">Monkey D. Luffy</h3>
     </div>
 
     <div class="character-details">
@@ -20,12 +18,14 @@
             <Picture PicturePath="@Character?.Picture" />
         </div>
 
-        <div>
-            <h4><span class="label">Première apparition :</span> 22</h4>
-            <h4><span class="label">Bounty :</span> 3 Md</h4>
-            <h4><span class="label">Particularité 1 :</span> true</h4>
-            <h4><span class="label">Particularité 2 :</span> true</h4>
-            <h4><span class="label">Équipage :</span> Mugiwara's Crew</h4>
+        <div class="character-infos">
+            <h4><span class="label">Première apparition : </span>@Character?.FirstAppearance</h4>
+            <h4><span class="label">Prime : </span>@Character?.Bounty</h4>
+            <h4><span class="label">En vie : </span>@Character?.Alive</h4>
+            <h4><span class="label">Age : </span>@Character?.Age</h4>
+            <h4><span class="label">Type : </span>@Character?.Type</h4>
+            <h4><span class="label">Fruit du Démon : </span>@Character?.DevilFruit</h4>
+            <h4><span class="label">Équipage : </span>@Character?.Crew</h4>
         </div>
     </div>
 
