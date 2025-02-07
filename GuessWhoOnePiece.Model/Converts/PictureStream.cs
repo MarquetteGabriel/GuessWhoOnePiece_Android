@@ -11,5 +11,12 @@ namespace GuessWhoOnePiece.Model.Converts
             var resourceName = $"{assembly.GetName().Name}.Resources.Images.{pictureName}";
             return assembly.GetManifestResourceStream(resourceName);
         }
+
+        public static string GetAssemblyName(string pictureName)
+        {
+            Assembly assembly = typeof(PictureStream).Assembly;
+            return $"{assembly.GetName().Name}.Resources.Images.{pictureName}";
+
+        }
     }
 }

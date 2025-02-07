@@ -15,6 +15,8 @@ namespace GuessWhoOnePiece.Components.Layout
                 LoadingService.Loading = false;
             else
                 LoadingService.Loading = true;
+
+            IndexMenuService.IndexMenu = 3;
         }
     }
 }

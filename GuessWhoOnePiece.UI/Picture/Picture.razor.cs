@@ -27,17 +27,22 @@ namespace GuessWhoOnePiece.UI.Picture
 
             try
             {
-                if (!PicturePath.Contains("jpeg", StringComparison.Ordinal))
-                {
-                    base64string = ConvertPictureToString(PicturePath);
-                }
-                else
+                if (PicturePath.Contains(".jpeg", StringComparison.Ordinal))
                 {
                     var picturePath = PicturePath.Replace(" / ", " _ ", StringComparison.OrdinalIgnoreCase);
                     var filePath = Path.Combine(FileSystem.Current.AppDataDirectory, picturePath);
                     var fileBytes = await File.ReadAllBytesAsync(filePath);
                     base64string = Convert.ToBase64String(fileBytes);
-                }             
+                }
+                else if (PicturePath.Contains(".svg", StringComparison.Ordinal))
+                {
+                    PathPicture = PictureStream.GetAssemblyName(PicturePath);
+                    return;
+                }
+                else
+                {
+                    base64string = ConvertPictureToString(PicturePath);
+                }
             }
             catch (Exception)
             {

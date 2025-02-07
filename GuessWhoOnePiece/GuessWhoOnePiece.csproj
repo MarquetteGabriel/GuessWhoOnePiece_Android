@@ -30,10 +30,10 @@
 
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+        <MauiIcon Include="Resources\AppIcon\logo_guesswho_one_piece.svg" />
 
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\disc0555.jpg" BaseSize="128,128" />
+        <MauiSplashScreen Include="Resources\Splash\disc0555.jpg" />
 
         <!-- Images -->
         <MauiImage Include="Resources\Images\*" />
@@ -67,10 +67,5 @@
       <ProjectReference Include="..\GuessWhoOnePiece.Model\GuessWhoOnePiece.Model.csproj" />
       <ProjectReference Include="..\GuessWhoOnePiece.Services\GuessWhoOnePiece.Services.csproj" />
       <ProjectReference Include="..\GuessWhoOnePiece.UI\GuessWhoOnePiece.UI.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Resources\Images\" />
-    </ItemGroup>
-	
+    </ItemGroup>	
 </Project>

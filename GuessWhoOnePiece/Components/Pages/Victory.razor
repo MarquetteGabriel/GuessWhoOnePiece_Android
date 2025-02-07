@@ -1,16 +1,15 @@
 ﻿@page "/victory"
 @inject GuessWhoOnePiece.Services.CurrentCharacterService CurrentCharacterService
 @inject NavigationManager Navigation
+@inject GuessWhoOnePiece.Services.IndexMenuService IndexMenuService
 
 <div class="victory-page">
 
-    <div class="background-img">
-        <Picture PicturePath="background_victory.jpg" />
-    </div>
+    <BackgroundPicture/>
     
     <div class="page-title">
         <h1 class="victory-title">Victory !</h1>
-        <h3 class="character-name-title">Monkey D. Luffy</h3>
+        <h3 class="character-name-title">@Character?.Name</h3>
     </div>
 
     <div class="character-details">

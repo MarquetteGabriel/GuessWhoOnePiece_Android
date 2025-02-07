@@ -1,9 +1,11 @@
-﻿<div class="tab-bar">
+﻿@inject GuessWhoOnePiece.Services.IndexMenuService IndexMenuService
+
+<div class="tab-bar">
     <div class="nav-list">
         <div class="nav-item">
             <NavLink class="nav-link" href="counter" @onclick="() => ChangeActiveState(1)">
                 @*<img class="nav-icon" src="icons/today_icon.png" alt=""/>*@
-                @if (Index == 1)
+                @if (IndexMenuService.IndexMenu == 1)
                 {
                     <img class="nav-icon" src="icons/today_icon_on.svg" alt=""/>
                 }
@@ -16,7 +18,7 @@
         <div class="nav-item">
             <NavLink class="nav-link" href="game" @onclick="() => ChangeActiveState(2)">
                 @*<img class="nav-icon" src="icons/game_icon.png" alt=""/>*@
-                @if (Index == 2)
+                @if (IndexMenuService.IndexMenu == 2)
                 {
                     <img class="nav-icon" src="icons/infinity_icon_on.svg" alt=""/>
                 }
@@ -28,7 +30,7 @@
         </div>
         <div class="nav-item">
             <NavLink class="nav-link" href="home" @onclick="() => ChangeActiveState(3)">
-            @if (Index == 3)
+                @if (IndexMenuService.IndexMenu == 3)
             {
                 <img class="nav-icon" src="icons/home_icon_on.svg" alt=""/>
             }
@@ -41,7 +43,7 @@
         <div class="nav-item">
             <NavLink class="nav-link" href="characters" @onclick="() => ChangeActiveState(4)">
                 @*<img class="nav-icon" src="icons/characters_icon.png" alt=""/>*@
-                @if (Index == 4)
+                @if (IndexMenuService.IndexMenu == 4)
                 {
                 <img class="nav-icon" src="icons/characters_icon_on.svg" alt=""/>
                 }
@@ -54,7 +56,7 @@
         <div class="nav-item">
             <NavLink class="nav-link" href="weather" @onclick="() => ChangeActiveState(5)">
                 @*<img class="nav-icon" src="icons/settings_icon.png" alt=""/>*@
-                @if (Index == 5)
+                @if (IndexMenuService.IndexMenu == 5)
                 {
                 <img class="nav-icon" src="icons/settings_icon_on.svg" alt=""/>
                 }

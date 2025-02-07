@@ -17,11 +17,15 @@ namespace GuessWhoOnePiece.Components.Pages
 
         private void OnHome()
         {
+            IndexMenuService.IndexMenu = 3;
+            StateHasChanged();
             Navigation.NavigateTo("/home");
         }
 
         private void OnPlayAgain()
         {
+            IndexMenuService.IndexMenu = 2;
+            StateHasChanged();
             Navigation.NavigateTo($"/game");
         }
     }
