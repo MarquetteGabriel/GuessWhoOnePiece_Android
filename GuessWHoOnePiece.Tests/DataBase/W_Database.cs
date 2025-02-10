@@ -5,6 +5,7 @@
 
 using GuessWhoOnePiece.Model.CsvManager;
 using GuessWhoOnePiece.Model.DataEntries;
+using GuessWhoOnePiece.Model.Resources;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(606, result.FirstAppearance);
-            Assert.Equal("L'Équipage des Pirates du Soleil", result.Crew);
+            Assert.Equal(Crew.SunPiratesCrew, result.Crew);
             Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
@@ -56,7 +57,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -74,7 +75,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -92,7 +93,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -110,7 +111,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(804, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -128,7 +129,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -146,7 +147,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(367, result.FirstAppearance);
-            Assert.Equal("Cipher Pol", result.Crew);
+            Assert.Equal(Crew.CipherPol, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Navy", result.Type);
         }
@@ -164,7 +165,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.True(result.DevilFruit);
             Assert.Equal(131, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -182,7 +183,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -200,7 +201,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -218,7 +219,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -236,7 +237,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -254,7 +255,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -272,7 +273,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -290,7 +291,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.True(result.DevilFruit);
             Assert.Equal(978, result.FirstAppearance);
-            Assert.Equal("L'Équipage aux Cent Bêtes", result.Crew);
+            Assert.Equal(Crew.KaidoCrew, result.Crew);
             Assert.Equal("546 Mi", result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
@@ -308,7 +309,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(705, result.FirstAppearance);
-            Assert.Equal("Allié de L'Équipage du Chapeau de Paille", result.Crew);
+            Assert.Equal(Crew.MugiwaraAllies, result.Crew);
             Assert.Equal(Unknown, result.Bounty);
             Assert.Equal("Pirate", result.Type);
         }
@@ -326,7 +327,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -344,7 +345,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(237, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }
@@ -361,7 +362,7 @@ namespace GuessWhoOnePiece.Tests.DataBase
             Assert.True(result.Alive);
             Assert.False(result.DevilFruit);
             Assert.Equal(77, result.FirstAppearance);
-            Assert.Equal("Citizen", result.Crew);
+            Assert.Equal(Crew.Citizen, result.Crew);
             Assert.Equal("0", result.Bounty);
             Assert.Equal("Citizen", result.Type);
         }

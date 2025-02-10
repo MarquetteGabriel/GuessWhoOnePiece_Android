@@ -6,6 +6,7 @@
 using GuessWhoOnePiece.Model;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.Game;
+using GuessWhoOnePiece.Model.Resources;
 
 namespace GuessWhoOnePiece.Tests.Game
 {
@@ -26,7 +27,7 @@ namespace GuessWhoOnePiece.Tests.Game
             character1 = new Character ("Monkey D. Luffy", true, "3 Md", 1, "Pirate", true, 19, "Straw Hat Pirates", "", 0);
             character3 = new Character("Portgas D. Ace", false, "550 Mi", 1080, "Pirate", false, 20, "Spade Pirates", "", 0);
             character4 = new Character("Ener", true, "Unknown", 220, "Pirate", true, 40, "Ener Crew", "", 0);
-            character5 = new Character("Kizaru", true, "0", 350, "Navy", true, 53, "Navy's Crew", "", 0);
+            character5 = new Character("Kizaru", true, "0", 350, "Navy", true, 53, Crew.Navy, "", 0);
             character6 = new Character("Marsh@ll D. Teach", true, "13 ez", -1, "Touriste", false, -3, "Crew", "", 5);
             character7 = new Character("Tony Tony Chopper", true, "5000", 141, "Pirate", true, 17, "Straw Hat Pirates", "", 0);
             judgmentAnswer = new JudgementAnswer(characterDefaut);

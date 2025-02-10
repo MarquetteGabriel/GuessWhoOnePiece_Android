@@ -117,22 +117,160 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApooCrew" xml:space="preserve">
+    <value>L'Équipage du On-Air</value>
+  </data>
+  <data name="ArlongCrew" xml:space="preserve">
+    <value>L'Équipage d'Arlong</value>
+  </data>
+  <data name="Assassin" xml:space="preserve">
+    <value>Assassin</value>
+  </data>
+  <data name="Bandit" xml:space="preserve">
+    <value>Bandit</value>
+  </data>
+  <data name="BaroqueWorks" xml:space="preserve">
+    <value>Baroque Works</value>
+  </data>
+  <data name="BegeCrew" xml:space="preserve">
+    <value>L'Équipage du Fire Tank</value>
+  </data>
+  <data name="BigMomCrew" xml:space="preserve">
+    <value>L'Équipage de Big Mom</value>
+  </data>
+  <data name="BlackCatCrew" xml:space="preserve">
+    <value>L'Équipage du Chat Noir</value>
+  </data>
+  <data name="BluejamCrew" xml:space="preserve">
+    <value>L'Équipage de Bluejam</value>
+  </data>
+  <data name="BonneyCrew" xml:space="preserve">
+    <value>L'Équipage de Bonney</value>
+  </data>
+  <data name="CaribouCrew" xml:space="preserve">
+    <value>L'Équipage de Caribou</value>
+  </data>
   <data name="CelestialDragons" xml:space="preserve">
     <value>Celestial Dragons</value>
+  </data>
+  <data name="CinqDoyens" xml:space="preserve">
+    <value>Cinq Doyens</value>
+  </data>
+  <data name="CipherPol" xml:space="preserve">
+    <value>Cipher Pol</value>
   </data>
   <data name="Citizen" xml:space="preserve">
     <value>Citizen</value>
   </data>
-  <data name="NavyType" xml:space="preserve">
-    <value>Navy</value>
+  <data name="CrossGuild" xml:space="preserve">
+    <value>Cross Guild</value>
   </data>
-  <data name="PirateType" xml:space="preserve">
+  <data name="DoflamingoCrew" xml:space="preserve">
+    <value>L'Équipage de Don Quichotte Doflamingo</value>
+  </data>
+  <data name="DonKriegCrew" xml:space="preserve">
+    <value>L'Armada Pirate de Don Krieg</value>
+  </data>
+  <data name="EnerCrew" xml:space="preserve">
+    <value>Clan d'Ener</value>
+  </data>
+  <data name="FalseMugiwaraCrew" xml:space="preserve">
+    <value>Faux Équipage du Chapeau de Paille</value>
+  </data>
+  <data name="FoxyCrew" xml:space="preserve">
+    <value>L'Équipage de Foxy</value>
+  </data>
+  <data name="GiantsCrew" xml:space="preserve">
+    <value>L'Équipage des Géants</value>
+  </data>
+  <data name="GouvernementMondial" xml:space="preserve">
+    <value>Gouvernement Mondial</value>
+  </data>
+  <data name="HawkinsCrew" xml:space="preserve">
+    <value>L'Équipage de Hawkins</value>
+  </data>
+  <data name="ImpelDown" xml:space="preserve">
+    <value>Impel Down</value>
+  </data>
+  <data name="KaidoCrew" xml:space="preserve">
+    <value>L'Équipage aux Cent Bêtes</value>
+  </data>
+  <data name="KidCrew" xml:space="preserve">
+    <value>L'Équipage de Kid</value>
+  </data>
+  <data name="Kujas" xml:space="preserve">
+    <value>Kujas</value>
+  </data>
+  <data name="LawCrew" xml:space="preserve">
+    <value>L'Équipage du Heart</value>
+  </data>
+  <data name="MountainBandit" xml:space="preserve">
+    <value>Bandits des montagnes</value>
+  </data>
+  <data name="MugiwaraAllies" xml:space="preserve">
+    <value>Allié de L'Équipage du Chapeau de Paille</value>
+  </data>
+  <data name="MugiwaraCrew" xml:space="preserve">
+    <value>L'Équipage du Chapeau de Paille</value>
+  </data>
+  <data name="Navy" xml:space="preserve">
+    <value>Navy's Crew</value>
+  </data>
+  <data name="NeoMads" xml:space="preserve">
+    <value>Néo Mads</value>
+  </data>
+  <data name="NewComerLand" xml:space="preserve">
+    <value>New Comer Land</value>
+  </data>
+  <data name="NewFishmenCrew" xml:space="preserve">
+    <value>L'Équipage des Nouveaux Hommes-Poissons</value>
+  </data>
+  <data name="NewgateCrew" xml:space="preserve">
+    <value>L'Équipage de Barbe Blanche</value>
+  </data>
+  <data name="Pirate" xml:space="preserve">
     <value>Pirate</value>
   </data>
-  <data name="RevolutionaryType" xml:space="preserve">
-    <value>Revolutionary</value>
+  <data name="PrimatesCrew" xml:space="preserve">
+    <value>Ligue des Primates</value>
   </data>
-  <data name="Unknown" xml:space="preserve">
-    <value>Unknown</value>
+  <data name="RevolutionaryArmy" xml:space="preserve">
+    <value>Revolutionary's Army</value>
+  </data>
+  <data name="RogerCrew" xml:space="preserve">
+    <value>L'Équipage des Pirates de Roger</value>
+  </data>
+  <data name="RollingCrew" xml:space="preserve">
+    <value>L'Équipage du Rolling</value>
+  </data>
+  <data name="Seraphim" xml:space="preserve">
+    <value>Seraphim</value>
+  </data>
+  <data name="ShanksCrew" xml:space="preserve">
+    <value>L'Équipage du Roux</value>
+  </data>
+  <data name="ShikiCrew" xml:space="preserve">
+    <value>L'Équipage du Lion d'Or</value>
+  </data>
+  <data name="SunPiratesCrew" xml:space="preserve">
+    <value>L'Équipage des Pirates du Soleil</value>
+  </data>
+  <data name="TeachCrew" xml:space="preserve">
+    <value>L'Équipage de Barbe Noire</value>
+  </data>
+  <data name="ThrillerBark" xml:space="preserve">
+    <value>Thriller Bark</value>
+  </data>
+  <data name="UrougeCrew" xml:space="preserve">
+    <value>L'Équipage des Moines Dépravés</value>
+  </data>
+  <data name="WapolCrew" xml:space="preserve">
+    <value>L’Équipage de Wapol</value>
+  </data>
+  <data name="WeebleCrew" xml:space="preserve">
+    <value>Edward Weeble</value>
+  </data>
+  <data name="ZoCrew" xml:space="preserve">
+    <value>Zo</value>
   </data>
 </root>

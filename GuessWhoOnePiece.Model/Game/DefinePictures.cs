@@ -38,7 +38,7 @@ public static class DefinePictures
         { "Kujas", PicturesAlbum.CrewKuja },
         { "L'Équipage de Caribou", PicturesAlbum.CrewCaribou },
         { "L'Équipage des Pirates du Soleil", PicturesAlbum.CrewSunpirates },
-        { "L'Équipage des Pirates Roger", PicturesAlbum.CrewRoger },
+        { "L'Équipage des Pirates de Roger", PicturesAlbum.CrewRoger },
         { "L'Équipage de Don Quichotte Doflamingo", PicturesAlbum.CrewDoffy },
         { "L'Équipage du Rumbar", PicturesAlbum.CrewRumbar },
         { "L'Équipage des Nouveaux Hommes-Poissons", PicturesAlbum.CrewNewfish },

@@ -3,6 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.Resources;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -19,27 +20,27 @@ namespace GuessWhoOnePiece.Model.DataEntries
         internal static string ExtractCrew(HtmlNode text, string characterName)
         {
             if (characterName.Equals("Vergo", StringComparison.Ordinal) || characterName.Equals("Senor Pink", StringComparison.Ordinal))
-                return "L'Équipage de Don Quichotte Doflamingo";
+                return Crew.DoflamingoCrew;
             if (characterName.Equals("Sanjuan Wolf", StringComparison.Ordinal))
-                return "L'Équipage de Barbe Noire";
+                return Crew.TeachCrew;
             if (characterName.Equals("Surume", StringComparison.Ordinal))
-                return Resources.Strings.AlliedMugiwaraCrew;
+                return Crew.MugiwaraAllies;
             if (characterName.Equals("Magellan", StringComparison.Ordinal))
-                return "Impel Down";
+                return Crew.ImpelDown;
 
             string crew = GetCrewMapping(ExtractPatternCrew(text));
 
             if (crew.StartsWith("CP", StringComparison.OrdinalIgnoreCase))
-                return "Cipher Pol";
+                return Crew.CipherPol;
 
             if (PirateTypeList.Any(crew.Contains))
                 return crew;
             if (NavyTypeList.Any(crew.Contains))
                 return crew;
             if (RevoTypeList.Any(crew.Contains))
-                return Resources.Strings.RevolutionaryCrew;
+                return Crew.RevolutionaryArmy;
 
-            return Resources.Strings.Citizen;
+            return Crew.Citizen;
         }
 
         /// <summary>Extract crew from text.</summary>
@@ -71,7 +72,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                     return cleanedAffiliation;
             }
 
-            return Resources.Strings.Citizen;
+            return Crew.Citizen;
         }
 
         /// <summary>Set affialition possible for the character.</summary>
@@ -107,7 +108,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 return singleCrew;
 
             if (affiliationCharacter.Any(affiliation => affiliation.Equals("SWORD")))
-                return Resources.Strings.NavyCrew;
+                return Crew.Navy;
 
             for (int index = 0; index < affiliationCharacter.Count; index++)
             {
@@ -127,16 +128,16 @@ namespace GuessWhoOnePiece.Model.DataEntries
         {
             if (index + 1 < affiliationCharacter.Count)
             {
-                if (affiliationCharacter[index].Equals("L'Équipage du Chapeau de Paille", StringComparison.Ordinal) 
+                if (affiliationCharacter[index].Equals(Crew.MugiwaraCrew, StringComparison.Ordinal) 
                     && affiliationCharacter[index + 1].Equals("Nain", StringComparison.Ordinal))
                 { 
-                    return Resources.Strings.AlliedMugiwaraCrew; 
+                    return Crew.MugiwaraAllies; 
                 }
 
-                if (affiliationCharacter[index].Equals("L'Équipage des Pirates du Soleil", StringComparison.Ordinal)
+                if (affiliationCharacter[index].Equals(Crew.SunPiratesCrew, StringComparison.Ordinal)
                     && affiliationCharacter[index + 1].Equals("Révolutionnaires", StringComparison.Ordinal))
                 {
-                    return Resources.Strings.RevolutionaryCrew;
+                    return Crew.RevolutionaryArmy;
                 }
             }
 
@@ -147,7 +148,7 @@ namespace GuessWhoOnePiece.Model.DataEntries
             }
 
             if (affiliationCharacter[index].Equals("(Anciennement)", StringComparison.Ordinal))
-                return Resources.Strings.PirateType;
+                return Crew.Pirate;
 
             return null;
         }
@@ -163,10 +164,10 @@ namespace GuessWhoOnePiece.Model.DataEntries
             var affiliation = affiliationCharacter.First();
 
             if (affiliation.Equals("CP9 (anciennement)"))
-                return "Cipher Pol";
+                return Crew.CipherPol;
 
             if (affiliation.Equals("L'Équipage de Don Quichotte Doflamingo (anciennement)"))
-                return Resources.Strings.Citizen;
+                return Crew.Citizen;
 
             return null;
         }
@@ -180,28 +181,28 @@ namespace GuessWhoOnePiece.Model.DataEntries
                 return result;
 
             if (NavyCrew.Contains(rawCrew))
-                return Resources.Strings.NavyCrew;
+                return Crew.Navy;
 
             if (BigMomCrew.Contains(rawCrew))
-                return Resources.Strings.BigMomCrew;
+                return Crew.BigMomCrew;
 
             if (BaroqueWorks.Contains(rawCrew))
-                return Resources.Strings.BaroqueWorks;
+                return Crew .BaroqueWorks;
 
             if (CrossGuild.Contains(rawCrew))
-                return Resources.Strings.CrossGuild;
+                return Crew.CrossGuild;
 
             if (AlliedMugiwaraCrew.Contains(rawCrew))
-                return Resources.Strings.AlliedMugiwaraCrew;
+                return Crew.MugiwaraAllies;
 
             if (CitizenCrew.Contains(rawCrew))
-                return Resources.Strings.Citizen;
+                return Crew.Citizen;
 
             if (ThrillerBark.Contains(rawCrew))
-                return Resources.Strings.ThrillerBark;
+                return Crew.ThrillerBark;
 
             if (DonQuichotte.Contains(rawCrew))
-                return Resources.Strings.DoffyFamily;
+                return Crew.DoflamingoCrew;
 
             return rawCrew;
         }

@@ -3,6 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.Resources;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -50,14 +51,14 @@ namespace GuessWhoOnePiece.Model.DataEntries
 
         private static readonly Dictionary<string, string> CrewMapping = new Dictionary<string, string>
         {
-            { "L'Équipage du Firetank", "L'Équipage du Fire Tank" },
-            { "Subordonné de L'Équipage de Barbe Blanche", "L'Équipage de Barbe Blanche" },
-            { "Capitaine de l'Equipage de Caribou", "L'Équipage de Caribou" },
-            { "Punk Hazard", "L'Équipage aux Cent Bêtes" },
-            { "Neutre", Resources.Strings.PirateType },
-            { "L'Équipage des Pirates Volants", "L'Équipage des Nouveaux Hommes-Poissons"},
-            { "Grand Corsaire", "Edward Weeble"},
-            { "L'Équipage des Pirates Roger", "L'Équipage des Pirates de Roger" }
+            { "L'Équipage du Firetank", Crew.BegeCrew },
+            { "Subordonné de L'Équipage de Barbe Blanche", Crew.NewgateCrew },
+            { "Capitaine de l'Equipage de Caribou", Crew.CaribouCrew },
+            { "Punk Hazard", Crew.KaidoCrew },
+            { "Neutre", Crew.Pirate },
+            { "L'Équipage des Pirates Volants", Crew.NewFishmenCrew},
+            { "Grand Corsaire", Crew.WeebleCrew},
+            { "L'Équipage des Pirates Roger", Crew.RogerCrew }
         };
 
         private static readonly Dictionary<string, string> CharacterNameMappings = new()

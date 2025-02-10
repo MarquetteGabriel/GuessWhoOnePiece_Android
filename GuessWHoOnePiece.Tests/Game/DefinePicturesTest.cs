@@ -6,6 +6,7 @@
 using GuessWhoOnePiece.Model;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.Game;
+using GuessWhoOnePiece.Model.Resources;
 
 namespace GuessWhoOnePiece.Tests.Game;
 
@@ -210,7 +211,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_NavyCrew()
     {
-        var result = DefinePictures.SetCrewPictures("Navy's Crew");
+        var result = DefinePictures.SetCrewPictures(Crew.Navy);
         Assert.Equal(PicturesAlbum.CrewNavy, result);
     }
 
@@ -218,7 +219,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_ClanDEner()
     {
-        var result = DefinePictures.SetCrewPictures("Clan d'Ener");
+        var result = DefinePictures.SetCrewPictures(Crew.EnerCrew);
         Assert.Equal(PicturesAlbum.CrewEner, result);
     }
 
@@ -226,7 +227,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageAuxCentBetes()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage aux Cent Bêtes");
+        var result = DefinePictures.SetCrewPictures(Crew.KaidoCrew);
         Assert.Equal(PicturesAlbum.CrewKaido, result);
     }
 
@@ -234,7 +235,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDeBarbeNoire()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage de Barbe Noire");
+        var result = DefinePictures.SetCrewPictures(Crew.TeachCrew);
         Assert.Equal(PicturesAlbum.CrewTeach, result);
     }
 
@@ -242,7 +243,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDeBigMom()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage de Big Mom");
+        var result = DefinePictures.SetCrewPictures(Crew.BigMomCrew);
         Assert.Equal(PicturesAlbum.CrewBigmom, result);
     }
 
@@ -250,7 +251,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_CrossGuild()
     {
-        var result = DefinePictures.SetCrewPictures("Cross Guild");
+        var result = DefinePictures.SetCrewPictures(Crew.CrossGuild);
         Assert.Equal(PicturesAlbum.CrossGuild, result);
     }
 
@@ -258,7 +259,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDuRoux()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage du Roux");
+        var result = DefinePictures.SetCrewPictures(Crew.ShanksCrew);
         Assert.Equal(PicturesAlbum.CrewShanks, result);
     }
 
@@ -266,7 +267,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDeBarbeBlanche()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage de Barbe Blanche");
+        var result = DefinePictures.SetCrewPictures(Crew.NewgateCrew);
         Assert.Equal(PicturesAlbum.CrewNewgate, result);
     }
 
@@ -274,7 +275,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDuChapeauDePaille()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage du Chapeau de Paille");
+        var result = DefinePictures.SetCrewPictures(Crew.MugiwaraCrew);
         Assert.Equal(PicturesAlbum.CrewMugiwara, result);
     }
 
@@ -282,7 +283,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_AllieDeLEquipageDuChapeauDePaille()
     {
-        var result = DefinePictures.SetCrewPictures("Allié de L'Équipage du Chapeau de Paille");
+        var result = DefinePictures.SetCrewPictures(Crew.MugiwaraAllies);
         Assert.Equal(PicturesAlbum.CrewMugiwara, result);
     }
 
@@ -290,7 +291,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_FauxEquipageDuChapeauDePaille()
     {
-        var result = DefinePictures.SetCrewPictures("Faux Équipage du Chapeau de Paille");
+        var result = DefinePictures.SetCrewPictures(Crew.FalseMugiwaraCrew);
         Assert.Equal(PicturesAlbum.CrewMugiwara, result);
     }
 
@@ -306,7 +307,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_GouvernementMondial()
     {
-        var result = DefinePictures.SetCrewPictures("Gouvernement Mondial");
+        var result = DefinePictures.SetCrewPictures(Crew.GouvernementMondial);
         Assert.Equal(PicturesAlbum.CrewWorldGov, result);
     }
 
@@ -314,7 +315,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_CipherPol()
     {
-        var result = DefinePictures.SetCrewPictures("Cipher Pol");
+        var result = DefinePictures.SetCrewPictures(Crew.CipherPol);
         Assert.Equal(PicturesAlbum.CrewWorldGov, result);
     }
 
@@ -322,7 +323,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDArlong()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage d'Arlong");
+        var result = DefinePictures.SetCrewPictures(Crew.ArlongCrew);
         Assert.Equal(PicturesAlbum.CrewArlong, result);
     }
 
@@ -330,7 +331,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_BaroqueWorks()
     {
-        var result = DefinePictures.SetCrewPictures("Baroque Works");
+        var result = DefinePictures.SetCrewPictures(Crew.BaroqueWorks);
         Assert.Equal(PicturesAlbum.CrewBW, result);
     }
 
@@ -338,7 +339,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LArmadaPirateDeDonKrieg()
     {
-        var result = DefinePictures.SetCrewPictures("L'Armada Pirate de Don Krieg");
+        var result = DefinePictures.SetCrewPictures(Crew.DonKriegCrew);
         Assert.Equal(PicturesAlbum.CrewKrieg, result);
     }
 
@@ -346,7 +347,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_ThrillerBark()
     {
-        var result = DefinePictures.SetCrewPictures("Thriller Bark");
+        var result = DefinePictures.SetCrewPictures(Crew.ThrillerBark);
         Assert.Equal(PicturesAlbum.CrewMoria, result);
     }
 
@@ -354,7 +355,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDuHeart()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage du Heart");
+        var result = DefinePictures.SetCrewPictures(Crew.LawCrew);
         Assert.Equal(PicturesAlbum.CrewLaw, result);
     }
 
@@ -362,7 +363,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDeKid()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage de Kid");
+        var result = DefinePictures.SetCrewPictures(Crew.KidCrew);
         Assert.Equal(PicturesAlbum.CrewKidd, result);
     }
 
@@ -370,7 +371,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_Kujas()
     {
-        var result = DefinePictures.SetCrewPictures("Kujas");
+        var result = DefinePictures.SetCrewPictures(Crew.Kujas);
         Assert.Equal(PicturesAlbum.CrewKuja, result);
     }
 
@@ -378,7 +379,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDeCaribou()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage de Caribou");
+        var result = DefinePictures.SetCrewPictures(Crew.CaribouCrew);
         Assert.Equal(PicturesAlbum.CrewCaribou, result);
     }
 
@@ -386,7 +387,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDesPiratesDuSoleil()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage des Pirates du Soleil");
+        var result = DefinePictures.SetCrewPictures(Crew.SunPiratesCrew);
         Assert.Equal(PicturesAlbum.CrewSunpirates, result);
     }
 
@@ -402,7 +403,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDeDonQuichotteDoflamingo()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage de Don Quichotte Doflamingo");
+        var result = DefinePictures.SetCrewPictures(Crew.DoflamingoCrew);
         Assert.Equal(PicturesAlbum.CrewDoffy, result);
     }
 
@@ -418,7 +419,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDesNouveauxHommesPoissons()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage des Nouveaux Hommes-Poissons");
+        var result = DefinePictures.SetCrewPictures(Crew.NewFishmenCrew);
         Assert.Equal(PicturesAlbum.CrewNewfish, result);
     }
 
@@ -426,7 +427,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDesGeants()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage des Géants");
+        var result = DefinePictures.SetCrewPictures(Crew.GiantsCrew);
         Assert.Equal(PicturesAlbum.CrewGiants, result);
     }
 
@@ -434,7 +435,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_CelestialDragons()
     {
-        var result = DefinePictures.SetCrewPictures("Celestial Dragons");
+        var result = DefinePictures.SetCrewPictures(Crew.CelestialDragons);
         Assert.Equal(PicturesAlbum.CrewCelestial, result);
     }
 
@@ -442,7 +443,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_ImpelDown()
     {
-        var result = DefinePictures.SetCrewPictures("Impel Down");
+        var result = DefinePictures.SetCrewPictures(Crew.ImpelDown);
         Assert.Equal(PicturesAlbum.CrewID, result);
     }
 
@@ -450,7 +451,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LigueDesPrimates()
     {
-        var result = DefinePictures.SetCrewPictures("Ligue des Primates");
+        var result = DefinePictures.SetCrewPictures(Crew.PrimatesCrew);
         Assert.Equal(PicturesAlbum.CrewPrimates, result);
     }
 
@@ -458,7 +459,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_EdwardWeeble()
     {
-        var result = DefinePictures.SetCrewPictures("Edward Weeble");
+        var result = DefinePictures.SetCrewPictures(Crew.WeebleCrew);
         Assert.Equal(PicturesAlbum.CrewWeeble, result);
     }
 
@@ -466,7 +467,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDuChatNoir()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage du Chat Noir");
+        var result = DefinePictures.SetCrewPictures(Crew.BlackCatCrew);
         Assert.Equal(PicturesAlbum.CrewChatnoir, result);
     }
 
@@ -474,7 +475,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDeFoxy()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage de Foxy");
+        var result = DefinePictures.SetCrewPictures(Crew.FoxyCrew);
         Assert.Equal(PicturesAlbum.CrewFoxy, result);
     }
 
@@ -482,7 +483,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDuFireTank()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage du Fire Tank");
+        var result = DefinePictures.SetCrewPictures(Crew.BegeCrew);
         Assert.Equal(PicturesAlbum.CrewFiretank, result);
     }
 
@@ -538,7 +539,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_LEquipageDuRolling()
     {
-        var result = DefinePictures.SetCrewPictures("L'Équipage du Rolling");
+        var result = DefinePictures.SetCrewPictures(Crew.RollingCrew);
         Assert.Equal(PicturesAlbum.CrewDefault, result);
     }
 
@@ -570,7 +571,7 @@ public class DefinePicturesTest
     [Fact]
     public void Test_SetCrewPictures_BanditsDesMontagnes()
     {
-        var result = DefinePictures.SetCrewPictures("Bandits des montagnes");
+        var result = DefinePictures.SetCrewPictures(Crew.MountainBandit);
         Assert.Equal(PicturesAlbum.CrewDefault, result);
     }
 

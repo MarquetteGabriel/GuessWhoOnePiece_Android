@@ -3,6 +3,7 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model.Resources;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace GuessWhoOnePiece.Model.DataEntries
         /// <returns>The new type.</returns>
         internal static string ExtractPatternType(HtmlNode text, string crew)
         {
-            if (crew.Equals(Resources.Strings.Citizen))
+            if (crew.Equals(Crew.Citizen))
                 return Resources.Strings.Citizen;
-            if (crew.Equals(Resources.Strings.RevolutionaryCrew))
+            if (crew.Equals(Crew.RevolutionaryArmy))
                 return Resources.Strings.RevolutionaryType;
             if (PirateTypeList.Any(crew.Contains))
                 return Resources.Strings.PirateType;

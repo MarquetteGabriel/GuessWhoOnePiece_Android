@@ -61,33 +61,6 @@ namespace GuessWhoOnePiece.Model.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Allié de L&apos;Équipage du Chapeau de Paille.
-        /// </summary>
-        internal static string AlliedMugiwaraCrew {
-            get {
-                return ResourceManager.GetString("AlliedMugiwaraCrew", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Baroque Works.
-        /// </summary>
-        internal static string BaroqueWorks {
-            get {
-                return ResourceManager.GetString("BaroqueWorks", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à L&apos;Équipage de Big Mom.
-        /// </summary>
-        internal static string BigMomCrew {
-            get {
-                return ResourceManager.GetString("BigMomCrew", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Celestial Dragons.
         /// </summary>
         internal static string CelestialDragons {
@@ -102,33 +75,6 @@ namespace GuessWhoOnePiece.Model.Resources {
         internal static string Citizen {
             get {
                 return ResourceManager.GetString("Citizen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Cross Guild.
-        /// </summary>
-        internal static string CrossGuild {
-            get {
-                return ResourceManager.GetString("CrossGuild", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à L&apos;Équipage de Don Quichotte Doflamingo.
-        /// </summary>
-        internal static string DoffyFamily {
-            get {
-                return ResourceManager.GetString("DoffyFamily", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Navy&apos;s Crew.
-        /// </summary>
-        internal static string NavyCrew {
-            get {
-                return ResourceManager.GetString("NavyCrew", resourceCulture);
             }
         }
         
@@ -151,38 +97,11 @@ namespace GuessWhoOnePiece.Model.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Revolutionary&apos;s Army.
-        /// </summary>
-        internal static string RevolutionaryCrew {
-            get {
-                return ResourceManager.GetString("RevolutionaryCrew", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Revolutionary.
         /// </summary>
         internal static string RevolutionaryType {
             get {
                 return ResourceManager.GetString("RevolutionaryType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à L&apos;équipage de Barbe Noire.
-        /// </summary>
-        internal static string TeachCrew {
-            get {
-                return ResourceManager.GetString("TeachCrew", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Thriller Bark.
-        /// </summary>
-        internal static string ThrillerBark {
-            get {
-                return ResourceManager.GetString("ThrillerBark", resourceCulture);
             }
         }
         
