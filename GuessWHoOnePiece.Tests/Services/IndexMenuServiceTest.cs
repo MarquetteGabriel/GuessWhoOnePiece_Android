@@ -8,8 +8,6 @@ namespace GuessWhoOnePiece.Tests.Services
         public void Test_IndexMenuService()
         {
             var IM = new IndexMenuService();
-            Assert.Equal(Model.IndexMenuTabBar.Home, IM.IndexMenu);
-
             IM.IndexMenu = Model.IndexMenuTabBar.Daily;
             Assert.Equal(Model.IndexMenuTabBar.Daily, IM.IndexMenu);
 

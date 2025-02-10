@@ -56,7 +56,8 @@ namespace GuessWhoOnePiece.Model.DataEntries
             { "Punk Hazard", "L'Équipage aux Cent Bêtes" },
             { "Neutre", Resources.Strings.PirateType },
             { "L'Équipage des Pirates Volants", "L'Équipage des Nouveaux Hommes-Poissons"},
-            { "Grand Corsaire", "Edward Weeble"}
+            { "Grand Corsaire", "Edward Weeble"},
+            { "L'Équipage des Pirates Roger", "L'Équipage des Pirates de Roger" }
         };
 
         private static readonly Dictionary<string, string> CharacterNameMappings = new()
