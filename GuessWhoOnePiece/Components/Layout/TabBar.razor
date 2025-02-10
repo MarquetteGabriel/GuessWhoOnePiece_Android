@@ -3,8 +3,9 @@
 
 <div class="tab-bar">
     <div class="nav-list">
+        @*
         <div class="nav-item">
-            <NavLink class="nav-link" href="counter" @onclick="() => ChangeActiveState(IndexMenuTabBar.Daily)">
+           <NavLink class="nav-link" href="counter" @onclick="() => ChangeActiveState(IndexMenuTabBar.Daily)">
                 @if (IndexMenuService.IndexMenu == IndexMenuTabBar.Daily)
                 {
                     <img class="nav-icon" src="icons/today_icon_on.svg" alt=""/>
@@ -15,6 +16,7 @@
                 }
             </NavLink>
         </div>
+        *@
         <div class="nav-item">
             <NavLink class="nav-link" href="game" @onclick="() => ChangeActiveState(IndexMenuTabBar.Game)">
                 @if (IndexMenuService.IndexMenu == IndexMenuTabBar.Game)
@@ -51,6 +53,7 @@
                 }
             </NavLink>
         </div>
+        @*
         <div class="nav-item">
             <NavLink class="nav-link" href="weather" @onclick="() => ChangeActiveState(IndexMenuTabBar.Settings)">
                 @if (IndexMenuService.IndexMenu == IndexMenuTabBar.Settings)
@@ -63,5 +66,6 @@
                 }
             </NavLink>
         </div>
+        *@
     </div>
 </div>
