@@ -13,5 +13,14 @@ namespace GuessWhoOnePiece.Tests.Converts
 
             Assert.NotNull(result);
         }
+
+        [Fact]
+        public void Test_GetImageStreamNamespace()
+        {
+            var pictureName = "error.jpg";
+            var result = PictureStream.GetAssemblyName(pictureName);
+
+            Assert.Equal("GuessWhoOnePiece.Model.Resources.Images.error.jpg", result);
+        }
     }
 }
