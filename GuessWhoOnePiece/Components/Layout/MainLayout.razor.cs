@@ -9,6 +9,8 @@ namespace GuessWhoOnePiece.Components.Layout
 {
     public partial class MainLayout
     {
+        private TabBar TabBarRef;
+
         protected override void OnInitialized()
         {
             if(Preferences.Get("Updated", false))
@@ -18,5 +20,7 @@ namespace GuessWhoOnePiece.Components.Layout
 
             IndexMenuService.IndexMenu = 3;
         }
+
+        public TabBar GetTabBarRef() => TabBarRef;
     }
 }

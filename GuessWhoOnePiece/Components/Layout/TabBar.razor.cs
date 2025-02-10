@@ -9,8 +9,9 @@ namespace GuessWhoOnePiece.Components.Layout;
 
 public partial class TabBar : ComponentBase
 {
-    private void ChangeActiveState(int index)
+    internal void ChangeActiveState(int index)
     {
         IndexMenuService.IndexMenu = index;
+        StateHasChanged();
     }
 }

@@ -1,3 +1,4 @@
+using GuessWhoOnePiece.Components.Layout;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Services;
 using Microsoft.AspNetCore.Components;
@@ -8,8 +9,9 @@ namespace GuessWhoOnePiece.Components.Pages
     public partial class Victory : ComponentBase
     {
         private Character? Character { get; set; }
+        [CascadingParameter(Name = "MainLayout")] private MainLayout? MainLayout { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
             Character = CurrentCharacterService.CurrentCharacter;
             StateHasChanged();
@@ -17,16 +19,14 @@ namespace GuessWhoOnePiece.Components.Pages
 
         private void OnHome()
         {
-            IndexMenuService.IndexMenu = 3;
-            StateHasChanged();
+            MainLayout!.GetTabBarRef().ChangeActiveState(3);
             Navigation.NavigateTo("/home");
         }
 
         private void OnPlayAgain()
         {
-            IndexMenuService.IndexMenu = 2;
-            StateHasChanged();
-            Navigation.NavigateTo($"/game");
+            MainLayout!.GetTabBarRef().ChangeActiveState(2);
+            Navigation.NavigateTo("/game");
         }
     }
 }
