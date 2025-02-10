@@ -3,13 +3,14 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
+using GuessWhoOnePiece.Model;
 using Microsoft.AspNetCore.Components;
 
 namespace GuessWhoOnePiece.Components.Layout;
 
 public partial class TabBar : ComponentBase
 {
-    internal void ChangeActiveState(int index)
+    internal void ChangeActiveState(IndexMenuTabBar index)
     {
         IndexMenuService.IndexMenu = index;
         StateHasChanged();

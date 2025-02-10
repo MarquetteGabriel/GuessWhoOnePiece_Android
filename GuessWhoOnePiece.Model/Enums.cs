@@ -47,4 +47,13 @@ namespace GuessWhoOnePiece.Model
         Wrong = 1, 
         NotAnswered = 2,
     }
+
+    public enum IndexMenuTabBar
+    {
+        Daily = 1,
+        Game = 2,
+        Home = 3,
+        Characters = 4,
+        Settings = 5,
+    }
 }

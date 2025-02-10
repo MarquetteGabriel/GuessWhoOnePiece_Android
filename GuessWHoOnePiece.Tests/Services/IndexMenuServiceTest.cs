@@ -8,22 +8,22 @@ namespace GuessWhoOnePiece.Tests.Services
         public void Test_IndexMenuService()
         {
             var IM = new IndexMenuService();
-            Assert.Equal(0, IM.IndexMenu);
+            Assert.Equal(Model.IndexMenuTabBar.Home, IM.IndexMenu);
 
-            IM.IndexMenu = 1;
-            Assert.Equal(1, IM.IndexMenu);
+            IM.IndexMenu = Model.IndexMenuTabBar.Daily;
+            Assert.Equal(Model.IndexMenuTabBar.Daily, IM.IndexMenu);
 
-            IM.IndexMenu = 5;
-            Assert.Equal(5, IM.IndexMenu);
+            IM.IndexMenu = Model.IndexMenuTabBar.Settings;
+            Assert.Equal(Model.IndexMenuTabBar.Settings, IM.IndexMenu);
 
-            IM.IndexMenu = 2;
-            Assert.Equal(2, IM.IndexMenu);
+            IM.IndexMenu = Model.IndexMenuTabBar.Game;
+            Assert.Equal(Model.IndexMenuTabBar.Game, IM.IndexMenu);
 
-            IM.IndexMenu = 4;
-            Assert.Equal(4, IM.IndexMenu);
+            IM.IndexMenu = Model.IndexMenuTabBar.Characters;
+            Assert.Equal(Model.IndexMenuTabBar.Characters, IM.IndexMenu);
 
-            IM.IndexMenu = 3;
-            Assert.Equal(3, IM.IndexMenu);
+            IM.IndexMenu = Model.IndexMenuTabBar.Home;
+            Assert.Equal(Model.IndexMenuTabBar.Home, IM.IndexMenu);
         }
     }
 }

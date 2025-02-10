@@ -1,8 +1,8 @@
 using GuessWhoOnePiece.Components.Layout;
+using GuessWhoOnePiece.Model;
 using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Services;
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Components.Pages
 {
@@ -19,13 +19,13 @@ namespace GuessWhoOnePiece.Components.Pages
 
         private void OnHome()
         {
-            MainLayout!.GetTabBarRef().ChangeActiveState(3);
+            MainLayout!.TabBarRef.ChangeActiveState(IndexMenuTabBar.Home);
             Navigation.NavigateTo("/home");
         }
 
         private void OnPlayAgain()
         {
-            MainLayout!.GetTabBarRef().ChangeActiveState(2);
+            MainLayout!.TabBarRef.ChangeActiveState(IndexMenuTabBar.Game);
             Navigation.NavigateTo("/game");
         }
     }

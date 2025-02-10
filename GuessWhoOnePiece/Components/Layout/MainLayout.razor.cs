@@ -9,7 +9,13 @@ namespace GuessWhoOnePiece.Components.Layout
 {
     public partial class MainLayout
     {
-        private TabBar TabBarRef;
+        private TabBar tabBarRef;
+
+        public TabBar TabBarRef
+        {
+            get => tabBarRef;
+            set => tabBarRef = value;
+        }
 
         protected override void OnInitialized()
         {
@@ -18,9 +24,7 @@ namespace GuessWhoOnePiece.Components.Layout
             else
                 LoadingService.Loading = true;
 
-            IndexMenuService.IndexMenu = 3;
+            IndexMenuService.IndexMenu = Model.IndexMenuTabBar.Home;
         }
-
-        public TabBar GetTabBarRef() => TabBarRef;
     }
 }

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using GuessWhoOnePiece.Model;
+using System;
 
 namespace GuessWhoOnePiece.Services
 {
     public class IndexMenuService
     {
         public event EventHandler? OnChange;
-        private int _index;
+        private IndexMenuTabBar _index;
 
-        public int IndexMenu
+        public IndexMenuTabBar IndexMenu
         {
             get => _index;
             set
