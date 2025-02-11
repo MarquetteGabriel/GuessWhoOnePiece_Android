@@ -1,10 +1,6 @@
 ﻿using GuessWhoOnePiece.Model.CsvManager;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GuessWhoOnePiece.Tests.CsvManager
@@ -61,7 +57,31 @@ namespace GuessWhoOnePiece.Tests.CsvManager
             Assert.True(File.Exists(LocalPath + "Characters.csv"));
         }
 
-    }
+        [Fact]
+        public async Task Test_ReceivePictureAndNameCsv()
+        {
+            var mockFileService = new Mock<IFileServiceReader>();
+            mockFileService.Setup(pp => pp.GetCsvPath)
+                             .Returns(LocalPath + "Characters.csv");
+            
+            var result = await ReceiveDataCsv.ReceiveCharacterInfoList(mockFileService.Object);
+            
+            Assert.NotNull(result);
+            Assert.Equal(491, result.Count);
+        }
 
+        [Fact]
+        public async Task Test_ReceivePictureAndNameSpecific()
+        {
+            var mockFileService = new Mock<IFileServiceReader>();
+            mockFileService.Setup(pp => pp.GetCsvPath)
+                             .Returns(LocalPath + "Characters.csv");
+
+            var result = await ReceiveDataCsv.ReceiveCharacterInfo("Yosaku", mockFileService.Object);
+            Assert.NotNull(result);
+            Assert.Equal("Yosaku", result.Name);
+
+        }
+    }
 }
 

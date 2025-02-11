@@ -1,6 +1,7 @@
 ﻿@page "/characters"
 @using GuessWhoOnePiece.Model.Characters
 @inject GuessWhoOnePiece.Model.CsvManager.IFileServiceReader FileServiceReader
+@inject GuessWhoOnePiece.Services.CurrentCharacterService CharacterService
 
 <BackgroundPicture/>
 
@@ -13,11 +14,67 @@
     }
     else
     {
+        @foreach (var groups in _characterGroups)
+        {
+            @if ((groups.Value.Count != 0))
+            {
+                <li class="card-character" @onclick="() => ToggleMenu(groups.Key)">
+                    <h4 class="card-name">@groups.Key</h4>
+                </li>
+
+                @if (IsMenuUnfold(groups.Key))
+                {
+                    @foreach (var character in groups.Value)
+                    {
+                        <li>
+                            <NavLink class="nav-link" href="charactersInfo" Match="NavLinkMatch.All">
+                                <div class="card-character">
+                                    <div class="card-picture">
+                                        <Picture PicturePath="@character.Picture" />
+                                    </div>
+                                    <div class="card-details">
+                                        <div class="card-name">
+                                            <h4>@character.Name</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </NavLink>
+                        </li>
+                    }
+                }
+            }
+        }
+
+        @*
+
+
+
+
+
+
+
+
+
+
+
+
+
         @foreach (var character in _characters)
         {
             <li>
-                <ItemList Character="character"/>
-            </li>
-        }
+                <NavLink class="nav-link" href="charactersInfo" Match="NavLinkMatch.All">
+                    <div class="card-character">
+                        <div class="card-picture">
+                            <Picture PicturePath="@character.Picture"/>
+                        </div>
+                        <div class="card-details">
+                            <div class="card-name">
+                                <h4>@character.Name</h4>
+                            </div>
+                        </div>
+                    </div>
+                </NavLink>
+            </li>        
+        }*@
     }
 </ul>

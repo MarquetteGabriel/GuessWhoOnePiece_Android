@@ -82,6 +82,41 @@ namespace GuessWhoOnePiece.Model.CsvManager
                         int.Parse(characterDatas[AgeColumn], CultureInfo.InvariantCulture), characterDatas[CrewColumn], characterDatas[PictureColumn],
                         int.Parse(characterDatas[LevelColumn], CultureInfo.InvariantCulture));
         }
+
+        public static async Task<List<InfoCharacter>> ReceiveCharacterInfoList(IFileServiceReader fileServiceReader)
+        {
+            var characterInfoList = new List<InfoCharacter>();
+            string csvPath = fileServiceReader.GetCsvPath;
+            await using var stream = File.OpenRead(csvPath);
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            while (await reader.ReadLineAsync() is { } line)
+            {
+                var values = line.Split(ManageCsv.Separator);
+                if (values.Length == DataCharacterLength)
+                {
+                    characterInfoList.Add(new InfoCharacter(values[NameColumn], values[PictureColumn]));
+                }
+            }
+            return characterInfoList.OrderBy(character => character.Name).ToList();
+        }
+
+
+        public static async Task<InfoCharacter> ReceiveCharacterInfo(string characterName, IFileServiceReader fileServiceReader)
+        {
+            var characterInfoList = new List<(string, string)>();
+            string csvPath = fileServiceReader.GetCsvPath;
+            await using var stream = File.OpenRead(csvPath);
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            while (await reader.ReadLineAsync() is { } line)
+            {
+                var values = line.Split(ManageCsv.Separator);
+                if (values.Length == DataCharacterLength && values[NameColumn].Equals(characterName))
+                {
+                    return new InfoCharacter(values[NameColumn], values[PictureColumn]);
+                }
+            }
+
+            return new InfoCharacter();
+        }
     }
 }
-
