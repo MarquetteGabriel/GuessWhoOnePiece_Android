@@ -24,7 +24,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
         /// <returns>The fileName.</returns>
         internal static async Task<string> DownloadImageAsync(string imageUrl, string fileName, IFileServiceReader fileServiceReader)
         {
-            fileName = fileName.Replace("/", "_", StringComparison.OrdinalIgnoreCase) + ".jpeg";
+            fileName = fileName.Replace("/", "_", StringComparison.OrdinalIgnoreCase) + ".webp";
             string picturePath = fileServiceReader.GetPicturePath;
             try
             {
@@ -40,7 +40,7 @@ namespace GuessWhoOnePiece.Model.DataEntries.Picture
                 using MemoryStream memoryStream = new(imageData);
                 using var skBitmap = SKBitmap.Decode(memoryStream);
                 using var image = SKImage.FromBitmap(skBitmap);
-                using var data = image.Encode(SKEncodedImageFormat.Jpeg, 100);
+                using var data = image.Encode(SKEncodedImageFormat.Webp, 75);
 
                 await File.WriteAllBytesAsync(outputFilePath, data.ToArray());
 

@@ -9,7 +9,7 @@ ul {
 }
 
 li {
-    margin-bottom: 10px;
+    margin-bottom: 7px;
 }
 
 
@@ -40,7 +40,7 @@ li {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     height: 70px;
     padding-left: 20px;
     padding-right: 20px;
@@ -55,9 +55,26 @@ li {
     margin: 0;
 }
 
-.card-level {
-    font-size: 0.8em;
-    font-weight: bold;
-    color: #000;
-    margin: 0;
+.top-bar-menu {
+    display: flex;
+    flex-direction: row;
+    height: 65px;
+    position: fixed;
+    top: 0;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-inline: auto;
+    place-content: center;
+}
+
+.text-entry {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.list-character {
+    margin-top: 50px;
+    margin-bottom: 80px;
 }

@@ -17,15 +17,13 @@ namespace GuessWhoOnePiece.Components.Pages;
 
 public partial class ListCharacters : ComponentBase
 {
+    private List<InfoCharacter> _charactersData = [];
     private List<InfoCharacter> _characters = [];
-    private Dictionary<char, List<InfoCharacter>> _characterGroups = new();
 
     private List<string> _characterNames;
 
     private bool isLoading;
     private string SearchText { get; set; }
-
-    private readonly Dictionary<char, bool> _menuStates = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -34,9 +32,9 @@ public partial class ListCharacters : ComponentBase
             isLoading = true;
             await InvokeAsync(StateHasChanged);
             _characterNames ??= [];
-            _characters = await ReceiveDataCsv.ReceiveCharacterInfoList(FileServiceReader);
+            _charactersData = await ReceiveDataCsv.ReceiveCharacterInfoList(FileServiceReader);
+            _characters = _charactersData.ToList();
             _characterNames = _characters.Select(character => character.Name).ToList();
-            CreateCharactersGroup(_characters);
             isLoading = false;
             await InvokeAsync(StateHasChanged);
         });
@@ -63,44 +61,21 @@ public partial class ListCharacters : ComponentBase
     private async Task FilterItems()
     {
         _characters.Clear();
+        isLoading = true;
+        StateHasChanged();
+
         if (string.IsNullOrEmpty(SearchText))
         {
-            _characters = await ReceiveDataCsv.ReceiveCharacterInfoList(FileServiceReader);
-            CreateCharactersGroup(_characters);
+            _characters = _charactersData.ToList();
         }
         else
         {
-            isLoading = true;
-            foreach (var character in _characterNames.Where(character => character.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)).ToList())
+            foreach (var character in _charactersData.Where(character => character.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)))
             {
-                _characters.Add(await ReceiveDataCsv.ReceiveCharacterInfo(character, FileServiceReader));
+                _characters.Add(character);
             }
-            isLoading = false;
-            _characters = _characters.OrderBy(character => character.Name).ToList();
-            CreateCharactersGroup(_characters);
         }
-    }
-
-    private void ToggleMenu(char key)
-    {
-        foreach (var keys in _menuStates.Keys.Where(keys => !keys.Equals(key)))
-        {
-            _menuStates[keys] = false;
-        }
-        _menuStates[key] = !_menuStates[key];
-    }
-
-    private bool IsMenuUnfold(char key)
-    {
-        return _menuStates[key];
-    }
-
-    private void CreateCharactersGroup(List<InfoCharacter> _characters)
-    {
-        _characterGroups = _characters.GroupBy(c => char.ToUpper(c.Name[0])).ToDictionary(g => g.Key, g => g.ToList());
-        foreach (var key in _characterGroups.Keys)
-        {
-            _menuStates[key] = false;
-        }
+        isLoading = false;
+        StateHasChanged();
     }
 }

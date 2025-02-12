@@ -27,7 +27,7 @@ namespace GuessWhoOnePiece.UI.Picture
 
             try
             {
-                if (PicturePath.Contains(".jpeg", StringComparison.Ordinal))
+                if (PicturePath.Contains(".webp", StringComparison.Ordinal))
                 {
                     var picturePath = PicturePath.Replace(" / ", " _ ", StringComparison.OrdinalIgnoreCase);
                     var filePath = Path.Combine(FileSystem.Current.AppDataDirectory, picturePath);
@@ -49,7 +49,7 @@ namespace GuessWhoOnePiece.UI.Picture
                 base64string = ConvertPictureToString("error.jpg");            
             }
 
-            PathPicture = $"data:image/png;base64, {base64string}";
+            PathPicture = $"data:image/webp;base64, {base64string}";
         }
 
         private static string ConvertPictureToString(string picturePath)
