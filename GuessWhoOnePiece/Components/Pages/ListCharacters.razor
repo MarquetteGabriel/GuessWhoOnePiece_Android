@@ -19,12 +19,12 @@
     {
         @foreach (var character in _characters)
         {
-            <div class="card-character" @onclick="() => OnSelectedCharacter(character.Name)">
+            <div class="card-character" @onclick="() => OnSelectedCharacter(character)">
                 @*<div class="card-picture">
                     <Picture PicturePath="@character.Picture" />
                 </div>*@
                 <div class="card-name">
-                    <h4>@character.Name</h4>
+                    <h4>@character</h4>
                 </div>
             </div>
         }

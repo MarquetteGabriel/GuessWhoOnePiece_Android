@@ -3,7 +3,6 @@
 // </copyright>
 // <author>Gabriel Marquette</author>
 
-using GuessWhoOnePiece.Model.Characters;
 using GuessWhoOnePiece.Model.CsvManager;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -17,8 +16,7 @@ namespace GuessWhoOnePiece.Components.Pages;
 
 public partial class ListCharacters : ComponentBase
 {
-    private List<InfoCharacter> _charactersData = [];
-    private List<InfoCharacter> _characters = [];
+    private List<string> _characters = [];
 
     private List<string> _characterNames;
 
@@ -32,9 +30,8 @@ public partial class ListCharacters : ComponentBase
             isLoading = true;
             await InvokeAsync(StateHasChanged);
             _characterNames ??= [];
-            _charactersData = await ReceiveDataCsv.ReceiveCharacterInfoList(FileServiceReader);
-            _characters = _charactersData.ToList();
-            _characterNames = _characters.Select(character => character.Name).ToList();
+            _characterNames = await ReceiveDataCsv.ReceiveCharacterInfoList(FileServiceReader);
+            _characters = _characterNames.ToList();
             isLoading = false;
             await InvokeAsync(StateHasChanged);
         });
@@ -67,11 +64,11 @@ public partial class ListCharacters : ComponentBase
 
         if (string.IsNullOrEmpty(SearchText))
         {
-            _characters = _charactersData.ToList();
+            _characters = _characterNames.ToList();
         }
         else
         {
-            foreach (var character in _charactersData.Where(character => character.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)))
+            foreach (var character in _characterNames.Where(character => character.Contains(SearchText, StringComparison.OrdinalIgnoreCase)))
             {
                 _characters.Add(character);
             }

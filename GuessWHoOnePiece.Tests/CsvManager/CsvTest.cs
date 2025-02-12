@@ -69,19 +69,6 @@ namespace GuessWhoOnePiece.Tests.CsvManager
             Assert.NotNull(result);
             Assert.Equal(491, result.Count);
         }
-
-        [Fact]
-        public async Task Test_ReceivePictureAndNameSpecific()
-        {
-            var mockFileService = new Mock<IFileServiceReader>();
-            mockFileService.Setup(pp => pp.GetCsvPath)
-                             .Returns(LocalPath + "Characters.csv");
-
-            var result = await ReceiveDataCsv.ReceiveCharacterInfo("Yosaku", mockFileService.Object);
-            Assert.NotNull(result);
-            Assert.Equal("Yosaku", result.Name);
-
-        }
     }
 }
 

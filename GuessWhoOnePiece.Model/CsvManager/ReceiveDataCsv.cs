@@ -83,9 +83,11 @@ namespace GuessWhoOnePiece.Model.CsvManager
                         int.Parse(characterDatas[LevelColumn], CultureInfo.InvariantCulture));
         }
 
-        public static async Task<List<InfoCharacter>> ReceiveCharacterInfoList(IFileServiceReader fileServiceReader)
+        /// <summary>Receive CharacterNamesList only.</summary>
+        /// <returns>the list of character's names.</returns>
+        public static async Task<List<string>> ReceiveCharacterInfoList(IFileServiceReader fileServiceReader)
         {
-            var characterInfoList = new List<InfoCharacter>();
+            var characterNames = new List<string>();
             string csvPath = fileServiceReader.GetCsvPath;
             await using var stream = File.OpenRead(csvPath);
             using var reader = new StreamReader(stream, Encoding.UTF8);
@@ -94,29 +96,10 @@ namespace GuessWhoOnePiece.Model.CsvManager
                 var values = line.Split(ManageCsv.Separator);
                 if (values.Length == DataCharacterLength)
                 {
-                    characterInfoList.Add(new InfoCharacter(values[NameColumn], values[PictureColumn]));
+                    characterNames.Add(values[NameColumn]);
                 }
             }
-            return characterInfoList.OrderBy(character => character.Name).ToList();
-        }
-
-
-        public static async Task<InfoCharacter> ReceiveCharacterInfo(string characterName, IFileServiceReader fileServiceReader)
-        {
-            var characterInfoList = new List<(string, string)>();
-            string csvPath = fileServiceReader.GetCsvPath;
-            await using var stream = File.OpenRead(csvPath);
-            using var reader = new StreamReader(stream, Encoding.UTF8);
-            while (await reader.ReadLineAsync() is { } line)
-            {
-                var values = line.Split(ManageCsv.Separator);
-                if (values.Length == DataCharacterLength && values[NameColumn].Equals(characterName))
-                {
-                    return new InfoCharacter(values[NameColumn], values[PictureColumn]);
-                }
-            }
-
-            return new InfoCharacter();
+            return characterNames.OrderBy(character => character).ToList();
         }
     }
 }
