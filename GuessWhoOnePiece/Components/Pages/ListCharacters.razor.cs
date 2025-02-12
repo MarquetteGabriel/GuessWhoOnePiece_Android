@@ -42,9 +42,10 @@ public partial class ListCharacters : ComponentBase
         thread.Start();
     }
 
-    private async void OnSelectedCharacter(string characterName)
+    private async Task OnSelectedCharacter(string characterName)
     {
-        CharacterService.CurrentCharacter = await ReceiveDataCsv.ReceiveCharacter(characterName, FileServiceReader);
+        CurrentCharacterService.CurrentCharacter = await ReceiveDataCsv.ReceiveCharacter(characterName, FileServiceReader);
+        Navigation.NavigateTo("/charactersInfo");
     }
 
     private async Task OnInput(ChangeEventArgs args)

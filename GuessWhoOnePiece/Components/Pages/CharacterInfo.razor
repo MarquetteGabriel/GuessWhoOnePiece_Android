@@ -1,8 +1,28 @@
 ﻿@page "/charactersInfo"
 @using GuessWhoOnePiece.Model.Characters
 @inject GuessWhoOnePiece.Model.CsvManager.IFileServiceReader FileServiceReader
+@inject GuessWhoOnePiece.Services.CurrentCharacterService CurrentCharacterService
 
+<div class="character-info-page">
+    <div>
+    <div class="page-title">
+        <h3 class="character-name-title">@Character.Name</h3>
+    </div>
 
-<div>
-    <label>Character.Name</label>
+    <div class="character-details">
+        <div class="picture-character">
+            <Picture PicturePath="@Character?.Picture" />
+        </div>
+
+        <div class="character-infos">
+            <h4><span class="label">Première apparition : </span>@Character.FirstAppearance</h4>
+            <h4><span class="label">Prime : </span>@Character.Bounty</h4>
+            <h4><span class="label">En vie : </span>@Character.Alive</h4>
+            <h4><span class="label">Age : </span>@Character.Age</h4>
+            <h4><span class="label">Type : </span>@Character.Type</h4>
+            <h4><span class="label">Fruit du Démon : </span>@Character.DevilFruit</h4>
+            <h4><span class="label">Équipage : </span>@Character.Crew</h4>
+        </div>
+    </div>
+    </div>
 </div>

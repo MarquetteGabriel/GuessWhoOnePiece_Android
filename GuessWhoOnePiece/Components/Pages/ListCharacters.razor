@@ -1,9 +1,8 @@
 ﻿@page "/characters"
 @using GuessWhoOnePiece.Model.Characters
 @inject GuessWhoOnePiece.Model.CsvManager.IFileServiceReader FileServiceReader
-@inject GuessWhoOnePiece.Services.CurrentCharacterService CharacterService
-
-<BackgroundPicture/>
+@inject GuessWhoOnePiece.Services.CurrentCharacterService CurrentCharacterService
+@inject NavigationManager Navigation
 
 <div class="top-bar-menu">
     <div class="text-entry">
@@ -20,20 +19,14 @@
     {
         @foreach (var character in _characters)
         {
-            <li>
-                <NavLink class="nav-link" href="charactersInfo" Match="NavLinkMatch.All">
-                    <div class="card-character">
-                        @*<div class="card-picture">
-                            <Picture PicturePath="@character.Picture" />
-                        </div>*@
-                        <div class="card-details">
-                            <div class="card-name">
-                                <h4>@character.Name</h4>
-                            </div>
-                        </div>
-                    </div>
-                </NavLink>
-            </li>
+            <div class="card-character" @onclick="() => OnSelectedCharacter(character.Name)">
+                @*<div class="card-picture">
+                    <Picture PicturePath="@character.Picture" />
+                </div>*@
+                <div class="card-name">
+                    <h4>@character.Name</h4>
+                </div>
+            </div>
         }
     }
 </ul>

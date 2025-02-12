@@ -2,6 +2,8 @@
 @inject GuessWhoOnePiece.Services.LoadingService LoadingService
 @inject GuessWhoOnePiece.Services.IndexMenuService IndexMenuService
 
+<BackgroundPicture/>
+
 <CascadingValue Value="this" Name="MainLayout">
     <div class="page">
         @if(!LoadingService.Loading)
